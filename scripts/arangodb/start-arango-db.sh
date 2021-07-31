@@ -2,10 +2,12 @@
 
 set -e
 
-# Remember to set the following environment variables.
-# SERVER="server";
-# PW="confidential";
-# DB="dbname";
+# Remember to set the following environment variables and to add their values to your .env in project root.
+# ARANGO_DB_SERVER="dbserver";
+# ARANGO_DB_ROOT_PASSWORD="rootPASSWORD";
+# ARRANGO_DB_USER="devtester";
+# ARRANGO_DB_USER_PASSWORD="confidential"
+# ARRANGO_DB_NAME="testdb";
 
 echo "echo stop & remove old docker [$SERVER] and starting new fresh instance of [$SERVER]"
 (docker kill $SERVER || :) && \
