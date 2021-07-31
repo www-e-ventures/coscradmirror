@@ -2,7 +2,7 @@
 
 ## About us
 
-_COSCARD_ is a loose collaboration of several organizations, technical teams, and communities working in the space of custom software development for indigenous language revitalization and cultural research.
+_COSCRAD_ is a loose collaboration of several organizations, technical teams, and communities working in the space of custom software development for Indigenous language revitalization and cultural research.
 
 <!-- TODO List member organizations \ projects -->
 
