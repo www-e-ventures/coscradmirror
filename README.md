@@ -10,9 +10,23 @@ _COSCARD_ is a loose collaboration of several organizations, technical teams, an
 
 We have adopted the monorepo approach to allow our members to maximize opportunities for code sharing and collaboration, while maintaining autonomy and focus on their own individual projects within this workspace.
 
-### Technical
+### Technical Details
 
 This monorepo workspace is managed using [Nx](https://nx.dev). See the `README` in an individual app or lib to learn more about the tools used on that particular project.
+
+### Workflow
+
+#### Lint
+
+In the project root, run
+
+> > npm run lint
+
+#### Tests
+
+In the project root, run
+
+> > npm run test
 
 <!-- TODO Add License info \ choose open source license -->
 
