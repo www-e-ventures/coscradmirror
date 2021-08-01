@@ -10,6 +10,7 @@
     "serve:api": "nx run api:serve",
     "serve:frontend": "ng serve --o",
     "serve:all": "concurrently \"npm run serve:api\" \"npm run serve:frontend\"",
+    "start:db:dev": "./scripts/arangodb/start-arango-db.sh",
     "build": "ng build",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",

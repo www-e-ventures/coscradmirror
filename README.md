@@ -14,15 +14,36 @@ We have adopted the monorepo approach to allow our members to maximize opportuni
 
 This monorepo workspace is managed using [Nx](https://nx.dev). See the `README` in an individual app or lib to learn more about the tools used on that particular project.
 
-### Workflow
+## Workflow
 
-#### Lint
+### Spinning up a development instance of `ArangoDb`
+
+To fire up a disposable development instance of `ArangoDB` with docker, run
+
+> > npm run start:db:dev
+> > from the project root.
+
+In order for this to work, you'll need to add the following environment variables:
+
+- `ARANGO_DB_SERVER`
+- `ARANGO_DB_ROOT_PASSWORD`
+- `ARANGO_DB_PORT`
+
+The script will bind the default arango port 8529 of the container to `$ARANGO_DB_PORT` on the host. To verify, you can open
+
+```
+localhost:${ARANGO_DB_PORT}
+```
+
+in your browser and access the dashboard using `${ARANGO_DB_ROOT_PASSWORD}`.
+
+### Lint
 
 In the project root, run
 
 > > npm run lint
 
-#### Tests
+### Tests
 
 In the project root, run
 
