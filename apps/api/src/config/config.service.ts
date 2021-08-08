@@ -6,7 +6,7 @@ type DatabaseType = 'arangodb';
 const isDatabaseType = (input: unknown): input is DatabaseType =>
   input === 'arangodb';
 
-export enum Environment {
+enum Environment {
   development = 'development',
   staging = 'staging',
   production = 'production',
@@ -23,7 +23,7 @@ type DatabaseConfigOptions = {
 };
 
 // Should this be a test utility for now or do we need type safety elsewhere?
-export const isDatabaseConfigOptions = (
+const isDatabaseConfigOptions = (
   input: unknown
 ): input is DatabaseConfigOptions => {
   const { type, host, port, username, userPassword, database, shouldUseSSL } =
@@ -40,15 +40,15 @@ export const isDatabaseConfigOptions = (
   );
 };
 
-type AuthorizationConfig = {
+type AuthorizationConfiguration = {
   issuerURL: string;
   audience: string;
 };
 
-export const isAuthorizationConfig = (
+const isAuthorizationConfiguration = (
   input: unknown
-): input is AuthorizationConfig => {
-  const { issuerURL, audience } = input as AuthorizationConfig;
+): input is AuthorizationConfiguration => {
+  const { issuerURL, audience } = input as AuthorizationConfiguration;
 
   return typeof issuerURL === 'string' && typeof audience === 'string';
 };
@@ -91,7 +91,7 @@ class ConfigService {
     };
   }
 
-  public getAuthorizationConfig(): AuthorizationConfig {
+  public getAuthorizationConfig(): AuthorizationConfiguration {
     return {
       issuerURL: this.getValue('AUTH0_ISSUER_URL'),
       audience: this.getValue('AUTH0_AUDIENCE'),
@@ -123,4 +123,12 @@ const configServiceFactory = (environmentOveride?: Environment) => {
   ]);
 };
 
-export { configServiceFactory };
+export {
+  AuthorizationConfiguration,
+  ConfigService,
+  configServiceFactory,
+  DatabaseConfigOptions,
+  Environment,
+  isAuthorizationConfiguration as isAuthorizationConfig,
+  isDatabaseConfigOptions,
+};
