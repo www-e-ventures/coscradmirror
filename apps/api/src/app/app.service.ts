@@ -18,4 +18,8 @@ export class AppService {
       ],
     };
   }
+
+  postData(data: string): void {
+    console.log(`posting the data ${data}`);
+  }
 }

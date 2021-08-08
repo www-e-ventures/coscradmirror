@@ -1,13 +1,14 @@
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { passportJwtSecret } from 'jwks-rsa';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { ConfigService } from '../config/config.service';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(configService: ConfigService) {
-    const { issuerURL, audience } = configService.getAuthorizationConfig();
+    const issuerURL = configService.get<string>('issueURL');
+    const audience = configService.get<string>('audience');
     super({
       secretOrKeyProvider: passportJwtSecret({
         cache: true,

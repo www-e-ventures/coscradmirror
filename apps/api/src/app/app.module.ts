@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AuthorizationModule } from '../authorization/authorization.module';
-import { configServiceFactory } from '../config/config.service';
+import { ConfigService, configServiceFactory } from '../config/config.service';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
@@ -13,6 +13,6 @@ import { AppService } from './app.service';
     }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, ConfigService],
 })
 export class AppModule {}

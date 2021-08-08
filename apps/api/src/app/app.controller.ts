@@ -1,5 +1,6 @@
 import { MediaItem } from '@coscrad/api-interfaces';
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { AppService } from './app.service';
 
 @Controller()
@@ -9,5 +10,12 @@ export class AppController {
   @Get('hello')
   getData(): MediaItem {
     return this.appService.getData();
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Post('message')
+  async create(@Body('data') data: string): Promise<void> {
+    console.log(`received data: ${data}`);
+    this.appService.postData(data);
   }
 }

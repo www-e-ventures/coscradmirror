@@ -1,4 +1,5 @@
-require('dotenv').config();
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 type DatabaseType = 'arangodb';
 
@@ -105,7 +106,7 @@ class ConfigService {
  * update the factory to override the entire environment when `environmentOverride` is defined.
  */
 const configServiceFactory = (environmentOveride?: Environment) => {
-  const MODE = environmentOveride || 'development';
+  // const MODE = environmentOveride || 'development';
   const env = {
     ...process.env,
     MODE: environmentOveride,
@@ -119,7 +120,7 @@ const configServiceFactory = (environmentOveride?: Environment) => {
     'ARANGO_DB_NAME',
     'AUTH0_ISSUER_URL',
     'AUTH0_AUDIENCE',
-    'MODE',
+    // 'MODE',
   ]);
 };
 
