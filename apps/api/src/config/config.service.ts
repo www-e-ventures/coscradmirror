@@ -40,6 +40,19 @@ export const isDatabaseConfigOptions = (
   );
 };
 
+type AuthorizationConfig = {
+  issuerURL: string;
+  audience: string;
+};
+
+export const isAuthorizationConfig = (
+  input: unknown
+): input is AuthorizationConfig => {
+  const { issuerURL, audience } = input as AuthorizationConfig;
+
+  return typeof issuerURL === 'string' && typeof audience === 'string';
+};
+
 class ConfigService {
   constructor(private env: { [k: string]: string | undefined }) {}
 
@@ -77,6 +90,13 @@ class ConfigService {
       shouldUseSSL: this.isProduction(),
     };
   }
+
+  public getAuthorizationConfig(): AuthorizationConfig {
+    return {
+      issuerURL: this.getValue('AUTH0_ISSUER_URL'),
+      audience: this.getValue('AUTH0_AUDIENCE'),
+    };
+  }
 }
 
 /**
@@ -97,6 +117,8 @@ const configServiceFactory = (environmentOveride?: Environment) => {
     'ARANGO_DB_USER',
     'ARANGO_DB_USER_PASSWORD',
     'ARANGO_DB_NAME',
+    'AUTH0_ISSUER_URL',
+    'AUTH0_AUDIENCE',
     'MODE',
   ]);
 };
