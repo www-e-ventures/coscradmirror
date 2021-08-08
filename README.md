@@ -14,6 +14,12 @@ We have adopted the monorepo approach to allow our members to maximize opportuni
 
 This monorepo workspace is managed using [Nx](https://nx.dev). See the `README` in an individual app or lib to learn more about the tools used on that particular project.
 
+### Getting Started
+
+Install Nx globally
+
+> > npm install -g @nrwl/cli
+
 ## Workflow
 
 ### Spinning up a development instance of `ArangoDb`
