@@ -45,9 +45,13 @@ In the project root, run
 
 ### Tests
 
-In the project root, run
+Note: Make sure nx cli is installed globally to run the following command.
 
-> > npm run test
+> > nx test <project-name>
+
+For example, to run the tests for the project `api`, run
+
+> > nx test api
 
 <!-- TODO Add License info \ choose open source license -->
 
