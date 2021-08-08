@@ -2,6 +2,16 @@ require('dotenv').config();
 
 type DatabaseType = 'arangodb';
 
+// TODO Update this typeguard when supporting additional db type
+const isDatabaseType = (input: unknown): input is DatabaseType =>
+  input === 'arangodb';
+
+export enum Environment {
+  development = 'development',
+  staging = 'staging',
+  production = 'production',
+}
+
 type DatabaseConfigOptions = {
   type: DatabaseType;
   host: string;
@@ -12,12 +22,30 @@ type DatabaseConfigOptions = {
   shouldUseSSL: boolean;
 };
 
+// Should this be a test utility for now or do we need type safety elsewhere?
+export const isDatabaseConfigOptions = (
+  input: unknown
+): input is DatabaseConfigOptions => {
+  const { type, host, port, username, userPassword, database, shouldUseSSL } =
+    input as DatabaseConfigOptions;
+
+  return (
+    isDatabaseType(type) &&
+    typeof host === 'string' &&
+    typeof port === 'number' &&
+    typeof username === 'string' &&
+    typeof userPassword === 'string' &&
+    typeof database === 'string' &&
+    typeof shouldUseSSL === 'boolean'
+  );
+};
+
 class ConfigService {
   constructor(private env: { [k: string]: string | undefined }) {}
 
-  private getValue(key: string, throwOnMissing = true): string {
+  private getValue(key: string, shouldThrowOnMissing = true): string {
     const value = this.env[key];
-    if (!value && throwOnMissing) {
+    if (!value && shouldThrowOnMissing) {
       throw new Error(`config error - missing env.${key}`);
     }
 
@@ -34,8 +62,8 @@ class ConfigService {
   }
 
   public isProduction() {
-    const mode = this.getValue('MODE', false);
-    return mode != 'DEV';
+    const mode = this.getValue('MODE');
+    return mode === Environment.production;
   }
 
   public getArangoConfig(): DatabaseConfigOptions {
@@ -51,13 +79,26 @@ class ConfigService {
   }
 }
 
-const configServiceFactory = () =>
-  new ConfigService(process.env).ensureValues([
+/**
+ *
+ * currently `environmentOverride` just overrides 'MODE' from the dot-env environment.
+ * update the factory to override the entire environment when `environmentOverride` is defined.
+ */
+const configServiceFactory = (environmentOveride?: Environment) => {
+  const MODE = environmentOveride || 'development';
+  const env = {
+    ...process.env,
+    MODE: environmentOveride,
+  };
+
+  return new ConfigService(env).ensureValues([
     'ARANGO_DB_HOST',
     'ARANGO_DB_PORT',
     'ARANGO_DB_USER',
     'ARANGO_DB_USER_PASSWORD',
     'ARANGO_DB_NAME',
+    'MODE',
   ]);
+};
 
 export { configServiceFactory };
