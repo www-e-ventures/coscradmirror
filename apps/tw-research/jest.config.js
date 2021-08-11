@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'tw-researc',
+  displayName: 'tw-research',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -8,7 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../coverage/apps/tw-researc',
+  coverageDirectory: '../../coverage/apps/tw-research',
   transform: {
     '^.+\\.(ts|js|html)$': 'jest-preset-angular',
   },

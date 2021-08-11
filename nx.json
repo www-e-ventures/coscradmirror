@@ -33,12 +33,12 @@
     "api-interfaces": {
       "tags": []
     },
-    "tw-researc": {
+    "tw-research": {
       "tags": []
     },
-    "tw-researc-e2e": {
+    "tw-research-e2e": {
       "tags": [],
-      "implicitDependencies": ["tw-researc"]
+      "implicitDependencies": ["tw-research"]
     }
   }
 }

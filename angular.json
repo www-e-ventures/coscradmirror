@@ -64,26 +64,26 @@
         }
       }
     },
-    "tw-researc": {
+    "tw-research": {
       "projectType": "application",
-      "root": "apps/tw-researc",
-      "sourceRoot": "apps/tw-researc/src",
+      "root": "apps/tw-research",
+      "sourceRoot": "apps/tw-research/src",
       "prefix": "coscrad",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "outputs": ["{options.outputPath}"],
           "options": {
-            "outputPath": "dist/apps/tw-researc",
-            "index": "apps/tw-researc/src/index.html",
-            "main": "apps/tw-researc/src/main.ts",
-            "polyfills": "apps/tw-researc/src/polyfills.ts",
-            "tsConfig": "apps/tw-researc/tsconfig.app.json",
+            "outputPath": "dist/apps/tw-research",
+            "index": "apps/tw-research/src/index.html",
+            "main": "apps/tw-research/src/main.ts",
+            "polyfills": "apps/tw-research/src/polyfills.ts",
+            "tsConfig": "apps/tw-research/tsconfig.app.json",
             "assets": [
-              "apps/tw-researc/src/favicon.ico",
-              "apps/tw-researc/src/assets"
+              "apps/tw-research/src/favicon.ico",
+              "apps/tw-research/src/assets"
             ],
-            "styles": ["apps/tw-researc/src/styles.css"],
+            "styles": ["apps/tw-research/src/styles.css"],
             "scripts": []
           },
           "configurations": {
@@ -102,8 +102,8 @@
               ],
               "fileReplacements": [
                 {
-                  "replace": "apps/tw-researc/src/environments/environment.ts",
-                  "with": "apps/tw-researc/src/environments/environment.prod.ts"
+                  "replace": "apps/tw-research/src/environments/environment.ts",
+                  "with": "apps/tw-research/src/environments/environment.prod.ts"
                 }
               ],
               "outputHashing": "all"
@@ -123,64 +123,64 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "tw-researc:build:production"
+              "browserTarget": "tw-research:build:production"
             },
             "development": {
-              "browserTarget": "tw-researc:build:development"
+              "browserTarget": "tw-research:build:development"
             }
           },
           "defaultConfiguration": "development",
           "options": {
-            "proxyConfig": "apps/tw-researc/proxy.conf.json"
+            "proxyConfig": "apps/tw-research/proxy.conf.json"
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "tw-researc:build"
+            "browserTarget": "tw-research:build"
           }
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "apps/tw-researc/src/**/*.ts",
-              "apps/tw-researc/src/**/*.html"
+              "apps/tw-research/src/**/*.ts",
+              "apps/tw-research/src/**/*.html"
             ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/tw-researc"],
+          "outputs": ["coverage/apps/tw-research"],
           "options": {
-            "jestConfig": "apps/tw-researc/jest.config.js",
+            "jestConfig": "apps/tw-research/jest.config.js",
             "passWithNoTests": true
           }
         }
       }
     },
-    "tw-researc-e2e": {
-      "root": "apps/tw-researc-e2e",
-      "sourceRoot": "apps/tw-researc-e2e/src",
+    "tw-research-e2e": {
+      "root": "apps/tw-research-e2e",
+      "sourceRoot": "apps/tw-research-e2e/src",
       "projectType": "application",
       "architect": {
         "e2e": {
           "builder": "@nrwl/cypress:cypress",
           "options": {
-            "cypressConfig": "apps/tw-researc-e2e/cypress.json",
-            "tsConfig": "apps/tw-researc-e2e/tsconfig.e2e.json",
-            "devServerTarget": "tw-researc:serve:development"
+            "cypressConfig": "apps/tw-research-e2e/cypress.json",
+            "tsConfig": "apps/tw-research-e2e/tsconfig.e2e.json",
+            "devServerTarget": "tw-research:serve:development"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "tw-researc:serve:production"
+              "devServerTarget": "tw-research:serve:production"
             }
           }
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/tw-researc-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": ["apps/tw-research-e2e/**/*.{js,ts}"]
           }
         }
       }
@@ -216,5 +216,5 @@
       "style": "css"
     }
   },
-  "defaultProject": "tw-researc"
+  "defaultProject": "tw-research"
 }
