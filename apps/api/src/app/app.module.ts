@@ -10,6 +10,8 @@ import { AppService } from './app.service';
     AuthorizationModule,
     ConfigModule.forRoot({
       load: [configServiceFactory],
+      isGlobal: true,
+      ignoreEnvFile: true,
     }),
   ],
   controllers: [AppController],
