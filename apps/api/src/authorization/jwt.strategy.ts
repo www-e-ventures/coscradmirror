@@ -7,8 +7,23 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(configService: ConfigService) {
-    const issuerURL = configService.get<string>('issueURL');
-    const audience = configService.get<string>('audience');
+    console.log({ configServiceInternal: configService.internalConfig });
+    const issuerURL = configService.get<string>('AUTH0_ISSUER_URL');
+    if (!issuerURL)
+      throw new Error('Internal Error: could not determine issuer url');
+    else {
+      console.log({
+        issuerURL,
+      });
+    }
+
+    const audience = configService.get<string>('AUTH0_AUDIENCE');
+    if (!audience)
+      throw new Error('Internal Error: could not determine audience');
+    else {
+      console.log({ audience });
+    }
+
     super({
       secretOrKeyProvider: passportJwtSecret({
         cache: true,
@@ -18,13 +33,16 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       }),
 
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      audience: audience,
-      issuer: `${issuerURL}`,
+      audience: 'https://tw-research.tsilhqotinlanguage.ca',
+      issuer: issuerURL,
       algorithms: ['RS256'],
     });
   }
 
   validate(payload: unknown): unknown {
+    console.log({
+      payload,
+    });
     return payload;
   }
 }

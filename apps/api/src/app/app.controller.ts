@@ -7,8 +7,10 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
+  @UseGuards(AuthGuard('jwt'))
   @Get('hello')
   getData(): MediaItem {
+    console.log(`You called get!`);
     return this.appService.getData();
   }
 

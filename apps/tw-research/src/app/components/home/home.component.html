@@ -3,3 +3,10 @@
 </div>
 <coscrad-auth-button></coscrad-auth-button>
 <div>MediaItem loaded from API: {{ hello$ | async | json }}</div>
+
+<button (click)="callApi()">CALL API</button>
+
+<button (click)="callSecureApi()">CALL SECURE API</button>
+
+<h2>SECURE MESSAGE</h2>
+<p>{{ mediaItem | json }}</p>
