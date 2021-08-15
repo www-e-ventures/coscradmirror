@@ -7,22 +7,13 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(configService: ConfigService) {
-    console.log({ configServiceInternal: configService.internalConfig });
     const issuerURL = configService.get<string>('AUTH0_ISSUER_URL');
     if (!issuerURL)
       throw new Error('Internal Error: could not determine issuer url');
-    else {
-      console.log({
-        issuerURL,
-      });
-    }
 
     const audience = configService.get<string>('AUTH0_AUDIENCE');
     if (!audience)
       throw new Error('Internal Error: could not determine audience');
-    else {
-      console.log({ audience });
-    }
 
     super({
       secretOrKeyProvider: passportJwtSecret({
@@ -40,9 +31,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   validate(payload: unknown): unknown {
-    console.log({
-      payload,
-    });
     return payload;
   }
 }
