@@ -8,12 +8,16 @@
       "architect": {
         "build": {
           "builder": "@nrwl/node:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/api",
             "main": "apps/api/src/main.ts",
             "tsConfig": "apps/api/tsconfig.app.json",
-            "assets": ["apps/api/src/assets"]
+            "assets": [
+              "apps/api/src/assets"
+            ]
           },
           "configurations": {
             "production": {
@@ -38,12 +42,16 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/api/**/*.ts"]
+            "lintFilePatterns": [
+              "apps/api/**/*.ts"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/api"],
+          "outputs": [
+            "coverage/apps/api"
+          ],
           "options": {
             "jestConfig": "apps/api/jest.config.js",
             "passWithNoTests": true
@@ -59,7 +67,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/api-interfaces/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/api-interfaces/**/*.ts"
+            ]
           }
         }
       }
@@ -72,7 +82,9 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/tw-research",
             "index": "apps/tw-research/src/index.html",
@@ -83,7 +95,9 @@
               "apps/tw-research/src/favicon.ico",
               "apps/tw-research/src/assets"
             ],
-            "styles": ["apps/tw-research/src/styles.css"],
+            "styles": [
+              "apps/tw-research/src/styles.css"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -151,7 +165,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/tw-research"],
+          "outputs": [
+            "coverage/apps/tw-research"
+          ],
           "options": {
             "jestConfig": "apps/tw-research/jest.config.js",
             "passWithNoTests": true
@@ -180,7 +196,89 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/tw-research-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/tw-research-e2e/**/*.{js,ts}"
+            ]
+          }
+        }
+      }
+    },
+    "nativescript-tng-dictionary-mobile": {
+      "projectType": "application",
+      "root": "apps/nativescript-tng-dictionary-mobile/",
+      "sourceRoot": "apps/nativescript-tng-dictionary-mobile/src",
+      "prefix": "",
+      "architect": {
+        "build": {
+          "builder": "@nativescript/nx:build",
+          "options": {
+            "noHmr": true,
+            "production": true,
+            "uglify": true,
+            "release": true,
+            "forDevice": true
+          },
+          "configurations": {
+            "prod": {
+              "fileReplacements": [
+                {
+                  "replace": "./src/environments/environment.ts",
+                  "with": "./src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "ios": {
+          "builder": "@nativescript/nx:build",
+          "options": {
+            "platform": "ios"
+          },
+          "configurations": {
+            "build": {
+              "copyTo": "./dist/build.ipa"
+            },
+            "prod": {
+              "combineWithConfig": "build:prod"
+            }
+          }
+        },
+        "android": {
+          "builder": "@nativescript/nx:build",
+          "options": {
+            "platform": "android"
+          },
+          "configurations": {
+            "build": {
+              "copyTo": "./dist/build.apk"
+            },
+            "prod": {
+              "combineWithConfig": "build:prod"
+            }
+          }
+        },
+        "clean": {
+          "builder": "@nativescript/nx:build",
+          "options": {
+            "clean": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/nativescript-tng-dictionary-mobile/**/*.ts",
+              "apps/nativescript-tng-dictionary-mobile/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/nativescript-tng-dictionary-mobile/jest.config.js",
+            "tsConfig": "apps/nativescript-tng-dictionary-mobile/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "apps/nativescript-tng-dictionary-mobile/src/test-setup.ts"
           }
         }
       }
