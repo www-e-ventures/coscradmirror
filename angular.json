@@ -64,6 +64,124 @@
         }
       }
     },
+    "tng-dictionary": {
+      "projectType": "application",
+      "root": "apps/tng-dictionary",
+      "sourceRoot": "apps/tng-dictionary/src",
+      "prefix": "coscrad",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/tng-dictionary",
+            "index": "apps/tng-dictionary/src/index.html",
+            "main": "apps/tng-dictionary/src/main.ts",
+            "polyfills": "apps/tng-dictionary/src/polyfills.ts",
+            "tsConfig": "apps/tng-dictionary/tsconfig.app.json",
+            "assets": [
+              "apps/tng-dictionary/src/favicon.ico",
+              "apps/tng-dictionary/src/assets"
+            ],
+            "styles": ["apps/tng-dictionary/src/styles.css"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/tng-dictionary/src/environments/environment.ts",
+                  "with": "apps/tng-dictionary/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "tng-dictionary:build:production"
+            },
+            "development": {
+              "browserTarget": "tng-dictionary:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "tng-dictionary:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/tng-dictionary/src/**/*.ts",
+              "apps/tng-dictionary/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/tng-dictionary"],
+          "options": {
+            "jestConfig": "apps/tng-dictionary/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "tng-dictionary-e2e": {
+      "root": "apps/tng-dictionary-e2e",
+      "sourceRoot": "apps/tng-dictionary-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/tng-dictionary-e2e/cypress.json",
+            "tsConfig": "apps/tng-dictionary-e2e/tsconfig.e2e.json",
+            "devServerTarget": "tng-dictionary:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "tng-dictionary:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/tng-dictionary-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
     "tw-research": {
       "projectType": "application",
       "root": "apps/tw-research",

@@ -33,6 +33,13 @@
     "api-interfaces": {
       "tags": []
     },
+    "tng-dictionary": {
+      "tags": []
+    },
+    "tng-dictionary-e2e": {
+      "tags": [],
+      "implicitDependencies": ["tng-dictionary"]
+    },
     "tw-research": {
       "tags": []
     },
