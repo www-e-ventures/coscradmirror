@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'coscrad-root',
+  selector: 'tng-dictionary-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
