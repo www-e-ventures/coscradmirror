@@ -201,7 +201,7 @@
               "apps/tw-research/src/favicon.ico",
               "apps/tw-research/src/assets"
             ],
-            "styles": ["apps/tw-research/src/styles.css"],
+            "styles": ["./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css", "apps/tw-research/src/styles.css"],
             "scripts": []
           },
           "configurations": {

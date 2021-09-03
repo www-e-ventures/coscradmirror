@@ -11,6 +11,7 @@ import { routes } from './app.routes';
 import { AuthButtonComponent } from './components/auth-button/auth-button.component';
 import { HomeComponent } from './components/home/home.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
       },
     }),
     AppRoutingModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     {
