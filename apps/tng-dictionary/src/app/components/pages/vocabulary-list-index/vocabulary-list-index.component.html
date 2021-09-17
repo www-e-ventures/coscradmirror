@@ -1,0 +1,6 @@
+<div *ngIf="listSummaryTable">
+  <app-table
+    [data]="listSummaryTable"
+    (onClick)="handleCellClick($event)"
+  ></app-table>
+</div>

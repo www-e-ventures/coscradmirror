@@ -12,6 +12,7 @@ import { AuthButtonComponent } from './components/auth-button/auth-button.compon
 import { HomeComponent } from './components/home/home.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TableComponent } from './components/widgets/table/table.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AuthButtonComponent,
     UserProfileComponent,
     HomeComponent,
+    TableComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,33 @@
+<div *ngIf="_selectedData">
+  <div style="padding: 5px">
+    <table id="myTable">
+      <thead>
+        <ng-container *ngFor="let heading of _selectedData.headings">
+          <th class="header">
+            {{ heading }}
+
+            <input
+              type="text"
+              id="myInput"
+              (keyup)="filterData($event, heading)"
+              placeholder="Search {{ heading }} ..."
+              title="Filter column {{ heading }}"
+            />
+          </th>
+        </ng-container>
+      </thead>
+      <tbody>
+        <tr id="demo" *ngFor="let row of _selectedData.rows; let i = index">
+          <td
+            *ngFor="let key of _selectedData.headings; let j = index"
+            [attr.rowIndex]="i"
+            [class]="key"
+            (click)="handleCellClick($event)"
+          >
+            {{ row[key] }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
