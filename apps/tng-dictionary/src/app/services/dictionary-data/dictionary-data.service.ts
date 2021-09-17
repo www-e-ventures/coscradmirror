@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { IDictionaryDataAPI } from '../dictionary-data/interfaces/dictionary-data-api.interface';
 import { invalid, isValid, MaybeInvalid } from './view-models/invalid';
 import VocabularyListSummaryViewModel, {
   RawVocablaryListSummary,
@@ -10,7 +11,7 @@ import VocabularyListSummaryViewModel, {
 @Injectable({
   providedIn: 'root',
 })
-export class DictionaryDataService {
+export class DictionaryDataService implements IDictionaryDataAPI {
   private baseAPIURL: string = 'https://api.tsilhqotinlanguage.ca';
 
   // TODO refactor and add type safety to keys

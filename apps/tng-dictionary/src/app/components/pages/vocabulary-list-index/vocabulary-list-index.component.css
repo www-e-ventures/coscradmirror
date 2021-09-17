@@ -1,0 +1,11 @@
+#id {
+  height: auto;
+  width: 80vw;
+  margin: auto;
+  border-spacing: 0;
+  border: 1px solid #ddd;
+  background: rgb(252, 252, 252);
+  border-radius: 5px;
+  box-shadow: 1px 5px 5px 1px rgba(0, 0, 0, 0.445);
+  padding: 25px;
+}

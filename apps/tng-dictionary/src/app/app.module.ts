@@ -11,11 +11,17 @@ import { VocabularyListIndexComponent } from './components/pages/vocabulary-list
 import { TableComponent } from './components/widgets/table/table.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, VocabularyListIndexComponent, TableComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    VocabularyListIndexComponent,
+    TableComponent,
+  ],
   imports: [
     AppRoutingModule,
-    BrowserModule,
     RouterModule.forRoot(routes),
+    BrowserModule,
+
     MatToolbarModule,
     HttpClientModule,
   ],
