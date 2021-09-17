@@ -25,7 +25,9 @@ export class VocabularyListIndexComponent implements OnInit {
   }
 
   handleCellClick({ row }: TableClickEventData<VocabularyListSummaryDTO>) {
-    this.router.navigateByUrl(`/lists/${this.listSummaryTable.rows[row].id}`);
+    const id = this.listSummaryTable.rows[row].id;
+
+    this.router.navigateByUrl(`/lists/${id}`);
 
     // TODO if column === 'contributor' navigate to the contributor's bio page
   }

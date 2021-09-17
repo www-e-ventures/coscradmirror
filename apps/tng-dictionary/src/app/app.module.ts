@@ -9,6 +9,7 @@ import routes from './app.routes';
 import { HomeComponent } from './components/pages/home/home.component';
 import { VocabularyListIndexComponent } from './components/pages/vocabulary-list-index/vocabulary-list-index.component';
 import { TableComponent } from './components/widgets/table/table.component';
+import { VocabularyListDetailComponent } from './components/pages/vocabulary-list-detail/vocabulary-list-detail.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { TableComponent } from './components/widgets/table/table.component';
     HomeComponent,
     VocabularyListIndexComponent,
     TableComponent,
+    VocabularyListDetailComponent,
   ],
   imports: [
     AppRoutingModule,

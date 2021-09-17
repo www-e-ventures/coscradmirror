@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { IDictionaryDataAPI } from '../dictionary-data/interfaces/dictionary-data-api.interface';
 import { invalid, isValid, MaybeInvalid } from './view-models/invalid';
 import VocabularyListSummaryViewModel, {
-  RawVocablaryListSummary,
+  RawVocablaryListSummaryDTO,
 } from './view-models/vocabulary-list-summary-view-model';
 
 @Injectable({
@@ -38,7 +38,7 @@ export class DictionaryDataService implements IDictionaryDataAPI {
           return data
             .map(
               (
-                rawVocabularyList: RawVocablaryListSummary
+                rawVocabularyList: RawVocablaryListSummaryDTO
               ): MaybeInvalid<VocabularyListSummaryViewModel> => {
                 try {
                   return new VocabularyListSummaryViewModel(rawVocabularyList);

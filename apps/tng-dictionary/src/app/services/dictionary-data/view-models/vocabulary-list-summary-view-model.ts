@@ -1,5 +1,6 @@
 import { invalid, isInvalid, isValid, MaybeInvalid, Raw } from './invalid';
 import { isUndefined } from './utilities/is-null-or-undefined';
+import { validateId } from './utilities/validate-id';
 import { validateStringWithLength } from './utilities/validate-string-with-length';
 
 export type VocabularyListSummaryDTO = {
@@ -10,11 +11,41 @@ export type VocabularyListSummaryDTO = {
   nameEnglish?: string;
 };
 
-export type RawVocablaryListSummary = Raw<
-  Omit<VocabularyListSummaryDTO, 'nameEnglish'> & {
-    name_english: string;
-  }
->;
+export type ValidatedRawVocabularyListSummaryDTO = Omit<
+  VocabularyListSummaryDTO,
+  'nameEnglish' | 'id'
+> & {
+  name_english: string;
+  id: number;
+};
+
+// This is the part of the domain model we need to create the View Model
+export type RawVocablaryListSummaryDTO =
+  Raw<ValidatedRawVocabularyListSummaryDTO>;
+
+// This belongs on the server!
+const validateRawVocabularyListSummaryDTO = (
+  input: RawVocablaryListSummaryDTO
+): MaybeInvalid<ValidatedRawVocabularyListSummaryDTO> => {
+  const { id, name, name_english } = input;
+
+  if (validateId(id) === invalid) return invalid;
+
+  const nameValidationResult = validateStringWithLength(name);
+  const nameEnglishValidationResult = validateStringWithLength(name_english);
+
+  // one of name, name_english must be a name with length
+  if (isInvalid(nameValidationResult) && isInvalid(nameEnglishValidationResult))
+    return invalid;
+
+  return {
+    id,
+    name: isValid(nameValidationResult) ? nameValidationResult : undefined,
+    name_english: isValid(nameEnglishValidationResult)
+      ? nameEnglishValidationResult
+      : undefined,
+  } as ValidatedRawVocabularyListSummaryDTO;
+};
 
 /**
  * TODO Move the validation of DTOs and creation
@@ -29,8 +60,8 @@ export default class VocabularyListSummaryViewModel {
 
   nameEnglish?: string;
 
-  constructor(rawData: RawVocablaryListSummary) {
-    const dto = this.validateDTO(rawData);
+  constructor(rawData: RawVocablaryListSummaryDTO) {
+    const dto = this.mapRawDataToDTO(rawData);
 
     if (isInvalid(dto))
       throw new Error(`Invalid Vocabulary List Summary DTO: ${rawData}`);
@@ -43,47 +74,22 @@ export default class VocabularyListSummaryViewModel {
   }
 
   // Consider throwing here for more fine-grained error messages
-  validateDTO(
-    rawData: RawVocablaryListSummary
+  mapRawDataToDTO(
+    rawData: RawVocablaryListSummaryDTO
   ): MaybeInvalid<VocabularyListSummaryDTO> {
     if (isUndefined(rawData)) return invalid;
 
-    if (!Number.isInteger(rawData.id)) return invalid;
+    const dto = validateRawVocabularyListSummaryDTO(rawData);
 
-    const id = rawData.toString();
+    if (isInvalid(dto)) return invalid;
 
-    const nameEnglish = validateStringWithLength(rawData.name_english);
+    const { id, name, name_english } = dto;
 
-    const name = validateStringWithLength(rawData.name);
-
-    // one of nameEnglish and name must be a well defined string
-    if (isInvalid(nameEnglish) && isInvalid(name)) return invalid;
-
-    if (isValid(nameEnglish) && isValid(name)) {
-      return {
-        id,
-        name,
-        nameEnglish,
-      };
-    }
-
-    // nameEnglish is a string with length
-    if (isValid(nameEnglish) && isInvalid(name)) {
-      return {
-        id,
-        nameEnglish,
-      };
-    }
-
-    // name is a string with length
-    if (isInvalid(nameEnglish) && isValid(name)) {
-      return {
-        id,
-        name,
-      };
-    }
-
-    // catchall
-    return invalid;
+    // map domain model to view model
+    return {
+      id: id.toString(),
+      name,
+      nameEnglish: name_english,
+    };
   }
 }
