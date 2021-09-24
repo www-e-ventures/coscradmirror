@@ -136,20 +136,3 @@ export default class TermViewModel implements IViewModel<RawTermData, TermDTO> {
     return mapValidRawDataToDTO(maybeInvalidRawData);
   }
 }
-
-// TODO
-// - implement `mapRawDataToDTO`
-// - implement `validateRawTermData`
-// - implement `mapValidatedRawTermDataToDTO`
-// return {
-//   id: throwErrorIfUndefined(apiTerm.id),
-//   term: returnValueOrNullIfUndefined(apiTerm.term),
-//   termEnglish: returnValueOrNullIfUndefined(apiTerm.term_english),
-//   audioURL: `${this.baseAPIURL}${returnValueOrNullIfUndefined(
-//     apiTerm.audio[0]?.url
-//   )}`,
-//   audioFormat: returnValueOrNullIfUndefined(apiTerm.audio[0]?.format),
-//   contributor: returnValueOrNullIfUndefined(
-//     `${apiTerm.contributor?.first_name} ${apiTerm.contributor?.last_name}`
-//   ),
-// };
