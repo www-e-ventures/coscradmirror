@@ -1,6 +1,7 @@
 import { AudioData } from '../types/audioData';
 import { RawContributor } from '../types/raw-contributor';
 import { invalid, isInvalid, isValid, MaybeInvalid } from './invalid';
+import { isNullOrUndefined } from './utilities/is-null-or-undefined';
 import { validateId } from './utilities/validate-id';
 import { validateStringWithLength } from './utilities/validate-string-with-length';
 import { validateAudioData } from './utilities/validateAudioData';
@@ -122,14 +123,17 @@ export default class TermViewModel implements IViewModel<RawTermData, TermDTO> {
   }
 
   mapRawDataToDTO(
-    _rawData: unknown,
-    _validateRawTermData: RawDataValidator<RawTermData>,
-    _mapValidatedRawTermDataToDTO: MapValidatedRawDataToDTO<
-      RawTermData,
-      TermDTO
-    >
-  ): TermDTO {
-    throw new Error('Not implemented');
+    rawData: unknown,
+    validateRawData: RawDataValidator<RawTermData>,
+    mapValidRawDataToDTO: MapValidatedRawDataToDTO<RawTermData, TermDTO>
+  ): MaybeInvalid<TermDTO> {
+    if (isNullOrUndefined(rawData)) return invalid;
+
+    const maybeInvalidRawData = validateRawData(rawData);
+
+    if (isInvalid(maybeInvalidRawData)) return invalid;
+
+    return mapValidRawDataToDTO(maybeInvalidRawData);
   }
 }
 
