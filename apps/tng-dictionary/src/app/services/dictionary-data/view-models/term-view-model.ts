@@ -1,4 +1,27 @@
-import { MaybeInvalid, Raw } from './invalid';
+import { MaybeInvalid } from './invalid';
+import {
+  IViewModel,
+  MapValidatedRawDataToDTO,
+  RawDataValidator,
+} from './view-model.interface';
+
+type Audio = {
+  url: string;
+  format?: string;
+};
+
+type Contributor = {
+  first_name: string;
+  last_name: string;
+};
+
+export type RawTermData = {
+  id: string;
+  term: string;
+  term_english?: string;
+  audio?: Audio;
+  contributor: Contributor;
+};
 
 export type TermDTO = {
   id: string;
@@ -9,21 +32,53 @@ export type TermDTO = {
   audioFormat?: string;
 };
 
-export type ValidatedRawTermDTO = Omit<TermDTO, 'id'> & {
-  id: number;
+const validateRawTermData = (input: unknown): MaybeInvalid<RawTermData> => {
+  throw new Error('Not implemented');
 };
 
-export type RawTermDTO = Partial<ValidatedRawTermDTO>;
+const mapValidatedRawTermDataToDTO = (
+  validatedRawData: RawTermData
+): TermDTO => {
+  throw new Error('Not implemented');
+};
 
-export default class TermViewModel {
-  constructor() {}
+export default class TermViewModel implements IViewModel<RawTermData, TermDTO> {
+  // Add Term View Model properties here
 
-  validateDTO(rawData: Raw<TermDTO>): MaybeInvalid<TermDTO> {
-    throw new Error('validate DTO is not implemented for a Term');
-    // if (isUndefined(rawData)) return invalid;
+  constructor(rawData: unknown) {
+    const dto = this.mapRawDataToDTO(
+      rawData,
+      validateRawTermData,
+      mapValidatedRawTermDataToDTO
+    );
 
-    // if (!Number.isInteger(rawData.id)) return invalid;
+    // Check if dto isInvalid(...) -> throw
 
-    // const id = rawData.id.toString();
+    // set Term View Model properties from dto
+  }
+
+  mapRawDataToDTO(
+    rawData: unknown,
+    validateRawTermData: RawDataValidator<RawTermData>,
+    mapValidatedRawTermDataToDTO: MapValidatedRawDataToDTO<RawTermData, TermDTO>
+  ): TermDTO {
+    throw new Error('Not implemented');
   }
 }
+
+// TODO
+// - implement `mapRawDataToDTO`
+// - implement `validateRawTermData`
+// - implement `mapValidatedRawTermDataToDTO`
+// return {
+//   id: throwErrorIfUndefined(apiTerm.id),
+//   term: returnValueOrNullIfUndefined(apiTerm.term),
+//   termEnglish: returnValueOrNullIfUndefined(apiTerm.term_english),
+//   audioURL: `${this.baseAPIURL}${returnValueOrNullIfUndefined(
+//     apiTerm.audio[0]?.url
+//   )}`,
+//   audioFormat: returnValueOrNullIfUndefined(apiTerm.audio[0]?.format),
+//   contributor: returnValueOrNullIfUndefined(
+//     `${apiTerm.contributor?.first_name} ${apiTerm.contributor?.last_name}`
+//   ),
+// };

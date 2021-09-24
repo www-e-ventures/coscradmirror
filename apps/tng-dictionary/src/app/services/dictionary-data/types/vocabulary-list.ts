@@ -25,8 +25,8 @@ export type VocabularyList<T> = Omit<RawVocabularyList<any>, 'variables'> & {
   variables: ParsedVariables;
 };
 
-export type VocabularyListSummary = {
-  id: string;
-  name?: string;
-  name_english: string;
-};
+// export type VocabularyListSummary = {
+//   id: string;
+//   name?: string;
+//   name_english: string;
+// };

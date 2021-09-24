@@ -1,24 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { DictionaryDataService } from '../../../services/dictionary-data/dictionary-data.service';
 
 @Component({
   selector: 'coscrad-vocabulary-list-detail',
   templateUrl: './vocabulary-list-detail.component.html',
   styleUrls: ['./vocabulary-list-detail.component.css'],
 })
-export class VocabularyListDetailComponent {
-  // implements OnInit {
-  // selectedEntry: VocabularyListEntry;
-  // entries: VocabularyListEntry[];
+export class VocabularyListDetailComponent implements OnInit {
+  implements OnInit {
+  selectedEntry: VocabularyListEntry;
+  entries: VocabularyListEntry[];
   // vocabularyList: VocabularyList<any>;
-  // listId: string;
+  listId: string;
   // selectedTermId: string;
   // dropboxes: ListVariable<string>[] = [];
   // checkboxes: ListVariable<boolean>[] = [];
-  // constructor(
-  //   private dictionaryData: DictionaryDataService,
-  //   private dictionarySearch: DictionarySearchService,
-  //   private route: ActivatedRoute
-  // ) {}
+  constructor(
+    private dictionaryData: DictionaryDataService,
+   // private dictionarySearch: DictionarySearchService,
+    private route: ActivatedRoute
+  ) {}
   // ngOnInit(): void {
   //   this.route.paramMap
   //     .pipe(

@@ -1,7 +1,8 @@
-import { invalid, isInvalid, isValid, MaybeInvalid, Raw } from './invalid';
-import { isUndefined } from './utilities/is-null-or-undefined';
+import { invalid, isInvalid, isValid, MaybeInvalid } from './invalid';
+import { isNullOrUndefined } from './utilities/is-null-or-undefined';
 import { validateId } from './utilities/validate-id';
 import { validateStringWithLength } from './utilities/validate-string-with-length';
+import { IViewModel } from './view-model.interface';
 
 export type VocabularyListSummaryDTO = {
   id: string;
@@ -11,23 +12,20 @@ export type VocabularyListSummaryDTO = {
   nameEnglish?: string;
 };
 
-export type ValidatedRawVocabularyListSummaryDTO = Omit<
-  VocabularyListSummaryDTO,
-  'nameEnglish' | 'id'
-> & {
-  name_english: string;
-  id: number;
-};
-
-// This is the part of the domain model we need to create the View Model
-export type RawVocablaryListSummaryDTO =
-  Raw<ValidatedRawVocabularyListSummaryDTO>;
+export type ValidatedRawVocabularyListSummaryData = Partial<
+  Omit<VocabularyListSummaryDTO, 'nameEnglish' | 'id'> & {
+    name_english: string;
+    id: number;
+  }
+>;
 
 // This belongs on the server!
-const validateRawVocabularyListSummaryDTO = (
-  input: RawVocablaryListSummaryDTO
-): MaybeInvalid<ValidatedRawVocabularyListSummaryDTO> => {
-  const { id, name, name_english } = input;
+const validateRawVocabularyListSummaryData = (
+  input: unknown
+): MaybeInvalid<ValidatedRawVocabularyListSummaryData> => {
+  const test = input as ValidatedRawVocabularyListSummaryData;
+
+  const { id, name, name_english } = test;
 
   if (validateId(id) === invalid) return invalid;
 
@@ -44,7 +42,20 @@ const validateRawVocabularyListSummaryDTO = (
     name_english: isValid(nameEnglishValidationResult)
       ? nameEnglishValidationResult
       : undefined,
-  } as ValidatedRawVocabularyListSummaryDTO;
+  } as ValidatedRawVocabularyListSummaryData;
+};
+
+const mapValidRawVocabularyListSummaryDataToDTO = (
+  validRawData: ValidatedRawVocabularyListSummaryData
+): VocabularyListSummaryDTO => {
+  const { id, name, name_english } = validRawData;
+
+  // map domain model to view model
+  return {
+    id: (id as number).toString(),
+    name,
+    nameEnglish: name_english,
+  };
 };
 
 /**
@@ -53,18 +64,27 @@ const validateRawVocabularyListSummaryDTO = (
  * The API should return valid DTOs for view models
  * as part of its contract with the front-end.
  */
-export default class VocabularyListSummaryViewModel {
+export default class VocabularyListSummaryViewModel
+  implements
+    IViewModel<ValidatedRawVocabularyListSummaryData, VocabularyListSummaryDTO>
+{
   id: string;
 
   name?: string;
 
   nameEnglish?: string;
 
-  constructor(rawData: RawVocablaryListSummaryDTO) {
-    const dto = this.mapRawDataToDTO(rawData);
+  constructor(rawData: unknown) {
+    const dto = this.mapRawDataToDTO(
+      rawData,
+      validateRawVocabularyListSummaryData,
+      mapValidRawVocabularyListSummaryDataToDTO
+    );
 
     if (isInvalid(dto))
       throw new Error(`Invalid Vocabulary List Summary DTO: ${rawData}`);
+
+    //    Object.assign(this, dto);
 
     this.id = dto.id;
 
@@ -75,21 +95,20 @@ export default class VocabularyListSummaryViewModel {
 
   // Consider throwing here for more fine-grained error messages
   mapRawDataToDTO(
-    rawData: RawVocablaryListSummaryDTO
+    rawData: unknown,
+    validateRawData: (
+      rawData: unknown
+    ) => MaybeInvalid<ValidatedRawVocabularyListSummaryData>,
+    mapValidRawDataToDTO: (
+      validRawData: ValidatedRawVocabularyListSummaryData
+    ) => VocabularyListSummaryDTO
   ): MaybeInvalid<VocabularyListSummaryDTO> {
-    if (isUndefined(rawData)) return invalid;
+    if (isNullOrUndefined(rawData)) return invalid;
 
-    const dto = validateRawVocabularyListSummaryDTO(rawData);
+    const maybeInvalidRawData = validateRawData(rawData);
 
-    if (isInvalid(dto)) return invalid;
+    if (isInvalid(maybeInvalidRawData)) return invalid;
 
-    const { id, name, name_english } = dto;
-
-    // map domain model to view model
-    return {
-      id: id.toString(),
-      name,
-      nameEnglish: name_english,
-    };
+    return mapValidRawDataToDTO(maybeInvalidRawData);
   }
 }
