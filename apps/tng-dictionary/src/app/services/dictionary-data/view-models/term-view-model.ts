@@ -57,7 +57,25 @@ const validateRawTermData = (input: unknown): MaybeInvalid<RawTermData> => {
 const mapValidatedRawTermDataToDTO = (
   validatedRawData: RawTermData
 ): TermDTO => {
-  throw new Error('Not implemented');
+  const {
+    id,
+    term,
+    term_english,
+    audio,
+    contributor: { first_name, last_name },
+  } = validatedRawData;
+
+  const audioURL = audio?.url;
+  const audioFormat = audio?.format;
+
+  return {
+    id,
+    term,
+    termEnglish: term_english,
+    audioURL,
+    contributor: `${first_name} ${last_name}`,
+    audioFormat,
+  };
 };
 
 export default class TermViewModel implements IViewModel<RawTermData, TermDTO> {
