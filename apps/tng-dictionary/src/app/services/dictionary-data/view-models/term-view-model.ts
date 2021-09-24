@@ -63,6 +63,18 @@ const mapValidatedRawTermDataToDTO = (
 export default class TermViewModel implements IViewModel<RawTermData, TermDTO> {
   // Add Term View Model properties here
 
+  id: string;
+
+  term: string;
+
+  termEnglish?: string;
+
+  contributor: string;
+
+  audioURL?: string;
+
+  audioFormat?: string;
+
   constructor(rawData: unknown) {
     const dto = this.mapRawDataToDTO(
       rawData,
@@ -73,12 +85,31 @@ export default class TermViewModel implements IViewModel<RawTermData, TermDTO> {
     // Check if dto isInvalid(...) -> throw
 
     // set Term View Model properties from dto
+
+    if (isInvalid(dto))
+      throw new Error(`Invalid Vocabulary List Summary DTO: ${rawData}`);
+
+    //    Object.assign(this, dto);
+    this.id = dto.id;
+
+    this.term = dto.term;
+
+    this.termEnglish = dto.termEnglish || undefined;
+
+    this.contributor = dto.contributor;
+
+    this.audioURL = dto.audioURL || undefined;
+
+    this.audioFormat = dto.audioFormat || undefined;
   }
 
   mapRawDataToDTO(
-    rawData: unknown,
-    validateRawTermData: RawDataValidator<RawTermData>,
-    mapValidatedRawTermDataToDTO: MapValidatedRawDataToDTO<RawTermData, TermDTO>
+    _rawData: unknown,
+    _validateRawTermData: RawDataValidator<RawTermData>,
+    _mapValidatedRawTermDataToDTO: MapValidatedRawDataToDTO<
+      RawTermData,
+      TermDTO
+    >
   ): TermDTO {
     throw new Error('Not implemented');
   }
