@@ -1,1 +1,3 @@
-export type VariableValues = Record<string, string | boolean>;
+import { VariableValueType } from './variable-value-type';
+
+export type VariableValues = Record<string, VariableValueType>;

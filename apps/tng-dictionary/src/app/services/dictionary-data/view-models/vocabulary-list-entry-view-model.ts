@@ -1,98 +1,71 @@
-import { VariableValues } from '../types/variable-values';
-import { invalid, isInvalid, MaybeInvalid } from './invalid';
-import { RawTermData } from './term-view-model';
+import TermViewModel from './term-view-model';
 import { isNullOrUndefined } from './utilities/is-null-or-undefined';
-import {
-  IViewModel,
-  MapValidatedRawDataToDTO,
-  RawDataValidator,
-} from './view-model.interface';
+import { VariableValuesViewModel } from './variable-values-view-model';
 
-export type RawVariableValuesData = {};
-
-export type RawVocabularyListEntryData = {
-  term: RawTermData;
-  variable_values: VariableValues;
-};
-
-export type VocabularyListEntryDTO = {
+type HasTerm = {
   term: TermViewModel;
-  variableValues: VariableValues;
 };
 
-const validateRawEntryData = (
-  input: unknown
-): MaybeInvalid<RawVocabularyListEntryData> => {
-  throw new Error('not implemented');
-  // note: We defer validation of a term to the TermViewModel constructor
+const hasTerm = (input: unknown): input is HasTerm => {
+  if (isNullOrUndefined(input)) return false;
 
-  // const test = input as RawTermData;
+  const test = input as HasTerm;
 
-  // // Validate required properties
-  // const id = validateId(test.id);
-  // if (isInvalid(id)) return invalid;
-
-  // const term = validateStringWithLength(test.term);
-  // if (isInvalid(term)) return invalid;
-
-  // const contributor = validateRawContributor(test.contributor);
-  // if (isInvalid(contributor)) return invalid;
-
-  // // Validate optional properties
-  // const term_english = validateStringWithLength(test.term_english);
-  // const audio = validateAudioData(test.audio);
-
-  // return {
-  //   id,
-  //   term,
-  //   contributor,
-  //   term_english: isValid(term_english) ? term_english : undefined,
-  //   audio: isValid(audio) ? audio : undefined,
-  // };
+  return !isNullOrUndefined(test.term);
 };
 
-const mapValidatedRawTermDataToDTO = (
-  validatedRawData: RawVocabularyListEntryData
-): VocabularyListEntryDTO => {
-  throw new Error('Not Implemented');
+type HasVariableValues = {
+  variable_values: VariableValuesViewModel;
 };
 
-export default class TermViewModel
-  implements IViewModel<RawVocabularyListEntryData, VocabularyListEntryDTO>
-{
-  // Add Term View Model properties here
+const hasVariableValues = (input: unknown): input is HasVariableValues => {
+  if (isNullOrUndefined(input)) return false;
+
+  const test = input as HasVariableValues;
+
+  return !isNullOrUndefined(test.variable_values);
+};
+
+export default class VocabularyListEntryViewModel {
+  term: TermViewModel;
+
+  variableValues: VariableValuesViewModel;
 
   constructor(rawData: unknown) {
-    const dto = this.mapRawDataToDTO(
-      rawData,
-      validateRawEntryData,
-      mapValidatedRawTermDataToDTO
-    );
+    if (!hasTerm(rawData)) {
+      const msg = [
+        `No term property found when trying to build`,
+        `a vocabulary list entry view model from :`,
+        JSON.stringify(rawData),
+      ].join(' ');
 
-    // Check if dto isInvalid(...) -> throw
+      throw new Error(msg);
+    }
 
-    // set Term View Model properties from dto
+    try {
+      this.term = new TermViewModel(rawData.term);
+    } catch (error) {
+      const msg = (error as Error).message;
 
-    if (isInvalid(dto))
-      throw new Error(`Invalid Vocabulary List Summary DTO: ${rawData}`);
+      throw new Error(msg);
+    }
 
-    //    Object.assign(this, dto);
-  }
+    if (!hasVariableValues(rawData)) {
+      const msg = [
+        `No variable values property found when trying to build`,
+        `a vocabulary list entry view model from :`,
+        JSON.stringify(rawData),
+      ].join(' ');
 
-  mapRawDataToDTO(
-    rawData: unknown,
-    validateRawData: RawDataValidator<RawVocabularyListEntryData>,
-    mapValidRawDataToDTO: MapValidatedRawDataToDTO<
-      RawVocabularyListEntryData,
-      VocabularyListEntryDTO
-    >
-  ): MaybeInvalid<VocabularyListEntryDTO> {
-    if (isNullOrUndefined(rawData)) return invalid;
+      throw new Error(msg);
+    }
 
-    const maybeInvalidRawData = validateRawData(rawData);
+    try {
+      this.variableValues = new VariableValuesViewModel(rawData);
+    } catch (error) {
+      const msg = (error as Error).message;
 
-    if (isInvalid(maybeInvalidRawData)) return invalid;
-
-    return mapValidRawDataToDTO(maybeInvalidRawData);
+      throw new Error(msg);
+    }
   }
 }
