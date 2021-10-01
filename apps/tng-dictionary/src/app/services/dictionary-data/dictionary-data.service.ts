@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { IDictionaryDataAPI } from '../dictionary-data/interfaces/dictionary-data-api.interface';
 import { invalid, isValid, MaybeInvalid } from './view-models/invalid';
 import { VocabularyListSummaryViewModel } from './view-models/vocabulary-list-summary-view-model';
+import { VocabularyListViewModel } from './view-models/vocabulary-list-view-model';
 
 @Injectable({
   providedIn: 'root',
@@ -63,4 +64,17 @@ export class DictionaryDataService implements IDictionaryDataAPI {
   }
 
   // TODO [JB] implement -> getVocabularyListByID
+  getVocabularyListByID(id: string) {
+    // TODO Validate id
+    const endpoint = `this.endpointNamesAndEndpoints.vocabularyLists${id}`;
+
+    return this.http
+      .get(endpoint)
+      .pipe(
+        map(
+          (rawVocabularyListData: unknown): VocabularyListViewModel =>
+            new VocabularyListViewModel(rawVocabularyListData)
+        )
+      );
+  }
 }
