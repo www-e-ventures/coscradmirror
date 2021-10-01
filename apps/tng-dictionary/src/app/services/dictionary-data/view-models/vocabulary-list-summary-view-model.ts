@@ -64,7 +64,7 @@ const mapValidRawVocabularyListSummaryDataToDTO = (
  * The API should return valid DTOs for view models
  * as part of its contract with the front-end.
  */
-export default class VocabularyListSummaryViewModel
+export class VocabularyListSummaryViewModel
   implements
     IViewModel<ValidatedRawVocabularyListSummaryData, VocabularyListSummaryDTO>
 {

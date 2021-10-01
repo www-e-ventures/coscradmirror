@@ -1,5 +1,6 @@
 import { Observable } from 'rxjs';
-import VocabularyListSummaryViewModel from '../view-models/vocabulary-list-summary-view-model';
+import { VocabularyListSummaryViewModel } from '../view-models/vocabulary-list-summary-view-model';
+import { VocabularyListViewModel } from '../view-models/vocabulary-list-view-model';
 
 /**
  * TODO Move all interfaces to a lib in the Nx monorepo.
@@ -7,7 +8,7 @@ import VocabularyListSummaryViewModel from '../view-models/vocabulary-list-summa
  */
 export interface IDictionaryDataAPI {
   //   getTermsForListByListID(id: string): Observable<VocabularyListEntry[]>;
-  //   getVocabularyListByID(id: string): Observable<VocabularyList<any>>;
+  getVocabularyListByID(id: string): Observable<VocabularyListViewModel>;
   //   getAllTerms(): Observable<Term[]>;
   //   getTermByID(id: string): Observable<Term>;
   getAllVocabularyListSummaries(): Observable<VocabularyListSummaryViewModel[]>;
