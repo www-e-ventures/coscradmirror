@@ -30,7 +30,7 @@ export class DictionaryDataService implements IDictionaryDataAPI {
   getAllVocabularyListSummaries(): Observable<
     VocabularyListSummaryViewModel[]
   > {
-    const endpoint: string = this.endpointNamesAndEndpoints.vocabularyLists;
+    const endpoint = this.endpointNamesAndEndpoints.vocabularyLists;
     return this.http.get(endpoint).pipe(
       map((data: unknown) => {
         if (Array.isArray(data) && data.length > 0) {
