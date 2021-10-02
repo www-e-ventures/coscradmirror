@@ -1,1 +1,22 @@
-<p>vocabulary-list-detail works!</p>
+<div *ngIf="selectedEntry?.term">
+  {{ selectedEntry.term.term }}
+  {{ selectedEntry.term.id }}
+  {{ selectedEntry.term.audioURL }}
+  <div *ngIf="selectedEntry.term?.audioURL">
+    <img
+      id="play-icon"
+      src="https://api.tsilhqotinlanguage.ca/uploads/audio_play_button_pixabay_f799959630.png"
+      (click)="playAudio()"
+    />
+  </div>
+</div>
+<div *ngIf="!selectedEntry">No results found.</div>
+
+<!-- <div *ngIf="dropboxes">
+  <div *ngFor="let dropbox of dropboxes">
+    <app-list-control
+      [listVariable]="dropbox"
+      (onChange)="handleNewSelection($event)"
+    ></app-list-control>
+  </div>
+</div> -->

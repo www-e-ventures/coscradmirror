@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 import { DictionaryDataService } from '../../../services/dictionary-data/dictionary-data.service';
+import VocabularyListEntryViewModel from '../../../services/dictionary-data/view-models/vocabulary-list-entry-view-model';
 
 @Component({
   selector: 'coscrad-vocabulary-list-detail',
@@ -8,19 +10,50 @@ import { DictionaryDataService } from '../../../services/dictionary-data/diction
   styleUrls: ['./vocabulary-list-detail.component.css'],
 })
 export class VocabularyListDetailComponent implements OnInit {
-  implements OnInit {
-  selectedEntry: VocabularyListEntry;
-  entries: VocabularyListEntry[];
+  selectedEntry: VocabularyListEntryViewModel;
+  entries: VocabularyListEntryViewModel[];
   // vocabularyList: VocabularyList<any>;
   listId: string;
+  errorMessage: string = '';
   // selectedTermId: string;
   // dropboxes: ListVariable<string>[] = [];
   // checkboxes: ListVariable<boolean>[] = [];
   constructor(
-    private dictionaryData: DictionaryDataService,
-   // private dictionarySearch: DictionarySearchService,
+    private dictionaryDataService: DictionaryDataService,
+    // private dictionarySearch: DictionarySearchService,
     private route: ActivatedRoute
   ) {}
+  ngOnInit(): void {
+    this.route.paramMap
+      .pipe(
+        switchMap((params: ParamMap) => {
+          this.listId = params.get('id') || '';
+          if (!this.listId) {
+            this.errorMessage = 'No vocabulary list id provided in URL';
+            // TODO fail early
+          }
+          return this.dictionaryDataService.getVocabularyListByID(this.listId);
+        })
+      )
+      .subscribe((vocabularyListViewModel) => {
+        console.log(vocabularyListViewModel);
+        const { entries } = vocabularyListViewModel;
+        this.entries = entries;
+        if (entries.length > 0) this.selectedEntry = entries[0];
+      });
+  }
+
+  playAudio(): void {
+    if (!this.selectedEntry) return;
+
+    const { audioURL } = this.selectedEntry.term;
+
+    // TODO pre-load?
+    if (!audioURL) return;
+
+    // TODO actually play audio
+    console.log(`Now playing: ${audioURL}`);
+  }
   // ngOnInit(): void {
   //   this.route.paramMap
   //     .pipe(

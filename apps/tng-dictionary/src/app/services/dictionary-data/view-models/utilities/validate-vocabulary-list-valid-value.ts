@@ -12,12 +12,11 @@ export const validateVocabularyListVariableValidValue = (
 
   const value = validateVariableValueType(test.value);
 
-  const areBothValid = isValid(display) && isValid(value);
+  if (isValid(display) && isValid(value))
+    return {
+      display,
+      value,
+    };
 
-  return areBothValid
-    ? {
-        display,
-        value,
-      }
-    : invalid;
+  return invalid;
 };

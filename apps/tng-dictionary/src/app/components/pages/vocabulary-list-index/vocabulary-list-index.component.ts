@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DictionaryDataService } from '../../../services/dictionary-data/dictionary-data.service';
-import VocabularyListSummaryViewModel, {
+import {
   VocabularyListSummaryDTO,
+  VocabularyListSummaryViewModel,
 } from '../../../services/dictionary-data/view-models/vocabulary-list-summary-view-model';
 import { TableClickEventData } from '../../widgets/table/table-click-event-data';
 import { TableData } from '../../widgets/table/table-data';

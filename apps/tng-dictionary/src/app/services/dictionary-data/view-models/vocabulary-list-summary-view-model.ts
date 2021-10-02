@@ -27,14 +27,22 @@ const validateRawVocabularyListSummaryData = (
 
   const { id, name, name_english } = test;
 
-  if (validateId(id) === invalid) return invalid;
+  if (validateId(id) === invalid) {
+    console.log(`Invalid id: ${id}`);
+    return invalid;
+  }
 
   const nameValidationResult = validateStringWithLength(name);
   const nameEnglishValidationResult = validateStringWithLength(name_english);
 
   // one of name, name_english must be a name with length
-  if (isInvalid(nameValidationResult) && isInvalid(nameEnglishValidationResult))
+  if (
+    isInvalid(nameValidationResult) &&
+    isInvalid(nameEnglishValidationResult)
+  ) {
+    console.log('Invalid name and nameEnglish combo');
     return invalid;
+  }
 
   return {
     id,
@@ -81,8 +89,14 @@ export class VocabularyListSummaryViewModel
       mapValidRawVocabularyListSummaryDataToDTO
     );
 
+    console.log({
+      rawData: JSON.stringify(rawData),
+    });
+
     if (isInvalid(dto))
-      throw new Error(`Invalid Vocabulary List Summary DTO: ${rawData}`);
+      throw new Error(
+        `Invalid Vocabulary List Summary DTO: ${JSON.stringify(rawData)}`
+      );
 
     //    Object.assign(this, dto);
 
