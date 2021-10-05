@@ -46,6 +46,11 @@ const validateRawTermData = (input: unknown): MaybeInvalid<RawTermData> => {
   const term_english = validateStringWithLength(test.term_english);
   const audio = validateAudioData(test.audio);
 
+  if (isInvalid(audio))
+    throw new Error(
+      `Invalid audio!- remove me audio: ${JSON.stringify(test.audio)}`
+    );
+
   return {
     id,
     term,
@@ -106,7 +111,7 @@ export default class TermViewModel implements IViewModel<RawTermData, TermDTO> {
     // set Term View Model properties from dto
 
     if (isInvalid(dto))
-      throw new Error(`Invalid Vocabulary List Summary DTO: ${rawData}`);
+      throw new Error(`Invalid Term DTO: ${JSON.stringify(rawData)}`);
 
     //    Object.assign(this, dto);
     this.id = dto.id;

@@ -61,7 +61,9 @@ export default class VocabularyListEntryViewModel {
     }
 
     try {
-      this.variableValues = new VariableValuesViewModel(rawData);
+      this.variableValues = new VariableValuesViewModel(
+        rawData.variable_values
+      );
     } catch (error) {
       const msg = (error as Error).message;
 
