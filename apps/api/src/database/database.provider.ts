@@ -4,6 +4,7 @@ import { Database } from 'arangojs';
 
 @Injectable()
 export class DatabaseProvider {
+  // TODO add type
   readonly #db;
 
   constructor(private configService: ConfigService) {
@@ -36,11 +37,5 @@ export class DatabaseProvider {
     console.log({ db: this.#db });
   }
 
-  getConnection = () => {
-    console.log({
-      getConnectionDB: this.#db,
-    });
-
-    return this.#db;
-  };
+  getConnection = () => this.#db;
 }
