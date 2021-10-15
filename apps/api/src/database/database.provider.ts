@@ -17,12 +17,6 @@ export class DatabaseProvider {
         'Failed to obtain environment variables required for db connection.'
       );
 
-    console.log({
-      dbUser,
-      dbPass,
-      dbName,
-    });
-
     const systemDB = new Database({
       url: 'http://localhost:8585/',
     });

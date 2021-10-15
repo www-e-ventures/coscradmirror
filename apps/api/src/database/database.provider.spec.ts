@@ -17,7 +17,6 @@ describe('AppController', () => {
     configService = moduleRef.get<ConfigService>(ConfigService);
     if (!configService) throw new Error('Config service not injected.');
     databaseProvider = new DatabaseProvider(configService);
-    console.log({ configService });
 
     db = databaseProvider.getConnection();
   });
@@ -46,26 +45,13 @@ describe('AppController', () => {
     });
 
     const expectedResult = [
-      { type: 'test', value: 5 },
-      { type: 'test', value: 2 },
-      { type: 'test', value: 15 },
+      { type: 'circle', value: 2 },
+      { type: 'square', value: 3 },
+      { type: 'rectangle', value: 5 },
     ];
 
-    it('should return a truthy value', () => {
+    it('should return the expected value', () => {
       expect(queryResult).toEqual(expectedResult);
     });
-
-    // describe('the returned database instance', () => {
-    //   const expectedResult = '';
-
-    //   it('should return the expected query result on test collection', () => {
-    //     db.query(
-    //       aql`
-    //           FOR t in testcollection
-    //             RETURN t
-    //         `
-    //     ).then((queryResult) => expect(queryResult).toEqual(expectedResult));
-    //   });
-    // });
   });
 });
