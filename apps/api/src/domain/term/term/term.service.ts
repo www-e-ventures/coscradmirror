@@ -13,7 +13,9 @@ export class TermService {
   collection: 'TermCollection';
 
   constructor(databaseProvider: DatabaseProvider) {
-    this.#db = databaseProvider.getConnection();
+    const shouldInitialize = true;
+
+    this.#db = databaseProvider.getArangoDbInstance(shouldInitialize);
   }
 
   async create(createTermDto: CreateTermDto) {
@@ -78,7 +80,7 @@ export class TermService {
     FOR t IN TermCollection
       FILTER t._id == @id
         RETURN t
-    `
+    `;
   }
 
   update(id: number, updateTermDto: UpdateTermDto) {

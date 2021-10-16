@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Database } from 'arangojs';
+import { buildTestData } from '../test-data/test-data-index';
+import { ArangoDatabase } from './arango-database';
 
 @Injectable()
 export class DatabaseProvider {
@@ -32,4 +34,15 @@ export class DatabaseProvider {
   }
 
   getConnection = () => this.#db;
+
+  getArangoDbInstance = async (
+    shouldInitializeWithTestData = false
+  ): Promise<ArangoDatabase> => {
+    const arangoDb = new ArangoDatabase(this.#db);
+
+    if (shouldInitializeWithTestData)
+      await arangoDb.initializeWithData(buildTestData());
+
+    return arangoDb;
+  };
 }

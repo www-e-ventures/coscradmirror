@@ -1,23 +1,33 @@
 import { aql, Database } from 'arangojs';
+import { isArangoDatabase } from 'arangojs/database';
 import { Maybe } from '../app/lib/types/maybe';
 import { isNotFound, notFound } from '../app/lib/types/not-found';
-import { DatabaseProvider } from './database.provider';
+import { AllCreateEntityDtosUnion } from '../domain/types/all-entities';
+import { CollectionNameAndModels } from '../test-data/test-data-index';
 
 type HasKey<T> = T & {
   _key: string;
 };
 
-export class ArangoDatabase<TEntity, TCreateEntityDTO, TUpdateEntityDTO> {
+/**
+ * The generics on the class seem out of place.
+ */
+export class ArangoDatabase {
   #db: Database;
 
-  constructor(databaseProvider: DatabaseProvider) {
-    this.#db = databaseProvider.getConnection();
+  constructor(database: Database) {
+    if (!isArangoDatabase(database))
+      throw new Error(
+        'Cannot create an Arango Database from an invalid database connection'
+      );
+
+    this.#db = database;
   }
 
-  fetchById = async (
+  fetchById = async <TCreateEntityDto>(
     id: string,
     collectionName: string
-  ): Promise<Maybe<TEntity>> => {
+  ): Promise<Maybe<TCreateEntityDto>> => {
     const collection = this.#getCollection(collectionName);
 
     if (!collection) return notFound;
@@ -42,10 +52,12 @@ export class ArangoDatabase<TEntity, TCreateEntityDTO, TUpdateEntityDTO> {
       );
 
     // TODO remove cast
-    return cursor.next() as unknown as TEntity;
+    return cursor.next() as unknown as TCreateEntityDto;
   };
 
-  fetchMany = async (collectionName: string): Promise<Maybe<TEntity[]>> => {
+  fetchMany = async <TCreateEntityDto>(
+    collectionName: string
+  ): Promise<Maybe<TCreateEntityDto[]>> => {
     const collection = this.#getCollection(collectionName);
 
     const query = aql`
@@ -58,7 +70,7 @@ export class ArangoDatabase<TEntity, TCreateEntityDTO, TUpdateEntityDTO> {
     if (cursor.count === 0) return notFound;
 
     // TODO remove cast
-    return cursor.all() as unknown as TEntity[];
+    return cursor.all() as unknown as TCreateEntityDto[];
   };
 
   getCount = async (collectionName: string): Promise<number> => {
@@ -72,8 +84,8 @@ export class ArangoDatabase<TEntity, TCreateEntityDTO, TUpdateEntityDTO> {
    *
    * TODO [design] consider a pattern for returning errors
    */
-  create = async (
-    dto: TCreateEntityDTO,
+  create = async <TCreateEntityDto>(
+    dto: TCreateEntityDto,
     collectionName: string
   ): Promise<void> => {
     const collection = this.#getCollection(collectionName);
@@ -95,8 +107,8 @@ export class ArangoDatabase<TEntity, TCreateEntityDTO, TUpdateEntityDTO> {
     });
   };
 
-  createMany = async (
-    dtos: TCreateEntityDTO[],
+  createMany = async <TCreateEntityDto>(
+    dtos: TCreateEntityDto[],
     collectionName: string
   ): Promise<void> => {
     const collection = this.#getCollection(collectionName);
@@ -119,7 +131,7 @@ export class ArangoDatabase<TEntity, TCreateEntityDTO, TUpdateEntityDTO> {
     });
   };
 
-  update = async (
+  update = async <TUpdateEntityDTO>(
     id: string,
     dto: TUpdateEntityDTO,
     collectionName: string
@@ -140,7 +152,9 @@ export class ArangoDatabase<TEntity, TCreateEntityDTO, TUpdateEntityDTO> {
       );
 
     // TODO remove cast
-    const key = this.#getKeyOfDocument(documentToUpdate as HasKey<TEntity>);
+    const key = this.#getKeyOfDocument(
+      documentToUpdate as HasKey<TUpdateEntityDTO>
+    );
 
     if (isNotFound(key))
       throw new Error(
@@ -162,6 +176,18 @@ export class ArangoDatabase<TEntity, TCreateEntityDTO, TUpdateEntityDTO> {
     return this.#db.collection(collectionName);
   }
 
-  #getKeyOfDocument = (document: HasKey<TEntity>): Maybe<string> =>
+  #getKeyOfDocument = <TCreateEntityDto>(
+    document: HasKey<TCreateEntityDto>
+  ): Maybe<string> =>
     typeof document._key === 'string' ? document._key : notFound;
+
+  initializeWithData = async (
+    collectionNamesAndModels: CollectionNameAndModels<AllCreateEntityDtosUnion>[]
+  ): Promise<void> =>
+    collectionNamesAndModels.forEach(({ collection, models }) => {
+      this.#db.createCollection(collection);
+
+      // TODO rethink the generic as it doesn't make sense for this method!
+      this.createMany(models, collection);
+    });
 }
