@@ -73,8 +73,12 @@ export class TermService {
     return '200 ok';
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} term`;
+  findOne(id: string) {
+    const query = `
+    FOR t IN TermCollection
+      FILTER t._id == @id
+        RETURN t
+    `
   }
 
   update(id: number, updateTermDto: UpdateTermDto) {

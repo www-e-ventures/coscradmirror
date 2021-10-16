@@ -16,3 +16,7 @@ Let's say you want to post the following `Term`:
 then you can submit the following post request via CURL:
 
 > > `curl -X POST -H "Content-Type: application/json" -d '{"id":"6","term":"nexwela","contributor":"William Myers"}' http://localhost:3333/api/term`
+
+If you'd like to post many, just send an array of `DTOs`:
+
+> > `curl -X POST -H "Content-Type: application/json" -d '[{"id":"7","term":"gubela","contributor":"William Myers"},{"id":"8","term":"test term","contributor":"William Myers"}]' http://localhost:3333/api/term/many`

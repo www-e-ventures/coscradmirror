@@ -1,7 +1,15 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { TermService } from './term.service';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { CreateTermDto } from './dto/create-term.dto';
 import { UpdateTermDto } from './dto/update-term.dto';
+import { TermService } from './term.service';
 
 @Controller('term')
 export class TermController {
@@ -12,6 +20,11 @@ export class TermController {
     return this.termService.create(createTermDto);
   }
 
+  @Post('many')
+  createMany(@Body() createTermDtos: CreateTermDto[]) {
+    return this.termService.createMany(createTermDtos);
+  }
+
   @Get()
   findAll() {
     return this.termService.findAll();
@@ -19,7 +32,7 @@ export class TermController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.termService.findOne(+id);
+    return this.termService.findOne(id);
   }
 
   @Patch(':id')
