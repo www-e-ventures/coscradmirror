@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { ArangoDatabase } from 'apps/api/src/database/arango-database';
 import { DatabaseProvider } from 'apps/api/src/database/database.provider';
 import { CreateTermDto } from './dto/create-term.dto';
 import { UpdateTermDto } from './dto/update-term.dto';
@@ -8,86 +9,45 @@ import { UpdateTermDto } from './dto/update-term.dto';
  */
 @Injectable()
 export class TermService {
-  #db;
+  #db: ArangoDatabase;
 
-  collection: 'TermCollection';
+  initialized: Promise<boolean>;
+
+  collection = 'TermCollection';
 
   constructor(databaseProvider: DatabaseProvider) {
     const shouldInitialize = true;
 
-    this.#db = databaseProvider.getArangoDbInstance(shouldInitialize);
+    // We need to await this somehow! also verify collection exists.
+    this.initialized = databaseProvider
+      .getArangoDbInstance(shouldInitialize)
+      .then((arangoInstance) => {
+        this.#db = arangoInstance;
+        return true;
+      });
   }
 
   async create(createTermDto: CreateTermDto) {
-    const query = `
-    INSERT @dto
-      INTO TermCollection
-    `;
-
-    await this.#db.query({
-      query,
-      bindVars: {
-        dto: createTermDto,
-      },
-    });
-
-    return '200 ok';
+    return this.#db.create(createTermDto, this.collection);
   }
 
   async findAll() {
-    const query = `
-    FOR t in TermCollection
-      RETURN t
-  `;
-
-    try {
-      return await this.#db
-        .query({
-          query,
-          bindVars: {}, // { collection: this.collection || 'TermCollection' },
-        })
-        .then((cursor) =>
-          cursor.reduce(
-            (accumulatedResults, nextValue) =>
-              accumulatedResults.concat([nextValue]),
-            []
-          )
-        );
-    } catch (err) {
-      return err;
-    }
+    return this.#db.fetchMany(this.collection);
   }
 
   async createMany(createTermDtos: CreateTermDto[]) {
-    const query = `
-    FOR dto in @dtos
-      INSERT dto
-        INTO TermCollection
-    `;
-
-    await this.#db.query({
-      query,
-      bindVars: {
-        dtos: createTermDtos,
-      },
-    });
-
-    return '200 ok';
+    return this.#db.createMany(createTermDtos, this.collection);
   }
 
   findOne(id: string) {
-    const query = `
-    FOR t IN TermCollection
-      FILTER t._id == @id
-        RETURN t
-    `;
+    return this.#db.fetchById(id, this.collection);
   }
 
-  update(id: number, updateTermDto: UpdateTermDto) {
-    return `This action updates a #${id} term`;
+  update(id: string, updateTermDto: UpdateTermDto) {
+    return this.#db.update(id, updateTermDto, this.collection);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} term`;
+  remove(id: string) {
+    throw new Error('Remove term is not supported at this time');
   }
 }

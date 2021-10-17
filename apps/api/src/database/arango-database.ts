@@ -1,4 +1,4 @@
-import { aql, Database } from 'arangojs';
+import { Database } from 'arangojs';
 import { isArangoDatabase } from 'arangojs/database';
 import { Maybe } from '../app/lib/types/maybe';
 import { isNotFound, notFound } from '../app/lib/types/not-found';
@@ -28,17 +28,20 @@ export class ArangoDatabase {
     id: string,
     collectionName: string
   ): Promise<Maybe<TCreateEntityDto>> => {
-    const collection = this.#getCollection(collectionName);
-
-    if (!collection) return notFound;
-
-    const query = aql`
-    FOR t IN ${collection}
+    const query = `
+    FOR t IN ${collectionName}
       FILTER t._id == @id
         RETURN t
     `;
 
-    const cursor = await this.#db.query(query);
+    const bindVars = {
+      id: `${collectionName}/${id}`,
+    };
+
+    const cursor = await this.#db.query({
+      query,
+      bindVars,
+    });
 
     if (cursor.count === 0) return notFound;
 
@@ -58,14 +61,17 @@ export class ArangoDatabase {
   fetchMany = async <TCreateEntityDto>(
     collectionName: string
   ): Promise<Maybe<TCreateEntityDto[]>> => {
-    const collection = this.#getCollection(collectionName);
-
-    const query = aql`
-      FOR t IN ${collection}
+    const query = `
+      FOR t IN ${collectionName}
         return t
       `;
 
-    const cursor = await this.#db.query(query);
+    const bindVars = {};
+
+    const cursor = await this.#db.query({
+      query,
+      bindVars,
+    });
 
     if (cursor.count === 0) return notFound;
 
@@ -88,13 +94,14 @@ export class ArangoDatabase {
     dto: TCreateEntityDto,
     collectionName: string
   ): Promise<void> => {
-    const collection = this.#getCollection(collectionName);
+    // remove this check. It's the callers responsibility to verify the `Collection` exists
+    const collectionExists = await this.#doesCollectionExist(collectionName);
 
-    if (!collection) throw new Error(`Collection ${collectionName} not found!`);
-
+    if (!collectionExists)
+      throw new Error(`Collection ${collectionName} not found!`);
     const query = `
     INSERT @dto
-        INTO ${collection}
+        INTO ${collectionName}
     `;
 
     const bindVars = {
@@ -111,24 +118,30 @@ export class ArangoDatabase {
     dtos: TCreateEntityDto[],
     collectionName: string
   ): Promise<void> => {
-    const collection = this.#getCollection(collectionName);
+    // remove this check. It's the callers responsibility to verify the `Collection` exists
+    const collectionExists = await this.#doesCollectionExist(collectionName);
 
-    if (!collection) throw new Error(`Collection ${collectionName} not found!`);
+    if (!collectionExists)
+      throw new Error(`Collection ${collectionName} not found!`);
 
     const query = `
     FOR dto IN @dtos
         INSERT dto
-            INTO ${collection}
+            INTO ${collectionName}
     `;
 
     const bindVars = {
       dtos,
     };
 
-    await this.#db.query({
-      query,
-      bindVars,
-    });
+    try {
+      await this.#db.query({
+        query,
+        bindVars,
+      });
+    } catch (error) {
+      throw error;
+    }
   };
 
   update = async <TUpdateEntityDTO>(
@@ -136,10 +149,6 @@ export class ArangoDatabase {
     dto: TUpdateEntityDTO,
     collectionName: string
   ): Promise<void> => {
-    const collection = this.#getCollection(collectionName);
-
-    if (!collection) throw new Error(`Collection ${collectionName} not found`);
-
     const documentToUpdate = await this.fetchById(id, collectionName);
 
     if (isNotFound(documentToUpdate))
@@ -164,7 +173,7 @@ export class ArangoDatabase {
     const query = `
     UPDATE ${key}
         WITH @dto
-            IN ${collection}
+            IN ${collectionName}
     `;
   };
 
@@ -181,13 +190,23 @@ export class ArangoDatabase {
   ): Maybe<string> =>
     typeof document._key === 'string' ? document._key : notFound;
 
+  #doesCollectionExist = async (collectionName: string): Promise<boolean> =>
+    this.#db
+      .collections()
+      .then((collections) =>
+        collections.some((collection) => collection.name === collectionName)
+      );
+
   initializeWithData = async (
     collectionNamesAndModels: CollectionNameAndModels<AllCreateEntityDtosUnion>[]
-  ): Promise<void> =>
-    collectionNamesAndModels.forEach(({ collection, models }) => {
-      this.#db.createCollection(collection);
+  ): Promise<void[]> =>
+    Promise.all(
+      collectionNamesAndModels.map(async ({ collection, models }) => {
+        if (await this.#doesCollectionExist(collection)) return;
 
-      // TODO rethink the generic as it doesn't make sense for this method!
-      this.createMany(models, collection);
-    });
+        this.#db.createCollection(collection);
+
+        this.createMany(models, collection);
+      })
+    );
 }

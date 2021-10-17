@@ -11,7 +11,7 @@ import { CreateTermDto } from './dto/create-term.dto';
 import { UpdateTermDto } from './dto/update-term.dto';
 import { TermService } from './term.service';
 
-@Controller('term')
+@Controller('terms')
 export class TermController {
   constructor(private readonly termService: TermService) {}
 
@@ -27,7 +27,11 @@ export class TermController {
 
   @Get()
   findAll() {
-    return this.termService.findAll();
+    try {
+      return this.termService.findAll();
+    } catch (error) {
+      return error;
+    }
   }
 
   @Get(':id')
@@ -37,11 +41,11 @@ export class TermController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateTermDto: UpdateTermDto) {
-    return this.termService.update(+id, updateTermDto);
+    return this.termService.update(id, updateTermDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.termService.remove(+id);
+    return this.termService.remove(id);
   }
 }

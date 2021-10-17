@@ -9,6 +9,8 @@ export class DatabaseProvider {
   // TODO add type
   readonly #db;
 
+  #arangoInstance: ArangoDatabase = null;
+
   constructor(private configService: ConfigService) {
     const dbUser = 'root'; // this.configService.get<string>('ARANGO_DB_USER');
     const dbPass = this.configService.get<string>('ARANGO_DB_ROOT_PASSWORD');
@@ -29,8 +31,6 @@ export class DatabaseProvider {
     dbInstance.useBasicAuth(dbUser, dbPass);
 
     this.#db = dbInstance;
-
-    console.log({ db: this.#db });
   }
 
   getConnection = () => this.#db;
@@ -38,11 +38,20 @@ export class DatabaseProvider {
   getArangoDbInstance = async (
     shouldInitializeWithTestData = false
   ): Promise<ArangoDatabase> => {
+    if (!this.#arangoInstance)
+      await this.#initializeArangoDb(shouldInitializeWithTestData);
+
+    return this.#arangoInstance;
+  };
+
+  #initializeArangoDb = async (
+    shouldInitializeWithTestData = false
+  ): Promise<void> => {
     const arangoDb = new ArangoDatabase(this.#db);
 
     if (shouldInitializeWithTestData)
       await arangoDb.initializeWithData(buildTestData());
 
-    return arangoDb;
+    this.#arangoInstance = arangoDb;
   };
 }
