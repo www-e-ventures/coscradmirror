@@ -1,17 +1,14 @@
 import { Database } from 'arangojs';
 import { isArangoDatabase } from 'arangojs/database';
-import { Maybe } from '../app/lib/types/maybe';
-import { isNotFound, notFound } from '../app/lib/types/not-found';
 import { AllCreateEntityDtosUnion } from '../domain/types/all-entities';
+import { Maybe } from '../lib/types/maybe';
+import { isNotFound, notFound } from '../lib/types/not-found';
 import { CollectionNameAndModels } from '../test-data/test-data-index';
 
 type HasKey<T> = T & {
   _key: string;
 };
 
-/**
- * The generics on the class seem out of place.
- */
 export class ArangoDatabase {
   #db: Database;
 
