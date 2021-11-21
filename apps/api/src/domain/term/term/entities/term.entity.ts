@@ -1,61 +1,71 @@
+import { PartialDTO } from 'apps/api/src/types/partial-dto';
+import { EntityId } from '../../../types/entity-id';
 import { determineAllMissingRequiredProperties } from '../../../utilities/validation/determine-all-missing-required-properties';
 import { isNullOrUndefined } from '../../../utilities/validation/is-null-or-undefined';
-import { CreateTermDto } from '../dto/create-term.dto';
+import { Entity } from './entity';
 
-export class Term {
-  //  readonly #dto: CreateTermDto;
-
-  readonly id: string;
-
+export class Term extends Entity {
   readonly term: string;
 
   readonly termEnglish?: string;
 
-  readonly contributor: string;
+  readonly contributorId: EntityId;
 
-  readonly audioURL?: string;
-
-  readonly audioFormat?: string;
+  // TODO Create separate media item model
+  readonly audioFilename?: string;
 
   constructor(dto: unknown) {
+    super(dto);
+
     if (!this.#validate(dto))
       throw new Error(`invalid Create Term Dto: ${dto}`);
 
-    this.id = dto.id;
-
+    /**
+     * TODO [design]: We should abstract this pattern of having text in multiple
+     * languages. Options:
+     * 1. interface `hasBilingualText`
+     * ```js
+     * {
+     * text: string;
+     * textInTranslationLanguage: string;
+     * }
+     * ```
+     * 2. Have a separate layer that fetches translations. This approach would
+     * allow us to express the direction of the relationship. Did we start with
+     * an English gloss and ilicit the form in the indigenous language? Did we
+     * start with the indignous term and elicit a translation or gloss?
+     *
+     * Related models that will use this concept:
+     * Any entity that has (the potential for) a bilingual name
+     * Texts, including transcripts for audio \ video
+     */
     this.term = dto.term;
 
     this.termEnglish = dto.termEnglish;
 
-    this.contributor = dto.contributor;
+    this.contributorId = dto.contributorId;
 
-    this.audioURL = dto.audioURL;
-
-    this.audioFormat = dto.audioFormat;
+    this.audioFilename = dto.audioFilename;
   }
 
   /**
    * TODO [design]: we need a system for accumulating \ returning errors.
    * For now we will throw.
-   *
-   * TODO [refactor]: Should we move this logic to the `CreateTermDto` class?
    */
-  #validate(dto: unknown): dto is CreateTermDto {
+  #validate(dto: unknown): dto is PartialDTO<Term> {
     if (isNullOrUndefined(dto)) {
       const message = 'A Create Term DTO is required to build a Term';
 
       throw new Error(message);
     }
 
-    const { id, term, termEnglish, contributor, audioFormat, audioURL } =
-      dto as CreateTermDto;
-
-    const missingProperties =
-      determineAllMissingRequiredProperties<CreateTermDto>(
-        // TODO remove cast
-        dto as CreateTermDto,
-        ['id', 'term', 'contributor']
-      );
+    const missingProperties = determineAllMissingRequiredProperties<
+      PartialDTO<Term>
+    >(
+      // TODO remove cast
+      dto as PartialDTO<Term>,
+      ['id', 'term', 'contributorId']
+    );
 
     if (missingProperties.length) {
       const message = missingProperties.reduce(
@@ -67,7 +77,7 @@ export class Term {
       throw new Error(message);
     }
 
-    // TODO validate property types!
+    // TODO validate property types! !
 
     // If we've made it this far, this is a valid dto
     return true;
