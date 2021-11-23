@@ -1,0 +1,37 @@
+<ActionBar
+  title="Tŝilhqot'in Dictionary"
+  [nsRouterLink]="['/']"
+  class="action-bar"
+  flat="true"
+>
+</ActionBar>
+
+<StackLayout class="p-20">
+  <SearchBar
+    hint="Search"
+    color="red"
+    backgroundColor="white"
+    textFieldHintColor="red"
+    textFieldBackgroundColor="white"
+    border-radius="5px"
+  ></SearchBar>
+  <ListView style="height: 1250px">
+    <ng-template let-country="item">
+      <FlexboxLayout flexDirection="row">
+        <Image [src]="country.imageSrc" class="thumb img-circle"></Image>
+        <Label
+          [text]=""
+          class="t-12"
+          verticalAlignment="center"
+          style="width: 60%"
+        ></Label>
+      </FlexboxLayout>
+    </ng-template>
+  </ListView>
+
+  <!--Could use on mobile for dropdown items
+  <ListPicker
+    [items]="listPickerCountries"
+    [(ngModel)]="selectedListPickerIndex"
+  ></ListPicker> -->
+</StackLayout>
