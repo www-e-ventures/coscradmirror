@@ -1,9 +1,3 @@
-<ActionBar
-  title="Tŝilhqot'in Dictionary"
-  [nsRouterLink]="['/']"
-  class="action-bar"
->
-</ActionBar>
 <StackLayout class="p-20">
   <Image
     src="~/assets/images/tng_footer_logo.png"
@@ -13,13 +7,13 @@
   <!--BUTTONS-->
   <button
     text="Terms"
-    [nsRouterLink]="['vocab']"
+    [nsRouterLink]="['vocabDetail']"
     pageTransition="slide"
     clearHistory="true"
   ></button>
   <Button
     text="Paradigms & Vocabulary Lists"
-    [nsRouterLink]="['vocab']"
+    [nsRouterLink]="['vocabIndex']"
     pageTransition="slide"
     clearHistory="true"
   ></Button>

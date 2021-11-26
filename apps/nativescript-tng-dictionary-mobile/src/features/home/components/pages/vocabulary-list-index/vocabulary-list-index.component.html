@@ -1,0 +1,22 @@
+<ActionBar
+  title="Tŝilhqot'in Dictionary"
+  [nsRouterLink]="['/']"
+  class="action-bar"
+  flat="true"
+>
+</ActionBar>
+
+<StackLayout class="p-20">
+  <label
+    textWrap="true"
+    text="Vocabulary List Index works! This is to test that the label text does in fact wrap when you use textWrap equals true."
+  ></label>
+
+  <!--Could use on mobile for dropdown items
+  <ListPicker
+    [items]="listPickerCountries"
+    [(ngModel)]="selectedListPickerIndex"
+  ></ListPicker> -->
+
+  <coscrad-table-component></coscrad-table-component>
+</StackLayout>

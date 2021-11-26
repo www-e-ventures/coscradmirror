@@ -8,26 +8,31 @@
 
 <StackLayout class="p-20">
   <SearchBar
-    hint="Search"
+    hint="Search English"
     color="red"
     backgroundColor="white"
     textFieldHintColor="red"
     textFieldBackgroundColor="white"
     border-radius="5px"
   ></SearchBar>
-  <ListView style="height: 1250px">
-    <ng-template let-country="item">
-      <FlexboxLayout flexDirection="row">
-        <Image [src]="country.imageSrc" class="thumb img-circle"></Image>
-        <Label
-          [text]=""
-          class="t-12"
-          verticalAlignment="center"
-          style="width: 60%"
-        ></Label>
-      </FlexboxLayout>
-    </ng-template>
-  </ListView>
+
+  <SearchBar
+    hint="Search Term"
+    color="red"
+    backgroundColor="white"
+    textFieldHintColor="red"
+    textFieldBackgroundColor="white"
+    border-radius="5px"
+  ></SearchBar>
+
+  <SearchBar
+    hint="Search Contributor"
+    color="red"
+    backgroundColor="white"
+    textFieldHintColor="red"
+    textFieldBackgroundColor="white"
+    border-radius="5px"
+  ></SearchBar>
 
   <!--Could use on mobile for dropdown items
   <ListPicker
