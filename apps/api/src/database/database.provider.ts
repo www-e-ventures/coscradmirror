@@ -21,6 +21,7 @@ export class DatabaseProvider {
         'Failed to obtain environment variables required for db connection.'
       );
 
+    // TODO get this from the configService
     const systemDB = new Database({
       url: 'http://localhost:8585/',
     });
@@ -35,7 +36,7 @@ export class DatabaseProvider {
 
   getConnection = () => this.#db;
 
-  getArangoDbInstance = async (
+  getDBInstance = async (
     shouldInitializeWithTestData = false
   ): Promise<ArangoDatabase> => {
     if (!this.#arangoInstance)
@@ -45,6 +46,7 @@ export class DatabaseProvider {
   };
 
   #initializeArangoDb = async (
+    // TODO move this to an Options array
     shouldInitializeWithTestData = false
   ): Promise<void> => {
     const arangoDb = new ArangoDatabase(this.#db);

@@ -16,11 +16,12 @@ export class TermService {
   collection = 'TermCollection';
 
   constructor(databaseProvider: DatabaseProvider) {
-    const shouldInitialize = true;
+    // TODO read this from config \ env
+    const shouldInitialize = false;
 
     // We need to await this somehow! also verify collection exists.
     this.initialized = databaseProvider
-      .getArangoDbInstance(shouldInitialize)
+      .getDBInstance(shouldInitialize)
       .then((arangoInstance) => {
         this.#db = arangoInstance;
         return true;

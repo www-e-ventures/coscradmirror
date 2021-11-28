@@ -1,6 +1,5 @@
 import { ConfigService } from '@nestjs/config';
 import { Test } from '@nestjs/testing';
-import { aql } from 'arangojs';
 import { DatabaseProvider } from './database.provider';
 
 describe('AppController', () => {
@@ -22,36 +21,40 @@ describe('AppController', () => {
   });
 
   describe('getConnection', () => {
-    let queryResult;
+    let result;
 
     beforeAll(async () => {
-      queryResult = await db
-        .query(
-          aql`
-                  FOR t in TestCollection
-                    RETURN {
-                      type: t.type,
-                      value: t.value
-                    }
-                `
-        )
-        .then((cursor) =>
-          cursor.reduce(
-            (accumulatedResults, nextValue) =>
-              accumulatedResults.concat([nextValue]),
-            []
-          )
-        );
+      result = await db.route('_api').get('version');
+      console.log(result.body.version);
+
+      //   await db
+      //     .query(
+      //       aql`
+      //               FOR t in TestCollection
+      //                 RETURN {
+      //                   type: t.type,
+      //                   value: t.value
+      //                 }
+      //             `
+      //     )
+      //     .then((cursor) =>
+      //       cursor.reduce(
+      //         (accumulatedResults, nextValue) =>
+      //           accumulatedResults.concat([nextValue]),
+      //         []
+      //       )
+      //     );
+      // });
+
+      // const expectedResult = [
+      //   { type: 'circle', value: 2 },
+      //   { type: 'square', value: 3 },
+      //   { type: 'rectangle', value: 5 },
+      // ];
     });
 
-    const expectedResult = [
-      { type: 'circle', value: 2 },
-      { type: 'square', value: 3 },
-      { type: 'rectangle', value: 5 },
-    ];
-
-    it('should return the expected value', () => {
-      expect(queryResult).toEqual(expectedResult);
+    it('querying the db version should return a result', () => {
+      expect(result).toBeTruthy();
     });
   });
 });

@@ -31,54 +31,52 @@ export const buildDictionaryTestData = (): CollectionNameAndModels<
     collection: 'VocabularyListCollection',
     models: [
       // Vocabulary List 1
-      {
-        name: 'test VL 1 chil',
-        nameEnglish: 'test VL 1 engl',
-        entries: [
-          {
-            termId: '1',
-            variableValues: {
-              person: '11',
-            },
-          },
-          {
-            termId: '2',
-            variableValues: {
-              person: '21',
-            },
-          },
-        ],
-        variables: [
-          {
-            name: 'person',
-            type: 'dropbox',
-            validValues: [
-              {
-                display: 'I',
-                value: '11',
-              },
-              {
-                display: 'We',
-                value: '21',
-              },
-            ],
-          },
-        ],
-      },
-
-      // Vocabulary List 2
-      {
-        name: 'test VL 2 CHIL- no engl name',
-        entries: [],
-        variables: [],
-      },
-
-      // Vocabulary List 3
-      {
-        nameEnglish: 'test VL ENG- 3 no chil name',
-        entries: [],
-        variables: [],
-      },
+      // {
+      //   name: 'test VL 1 chil',
+      //   nameEnglish: 'test VL 1 engl',
+      //   entries: [
+      //     {
+      //       termId: '1',
+      //       variableValues: {
+      //         person: '11',
+      //       },
+      //     },
+      //     {
+      //       termId: '2',
+      //       variableValues: {
+      //         person: '21',
+      //       },
+      //     },
+      //   ],
+      //   variables: [
+      //     {
+      //       name: 'person',
+      //       type: 'dropbox',
+      //       validValues: [
+      //         {
+      //           display: 'I',
+      //           value: '11',
+      //         },
+      //         {
+      //           display: 'We',
+      //           value: '21',
+      //         },
+      //       ],
+      //     },
+      //   ],
+      // },
+      // // Vocabulary List 2
+      // {
+      //   name: 'test VL 2 CHIL- no engl name',
+      //   entries: [],
+      //   variables: [],
+      // },
+      // // Vocabulary List 3
+      // {
+      //   nameEnglish: 'test VL ENG- 3 no chil name',
+      //   entries: [],
+      //   variables: [],
+      // },
     ],
   },
 ];

@@ -4,12 +4,13 @@ import { AllCreateEntityDtosUnion } from '../domain/types/all-entities';
 import { Maybe } from '../lib/types/maybe';
 import { isNotFound, notFound } from '../lib/types/not-found';
 import { CollectionNameAndModels } from '../test-data/test-data-index';
+import { IDatabase } from './interfaces/database';
 
 type HasKey<T> = T & {
   _key: string;
 };
 
-export class ArangoDatabase {
+export class ArangoDatabase implements IDatabase {
   #db: Database;
 
   constructor(database: Database) {

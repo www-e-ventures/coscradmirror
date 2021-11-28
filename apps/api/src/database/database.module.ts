@@ -4,7 +4,7 @@ import { DatabaseProvider } from './database.provider';
 
 @Module({
   imports: [DatabaseModule],
-  providers: [ConfigService, DatabaseProvider],
+  providers: [ConfigService],
   exports: [DatabaseProvider],
 })
 export class DatabaseModule {}
