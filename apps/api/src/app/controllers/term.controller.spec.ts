@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TermService } from '../../domain/services/term.service';
-import { buildMockDatabaseProvicer } from '../../domain/services/term.service.spec';
-import { DatabaseProvider } from '../../persistence/database/database.provider';
+import { buildMockRepositoryProvider } from '../../domain/services/term.service.spec';
+import { RepositoryProvider } from '../../persistence/repositories/repository.provider';
 import { TermController } from './term.controller';
 
 /**
@@ -18,8 +18,8 @@ describe('TermController', () => {
       providers: [
         TermService,
         {
-          provide: DatabaseProvider,
-          useFactory: buildMockDatabaseProvicer,
+          provide: RepositoryProvider,
+          useFactory: buildMockRepositoryProvider,
         },
       ],
     }).compile();

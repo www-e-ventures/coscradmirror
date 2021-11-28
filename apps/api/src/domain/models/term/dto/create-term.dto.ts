@@ -1,3 +1,4 @@
+// TODO [refactor] remove in favor of `PartialDTO<Term>`
 export class CreateTermDto {
   id: string;
   term: string;

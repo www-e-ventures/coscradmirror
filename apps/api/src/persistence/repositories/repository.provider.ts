@@ -1,12 +1,25 @@
 import { Injectable } from '@nestjs/common';
+import { Entity } from '../../domain/models/entity';
+import { IRepositoryProvider } from '../../domain/repositories/interfaces/repository-provider';
 import { DatabaseProvider } from '../database/database.provider';
+import {
+  ArangoCollectionID,
+  getArangoCollectionIDs,
+} from '../database/get-arango-collection-ids';
+import { InstanceFactory, RepositoryForEntity } from './repository-for-entity';
 
-/**
- * TODO Use a provider for our repositories. This will allow us to
- * swap out the implemntation of all repositories in one go. For exmaple,
- * we may want to use an in-memory repository for tests or development.
- */
 @Injectable()
-export class RepositoryProvider {
-  constructor(private databaseProvier: DatabaseProvider) {}
+export class RepositoryProvider implements IRepositoryProvider {
+  constructor(private databaseProvider: DatabaseProvider) {}
+
+  forEntity<TEntity extends Entity>(
+    collectionName: ArangoCollectionID,
+    instanceFactory: InstanceFactory<TEntity>
+  ) {
+    return new RepositoryForEntity<TEntity>(
+      this.databaseProvider,
+      getArangoCollectionIDs[collectionName],
+      instanceFactory
+    );
+  }
 }

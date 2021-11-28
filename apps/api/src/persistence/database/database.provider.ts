@@ -3,11 +3,14 @@ import { ConfigService } from '@nestjs/config';
 import { buildTestData } from 'apps/api/src/test-data/test-data-index';
 import { Database } from 'arangojs';
 import { ArangoDatabase } from './arango-database';
+import { ArangoDatabaseForCollection } from './arango-database-for-collection';
+import { ArangoCollectionID } from './get-arango-collection-ids';
+import { IDatabaseProvider } from './interfaces/database-provider';
 
+// TODO Should we rename this `ArangoDatabaseProvider` ?
 @Injectable()
-export class DatabaseProvider {
-  // TODO add type
-  readonly #db;
+export class DatabaseProvider implements IDatabaseProvider {
+  readonly #db: Database;
 
   #arangoInstance: ArangoDatabase = null;
 
@@ -21,15 +24,21 @@ export class DatabaseProvider {
         'Failed to obtain environment variables required for db connection.'
       );
 
-    // TODO get this from the configService
     const systemDB = new Database({
+      // TODO get this from the configService
       url: 'http://localhost:8585/',
     });
     // TODO why is `useDatabase` deprecated? can we use myDB.database("db_name")?
-
     const dbInstance = systemDB.database(dbName);
-    // TODO implement a more sophisticated authentication method
     dbInstance.useBasicAuth(dbUser, dbPass);
+
+    dbInstance
+      .route('_api')
+      .get('version')
+      .catch((error) => {
+        console.log(JSON.stringify(error));
+        systemDB.createDatabase(dbName);
+      });
 
     this.#db = dbInstance;
   }
@@ -44,6 +53,12 @@ export class DatabaseProvider {
 
     return this.#arangoInstance;
   };
+
+  // TODO [type-safety] Can we correlate entity `DTOs` with `collection IDs`?
+  getDatabaseForCollection = <TEntityDTO>(
+    collectionName: ArangoCollectionID
+  ): ArangoDatabaseForCollection<TEntityDTO> =>
+    new ArangoDatabaseForCollection(this.#arangoInstance, collectionName);
 
   #initializeArangoDb = async (
     // TODO move this to an Options array

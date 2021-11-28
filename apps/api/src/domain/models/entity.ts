@@ -30,6 +30,10 @@ export class Entity {
     this.published = typeof dto.published === 'boolean' ? dto.published : false;
   }
 
+  toDTO<TEntity extends Entity>(this: TEntity): PartialDTO<TEntity> {
+    return JSON.parse(JSON.stringify(this));
+  }
+
   /**
    * TODO develop a general pattern \ directory structure for validation \ validators.
    * One idea: Return a symbol Valid | Errors[] from a validator instead of a

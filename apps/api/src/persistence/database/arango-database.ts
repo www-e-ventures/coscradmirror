@@ -56,9 +56,14 @@ export class ArangoDatabase implements IDatabase {
     return cursor.next() as unknown as TCreateEntityDto;
   };
 
-  fetchMany = async <TCreateEntityDto>(
+  /**
+   *
+   * @param collectionName name of the collection
+   * @returns array of `DTOs`, empty array if none found
+   */
+  fetchMany = async <TCreateEntityDTO>(
     collectionName: string
-  ): Promise<Maybe<TCreateEntityDto[]>> => {
+  ): Promise<TCreateEntityDTO[]> => {
     const query = `
       FOR t IN ${collectionName}
         return t
@@ -71,10 +76,10 @@ export class ArangoDatabase implements IDatabase {
       bindVars,
     });
 
-    if (cursor.count === 0) return notFound;
+    if (cursor.count === 0) return [];
 
     // TODO remove cast
-    return cursor.all() as unknown as TCreateEntityDto[];
+    return cursor.all() as unknown as TCreateEntityDTO[];
   };
 
   getCount = async (collectionName: string): Promise<number> => {
@@ -83,11 +88,7 @@ export class ArangoDatabase implements IDatabase {
     return isNotFound(results) ? 0 : results.length;
   };
 
-  // Write Methods
-  /**
-   *
-   * TODO [design] consider a pattern for returning errors
-   */
+  // TODO Error handling.
   create = async <TCreateEntityDto>(
     dto: TCreateEntityDto,
     collectionName: string
@@ -178,10 +179,6 @@ export class ArangoDatabase implements IDatabase {
   // TODO Add Replace
 
   // TODO Add Soft Delete
-
-  #getCollection(collectionName: string) {
-    return this.#db.collection(collectionName);
-  }
 
   #getKeyOfDocument = <TCreateEntityDto>(
     document: HasKey<TCreateEntityDto>

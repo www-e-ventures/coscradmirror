@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { ArangoDatabase } from '../../persistence/database/arango-database';
-import { DatabaseProvider } from '../../persistence/database/database.provider';
+import { isNotFound, notFound } from '../../lib/types/not-found';
+import { getArangoCollectionIDs } from '../../persistence/database/get-arango-collection-ids';
+import { RepositoryProvider } from '../../persistence/repositories/repository.provider';
 import { PartialDTO } from '../../types/partial-dto';
 import { Term } from '../models/term/entities/term.entity';
+import { IRepositoryForEntity } from '../repositories/interfaces/repository-for-entity';
 /**
  * TODO Refactor to use repository pattern and a `TermRepositoryProvider`.
  * Adhere to DDD and decouple domain from persistence layer.
@@ -13,43 +15,46 @@ import { Term } from '../models/term/entities/term.entity';
  */
 @Injectable()
 export class TermService {
-  #db: ArangoDatabase;
+  #termRepository: IRepositoryForEntity<Term>;
 
   initialized: Promise<boolean>;
 
-  collection = 'TermCollection';
-
-  constructor(databaseProvider: DatabaseProvider) {
+  constructor(private termRepositoryProvider: RepositoryProvider) {
     // TODO read this from config \ env
-    const shouldInitialize = false;
+    const shouldInitialize = true;
 
-    // We need to await this somehow! also verify collection exists.
-    this.initialized = databaseProvider
-      .getDBInstance(shouldInitialize)
-      .then((arangoInstance) => {
-        this.#db = arangoInstance;
-        return true;
-      });
+    this.#termRepository = this.termRepositoryProvider.forEntity<Term>(
+      getArangoCollectionIDs()['term'],
+      (dto: PartialDTO<Term>) => new Term(dto)
+    );
   }
 
   async create(createTermDto: PartialDTO<Term>) {
-    return this.#db.create(createTermDto, this.collection);
+    return this.#termRepository.create(new Term(createTermDto));
   }
 
   async findAll() {
-    return this.#db.fetchMany(this.collection);
+    return this.#termRepository
+      .fetchMany()
+      .then((allModels) => allModels.map((model) => model.toDTO()));
   }
 
   async createMany(createTermDtos: PartialDTO<Term>[]) {
-    return this.#db.createMany(createTermDtos, this.collection);
+    return this.#termRepository.createMany(
+      createTermDtos.map((dto) => new Term(dto))
+    );
   }
 
-  findOne(id: string) {
-    return this.#db.fetchById(id, this.collection);
+  async findOne(id: string) {
+    const searchResult = await this.#termRepository.fetchById(id);
+
+    if (isNotFound) return notFound;
+
+    return new Term(searchResult);
   }
 
   update(id: string, updateTermDto: PartialDTO<Term>) {
-    return this.#db.update(id, updateTermDto, this.collection);
+    throw new Error('Updating a term is not supported at this time');
   }
 
   remove(id: string) {
