@@ -1,4 +1,4 @@
-import { Term } from '../domain/term/term/entities/term.entity';
+import { Term } from '../domain/models/term/entities/term.entity';
 import { EntityId } from '../domain/types/entity-id';
 import { VocabularyList } from '../domain/vocabulary-list/entities/vocabulary-list.entity';
 import { VocabularyListVariable } from '../domain/vocabulary-list/types/vocabulary-list-variable';

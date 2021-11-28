@@ -1,9 +1,9 @@
+import { AllCreateEntityDtosUnion } from 'apps/api/src/domain/types/all-entities';
+import { Maybe } from 'apps/api/src/lib/types/maybe';
+import { isNotFound, notFound } from 'apps/api/src/lib/types/not-found';
+import { CollectionNameAndModels } from 'apps/api/src/test-data/test-data-index';
 import { Database } from 'arangojs';
 import { isArangoDatabase } from 'arangojs/database';
-import { AllCreateEntityDtosUnion } from '../domain/types/all-entities';
-import { Maybe } from '../lib/types/maybe';
-import { isNotFound, notFound } from '../lib/types/not-found';
-import { CollectionNameAndModels } from '../test-data/test-data-index';
 import { IDatabase } from './interfaces/database';
 
 type HasKey<T> = T & {

@@ -1,5 +1,5 @@
-import { EntityId } from '../../domain/types/entity-id';
-import { Maybe } from '../../lib/types/maybe';
+import { EntityId } from 'apps/api/src/domain/types/entity-id';
+import { Maybe } from 'apps/api/src/lib/types/maybe';
 
 export interface IDatabase {
   fetchById: <TEntityDTO>(

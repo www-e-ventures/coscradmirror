@@ -1,11 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { ArangoDatabase } from 'apps/api/src/database/arango-database';
-import { DatabaseProvider } from 'apps/api/src/database/database.provider';
-import { CreateTermDto } from './dto/create-term.dto';
-import { UpdateTermDto } from './dto/update-term.dto';
+import { ArangoDatabase } from '../../persistence/database/arango-database';
+import { DatabaseProvider } from '../../persistence/database/database.provider';
+import { PartialDTO } from '../../types/partial-dto';
+import { Term } from '../models/term/entities/term.entity';
 /**
  * TODO Refactor to use repository pattern and a `TermRepositoryProvider`.
  * Adhere to DDD and decouple domain from persistence layer.
+ *
+ * Should we split `term updates` (commands) from (GET X, count, etc.) queries?
+ * The former apply to `domain models`, whereas the latter should work with
+ * `view models`.
  */
 @Injectable()
 export class TermService {
@@ -28,7 +32,7 @@ export class TermService {
       });
   }
 
-  async create(createTermDto: CreateTermDto) {
+  async create(createTermDto: PartialDTO<Term>) {
     return this.#db.create(createTermDto, this.collection);
   }
 
@@ -36,7 +40,7 @@ export class TermService {
     return this.#db.fetchMany(this.collection);
   }
 
-  async createMany(createTermDtos: CreateTermDto[]) {
+  async createMany(createTermDtos: PartialDTO<Term>[]) {
     return this.#db.createMany(createTermDtos, this.collection);
   }
 
@@ -44,7 +48,7 @@ export class TermService {
     return this.#db.fetchById(id, this.collection);
   }
 
-  update(id: string, updateTermDto: UpdateTermDto) {
+  update(id: string, updateTermDto: PartialDTO<Term>) {
     return this.#db.update(id, updateTermDto, this.collection);
   }
 

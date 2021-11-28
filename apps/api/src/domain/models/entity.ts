@@ -1,5 +1,5 @@
 import { PartialDTO } from 'apps/api/src/types/partial-dto';
-import { EntityId } from '../../../types/entity-id';
+import { EntityId } from './types/entity-id';
 
 // TODO Extract to a separate location
 const isValidStringWithLength = (input: unknown): input is string =>

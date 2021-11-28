@@ -7,21 +7,21 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { CreateTermDto } from './dto/create-term.dto';
-import { UpdateTermDto } from './dto/update-term.dto';
-import { TermService } from './term.service';
+import { Term } from '../../domain/models/term/entities/term.entity';
+import { TermService } from '../../domain/services/term.service';
+import { PartialDTO } from '../../types/partial-dto';
 
 @Controller('terms')
 export class TermController {
   constructor(private readonly termService: TermService) {}
 
   @Post()
-  create(@Body() createTermDto: CreateTermDto) {
+  create(@Body() createTermDto: PartialDTO<Term>) {
     return this.termService.create(createTermDto);
   }
 
   @Post('many')
-  createMany(@Body() createTermDtos: CreateTermDto[]) {
+  createMany(@Body() createTermDtos: PartialDTO<Term>[]) {
     return this.termService.createMany(createTermDtos);
   }
 
@@ -40,7 +40,7 @@ export class TermController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTermDto: UpdateTermDto) {
+  update(@Param('id') id: string, @Body() updateTermDto: PartialDTO<Term>) {
     return this.termService.update(id, updateTermDto);
   }
 

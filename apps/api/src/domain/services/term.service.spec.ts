@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { DatabaseProvider } from 'apps/api/src/database/database.provider';
-import { IDatabase } from 'apps/api/src/database/interfaces/database';
-import { IDatabaseProvider } from 'apps/api/src/database/interfaces/database.provider';
+import { IDatabase } from 'apps/api/src/persistence/database/interfaces/database';
+import { IDatabaseProvider } from 'apps/api/src/persistence/database/interfaces/database-provider';
+import { DatabaseProvider } from '../../persistence/database/database.provider';
 import { TermService } from './term.service';
 
 /**

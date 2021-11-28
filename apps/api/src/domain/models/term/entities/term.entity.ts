@@ -2,7 +2,7 @@ import { PartialDTO } from 'apps/api/src/types/partial-dto';
 import { EntityId } from '../../../types/entity-id';
 import { determineAllMissingRequiredProperties } from '../../../utilities/validation/determine-all-missing-required-properties';
 import { isNullOrUndefined } from '../../../utilities/validation/is-null-or-undefined';
-import { Entity } from './entity';
+import { Entity } from '../../entity';
 
 export class Term extends Entity {
   readonly term: string;

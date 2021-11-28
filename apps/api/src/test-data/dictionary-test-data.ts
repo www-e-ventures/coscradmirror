@@ -1,4 +1,4 @@
-import { CreateTermDto } from '../domain/term/term/dto/create-term.dto';
+import { CreateTermDto } from '../domain/models/term/dto/create-term.dto';
 import { CreateVocabularyListDto } from '../domain/vocabulary-list/dto/create-vocabulary-list.dto';
 import { CollectionNameAndModels } from './test-data-index';
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { buildTestData } from 'apps/api/src/test-data/test-data-index';
 import { Database } from 'arangojs';
-import { buildTestData } from '../test-data/test-data-index';
 import { ArangoDatabase } from './arango-database';
 
 @Injectable()
@@ -52,6 +52,7 @@ export class DatabaseProvider {
     const arangoDb = new ArangoDatabase(this.#db);
 
     if (shouldInitializeWithTestData)
+      // TODO Move this out and do it in a testing utility
       await arangoDb.initializeWithData(buildTestData());
 
     this.#arangoInstance = arangoDb;
