@@ -39,6 +39,7 @@ echo "echo stop & remove old docker [$ARANGO_DB_SERVER] and starting new fresh i
 (docker kill $ARANGO_DB_SERVER || :) && \
   (docker rm $ARANGO_DB_SERVER || :) && \
   docker run -e ARANGO_ROOT_PASSWORD=$ARANGO_DB_ROOT_PASSWORD \
+  -e ARANGO_TEST_USER_PASSWORD=$ARANGO_DB_USER_PASSWORD \
   --name $ARANGO_DB_SERVER -p $ARANGO_DB_PORT:8529 -d$ARANGO_VOLUME_PATH_CMD \
   arangodb
 
