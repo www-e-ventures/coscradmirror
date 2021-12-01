@@ -5,4 +5,4 @@ arangosh --server.database _system \
 --server.username root \
 --server.password $ARANGO_ROOT_PASSWORD \
 --console.history false \
---javascript.execute /home/setup_scripts/setup.js
+--javascript.execute /home/arango-volume-share/arango/setup.js
