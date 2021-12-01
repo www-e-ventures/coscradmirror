@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { buildTestData } from 'apps/api/src/test-data/test-data-index';
 import { Database } from 'arangojs';
 import { ArangoDatabase } from './arango-database';
 import { ArangoDatabaseForCollection } from './arango-database-for-collection';
@@ -12,7 +11,7 @@ import { IDatabaseProvider } from './interfaces/database-provider';
 export class DatabaseProvider implements IDatabaseProvider {
   readonly #db: Database;
 
-  #arangoInstance: ArangoDatabase = null;
+  #arangoInstance: ArangoDatabase;
 
   constructor(private configService: ConfigService) {
     const dbUser = 'root'; // this.configService.get<string>('ARANGO_DB_USER');
@@ -57,19 +56,19 @@ export class DatabaseProvider implements IDatabaseProvider {
   // TODO [type-safety] Can we correlate entity `DTOs` with `collection IDs`?
   getDatabaseForCollection = <TEntityDTO>(
     collectionName: ArangoCollectionID
-  ): ArangoDatabaseForCollection<TEntityDTO> =>
-    new ArangoDatabaseForCollection(this.#arangoInstance, collectionName);
+  ): ArangoDatabaseForCollection<TEntityDTO> => {
+    if (!this.#arangoInstance) this.#initializeArangoDb();
 
-  #initializeArangoDb = async (
+    return new ArangoDatabaseForCollection(
+      this.#arangoInstance,
+      collectionName
+    );
+  };
+
+  #initializeArangoDb = (
     // TODO move this to an Options array
     shouldInitializeWithTestData = false
-  ): Promise<void> => {
-    const arangoDb = new ArangoDatabase(this.#db);
-
-    if (shouldInitializeWithTestData)
-      // TODO Move this out and do it in a testing utility
-      await arangoDb.initializeWithData(buildTestData());
-
-    this.#arangoInstance = arangoDb;
+  ): void => {
+    this.#arangoInstance = new ArangoDatabase(this.#db);
   };
 }

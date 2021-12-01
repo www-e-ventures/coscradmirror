@@ -4,10 +4,13 @@ import { isNotFound, notFound } from 'apps/api/src/lib/types/not-found';
 import { CollectionNameAndModels } from 'apps/api/src/test-data/test-data-index';
 import { Database } from 'arangojs';
 import { isArangoDatabase } from 'arangojs/database';
+import { Entity } from '../../domain/models/entity';
+import { PartialDTO } from '../../types/partial-dto';
 import { IDatabase } from './interfaces/database';
 
-type HasKey<T> = T & {
+type ArangoDTO<T> = T & {
   _key: string;
+  _id: string;
 };
 
 export class ArangoDatabase implements IDatabase {
@@ -22,38 +25,25 @@ export class ArangoDatabase implements IDatabase {
     this.#db = database;
   }
 
-  fetchById = async <TCreateEntityDto>(
+  fetchById = async <TCreateEntityDto extends PartialDTO<Entity>>(
     id: string,
     collectionName: string
   ): Promise<Maybe<TCreateEntityDto>> => {
-    const query = `
-    FOR t IN ${collectionName}
-      FILTER t._id == @id
-        RETURN t
-    `;
+    const allEntities = await this.fetchMany<TCreateEntityDto>(collectionName);
 
-    const bindVars = {
-      id: `${collectionName}/${id}`,
+    if (allEntities.length === 0) return notFound;
+
+    const searchId = `${collectionName}/${id}`;
+
+    const doIdsMatch = (searchId) => (dbDTO) => {
+      const result = dbDTO.id === searchId;
+
+      return result;
     };
 
-    const cursor = await this.#db.query({
-      query,
-      bindVars,
-    });
+    const searchResult = allEntities.find(doIdsMatch(searchId));
 
-    if (cursor.count === 0) return notFound;
-
-    if (cursor.count > 1)
-      throw new Error(
-        [
-          `More than one document`,
-          `with the id ${id}`,
-          ` found in collection ${collectionName}`,
-        ].join(' ')
-      );
-
-    // TODO remove cast
-    return cursor.next() as unknown as TCreateEntityDto;
+    return searchResult || notFound;
   };
 
   /**
@@ -79,7 +69,11 @@ export class ArangoDatabase implements IDatabase {
     if (cursor.count === 0) return [];
 
     // TODO remove cast
-    return cursor.all() as unknown as TCreateEntityDTO[];
+    return cursor
+      .all()
+      .then((result) =>
+        result.map(this.#mapDTOFromDatabaseToDomainDTO)
+      ) as unknown as TCreateEntityDTO[];
   };
 
   getCount = async (collectionName: string): Promise<number> => {
@@ -161,7 +155,7 @@ export class ArangoDatabase implements IDatabase {
 
     // TODO remove cast
     const key = this.#getKeyOfDocument(
-      documentToUpdate as HasKey<TUpdateEntityDTO>
+      documentToUpdate as ArangoDTO<TUpdateEntityDTO>
     );
 
     if (isNotFound(key))
@@ -181,7 +175,7 @@ export class ArangoDatabase implements IDatabase {
   // TODO Add Soft Delete
 
   #getKeyOfDocument = <TCreateEntityDto>(
-    document: HasKey<TCreateEntityDto>
+    document: ArangoDTO<TCreateEntityDto>
   ): Maybe<string> =>
     typeof document._key === 'string' ? document._key : notFound;
 
@@ -204,4 +198,17 @@ export class ArangoDatabase implements IDatabase {
         this.createMany(models, collection);
       })
     );
+
+  #mapDTOFromDatabaseToDomainDTO = <T>(databaseDTO: ArangoDTO<T>): T =>
+    Object.entries(databaseDTO).reduce((accumulatedOutput, [key, value]) => {
+      if (key === '_key' || key === 'id') return accumulatedOutput;
+
+      if (key === '_id') {
+        accumulatedOutput['id'] = value;
+      } else {
+        accumulatedOutput[key] = value;
+      }
+
+      return accumulatedOutput;
+    }, {} as T);
 }

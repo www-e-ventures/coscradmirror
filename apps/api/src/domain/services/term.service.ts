@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { isNotFound, notFound } from '../../lib/types/not-found';
-import { getArangoCollectionIDs } from '../../persistence/database/get-arango-collection-ids';
 import { RepositoryProvider } from '../../persistence/repositories/repository.provider';
 import { PartialDTO } from '../../types/partial-dto';
 import { Term } from '../models/term/entities/term.entity';
@@ -20,11 +19,8 @@ export class TermService {
   initialized: Promise<boolean>;
 
   constructor(private termRepositoryProvider: RepositoryProvider) {
-    // TODO read this from config \ env
-    const shouldInitialize = true;
-
     this.#termRepository = this.termRepositoryProvider.forEntity<Term>(
-      getArangoCollectionIDs()['term'],
+      'term',
       (dto: PartialDTO<Term>) => new Term(dto)
     );
   }
@@ -48,7 +44,7 @@ export class TermService {
   async findOne(id: string) {
     const searchResult = await this.#termRepository.fetchById(id);
 
-    if (isNotFound) return notFound;
+    if (isNotFound(searchResult)) return notFound;
 
     return new Term(searchResult);
   }

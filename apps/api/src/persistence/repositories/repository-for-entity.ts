@@ -38,6 +38,13 @@ export class RepositoryForEntity<TEntity extends Entity>
     const searchResultForDTO =
       await this.#arangoDatabaseForEntitysCollection.fetchById(id);
 
+    console.log({
+      repoResult: searchResultForDTO,
+      asModel: isNotFound(searchResultForDTO)
+        ? notFound
+        : this.#instanceFactory(searchResultForDTO),
+    });
+
     return isNotFound(searchResultForDTO)
       ? notFound
       : this.#instanceFactory(searchResultForDTO);
