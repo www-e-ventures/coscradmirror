@@ -40,6 +40,7 @@ fi
 
 # Remember to set the following environment variables and to add their values to your .env in project root.
 # ARANGO_DB_SERVER="dbserver";
+# ARANGO_DB_PORT="8529";
 # ARANGO_DB_ROOT_PASSWORD="rootPASSWORD";
 # ARANGO_DB_USER="devtester";
 # ARANGO_DB_USER_PASSWORD="confidential"
@@ -55,12 +56,8 @@ echo "stop & remove old docker [$ARANGO_DB_SERVER] and starting new fresh instan
 
 # wait for pg to start
 echo "sleep wait for arango-db-server [$ARANGO_DB_SERVER] to start";
-sleep 3;
-
-# TODO
-# create the db
-# set environment variables
-# create new db through arangosh
+sudo -u root docker ps | grep "$ARANGO_DB_SERVER"
+wait
 
 echo "Run setup script to load test data"
 STARTUP_SCRIPT="$ARANGO_DOCKER_VOLUME_DESTINATION/arango/arango-setup.sh"
