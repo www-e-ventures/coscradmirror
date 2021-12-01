@@ -1,9 +1,9 @@
 const users = require('@arangodb/users');
 
-  users.save('devtester', process.env.ARANGO_DB_USER_PASSWORD);
+users.save(process.env.ARANGO_DB_USER, process.env.ARANGO_DB_USER_PASSWORD);
 
 db._createDatabase("coscrad");
-users.grantDatabase('devtester', 'coscrad', 'rw');
+users.grantDatabase('process.env.ARANGO_DB_USER', 'coscrad', 'rw');
 
 db._useDatabase("coscrad");
 
