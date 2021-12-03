@@ -1,5 +1,6 @@
-import { CreateTermDto } from '../models/term/dto/create-term.dto';
-import { CreateVocabularyListDto } from '../vocabulary-list/dto/create-vocabulary-list.dto';
+import { PartialDTO } from '../../types/partial-dto';
+import { Term } from '../models/term/entities/term.entity';
+import { VocabularyList } from '../vocabulary-list/entities/vocabulary-list.entity';
 
 /**
  * TODO [refactor] Remove this in favor of
@@ -7,4 +8,6 @@ import { CreateVocabularyListDto } from '../vocabulary-list/dto/create-vocabular
  * PartialDTO<Entity>
  * ```
  */
-export type AllCreateEntityDtosUnion = CreateTermDto | CreateVocabularyListDto;
+
+export type AllEntites = Term | VocabularyList;
+export type AllCreateEntityDtosUnion = PartialDTO<AllEntites>;

@@ -18,8 +18,8 @@ export class TermService {
 
   initialized: Promise<boolean>;
 
-  constructor(private termRepositoryProvider: RepositoryProvider) {
-    this.#termRepository = this.termRepositoryProvider.forEntity<Term>(
+  constructor(private repositoryProvider: RepositoryProvider) {
+    this.#termRepository = this.repositoryProvider.forEntity<Term>(
       'term',
       (dto: PartialDTO<Term>) => new Term(dto)
     );

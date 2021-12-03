@@ -1,28 +1,27 @@
 import isStringWithNonzeroLength from 'apps/api/src/lib/utilities/isStringWithNonzeroLength';
-import { EntityId } from '../../types/entity-id';
+import { PartialDTO } from 'apps/api/src/types/partial-dto';
+import { Entity } from '../../models/entity';
 import { determineAllMissingRequiredProperties } from '../../utilities/validation/determine-all-missing-required-properties';
-import { CreateVocabularyListDto } from '../dto/create-vocabulary-list.dto';
 import { VocabularyListVariable } from '../types/vocabulary-list-variable';
 import { VocabularyListEntry } from '../vocabulary-list-entry';
 
-export class VocabularyList {
+export class VocabularyList extends Entity {
   readonly name?: string;
 
   readonly nameEnglish?: string;
-
-  readonly id: EntityId;
 
   readonly entries: VocabularyListEntry[];
 
   readonly variables: VocabularyListVariable[];
 
-  #validate(dto: unknown): dto is CreateVocabularyListDto {
-    const missingProperties =
-      determineAllMissingRequiredProperties<CreateVocabularyListDto>(
-        // TODO remove cast
-        dto as CreateVocabularyListDto,
-        ['id', 'entries', 'variables']
-      );
+  #validate(dto: unknown): dto is PartialDTO<VocabularyList> {
+    const missingProperties = determineAllMissingRequiredProperties<
+      PartialDTO<VocabularyList>
+    >(
+      // TODO remove cast
+      dto as PartialDTO<VocabularyList>,
+      ['id', 'entries', 'variables']
+    );
 
     if (missingProperties.length) {
       const message = missingProperties
@@ -34,10 +33,11 @@ export class VocabularyList {
         // remove trailing comma
         .slice(0, -1);
 
+      // TODO return these errors
       throw new Error(message);
     }
 
-    const { name, nameEnglish, entries } = dto as CreateVocabularyListDto;
+    const { name, nameEnglish, entries } = dto as PartialDTO<VocabularyList>;
 
     if (
       !isStringWithNonzeroLength(name) &&

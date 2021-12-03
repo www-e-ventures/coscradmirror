@@ -1,8 +1,8 @@
 // TODO [design] Should we tie this to the model constructors?
 const arangoCollectionIDs = {
   book: 'BookCollection',
-  term: 'TermCollection',
-  vocabularyList: 'VocabularyListCollection',
+  term: 'terms',
+  vocabularyList: 'vocabulary_lists',
 } as const;
 
 // TODO export to higher level type utility
