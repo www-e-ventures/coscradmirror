@@ -1,6 +1,6 @@
 // TODO [design] Should we tie this to the model constructors?
 const arangoCollectionIDs = {
-  book: 'BookCollection',
+  // book: 'books',
   term: 'terms',
   vocabularyList: 'vocabulary_lists',
 } as const;

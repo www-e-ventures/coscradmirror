@@ -1,6 +1,6 @@
-import { Entity } from '../../domain/models/entity';
-import { isEntityId } from '../../domain/types/entity-id';
-import { PartialDTO } from '../../types/partial-dto';
+import { Entity } from 'apps/api/src/domain/models/entity';
+import { isEntityId } from 'apps/api/src/domain/types/entity-id';
+import { PartialDTO } from 'apps/api/src/types/partial-dto';
 
 export type DatabaseDTO<
   TEntityDTO extends PartialDTO<Entity> = PartialDTO<Entity>

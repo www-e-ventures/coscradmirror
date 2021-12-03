@@ -6,6 +6,7 @@ import { PartialDTO } from '../../types/partial-dto';
 import { ArangoDatabase } from './arango-database';
 import { ArangoCollectionID } from './get-arango-collection-ids';
 import { IDatabaseForCollection } from './interfaces/database-for-collection';
+import mapEntityDTOToDatabaseDTO from './utilities/mapEntityDTOToDatabaseDTO';
 
 export class ArangoDatabaseForCollection<TEntityDTO extends PartialDTO<Entity>>
   implements IDatabaseForCollection<TEntityDTO>
@@ -42,12 +43,19 @@ export class ArangoDatabaseForCollection<TEntityDTO extends PartialDTO<Entity>>
   }
 
   // Commands (mutate state)
-  create(dto: TEntityDTO) {
-    return this.#arangoDatabase.create(dto, this.#collectionID);
+  create(entityDTO: TEntityDTO) {
+    // Handle the difference in _id \ _key between model and database
+    return this.#arangoDatabase.create(
+      mapEntityDTOToDatabaseDTO(entityDTO),
+      this.#collectionID
+    );
   }
 
-  createMany(dtos: TEntityDTO[]) {
-    return this.#arangoDatabase.createMany(dtos, this.#collectionID);
+  createMany(entityDTOs: TEntityDTO[]) {
+    // Handle the difference in _id \ _key between model and database
+    const databaseDTOs = entityDTOs.map(mapEntityDTOToDatabaseDTO);
+
+    return this.#arangoDatabase.createMany(databaseDTOs, this.#collectionID);
   }
 
   update(id: EntityId, updateDTO: TEntityDTO) {

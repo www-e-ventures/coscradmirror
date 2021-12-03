@@ -56,8 +56,6 @@ export class RepositoryForEntity<TEntity extends Entity>
   }
 
   async create(entity: TEntity) {
-    const createDTO = entity.toDTO();
-
     return this.#arangoDatabaseForEntitysCollection.create(entity.toDTO());
   }
 

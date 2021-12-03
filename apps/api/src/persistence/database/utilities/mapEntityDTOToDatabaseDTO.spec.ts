@@ -1,8 +1,8 @@
-import { Entity } from '../../domain/models/entity';
+import { Entity } from '../../../domain/models/entity';
 import mapEntityDTOToDatabaseDTO from './mapEntityDTOToDatabaseDTO';
 
 describe('mapEntityDTOToDatabaseDTO', () => {
-  const dtoWithID = {
+  const dtoWithValidID = {
     id: '123',
     foo: 'nope',
     baz: 4,
@@ -12,7 +12,7 @@ describe('mapEntityDTOToDatabaseDTO', () => {
     },
   };
   describe('When given a dto with an ID property', () => {
-    const actualDatabaseDTO = mapEntityDTOToDatabaseDTO(dtoWithID);
+    const actualDatabaseDTO = mapEntityDTOToDatabaseDTO(dtoWithValidID);
 
     const expectedDatabaseDTO = {
       _key: '123',
@@ -28,23 +28,23 @@ describe('mapEntityDTOToDatabaseDTO', () => {
     });
   });
 
-  describe('When given a dto with an invalID type for the ID property', () => {
+  describe('When given a dto with an invalid type for the ID property', () => {
     [null, undefined, 7, {}, '', () => 5].forEach((invalidID) => {
-      const dtoWithInvalIDTypeForID = {
-        ...dtoWithID,
+      const dtoWithInvalidTypeForID = {
+        ...dtoWithValidID,
         id: invalidID,
       };
 
       const dtoWithoutIDProperty = {
-        ...dtoWithID,
+        ...dtoWithInvalidTypeForID,
         id: undefined,
       };
 
       const actualDatabaseDTO = mapEntityDTOToDatabaseDTO(
-        dtoWithInvalIDTypeForID as unknown as Entity
+        dtoWithInvalidTypeForID as unknown as Entity
       );
 
-      it('should omit the id property', () => {
+      it(`value ${invalidID}: it should omit the id property`, () => {
         expect(actualDatabaseDTO).toEqual(dtoWithoutIDProperty);
       });
     });
