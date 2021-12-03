@@ -18,7 +18,9 @@ export type InstanceFactory<TEntity> = (dto: PartialDTO<TEntity>) => TEntity;
 export class RepositoryForEntity<TEntity extends Entity>
   implements IRepositoryForEntity<TEntity>
 {
-  #arangoDatabaseForEntitysCollection: ArangoDatabaseForCollection<TEntity>;
+  #arangoDatabaseForEntitysCollection: ArangoDatabaseForCollection<
+    PartialDTO<TEntity>
+  >;
 
   // Typically just uses the model constructor
   #instanceFactory: InstanceFactory<TEntity>;
@@ -56,19 +58,13 @@ export class RepositoryForEntity<TEntity extends Entity>
   async create(entity: TEntity) {
     const createDTO = entity.toDTO();
 
-    // TODO remove cast
-    return this.#arangoDatabaseForEntitysCollection.create(
-      entity.toDTO() as TEntity
-    );
+    return this.#arangoDatabaseForEntitysCollection.create(entity.toDTO());
   }
 
   async createMany(entities: TEntity[]) {
     const createDTOs = entities.map((entity) => entity.toDTO());
 
-    // TODO remove cast
-    return this.#arangoDatabaseForEntitysCollection.createMany(
-      createDTOs as TEntity[]
-    );
+    return this.#arangoDatabaseForEntitysCollection.createMany(createDTOs);
   }
 
   async update() {}
