@@ -70,7 +70,14 @@ export const buildDictionaryTestData = (): CollectionNameAndModels<
       // Vocabulary List 2
       {
         name: 'test VL 2 CHIL- no engl name',
-        entries: [],
+        entries: [
+          {
+            termId: '2',
+            variableValues: {
+              person: '23',
+            },
+          },
+        ],
         variables: [],
       },
       // Vocabulary List 3

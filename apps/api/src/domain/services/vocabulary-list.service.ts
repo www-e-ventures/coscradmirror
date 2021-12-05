@@ -33,9 +33,7 @@ export class VocabularyListService {
   }
 
   async findAll() {
-    return this.#vocabularyListRepository
-      .fetchMany()
-      .then((allModels) => allModels.map((model) => model.toDTO()));
+    return this.#vocabularyListRepository.fetchMany();
   }
 
   async createMany(createVocabularyListDtos: PartialDTO<VocabularyList>[]) {
@@ -49,7 +47,7 @@ export class VocabularyListService {
 
     if (isNotFound(searchResult)) return notFound;
 
-    return new VocabularyList(searchResult);
+    return searchResult;
   }
 
   update(id: string, updateVocabularyListDto: PartialDTO<VocabularyList>) {

@@ -1,4 +1,5 @@
 import { PartialDTO } from 'apps/api/src/types/partial-dto';
+import { isNullOrUndefined } from '../utilities/validation/is-null-or-undefined';
 import { EntityId } from './types/entity-id';
 
 // TODO Extract to a separate location
@@ -42,7 +43,8 @@ export class Entity {
   #validateDTO = (dto: unknown): dto is PartialDTO<Entity> => {
     const { id } = dto as PartialDTO<Entity>;
 
-    if (!isValidEntityId(id)) return false;
+    // A new entity will have id auto assigned by db
+    if (!isNullOrUndefined(id) && !isValidEntityId(id)) return false;
 
     return true;
   };

@@ -30,9 +30,7 @@ export class TermService {
   }
 
   async findAll() {
-    return this.#termRepository
-      .fetchMany()
-      .then((allModels) => allModels.map((model) => model.toDTO()));
+    return this.#termRepository.fetchMany();
   }
 
   async createMany(createTermDtos: PartialDTO<Term>[]) {
@@ -46,7 +44,7 @@ export class TermService {
 
     if (isNotFound(searchResult)) return notFound;
 
-    return new Term(searchResult);
+    return searchResult;
   }
 
   update(id: string, updateTermDto: PartialDTO<Term>) {

@@ -9,7 +9,9 @@ import {
 } from '@nestjs/common';
 import { Term } from '../../domain/models/term/entities/term.entity';
 import { TermService } from '../../domain/services/term.service';
+import { isNotFound } from '../../lib/types/not-found';
 import { PartialDTO } from '../../types/partial-dto';
+import { TermViewModel } from '../../view-models/term-view-model';
 
 @Controller('terms')
 export class TermController {
@@ -28,7 +30,9 @@ export class TermController {
   @Get()
   findAll() {
     try {
-      return this.termService.findAll();
+      return this.termService
+        .findAll()
+        .then((terms) => terms.map((term) => new TermViewModel(term)));
     } catch (error) {
       return error;
     }
@@ -36,7 +40,11 @@ export class TermController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.termService.findOne(id);
+    return this.termService.findOne(id).then((term) => {
+      if (isNotFound(term)) return term;
+
+      return new TermViewModel(term);
+    });
   }
 
   @Patch(':id')

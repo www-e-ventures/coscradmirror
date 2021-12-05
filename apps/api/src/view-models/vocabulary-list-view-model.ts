@@ -24,14 +24,24 @@ export class VocabularyListViewModel {
   readonly variables: VocabularyListVariable[];
 
   constructor(vocabularyList: VocabularyList, allTerms: Term[]) {
-    const { entries } = vocabularyList;
+    const { entries, id, name, variables } = vocabularyList;
 
-    const newEntries = entries
+    this.id = id;
+
+    this.name = name;
+
+    this.nameEnglish = this.nameEnglish;
+
+    this.variables = { ...variables };
+
+    const newEntries = (entries || [])
       .map(({ termId, variableValues }) => ({
         term: allTerms.find((term) => term.id === termId) || notFound,
         variableValues,
       }))
-      .filter(({ term }) => term !== notFound);
+      .filter(
+        ({ term }) => term !== notFound
+      ) as unknown as VocabularyListEntryViewModel[];
 
     this.entries = newEntries;
   }
