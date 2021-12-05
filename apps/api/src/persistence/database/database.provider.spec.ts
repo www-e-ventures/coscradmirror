@@ -25,32 +25,6 @@ describe('AppController', () => {
 
     beforeAll(async () => {
       result = await db.route('_api').get('version');
-      console.log(result.body.version);
-
-      //   await db
-      //     .query(
-      //       aql`
-      //               FOR t in TestCollection
-      //                 RETURN {
-      //                   type: t.type,
-      //                   value: t.value
-      //                 }
-      //             `
-      //     )
-      //     .then((cursor) =>
-      //       cursor.reduce(
-      //         (accumulatedResults, nextValue) =>
-      //           accumulatedResults.concat([nextValue]),
-      //         []
-      //       )
-      //     );
-      // });
-
-      // const expectedResult = [
-      //   { type: 'circle', value: 2 },
-      //   { type: 'square', value: 3 },
-      //   { type: 'rectangle', value: 5 },
-      // ];
     });
 
     it('querying the db version should return a result', () => {

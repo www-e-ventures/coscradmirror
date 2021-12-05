@@ -42,7 +42,6 @@ export class VocabularyListController {
           new VocabularyListViewModel(vocabularyList, allTerms)
       )
     );
-    // return this.vocabularyListService.findAll();
   }
 
   @Get(':id')

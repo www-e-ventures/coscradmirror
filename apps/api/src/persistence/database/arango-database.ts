@@ -36,7 +36,7 @@ export class ArangoDatabase implements IDatabase {
     const searchId = `${collectionName}/${id}`;
 
     const doIdsMatch = (searchId) => (dbDTO) => {
-      const result = dbDTO.id === searchId;
+      const result = dbDTO._id === searchId;
 
       return result;
     };
@@ -69,11 +69,7 @@ export class ArangoDatabase implements IDatabase {
     if (cursor.count === 0) return [];
 
     // TODO remove cast
-    return cursor
-      .all()
-      .then((result) =>
-        result.map(this.#mapDTOFromDatabaseToDomainDTO)
-      ) as unknown as TCreateEntityDTO[];
+    return cursor.all();
   };
 
   getCount = async (collectionName: string): Promise<number> => {
@@ -198,17 +194,4 @@ export class ArangoDatabase implements IDatabase {
         this.createMany(models, collection);
       })
     );
-
-  #mapDTOFromDatabaseToDomainDTO = <T>(databaseDTO: ArangoDTO<T>): T =>
-    Object.entries(databaseDTO).reduce((accumulatedOutput, [key, value]) => {
-      if (key === '_key' || key === 'id') return accumulatedOutput;
-
-      if (key === '_id') {
-        accumulatedOutput['id'] = value;
-      } else {
-        accumulatedOutput[key] = value;
-      }
-
-      return accumulatedOutput;
-    }, {} as T);
 }

@@ -14,6 +14,27 @@ export class VocabularyList extends Entity {
 
   readonly variables: VocabularyListVariable[];
 
+  constructor(dto: unknown) {
+    super(dto);
+
+    if (!this.#validate(dto)) {
+      throw new Error(
+        `Invalid dto for a vocabulary list: ${JSON.stringify(dto)}`
+      );
+    }
+
+    const { name, nameEnglish, entries, variables } = dto;
+
+    this.name = name;
+
+    this.nameEnglish = nameEnglish;
+
+    // TODO type guard for this (validation already complete at this point)
+    this.entries = [...(entries as VocabularyListEntry[])];
+
+    this.variables = [...(variables as VocabularyListVariable[])];
+  }
+
   #validate(dto: unknown): dto is PartialDTO<VocabularyList> {
     const missingProperties = determineAllMissingRequiredProperties<
       PartialDTO<VocabularyList>

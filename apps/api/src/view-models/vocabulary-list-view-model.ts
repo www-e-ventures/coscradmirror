@@ -32,7 +32,7 @@ export class VocabularyListViewModel {
 
     this.nameEnglish = this.nameEnglish;
 
-    this.variables = { ...variables };
+    this.variables = [...variables];
 
     const newEntries = (entries || [])
       .map(({ termId, variableValues }) => ({

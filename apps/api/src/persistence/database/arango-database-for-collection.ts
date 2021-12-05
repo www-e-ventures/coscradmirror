@@ -6,10 +6,15 @@ import { PartialDTO } from '../../types/partial-dto';
 import { ArangoDatabase } from './arango-database';
 import { ArangoCollectionID } from './get-arango-collection-ids';
 import { IDatabaseForCollection } from './interfaces/database-for-collection';
-import mapEntityDTOToDatabaseDTO from './utilities/mapEntityDTOToDatabaseDTO';
+import { DatabaseDTO } from './utilities/mapEntityDTOToDatabaseDTO';
 
-export class ArangoDatabaseForCollection<TEntityDTO extends PartialDTO<Entity>>
-  implements IDatabaseForCollection<TEntityDTO>
+/**
+ * Note that at this level we are working with a `DatabaseDTO` (has _key
+ * and _id), not an `EntityDTO`. The mapping is taken care of in the
+ * repositories layer.
+ */
+export class ArangoDatabaseForCollection<TEntity extends Entity>
+  implements IDatabaseForCollection<TEntity>
 {
   #collectionID: ArangoCollectionID;
 
@@ -30,12 +35,17 @@ export class ArangoDatabaseForCollection<TEntityDTO extends PartialDTO<Entity>>
   }
 
   // True Queries (return information)
-  fetchById(id: EntityId): Promise<Maybe<TEntityDTO>> {
-    return this.#arangoDatabase.fetchById<TEntityDTO>(id, this.#collectionID);
+  fetchById(id: EntityId): Promise<Maybe<DatabaseDTO<PartialDTO<TEntity>>>> {
+    return this.#arangoDatabase.fetchById<DatabaseDTO<TEntity>>(
+      id,
+      this.#collectionID
+    );
   }
 
-  fetchMany(): Promise<TEntityDTO[]> {
-    return this.#arangoDatabase.fetchMany<TEntityDTO>(this.#collectionID);
+  fetchMany(): Promise<DatabaseDTO<TEntity>[]> {
+    return this.#arangoDatabase.fetchMany<DatabaseDTO<TEntity>>(
+      this.#collectionID
+    );
   }
 
   getCount(): Promise<number> {
@@ -43,22 +53,16 @@ export class ArangoDatabaseForCollection<TEntityDTO extends PartialDTO<Entity>>
   }
 
   // Commands (mutate state)
-  create(entityDTO: TEntityDTO) {
+  create(databaseDTO: DatabaseDTO<PartialDTO<TEntity>>) {
     // Handle the difference in _id \ _key between model and database
-    return this.#arangoDatabase.create(
-      mapEntityDTOToDatabaseDTO(entityDTO),
-      this.#collectionID
-    );
+    return this.#arangoDatabase.create(databaseDTO, this.#collectionID);
   }
 
-  createMany(entityDTOs: TEntityDTO[]) {
-    // Handle the difference in _id \ _key between model and database
-    const databaseDTOs = entityDTOs.map(mapEntityDTOToDatabaseDTO);
-
+  createMany(databaseDTOs: DatabaseDTO<PartialDTO<TEntity>>[]) {
     return this.#arangoDatabase.createMany(databaseDTOs, this.#collectionID);
   }
 
-  update(id: EntityId, updateDTO: TEntityDTO) {
+  update(id: EntityId, updateDTO: DatabaseDTO<TEntity>) {
     return this.#arangoDatabase.update(id, updateDTO, this.#collectionID);
   }
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Database } from 'arangojs';
+import { Entity } from '../../domain/models/entity';
 import { ArangoDatabase } from './arango-database';
 import { ArangoDatabaseForCollection } from './arango-database-for-collection';
 import { ArangoCollectionID } from './get-arango-collection-ids';
@@ -35,7 +36,6 @@ export class DatabaseProvider implements IDatabaseProvider {
       .route('_api')
       .get('version')
       .catch((error) => {
-        console.log(JSON.stringify(error));
         systemDB.createDatabase(dbName);
       });
 
@@ -54,12 +54,13 @@ export class DatabaseProvider implements IDatabaseProvider {
   };
 
   // TODO [type-safety] Can we correlate entity `DTOs` with `collection IDs`?
-  getDatabaseForCollection = <TEntityDTO>(
+  // @ts-expect-error TODO fix the following!
+  getDatabaseForCollection = <TEntity extends Entity>(
     collectionName: ArangoCollectionID
-  ): ArangoDatabaseForCollection<TEntityDTO> => {
+  ): ArangoDatabaseForCollection<TEntity> => {
     if (!this.#arangoInstance) this.#initializeArangoDb();
 
-    return new ArangoDatabaseForCollection(
+    return new ArangoDatabaseForCollection<TEntity>(
       this.#arangoInstance,
       collectionName
     );

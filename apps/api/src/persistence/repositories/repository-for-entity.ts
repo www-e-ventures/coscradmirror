@@ -7,6 +7,8 @@ import { PartialDTO } from '../../types/partial-dto';
 import { ArangoDatabaseForCollection } from '../database/arango-database-for-collection';
 import { DatabaseProvider } from '../database/database.provider';
 import { ArangoCollectionID } from '../database/get-arango-collection-ids';
+import mapDatabaseDTOToEntityDTO from '../database/utilities/mapDatabaseDTOToEntityDTO';
+import mapEntityDTOToDatabaseDTO from '../database/utilities/mapEntityDTOToDatabaseDTO';
 
 export type InstanceFactory<TEntity> = (dto: PartialDTO<TEntity>) => TEntity;
 
@@ -18,9 +20,7 @@ export type InstanceFactory<TEntity> = (dto: PartialDTO<TEntity>) => TEntity;
 export class RepositoryForEntity<TEntity extends Entity>
   implements IRepositoryForEntity<TEntity>
 {
-  #arangoDatabaseForEntitysCollection: ArangoDatabaseForCollection<
-    PartialDTO<TEntity>
-  >;
+  #arangoDatabaseForEntitysCollection: ArangoDatabaseForCollection<TEntity>;
 
   // Typically just uses the model constructor
   #instanceFactory: InstanceFactory<TEntity>;
@@ -31,7 +31,7 @@ export class RepositoryForEntity<TEntity extends Entity>
     instanceFactory: InstanceFactory<TEntity>
   ) {
     this.#arangoDatabaseForEntitysCollection =
-      arangoDatabaseProvider.getDatabaseForCollection(collectionName);
+      arangoDatabaseProvider.getDatabaseForCollection<TEntity>(collectionName);
 
     this.#instanceFactory = instanceFactory;
   }
@@ -42,13 +42,15 @@ export class RepositoryForEntity<TEntity extends Entity>
 
     return isNotFound(searchResultForDTO)
       ? notFound
-      : this.#instanceFactory(searchResultForDTO);
+      : this.#instanceFactory(mapDatabaseDTOToEntityDTO(searchResultForDTO));
   }
 
   async fetchMany(): Promise<TEntity[]> {
     return this.#arangoDatabaseForEntitysCollection
       .fetchMany()
-      .then((dtos) => dtos.map(this.#instanceFactory));
+      .then((dtos) =>
+        dtos.map(mapDatabaseDTOToEntityDTO).map(this.#instanceFactory)
+      );
   }
 
   async getCount(): Promise<number> {
@@ -56,11 +58,15 @@ export class RepositoryForEntity<TEntity extends Entity>
   }
 
   async create(entity: TEntity) {
-    return this.#arangoDatabaseForEntitysCollection.create(entity.toDTO());
+    return this.#arangoDatabaseForEntitysCollection.create(
+      mapEntityDTOToDatabaseDTO(entity.toDTO())
+    );
   }
 
   async createMany(entities: TEntity[]) {
-    const createDTOs = entities.map((entity) => entity.toDTO());
+    const createDTOs = entities
+      .map((entity) => entity.toDTO())
+      .map(mapEntityDTOToDatabaseDTO);
 
     return this.#arangoDatabaseForEntitysCollection.createMany(createDTOs);
   }

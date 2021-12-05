@@ -3,7 +3,6 @@ import { IDatabase } from 'apps/api/src/persistence/database/interfaces/database
 import { IDatabaseProvider } from 'apps/api/src/persistence/database/interfaces/database-provider';
 import { IDatabaseForCollection } from '../../persistence/database/interfaces/database-for-collection';
 import { RepositoryProvider } from '../../persistence/repositories/repository.provider';
-import { PartialDTO } from '../../types/partial-dto';
 import { Entity } from '../models/entity';
 import { IRepositoryForEntity } from '../repositories/interfaces/repository-for-entity';
 import { IRepositoryProvider } from '../repositories/interfaces/repository-provider';
@@ -26,8 +25,8 @@ export const buildMockArangoDatabase = (): MockInstance<IDatabase> => ({
 });
 
 export const buildMockArangoDatabaseForCollection = <
-  TEntityDTO extends PartialDTO<Entity>
->(): MockInstance<IDatabaseForCollection<TEntityDTO>> => ({
+  TEntity extends Entity
+>(): MockInstance<IDatabaseForCollection<TEntity>> => ({
   fetchById: jest.fn,
   fetchMany: jest.fn,
   create: jest.fn,
@@ -37,14 +36,12 @@ export const buildMockArangoDatabaseForCollection = <
 });
 
 export const buildMockDatabaseProvider = <
-  TEntityDTO extends PartialDTO<Entity>
+  TEntity extends Entity
 >(): IDatabaseProvider => ({
   getDBInstance: jest.fn().mockResolvedValue(buildMockArangoDatabase()),
   getDatabaseForCollection: jest
     .fn()
-    .mockResolvedValue(
-      buildMockArangoDatabaseForCollection<PartialDTO<TEntityDTO>>()
-    ),
+    .mockResolvedValue(buildMockArangoDatabaseForCollection<Entity>()),
 });
 
 export const buildMockRepositoryProvider = <

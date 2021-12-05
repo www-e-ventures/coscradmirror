@@ -20,8 +20,6 @@ export const getArangoCollectionID = (
   if (Object.keys(arangoCollectionIDs).includes(entityName)) {
     const result = arangoCollectionIDs[entityName];
 
-    console.log(`found: `);
-
     return result;
   }
 
