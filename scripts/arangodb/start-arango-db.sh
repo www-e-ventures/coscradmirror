@@ -10,28 +10,32 @@ set -e
 # ARANGO_DB_ROOT_PASSWORD="rootPASSWORD";
 # ARANGO_DB_USER="devtester";
 # ARANGO_DB_USER_PASSWORD="confidential"
-# ARANGO_DB_NAME="testdb";
+# ARANGO_DB_NAME="coscradtestdb";
+
+. ./scripts/arangodb/arango_setup_vars.sh
 
 if [ $1 == "test_arango" ];
 then
   echo "Setting up test data for ArangoDB";
   PROJECT_ROOT_PATH="$PWD";
   echo "PROJECT_ROOT_PATH: $PROJECT_ROOT_PATH"
-  ARANGO_DOCKER_LOCAL_DIR="../arango-volume-share";
-  ARANGO_DOCKER_VOLUME_DESTINATION="/home/arango-volume-share";
 
   # Create arango volume share location
-  if [ -d "$ARANGO_DOCKER_LOCAL_DIR" ]; then
-    echo "Removing $ARANGO_DOCKER_LOCAL_DIR"
-    rm -rf "$ARANGO_DOCKER_LOCAL_DIR"
+  if [ ! -d "$ARANGO_DOCKER_LOCAL_DIR" ]; then
+    mkdir $ARANGO_DOCKER_LOCAL_DIR
+    echo "Created local Docker share directory $ARANGO_DOCKER_LOCAL_DIR"
   fi
 
-  mkdir $ARANGO_DOCKER_LOCAL_DIR
-  echo "Created local Docker share directory $ARANGO_DOCKER_LOCAL_DIR"
+
+  if [ -d "$ARANGO_DOCKER_LOCAL_DIR/scripts/arango" ]; then
+    echo "Deleting existing arango scripts directory in $ARANGO_DOCKER_LOCAL_DIR"
+    sudo -u root rm -rf "$ARANGO_DOCKER_LOCAL_DIR/scripts/arango"
+  fi
 
   # Copy Arango Test Data to local share location
   cp -R ./scripts/arango $ARANGO_DOCKER_LOCAL_DIR
   echo "Copied scripts to local Docker share directory $ARANGO_DOCKER_LOCAL_DIR"
+
   cd $ARANGO_DOCKER_LOCAL_DIR
 
   ARANGO_LOCAL_VOLUME_PATH="$PWD";
@@ -50,8 +54,6 @@ fi
 
 echo "Check for instance of arango server"
 DOCKER_PS=`sudo -u root docker ps`
-
-# if egrep -q "arangodb.*8529" $DOCKER_PS;
 
 if [ -z "${DOCKER_PS##*8529*}" ];
 then
@@ -79,6 +81,7 @@ sudo -u root docker run \
 -e ARANGO_DB_USER=$ARANGO_DB_USER \
 -e ARANGO_DB_USER_PASSWORD=$ARANGO_DB_USER_PASSWORD \
 -e ARANGO_DB_NAME=$ARANGO_DB_NAME \
+-e ARANGO_DOCKER_VOLUME_DESTINATION=$ARANGO_DOCKER_VOLUME_DESTINATION \
 -p $ARANGO_DB_PORT:8529 \
 -d$ARANGO_LOCAL_VOLUME_PATH_CMD \
 arangodb

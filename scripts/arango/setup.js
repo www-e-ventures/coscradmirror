@@ -80,7 +80,7 @@ print(">> Running Setup in Arangosh");
 const users = require('@arangodb/users');
 
 // TODO load this from separate file and link with app's list of db references
-const collections = ['terms','vocabulary_lists']
+const collections = ['terms','vocabulary_lists'];
 
 users.save(process.env.ARANGO_DB_USER, process.env.ARANGO_DB_USER_PASSWORD);
 
