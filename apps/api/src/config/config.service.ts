@@ -59,7 +59,14 @@ class ConfigService {
 
   private getValue(key: string, shouldThrowOnMissing = true): string {
     const value = this.env[key];
+
     if (!value && shouldThrowOnMissing) {
+      console.log({
+        // checkingThis: this.env,
+        value,
+        missingKey: key,
+      });
+
       throw new Error(`config error - missing env.${key}`);
     }
 
@@ -106,10 +113,9 @@ class ConfigService {
  * update the factory to override the entire environment when `environmentOverride` is defined.
  */
 const configServiceFactory = (environmentOveride?: Environment) => {
-  // const MODE = environmentOveride || 'development';
   const env = {
     ...process.env,
-    MODE: environmentOveride,
+    MODE: 'development',
   };
 
   return new ConfigService(env).ensureValues([
