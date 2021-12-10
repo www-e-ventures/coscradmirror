@@ -8,7 +8,7 @@ DATE=`date +"%Y-%m-%d--%H-%M-%S"`
 echo "Date: $DATE"
 
 arangodump \
---output-directory "$ARANGO_DOCKER_VOLUME_DESTINATION/arango/database-backup/$DATE" \
+--output-directory "$ARANGO_DOCKER_VOLUME_SCRIPTS_DIR/database-backup/$DATE" \
 --server.database $ARANGO_DB_NAME \
 --server.username $ARANGO_DB_USER \
 --server.password $ARANGO_DB_USER_PASSWORD
