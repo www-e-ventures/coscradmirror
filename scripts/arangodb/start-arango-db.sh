@@ -15,6 +15,17 @@ set -e
 # Load path and script vars
 . ./scripts/arangodb/arango_setup_vars.sh
 
+# Register setup mode
+if [ $1 ]; then
+  SETUP_MODE=$1
+  export SETUP_MODE;
+else
+  echo "No setup mode input argument supplied.  Accepted: dev | staging | prod";
+fi
+
+echo "Setup mode: $SETUP_MODE";
+printenv | grep "SETUP";
+
 PROJECT_ROOT_PATH="$PWD";
 echo "PROJECT_ROOT_PATH: $PROJECT_ROOT_PATH"
 
@@ -100,8 +111,3 @@ do
      sleep 1
    fi
 done
-
-wait
-
-echo "Loading Data into Collections"
-sudo -u root docker exec -it $ARANGO_DB_SERVER $DB_DATA_LOAD_SCRIPT
