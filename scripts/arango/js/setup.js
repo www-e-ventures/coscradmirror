@@ -53,9 +53,15 @@ if (process.env.SETUP_MODE == "development") {
     // Create edges
     fromCollection.forEach(fromId => {
       toCollection.forEach(toId => {
-        const query = `INSERT { _from: "${fromId}", _to: "${toId}" } INTO ${edgeConfig.edge_collection}`;
-        // print('query: ', query);
-        db._query(query);
+        const random = Math.round(Math.random());
+        if (random == 1) {
+          const query = `INSERT { _from: "${fromId}", _to: "${toId}" } INTO ${edgeConfig.edge_collection}`;
+          print('query: ', query);
+          db._query(query);
+        }
+        else {
+          print(`No insert: random = ${random}`);
+        }
       })
     })
   });
