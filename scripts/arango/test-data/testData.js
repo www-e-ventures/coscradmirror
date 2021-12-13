@@ -1,3 +1,28 @@
+
+const dbCollections = [
+  {
+    "collectionName": "terms",
+    "type": "document"
+  },
+  {
+    "collectionName": "vocabulary_lists",
+    "type": "document"
+  },
+  {
+    "collectionName": "terms_to_vocabulary_lists",
+    "type": "edge"
+  }
+];
+
+const testEdgeConfig = [
+  {
+    "edge_collection": "terms_to_vocabulary_lists",
+    "from_collection": "terms",
+    "to_collection": "vocabulary_lists",
+    "additional_fields": "order_num"
+  }
+];
+
 const testData = [
   {
     "collection": "terms",
@@ -72,4 +97,4 @@ const testData = [
       }
     ]
   }
-]
+];

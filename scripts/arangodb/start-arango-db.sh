@@ -37,9 +37,9 @@ fi
 
 echo "Reloading setup scripts directory for ArangoDB";
 
-if [ -d "$ARANGO_DOCKER_LOCAL_DIR/scripts/arango" ]; then
+if [ -d "$ARANGO_DOCKER_LOCAL_DIR/arango" ]; then
   echo "Deleting existing arango scripts directory in $ARANGO_DOCKER_LOCAL_DIR"
-  sudo -u root rm -rf "$ARANGO_DOCKER_LOCAL_DIR/scripts/arango"
+  sudo -u root rm -rf "$ARANGO_DOCKER_LOCAL_DIR/arango"
 fi
 
 # Copy Arango Setup Scripts to local share location

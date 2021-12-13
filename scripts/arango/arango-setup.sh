@@ -6,10 +6,10 @@ PASSWORD=$ARANGO_ROOT_PASSWORD
 
 if [ $1 = "test_connection" ];
 then
-  ARANGOSH_SCRIPT="check-arangosh-connection.js";
+  ARANGOSH_SCRIPT="js/check-arangosh-connection.js";
 elif [ $1 = "load_collections" ];
 then
-  ARANGOSH_SCRIPT="setup.js";
+  ARANGOSH_SCRIPT="js/setup.js";
 fi
 
 # Connect to arangodb and run the arangosh setup script to load data
