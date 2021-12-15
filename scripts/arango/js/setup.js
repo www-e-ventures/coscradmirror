@@ -7,6 +7,10 @@ users.save(process.env.ARANGO_DB_USER, process.env.ARANGO_DB_USER_PASSWORD);
 db._createDatabase(process.env.ARANGO_DB_NAME);
 users.grantDatabase(process.env.ARANGO_DB_USER, process.env.ARANGO_DB_NAME, 'rw');
 
+// Haida Stories DB - Temporary
+db._createDatabase('haidastories');
+users.grantDatabase('haida', 'haidastories', 'rw');
+
 db._useDatabase(process.env.ARANGO_DB_NAME);
 
 // TODO load this from separate file and link with app's list of db references
