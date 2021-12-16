@@ -8,8 +8,11 @@ db._createDatabase(process.env.ARANGO_DB_NAME);
 users.grantDatabase(process.env.ARANGO_DB_USER, process.env.ARANGO_DB_NAME, 'rw');
 
 // Haida Stories DB - Temporary
-db._createDatabase('haidastories');
-users.grantDatabase('haida', 'haidastories', 'rw');
+print('haida user:', process.env.ARANGO_DB_HAIDA_USER);
+users.save(process.env.ARANGO_DB_HAIDA_USER, process.env.ARANGO_DB_HAIDA_USER_PASSWORD);
+db._createDatabase(process.env.ARANGO_DB_NAME_HAIDA);
+users.grantDatabase(process.env.ARANGO_DB_HAIDA_USER, process.env.ARANGO_DB_NAME_HAIDA, 'rw');
+// End temp Haida Setup
 
 db._useDatabase(process.env.ARANGO_DB_NAME);
 
