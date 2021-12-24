@@ -3,6 +3,7 @@ import { Maybe } from 'apps/api/src/lib/types/maybe';
 import { isNotFound, notFound } from 'apps/api/src/lib/types/not-found';
 import { CollectionNameAndModels } from 'apps/api/src/test-data/test-data-index';
 import { Database } from 'arangojs';
+import { AqlQuery } from 'arangojs/aql';
 import { isArangoDatabase } from 'arangojs/database';
 import { Entity } from '../../domain/models/entity';
 import { PartialDTO } from '../../types/partial-dto';
@@ -61,10 +62,12 @@ export class ArangoDatabase implements IDatabase {
 
     const bindVars = {};
 
-    const cursor = await this.#db.query({
+    const aqlQuery: AqlQuery = {
       query,
       bindVars,
-    });
+    };
+
+    const cursor = await this.#db.query(aqlQuery);
 
     if (cursor.count === 0) return [];
 

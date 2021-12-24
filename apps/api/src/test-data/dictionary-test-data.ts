@@ -80,12 +80,6 @@ export const buildDictionaryTestData = (): CollectionNameAndModels<
         ],
         variables: [],
       },
-      // Vocabulary List 3
-      {
-        nameEnglish: 'test VL ENG- 3 no chil name',
-        entries: [],
-        variables: [],
-      },
     ],
   },
 ];

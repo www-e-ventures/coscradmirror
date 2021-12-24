@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { configServiceFactory } from '../config/config.service';
 import { DomainServicesModule } from '../domain/services/domain-services.module';
 import { TermService } from '../domain/services/term.service';
 import { VocabularyListService } from '../domain/services/vocabulary-list.service';
@@ -14,7 +13,8 @@ import { VocabularyListController } from './controllers/vocabulary-list.controll
 @Module({
   imports: [
     ConfigModule.forRoot({
-      load: [configServiceFactory],
+      envFilePath: '.env',
+      cache: false,
     }),
     DomainServicesModule,
   ],

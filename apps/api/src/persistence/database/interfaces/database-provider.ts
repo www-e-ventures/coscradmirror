@@ -3,7 +3,7 @@ import { IDatabase } from './database';
 import { IDatabaseForCollection } from './database-for-collection';
 
 export interface IDatabaseProvider {
-  getDBInstance: (shouldInitialize: boolean) => Promise<IDatabase>;
+  getDBInstance: () => Promise<IDatabase>;
 
   getDatabaseForCollection: <TEntity extends Entity>(
     collectionId: string
