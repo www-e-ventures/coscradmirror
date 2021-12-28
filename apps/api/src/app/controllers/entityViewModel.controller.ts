@@ -8,6 +8,7 @@ import { Maybe } from '../../lib/types/maybe';
 import { isNotFound, NotFound } from '../../lib/types/not-found';
 import { RepositoryProvider } from '../../persistence/repositories/repository.provider';
 import buildViewModelForEntity from '../../view-models/buildViewModelForEntity/buildViewModelForEntity';
+import { buildAllEntityDescriptions } from '../../view-models/entityDescriptions/buildAllEntityDescriptions';
 import httpStatusCodes from '../constants/httpStatusCodes';
 
 type HasEntityId = {
@@ -29,7 +30,7 @@ const findEntityById = <TEntity extends HasEntityId = Entity>(
   return searchResult;
 };
 
-@Controller('entity')
+@Controller('entities')
 export class EntityViewModelController {
   constructor(private readonly repositoryProvider: RepositoryProvider) {}
 
@@ -68,5 +69,10 @@ export class EntityViewModelController {
     if (isNotFound(result)) return res.sendStatus(httpStatusCodes.notFound);
 
     res.status(httpStatusCodes.ok).send(result);
+  }
+
+  @Get('descriptions')
+  getAllEntityDescriptions() {
+    return buildAllEntityDescriptions();
   }
 }
