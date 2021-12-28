@@ -7,6 +7,7 @@ import { DatabaseProvider } from '../persistence/database/database.provider';
 import { RepositoryProvider } from '../persistence/repositories/repository.provider';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { EntityViewModelController } from './controllers/entityViewModel.controller';
 import { TermController } from './controllers/term.controller';
 import { VocabularyListController } from './controllers/vocabulary-list.controller';
 
@@ -18,7 +19,12 @@ import { VocabularyListController } from './controllers/vocabulary-list.controll
     }),
     DomainServicesModule,
   ],
-  controllers: [AppController, TermController, VocabularyListController],
+  controllers: [
+    AppController,
+    TermController,
+    VocabularyListController,
+    EntityViewModelController,
+  ],
   providers: [
     AppService,
     TermService,

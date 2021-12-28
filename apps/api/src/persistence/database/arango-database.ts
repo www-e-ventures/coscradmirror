@@ -1,6 +1,6 @@
 import { AllCreateEntityDtosUnion } from 'apps/api/src/domain/types/all-entities';
 import { Maybe } from 'apps/api/src/lib/types/maybe';
-import { isNotFound, notFound } from 'apps/api/src/lib/types/not-found';
+import { isNotFound, NotFound } from 'apps/api/src/lib/types/not-found';
 import { CollectionNameAndModels } from 'apps/api/src/test-data/test-data-index';
 import { Database } from 'arangojs';
 import { AqlQuery } from 'arangojs/aql';
@@ -32,7 +32,7 @@ export class ArangoDatabase implements IDatabase {
   ): Promise<Maybe<TCreateEntityDto>> => {
     const allEntities = await this.fetchMany<TCreateEntityDto>(collectionName);
 
-    if (allEntities.length === 0) return notFound;
+    if (allEntities.length === 0) return NotFound;
 
     const searchId = `${collectionName}/${id}`;
 
@@ -44,7 +44,7 @@ export class ArangoDatabase implements IDatabase {
 
     const searchResult = allEntities.find(doIdsMatch(searchId));
 
-    return searchResult || notFound;
+    return searchResult || NotFound;
   };
 
   /**
@@ -176,7 +176,7 @@ export class ArangoDatabase implements IDatabase {
   #getKeyOfDocument = <TCreateEntityDto>(
     document: ArangoDTO<TCreateEntityDto>
   ): Maybe<string> =>
-    typeof document._key === 'string' ? document._key : notFound;
+    typeof document._key === 'string' ? document._key : NotFound;
 
   #doesCollectionExist = async (collectionName: string): Promise<boolean> =>
     this.#db

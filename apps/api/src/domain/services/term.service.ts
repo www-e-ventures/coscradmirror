@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { isNotFound, notFound } from '../../lib/types/not-found';
+import { isNotFound, NotFound } from '../../lib/types/not-found';
 import { RepositoryProvider } from '../../persistence/repositories/repository.provider';
 import { PartialDTO } from '../../types/partial-dto';
 import { Term } from '../models/term/entities/term.entity';
@@ -42,7 +42,7 @@ export class TermService {
   async findOne(id: string) {
     const searchResult = await this.#termRepository.fetchById(id);
 
-    if (isNotFound(searchResult)) return notFound;
+    if (isNotFound(searchResult)) return NotFound;
 
     return searchResult;
   }

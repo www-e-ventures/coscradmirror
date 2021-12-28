@@ -1,4 +1,4 @@
-import { Term } from '../domain/models/term/entities/term.entity';
+import { Term } from 'apps/api/src/domain/models/term/entities/term.entity';
 
 const baseURL = `https://be.tsilhqotinlanguage.ca:3003/download?id=`;
 

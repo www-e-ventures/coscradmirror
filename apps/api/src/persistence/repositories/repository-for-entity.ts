@@ -2,7 +2,7 @@ import { Entity } from '../../domain/models/entity';
 import { IRepositoryForEntity } from '../../domain/repositories/interfaces/repository-for-entity';
 import { EntityId } from '../../domain/types/entity-id';
 import { Maybe } from '../../lib/types/maybe';
-import { isNotFound, notFound } from '../../lib/types/not-found';
+import { isNotFound, NotFound } from '../../lib/types/not-found';
 import { PartialDTO } from '../../types/partial-dto';
 import { ArangoDatabaseForCollection } from '../database/arango-database-for-collection';
 import { DatabaseProvider } from '../database/database.provider';
@@ -41,7 +41,7 @@ export class RepositoryForEntity<TEntity extends Entity>
       await this.#arangoDatabaseForEntitysCollection.fetchById(id);
 
     return isNotFound(searchResultForDTO)
-      ? notFound
+      ? NotFound
       : this.#instanceFactory(mapDatabaseDTOToEntityDTO(searchResultForDTO));
   }
 

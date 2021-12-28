@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { isNotFound, notFound } from '../../lib/types/not-found';
+import { isNotFound, NotFound } from '../../lib/types/not-found';
 import { RepositoryProvider } from '../../persistence/repositories/repository.provider';
 import { PartialDTO } from '../../types/partial-dto';
 import { IRepositoryForEntity } from '../repositories/interfaces/repository-for-entity';
@@ -45,7 +45,7 @@ export class VocabularyListService {
   async findOne(id: string) {
     const searchResult = await this.#vocabularyListRepository.fetchById(id);
 
-    if (isNotFound(searchResult)) return notFound;
+    if (isNotFound(searchResult)) return NotFound;
 
     return searchResult;
   }

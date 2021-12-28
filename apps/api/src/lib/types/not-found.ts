@@ -1,6 +1,6 @@
-export const notFound: unique symbol = Symbol('notFound');
+export const NotFound: unique symbol = Symbol('notFound');
 
-export type NotFound = typeof notFound;
+export type NotFound = typeof NotFound;
 
 export const isNotFound = (input: unknown): input is NotFound =>
-  input === notFound;
+  input === NotFound;

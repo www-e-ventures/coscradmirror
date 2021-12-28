@@ -10,9 +10,9 @@ import {
 import { TermService } from '../../domain/services/term.service';
 import { VocabularyListService } from '../../domain/services/vocabulary-list.service';
 import { VocabularyList } from '../../domain/vocabulary-list/entities/vocabulary-list.entity';
-import { isNotFound, notFound } from '../../lib/types/not-found';
+import { isNotFound, NotFound } from '../../lib/types/not-found';
 import { PartialDTO } from '../../types/partial-dto';
-import { VocabularyListViewModel } from '../../view-models/vocabulary-list-view-model';
+import { VocabularyListViewModel } from '../../view-models/buildViewModelForEntity/viewModels';
 
 @Controller('vocabulary-lists')
 export class VocabularyListController {
@@ -50,7 +50,7 @@ export class VocabularyListController {
       this.vocabularyListService.findOne(id),
       this.termService.findAll(),
     ]).then(([vocabularyList, allTerms]) => {
-      if (isNotFound(vocabularyList)) return notFound;
+      if (isNotFound(vocabularyList)) return NotFound;
 
       return new VocabularyListViewModel(vocabularyList, allTerms);
     });

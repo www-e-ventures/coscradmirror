@@ -11,7 +11,7 @@ import { Term } from '../../domain/models/term/entities/term.entity';
 import { TermService } from '../../domain/services/term.service';
 import { isNotFound } from '../../lib/types/not-found';
 import { PartialDTO } from '../../types/partial-dto';
-import { TermViewModel } from '../../view-models/term-view-model';
+import { TermViewModel } from '../../view-models/buildViewModelForEntity/viewModels';
 
 @Controller('terms')
 export class TermController {

@@ -1,10 +1,10 @@
-import { Term } from '../domain/models/term/entities/term.entity';
-import { EntityId } from '../domain/types/entity-id';
-import { VocabularyList } from '../domain/vocabulary-list/entities/vocabulary-list.entity';
-import { VocabularyListVariable } from '../domain/vocabulary-list/types/vocabulary-list-variable';
-import { VocabularyListVariableValue } from '../domain/vocabulary-list/types/vocabulary-list-variable-value';
-import { notFound } from '../lib/types/not-found';
-import { TermViewModel } from './term-view-model';
+import { Term } from '../../../domain/models/term/entities/term.entity';
+import { EntityId } from '../../../domain/types/entity-id';
+import { VocabularyList } from '../../../domain/vocabulary-list/entities/vocabulary-list.entity';
+import { VocabularyListVariable } from '../../../domain/vocabulary-list/types/vocabulary-list-variable';
+import { VocabularyListVariableValue } from '../../../domain/vocabulary-list/types/vocabulary-list-variable-value';
+import { NotFound } from '../../../lib/types/not-found';
+import { TermViewModel } from './TermViewModel';
 
 type VocabularyListEntryViewModel = {
   term: TermViewModel;
@@ -36,11 +36,11 @@ export class VocabularyListViewModel {
 
     const newEntries = (entries || [])
       .map(({ termId, variableValues }) => ({
-        term: allTerms.find((term) => term.id === termId) || notFound,
+        term: allTerms.find((term) => term.id === termId) || NotFound,
         variableValues,
       }))
       .filter(
-        ({ term }) => term !== notFound
+        ({ term }) => term !== NotFound
       ) as unknown as VocabularyListEntryViewModel[];
 
     this.entries = newEntries;
