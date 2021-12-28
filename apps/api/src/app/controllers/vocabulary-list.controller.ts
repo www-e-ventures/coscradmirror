@@ -7,9 +7,9 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { Term } from '../../domain/models/term/entities/term.entity';
 import { TermService } from '../../domain/services/term.service';
 import { VocabularyListService } from '../../domain/services/vocabulary-list.service';
+import { VocabularyList } from '../../domain/vocabulary-list/entities/vocabulary-list.entity';
 import { isNotFound, notFound } from '../../lib/types/not-found';
 import { PartialDTO } from '../../types/partial-dto';
 import { VocabularyListViewModel } from '../../view-models/vocabulary-list-view-model';
@@ -22,12 +22,12 @@ export class VocabularyListController {
   ) {}
 
   @Post()
-  create(@Body() createTermDto: PartialDTO<Term>) {
-    return this.vocabularyListService.create(createTermDto);
+  create(@Body() createVocabularyListDto: PartialDTO<VocabularyList>) {
+    return this.vocabularyListService.create(createVocabularyListDto);
   }
 
   @Post('many')
-  createMany(@Body() createTermDtos: PartialDTO<Term>[]) {
+  createMany(@Body() createTermDtos: PartialDTO<VocabularyList>[]) {
     return this.vocabularyListService.createMany(createTermDtos);
   }
 
@@ -57,8 +57,11 @@ export class VocabularyListController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTermDto: PartialDTO<Term>) {
-    return this.vocabularyListService.update(id, updateTermDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateVocabularyListDto: PartialDTO<VocabularyList>
+  ) {
+    return this.vocabularyListService.update(id, updateVocabularyListDto);
   }
 
   @Delete(':id')

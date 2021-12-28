@@ -1,11 +1,14 @@
 import isStringWithNonzeroLength from 'apps/api/src/lib/utilities/isStringWithNonzeroLength';
 import { PartialDTO } from 'apps/api/src/types/partial-dto';
 import { Entity } from '../../models/entity';
+import { entityTypes } from '../../types/entityType';
 import { determineAllMissingRequiredProperties } from '../../utilities/validation/determine-all-missing-required-properties';
 import { VocabularyListVariable } from '../types/vocabulary-list-variable';
 import { VocabularyListEntry } from '../vocabulary-list-entry';
 
 export class VocabularyList extends Entity {
+  readonly type = entityTypes.vocabularyList;
+
   readonly name?: string;
 
   readonly nameEnglish?: string;

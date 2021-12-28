@@ -1,6 +1,8 @@
 import { PartialDTO } from 'apps/api/src/types/partial-dto';
+import { EntityType } from '../types/entityType';
 import { isNullOrUndefined } from '../utilities/validation/is-null-or-undefined';
 import { EntityId } from './types/entity-id';
+import { EntityCompositeIdentifier } from './types/entityCompositeIdentifier';
 
 // TODO Extract to a separate location
 const isValidStringWithLength = (input: unknown): input is string =>
@@ -16,10 +18,10 @@ const isValidStringWithLength = (input: unknown): input is string =>
 const isValidEntityId = (input: unknown): input is EntityId =>
   isValidStringWithLength(input);
 
-export class Entity {
+export abstract class Entity {
   readonly id: EntityId;
 
-  readonly type: string;
+  abstract readonly type: EntityType;
 
   readonly published: boolean;
 
@@ -33,6 +35,16 @@ export class Entity {
     this.published = typeof dto.published === 'boolean' ? dto.published : false;
   }
 
+  getCompositeIdentifier = (): EntityCompositeIdentifier => ({
+    type: this.type,
+    id: this.id,
+  });
+
+  /**
+   * TODO consider moving this to a `Serializable` mixin. There may be cases
+   * where we want this behaviour on a non domain-model class without the
+   * inheritance baggage.
+   *  */
   toDTO<TEntity extends Entity>(this: TEntity): PartialDTO<TEntity> {
     return JSON.parse(JSON.stringify(this));
   }
@@ -41,6 +53,10 @@ export class Entity {
    * TODO develop a general pattern \ directory structure for validation \ validators.
    * One idea: Return a symbol Valid | Errors[] from a validator instead of a
    * boolean flag.
+   *
+   * We may break the validators out into separate files. Then we will validate
+   * a DTO before passing it to the constructor in our `instance factory` methods
+   * in the mapping layer for the repositories.
    *  */
   #validateDTO = (dto: unknown): dto is PartialDTO<Entity> => {
     const { id } = dto as PartialDTO<Entity>;
