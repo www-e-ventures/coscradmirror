@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 import { DomainServicesModule } from '../domain/services/domain-services.module';
 import { TermService } from '../domain/services/term.service';
 import { VocabularyListService } from '../domain/services/vocabulary-list.service';
@@ -18,6 +20,10 @@ import { VocabularyListController } from './controllers/vocabulary-list.controll
       cache: false,
     }),
     DomainServicesModule,
+    ServeStaticModule.forRoot({
+      // TODO get this from the config
+      rootPath: join(__dirname, '.', 'public'),
+    }),
   ],
   controllers: [
     AppController,
