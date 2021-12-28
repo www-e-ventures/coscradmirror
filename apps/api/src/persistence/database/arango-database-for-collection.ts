@@ -4,8 +4,8 @@ import { EntityId } from '../../domain/types/entity-id';
 import { Maybe } from '../../lib/types/maybe';
 import { PartialDTO } from '../../types/partial-dto';
 import { ArangoDatabase } from './arango-database';
-import { ArangoCollectionID } from './get-arango-collection-ids';
 import { IDatabaseForCollection } from './interfaces/database-for-collection';
+import { ArangoCollectionID } from './types/ArangoCollectionId';
 import { DatabaseDTO } from './utilities/mapEntityDTOToDatabaseDTO';
 
 /**

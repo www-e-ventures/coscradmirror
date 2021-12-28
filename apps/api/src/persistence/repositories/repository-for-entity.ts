@@ -6,7 +6,7 @@ import { isNotFound, notFound } from '../../lib/types/not-found';
 import { PartialDTO } from '../../types/partial-dto';
 import { ArangoDatabaseForCollection } from '../database/arango-database-for-collection';
 import { DatabaseProvider } from '../database/database.provider';
-import { ArangoCollectionID } from '../database/get-arango-collection-ids';
+import { ArangoCollectionID } from '../database/types/ArangoCollectionId';
 import mapDatabaseDTOToEntityDTO from '../database/utilities/mapDatabaseDTOToEntityDTO';
 import mapEntityDTOToDatabaseDTO from '../database/utilities/mapEntityDTOToDatabaseDTO';
 
@@ -71,5 +71,7 @@ export class RepositoryForEntity<TEntity extends Entity>
     return this.#arangoDatabaseForEntitysCollection.createMany(createDTOs);
   }
 
-  async update() {}
+  async update() {
+    throw new Error(`Method not implemented: RepositoryForEntity.update`);
+  }
 }

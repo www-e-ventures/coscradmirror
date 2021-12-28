@@ -1,29 +1,24 @@
+import { EntityType } from '../../domain/types/entityType';
+import { ArangoCollectionID } from './types/ArangoCollectionId';
+
 // TODO [design] Should we tie this to the model constructors?
-const arangoCollectionIDs = {
-  // book: 'books',
+const arangoCollectionIDs: {
+  [k in EntityType]: ArangoCollectionID;
+} = {
   term: 'terms',
   vocabularyList: 'vocabulary_lists',
-} as const;
-
-// TODO export to higher level type utility
-type ValueType<T extends object> = T[keyof T];
-
-export type EntityName = keyof typeof arangoCollectionIDs;
-
-export type ArangoCollectionID = ValueType<typeof arangoCollectionIDs>;
-
-export const getArangoCollectionIDs = () => ({ ...arangoCollectionIDs });
+};
 
 export const getArangoCollectionID = (
-  entityName: EntityName
+  entityType: EntityType
 ): ArangoCollectionID => {
-  if (Object.keys(arangoCollectionIDs).includes(entityName)) {
-    const result = arangoCollectionIDs[entityName];
+  if (Object.keys(arangoCollectionIDs).includes(entityType)) {
+    const result = arangoCollectionIDs[entityType];
 
     return result;
   }
 
   throw new Error(
-    `Cannot identify collection ID for unsupported entity: ${entityName}`
+    `Cannot identify collection ID for unsupported entity: ${entityType}`
   );
 };

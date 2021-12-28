@@ -7,8 +7,8 @@ import {
 } from './arango-connection.provider';
 import { ArangoDatabase } from './arango-database';
 import { ArangoDatabaseForCollection } from './arango-database-for-collection';
-import { ArangoCollectionID } from './get-arango-collection-ids';
 import { IDatabaseProvider } from './interfaces/database-provider';
+import { ArangoCollectionID } from './types/ArangoCollectionId';
 
 // TODO Should we rename this `ArangoDatabaseProvider` ?
 @Injectable()

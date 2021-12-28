@@ -17,7 +17,9 @@ const isValidEntityId = (input: unknown): input is EntityId =>
   isValidStringWithLength(input);
 
 export class Entity {
-  readonly id: string;
+  readonly id: EntityId;
+
+  readonly type: string;
 
   readonly published: boolean;
 
