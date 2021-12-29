@@ -10,8 +10,6 @@ import { RepositoryProvider } from '../persistence/repositories/repository.provi
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { EntityViewModelController } from './controllers/entityViewModel.controller';
-import { TermController } from './controllers/term.controller';
-import { VocabularyListController } from './controllers/vocabulary-list.controller';
 
 @Module({
   imports: [
@@ -25,12 +23,7 @@ import { VocabularyListController } from './controllers/vocabulary-list.controll
       rootPath: join(__dirname, '.', 'public'),
     }),
   ],
-  controllers: [
-    AppController,
-    TermController,
-    VocabularyListController,
-    EntityViewModelController,
-  ],
+  controllers: [AppController, EntityViewModelController],
   providers: [
     AppService,
     TermService,

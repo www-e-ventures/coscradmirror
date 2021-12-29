@@ -1,6 +1,7 @@
 import { Term } from 'apps/api/src/domain/models/term/entities/term.entity';
 import { VocabularyList } from 'apps/api/src/domain/models/vocabulary-list/entities/vocabulary-list.entity';
 import { entityTypes } from 'apps/api/src/domain/types/entityType';
+import { isInternalError } from 'apps/api/src/lib/errors/InternalError';
 import { PartialDTO } from 'apps/api/src/types/partial-dto';
 import { ViewModelBuilderDependencies } from '../buildViewModelForEntity';
 import { VocabularyListViewModel } from '../viewModels';
@@ -20,18 +21,18 @@ export default async ({
     (termDTO: PartialDTO<Term>) => new Term(termDTO)
   );
 
-  // TODO remove try \ catch once we add validation layer
-  try {
-    const allTerms = await termRepository.fetchMany();
+  const allTerms = await termRepository.fetchMany().then((allTerms) =>
+    // We filter out invalid DTOs in case they occur
+    allTerms.filter((term): term is Term => !isInternalError(term))
+  );
 
-    return vocabularyListRepository
-      .fetchMany()
-      .then((vocabularyLists) =>
-        vocabularyLists.map(
-          (list) => new VocabularyListViewModel(list, allTerms)
-        )
-      );
-  } catch (error) {
-    return error;
-  }
+  const allVocabularyListViewModels = await vocabularyListRepository
+    .fetchMany()
+    .then((vocabularyLists) =>
+      vocabularyLists
+        .filter((list): list is VocabularyList => !isInternalError(list))
+        .map((list) => new VocabularyListViewModel(list, allTerms))
+    );
+
+  return allVocabularyListViewModels;
 };

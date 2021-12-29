@@ -4,13 +4,16 @@ import { EntityId } from '../../domain/types/entity-id';
 import { Maybe } from '../../lib/types/maybe';
 import { isNotFound, NotFound } from '../../lib/types/not-found';
 import { PartialDTO } from '../../types/partial-dto';
+import { ResultOrError } from '../../types/ResultOrError';
 import { ArangoDatabaseForCollection } from '../database/arango-database-for-collection';
 import { DatabaseProvider } from '../database/database.provider';
 import { ArangoCollectionID } from '../database/types/ArangoCollectionId';
 import mapDatabaseDTOToEntityDTO from '../database/utilities/mapDatabaseDTOToEntityDTO';
 import mapEntityDTOToDatabaseDTO from '../database/utilities/mapEntityDTOToDatabaseDTO';
 
-export type InstanceFactory<TEntity> = (dto: PartialDTO<TEntity>) => TEntity;
+export type InstanceFactory<TEntity> = (
+  dto: PartialDTO<TEntity>
+) => ResultOrError<TEntity>;
 
 /**
  * TODO We need to add error handling. It is especially important that if
@@ -36,7 +39,7 @@ export class RepositoryForEntity<TEntity extends Entity>
     this.#instanceFactory = instanceFactory;
   }
 
-  async fetchById(id: EntityId): Promise<Maybe<TEntity>> {
+  async fetchById(id: EntityId): Promise<ResultOrError<Maybe<TEntity>>> {
     const searchResultForDTO =
       await this.#arangoDatabaseForEntitysCollection.fetchById(id);
 
@@ -45,7 +48,7 @@ export class RepositoryForEntity<TEntity extends Entity>
       : this.#instanceFactory(mapDatabaseDTOToEntityDTO(searchResultForDTO));
   }
 
-  async fetchMany(): Promise<TEntity[]> {
+  async fetchMany(): Promise<ResultOrError<TEntity>[]> {
     return this.#arangoDatabaseForEntitysCollection
       .fetchMany()
       .then((dtos) =>
@@ -54,6 +57,7 @@ export class RepositoryForEntity<TEntity extends Entity>
   }
 
   async getCount(): Promise<number> {
+    // We assume there are no invalid DTOs here- otherwise they are included in count
     return this.#arangoDatabaseForEntitysCollection.getCount();
   }
 

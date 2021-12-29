@@ -1,3 +1,4 @@
+import { ResultOrError } from 'apps/api/src/types/ResultOrError';
 import { Maybe } from '../../../lib/types/maybe';
 import { Entity } from '../../models/entity';
 import { EntityId } from '../../types/entity-id';
@@ -9,13 +10,10 @@ import { EntityId } from '../../types/entity-id';
  * we need to deal with `graph edge` relationships.
  */
 export interface IRepositoryForEntity<TEntity extends Entity> {
-  // TODO we need an abstraction around `db` dependency
-  //   constructor: (db: ?,collectionName: string) => IDatabase;
-
-  fetchById: (id: EntityId) => Promise<Maybe<TEntity>>;
+  fetchById: (id: EntityId) => Promise<ResultOrError<Maybe<TEntity>>>;
 
   // Returns an empty array if none found
-  fetchMany: () => Promise<TEntity[]>;
+  fetchMany: () => Promise<ResultOrError<TEntity>[]>;
 
   getCount: (collectionName: string) => Promise<number>;
 
