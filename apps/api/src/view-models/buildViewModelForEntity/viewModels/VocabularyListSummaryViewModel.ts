@@ -1,5 +1,5 @@
+import { VocabularyList } from '../../../domain/models/vocabulary-list/entities/vocabulary-list.entity';
 import { EntityId } from '../../../domain/types/entity-id';
-import { VocabularyList } from '../../../domain/vocabulary-list/entities/vocabulary-list.entity';
 
 export class VocabularyListSummaryViewModel {
   readonly name?: string;

@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { isNotFound, NotFound } from '../../lib/types/not-found';
 import { RepositoryProvider } from '../../persistence/repositories/repository.provider';
 import { PartialDTO } from '../../types/partial-dto';
+import { VocabularyList } from '../models/vocabulary-list/entities/vocabulary-list.entity';
 import { IRepositoryForEntity } from '../repositories/interfaces/repository-for-entity';
-import { VocabularyList } from '../vocabulary-list/entities/vocabulary-list.entity';
 /**
  * TODO Refactor to use repository pattern and a `vocabularyListRepositoryProvider`.
  * Adhere to DDD and decouple domain from persistence layer.

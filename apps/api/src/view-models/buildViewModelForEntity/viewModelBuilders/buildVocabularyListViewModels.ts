@@ -1,6 +1,6 @@
 import { Term } from 'apps/api/src/domain/models/term/entities/term.entity';
+import { VocabularyList } from 'apps/api/src/domain/models/vocabulary-list/entities/vocabulary-list.entity';
 import { entityTypes } from 'apps/api/src/domain/types/entityType';
-import { VocabularyList } from 'apps/api/src/domain/vocabulary-list/entities/vocabulary-list.entity';
 import { PartialDTO } from 'apps/api/src/types/partial-dto';
 import { ViewModelBuilderDependencies } from '../buildViewModelForEntity';
 import { VocabularyListViewModel } from '../viewModels';

@@ -1,4 +1,4 @@
-import { ValueAndDisplay } from '../../types/value-and-display';
+import { ValueAndDisplay } from '../../../types/value-and-display';
 import { DropboxOrCheckbox } from './dropbox-or-checkbox';
 import { VocabularyListVariableValue } from './vocabulary-list-variable-value';
 

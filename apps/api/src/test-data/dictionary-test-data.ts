@@ -1,5 +1,5 @@
 import { Term } from '../domain/models/term/entities/term.entity';
-import { VocabularyList } from '../domain/vocabulary-list/entities/vocabulary-list.entity';
+import { VocabularyList } from '../domain/models/vocabulary-list/entities/vocabulary-list.entity';
 import { PartialDTO } from '../types/partial-dto';
 import { CollectionNameAndModels } from './test-data-index';
 

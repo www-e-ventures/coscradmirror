@@ -7,9 +7,9 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
+import { VocabularyList } from '../../domain/models/vocabulary-list/entities/vocabulary-list.entity';
 import { TermService } from '../../domain/services/term.service';
 import { VocabularyListService } from '../../domain/services/vocabulary-list.service';
-import { VocabularyList } from '../../domain/vocabulary-list/entities/vocabulary-list.entity';
 import { isNotFound, NotFound } from '../../lib/types/not-found';
 import { PartialDTO } from '../../types/partial-dto';
 import { VocabularyListViewModel } from '../../view-models/buildViewModelForEntity/viewModels';
