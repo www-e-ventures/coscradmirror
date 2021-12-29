@@ -2,12 +2,17 @@ import { InternalError } from '../../lib/errors/InternalError';
 import { PartialDTO } from '../../types/partial-dto';
 import { Entity } from '../models/entity';
 import { Term } from '../models/term/entities/term.entity';
+import { VocabularyList } from '../models/vocabulary-list/entities/vocabulary-list.entity';
 import { EntityType, entityTypes } from '../types/entityType';
 import InvalidTermDTOError from './errors/term/InvalidTermDTOError';
 import TermHasNoTextInAnyLanguageError from './errors/term/TermHasNoTextInAnyLanguageError';
+import InvalidVocabularyListDTOError from './errors/vocabularyList/InvalidVocabularyListDTOError';
+import VocabularyListHasNoEntriesError from './errors/vocabularyList/VocabularyListHasNoEntriesError';
+import VocabularyListHasNoNameInAnyLanguageError from './errors/vocabularyList/VocabularyListHasNoNameInAnyLanguageError';
 import { DomainModelValidator } from './index';
 import termValidator from './termValidator';
 import { Valid } from './Valid';
+import vocabularyListValidator from './vocabularyListValidator';
 
 type DomainModelValidatorTestCase<TEntity extends Entity = Entity> = {
   entityType: EntityType; // TODO correlate this with TEntity
@@ -23,7 +28,24 @@ type DomainModelValidatorTestCase<TEntity extends Entity = Entity> = {
   }[];
 };
 
-const testCases: DomainModelValidatorTestCase<Term>[] = [
+const validVocabularyListDTO: PartialDTO<VocabularyList> = {
+  name: 'vlist name in language',
+  nameEnglish: 'vlist name in English',
+  id: '123',
+  entries: [
+    {
+      termId: 'term123',
+      variableValues: {
+        person: '13',
+      },
+    },
+  ],
+};
+
+const testCases: (
+  | DomainModelValidatorTestCase<Term>
+  | DomainModelValidatorTestCase<VocabularyList>
+)[] = [
   {
     entityType: entityTypes.term,
     validator: termValidator,
@@ -45,6 +67,57 @@ const testCases: DomainModelValidatorTestCase<Term>[] = [
         expectedError: new InvalidTermDTOError('123', [
           new TermHasNoTextInAnyLanguageError('123'),
         ]),
+      },
+    ],
+  },
+  {
+    entityType: entityTypes.vocabularyList,
+    validator: vocabularyListValidator,
+    validCases: [
+      {
+        dto: {
+          name: 'vlist name in language',
+          nameEnglish: 'vlist name in English',
+          id: '123',
+          entries: [
+            {
+              termId: 'term123',
+              variableValues: {
+                person: '13',
+              },
+            },
+          ],
+        },
+      },
+    ],
+    invalidCases: [
+      {
+        description: 'vocabulary list has no name in either language',
+        invalidDTO: {
+          id: '1234',
+          entries: [
+            {
+              termId: 'term123',
+              variableValues: {
+                person: '13',
+              },
+            },
+          ],
+        },
+        expectedError: new InvalidVocabularyListDTOError('1234', [
+          new VocabularyListHasNoNameInAnyLanguageError('1234'),
+        ]),
+      },
+      {
+        description: 'vocabulary list has no entries',
+        invalidDTO: {
+          ...validVocabularyListDTO,
+          entries: [],
+        },
+        expectedError: new InvalidVocabularyListDTOError(
+          validVocabularyListDTO.id,
+          [new VocabularyListHasNoEntriesError(validVocabularyListDTO.id)]
+        ),
       },
     ],
   },
