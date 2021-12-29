@@ -1,7 +1,6 @@
 import { Term } from 'apps/api/src/domain/models/term/entities/term.entity';
 import { entityTypes } from 'apps/api/src/domain/types/entityType';
 import { isInternalError } from 'apps/api/src/lib/errors/InternalError';
-import { PartialDTO } from 'apps/api/src/types/partial-dto';
 import { ViewModelBuilderDependencies } from '../buildViewModelForEntity';
 import { TermViewModel } from '../viewModels';
 
@@ -9,10 +8,7 @@ import { TermViewModel } from '../viewModels';
 export default async ({
   repositoryProvider,
 }: ViewModelBuilderDependencies): Promise<TermViewModel[]> => {
-  const termRepository = repositoryProvider.forEntity<Term>(
-    entityTypes.term,
-    (termDTO: PartialDTO<Term>) => new Term(termDTO)
-  );
+  const termRepository = repositoryProvider.forEntity<Term>(entityTypes.term);
 
   const searchResult = await termRepository.fetchMany();
 

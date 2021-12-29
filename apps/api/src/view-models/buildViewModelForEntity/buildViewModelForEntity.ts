@@ -13,7 +13,6 @@ export default (
 ) => {
   switch (entityType) {
     case entityTypes.term:
-      console.log('building term view models');
       return buildTermViewModels(dependencies);
 
     case entityTypes.vocabularyList:

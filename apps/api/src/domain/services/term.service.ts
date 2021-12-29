@@ -4,6 +4,7 @@ import { RepositoryProvider } from '../../persistence/repositories/repository.pr
 import { PartialDTO } from '../../types/partial-dto';
 import { Term } from '../models/term/entities/term.entity';
 import { IRepositoryForEntity } from '../repositories/interfaces/repository-for-entity';
+import { entityTypes } from '../types/entityType';
 /**
  * TODO Refactor to use repository pattern and a `TermRepositoryProvider`.
  * Adhere to DDD and decouple domain from persistence layer.
@@ -20,8 +21,7 @@ export class TermService {
 
   constructor(private repositoryProvider: RepositoryProvider) {
     this.#termRepository = this.repositoryProvider.forEntity<Term>(
-      'term',
-      (dto: PartialDTO<Term>) => new Term(dto)
+      entityTypes.term
     );
   }
 

@@ -4,6 +4,7 @@ import { RepositoryProvider } from '../../persistence/repositories/repository.pr
 import { PartialDTO } from '../../types/partial-dto';
 import { VocabularyList } from '../models/vocabulary-list/entities/vocabulary-list.entity';
 import { IRepositoryForEntity } from '../repositories/interfaces/repository-for-entity';
+import { entityTypes } from '../types/entityType';
 /**
  * TODO Refactor to use repository pattern and a `vocabularyListRepositoryProvider`.
  * Adhere to DDD and decouple domain from persistence layer.
@@ -21,8 +22,7 @@ export class VocabularyListService {
   constructor(private repositoryProvider: RepositoryProvider) {
     this.#vocabularyListRepository =
       this.repositoryProvider.forEntity<VocabularyList>(
-        'vocabularyList',
-        (dto: PartialDTO<VocabularyList>) => new VocabularyList(dto)
+        entityTypes.vocabularyList
       );
   }
 
