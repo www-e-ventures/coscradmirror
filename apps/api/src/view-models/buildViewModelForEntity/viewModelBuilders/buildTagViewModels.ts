@@ -7,7 +7,7 @@ import { TagViewModel } from '../viewModels/TagViewModel';
 export default async ({
   repositoryProvider,
 }: ViewModelBuilderDependencies): Promise<TagViewModel[]> => {
-  const tagRepository = repositoryProvider.forEntity<Tag>(entityTypes.term);
+  const tagRepository = repositoryProvider.forEntity<Tag>(entityTypes.tag);
 
   const searchResult = await tagRepository.fetchMany();
 

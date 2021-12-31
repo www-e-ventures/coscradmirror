@@ -9,6 +9,7 @@ import { DatabaseProvider } from '../persistence/database/database.provider';
 import { RepositoryProvider } from '../persistence/repositories/repository.provider';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AddTagController } from './controllers/addTag.controller';
 import { EntityViewModelController } from './controllers/entityViewModel.controller';
 
 @Module({
@@ -23,7 +24,7 @@ import { EntityViewModelController } from './controllers/entityViewModel.control
       rootPath: join(__dirname, '.', 'public'),
     }),
   ],
-  controllers: [AppController, EntityViewModelController],
+  controllers: [AppController, EntityViewModelController, AddTagController],
   providers: [
     AppService,
     TermService,

@@ -7,6 +7,9 @@ export class Tag extends Entity {
 
   text: string;
 
+  // Draft mode not currently supported for tags
+  published = true;
+
   constructor(dto: PartialDTO<Tag>) {
     super(dto);
 
