@@ -3,6 +3,7 @@ import { ValueType } from '../../lib/types/valueType';
 export const entityTypes = {
   term: 'term',
   vocabularyList: 'vocabularyList',
+  tag: 'tag',
 } as const;
 
 export type EntityType = ValueType<typeof entityTypes>;

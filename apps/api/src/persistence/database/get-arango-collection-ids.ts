@@ -7,6 +7,7 @@ const arangoCollectionIDs: {
 } = {
   term: 'terms',
   vocabularyList: 'vocabulary_lists',
+  tag: 'tags',
 };
 
 export const getArangoCollectionID = (

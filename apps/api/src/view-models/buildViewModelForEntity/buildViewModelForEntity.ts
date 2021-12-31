@@ -1,5 +1,6 @@
 import { EntityType, entityTypes } from '../../domain/types/entityType';
 import { RepositoryProvider } from '../../persistence/repositories/repository.provider';
+import buildTagViewModels from './viewModelBuilders/buildTagViewModels';
 import buildTermViewModels from './viewModelBuilders/buildTermViewModels';
 import buildVocabularyListViewModels from './viewModelBuilders/buildVocabularyListViewModels';
 
@@ -17,6 +18,9 @@ export default (
 
     case entityTypes.vocabularyList:
       return buildVocabularyListViewModels(dependencies);
+
+    case entityTypes.tag:
+      return buildTagViewModels(dependencies);
 
     default:
       const exhaustiveCheck: never = entityType;

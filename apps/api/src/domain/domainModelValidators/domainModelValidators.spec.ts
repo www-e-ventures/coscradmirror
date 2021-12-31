@@ -1,15 +1,19 @@
 import { InternalError } from '../../lib/errors/InternalError';
 import { PartialDTO } from '../../types/partial-dto';
 import { Entity } from '../models/entity';
+import { Tag } from '../models/tag/tag.entity';
 import { Term } from '../models/term/entities/term.entity';
 import { VocabularyList } from '../models/vocabulary-list/entities/vocabulary-list.entity';
 import { EntityType, entityTypes } from '../types/entityType';
+import InvalidEntityDTOError from './errors/InvalidEntityDTOError';
+import TagHasNoTextError from './errors/tag/TagHasNoTextError';
 import InvalidTermDTOError from './errors/term/InvalidTermDTOError';
 import TermHasNoTextInAnyLanguageError from './errors/term/TermHasNoTextInAnyLanguageError';
 import InvalidVocabularyListDTOError from './errors/vocabularyList/InvalidVocabularyListDTOError';
 import VocabularyListHasNoEntriesError from './errors/vocabularyList/VocabularyListHasNoEntriesError';
 import VocabularyListHasNoNameInAnyLanguageError from './errors/vocabularyList/VocabularyListHasNoNameInAnyLanguageError';
 import { DomainModelValidator } from './index';
+import tagValidator from './tagValidator';
 import termValidator from './termValidator';
 import { Valid } from './Valid';
 import vocabularyListValidator from './vocabularyListValidator';
@@ -42,9 +46,15 @@ const validVocabularyListDTO: PartialDTO<VocabularyList> = {
   ],
 };
 
+const validTagDTO: PartialDTO<Tag> = {
+  id: '11',
+  text: 'wardrobe',
+};
+
 const testCases: (
   | DomainModelValidatorTestCase<Term>
   | DomainModelValidatorTestCase<VocabularyList>
+  | DomainModelValidatorTestCase<Tag>
 )[] = [
   {
     entityType: entityTypes.term,
@@ -117,6 +127,29 @@ const testCases: (
         expectedError: new InvalidVocabularyListDTOError(
           validVocabularyListDTO.id,
           [new VocabularyListHasNoEntriesError(validVocabularyListDTO.id)]
+        ),
+      },
+    ],
+  },
+  {
+    entityType: entityTypes.tag,
+    validator: tagValidator,
+    validCases: [
+      {
+        dto: validTagDTO,
+      },
+    ],
+    invalidCases: [
+      {
+        description: 'No text is provided for the tag',
+        invalidDTO: {
+          ...validTagDTO,
+          text: undefined,
+        },
+        expectedError: new InvalidEntityDTOError(
+          entityTypes.tag,
+          validTagDTO.id,
+          [new TagHasNoTextError(validTagDTO.id)]
         ),
       },
     ],
