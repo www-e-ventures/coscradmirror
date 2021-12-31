@@ -1,5 +1,5 @@
 export const Valid = Symbol(
-  'The value has succesfully passed internal validation'
+  'The value has successfully passed internal validation'
 );
 
 // stack the corresponding type
