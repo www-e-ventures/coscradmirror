@@ -1,7 +1,5 @@
-import { AllCreateEntityDtosUnion } from 'apps/api/src/domain/types/all-entities';
 import { Maybe } from 'apps/api/src/lib/types/maybe';
 import { isNotFound, NotFound } from 'apps/api/src/lib/types/not-found';
-import { CollectionNameAndModels } from 'apps/api/src/test-data/test-data-index';
 import { Database } from 'arangojs';
 import { AqlQuery } from 'arangojs/aql';
 import { isArangoDatabase } from 'arangojs/database';
@@ -184,17 +182,4 @@ export class ArangoDatabase implements IDatabase {
       .then((collections) =>
         collections.some((collection) => collection.name === collectionName)
       );
-
-  initializeWithData = async (
-    collectionNamesAndModels: CollectionNameAndModels<AllCreateEntityDtosUnion>[]
-  ): Promise<void[]> =>
-    Promise.all(
-      collectionNamesAndModels.map(async ({ collection, models }) => {
-        if (await this.#doesCollectionExist(collection)) return;
-
-        this.#db.createCollection(collection);
-
-        this.createMany(models, collection);
-      })
-    );
 }
