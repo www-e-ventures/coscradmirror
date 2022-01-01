@@ -1,3 +1,4 @@
+import { writeFileSync } from 'fs';
 import { getValidatorForEntity } from '../domain/domainModelValidators';
 import { Valid } from '../domain/domainModelValidators/Valid';
 import { EntityType, isEntityType } from '../domain/types/entityType';
@@ -44,7 +45,20 @@ describe('buildTestData', () => {
           });
         });
 
-        // TODO write data to JSON
+        const testDataWithCollectionNamesForKeys = Object.entries(
+          testData
+        ).reduce(
+          (acc, [key, value]) => ({
+            ...acc,
+            [getArangoCollectionID(key as EntityType)]: value,
+          }),
+          {}
+        );
+
+        writeFileSync(
+          'testData.json',
+          JSON.stringify(testDataWithCollectionNamesForKeys)
+        );
       });
     });
   });
