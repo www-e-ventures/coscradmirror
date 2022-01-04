@@ -13,20 +13,10 @@ describe('AppController', () => {
   });
 
   describe('getData', () => {
-    it('should return "Welcome to api!"', () => {
+    it('should return "Welcome message."', () => {
       const appController = app.get<AppController>(AppController);
-      expect(appController.getData()).toEqual({
-        filename: 'sample-photo',
-        meta: {},
-        availableFormats: [
-          {
-            format: {
-              mimeType: 'image/jpeg',
-              resolution: 'medium',
-            },
-            url: 'https://cdn.pixabay.com/photo/2021/07/26/22/04/sea-shell-6495338__340.jpg',
-          },
-        ],
+      expect(appController.getWelcomeMessage()).toEqual({
+        message: 'Welcome to the COSCRAD API!',
       });
     });
   });
