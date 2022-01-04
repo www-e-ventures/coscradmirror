@@ -4,6 +4,7 @@ import { Valid } from '../domain/domainModelValidators/Valid';
 import { EntityType, isEntityType } from '../domain/types/entityType';
 import { isNullOrUndefined } from '../domain/utilities/validation/is-null-or-undefined';
 import { getArangoCollectionID } from '../persistence/database/get-arango-collection-ids';
+import mapEntityDTOToDatabaseDTO from '../persistence/database/utilities/mapEntityDTOToDatabaseDTO';
 import buildTestData from './buildTestData';
 describe('buildTestData', () => {
   describe('the resulting test data', () => {
@@ -45,19 +46,21 @@ describe('buildTestData', () => {
           });
         });
 
-        const testDataWithCollectionNamesForKeys = Object.entries(
-          testData
-        ).reduce(
-          (acc, [key, value]) => ({
-            ...acc,
-            [getArangoCollectionID(key as EntityType)]: value,
-          }),
-          {}
-        );
+        const testDataInDatabaseFormat =
+          // Use `collectionNames` not `entityTypes` as keys
+          Object.entries(testData).reduce(
+            (acc, [key, models]) => ({
+              ...acc,
+              [getArangoCollectionID(key as EntityType)]: models.map((model) =>
+                mapEntityDTOToDatabaseDTO(model)
+              ),
+            }),
+            {}
+          );
 
         writeFileSync(
           'testData.json',
-          JSON.stringify(testDataWithCollectionNamesForKeys)
+          JSON.stringify(testDataInDatabaseFormat)
         );
       });
     });
