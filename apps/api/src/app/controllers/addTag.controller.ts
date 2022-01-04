@@ -1,4 +1,5 @@
-import { Controller, Post, Query, Res } from '@nestjs/common';
+import { Controller, Post, Query, Res, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import TagAlreadyExistsError from '../../domain/domainModelValidators/errors/tag/TagAlreadyExistsError';
 import tagValidator from '../../domain/domainModelValidators/tagValidator';
 import { Tag } from '../../domain/models/tag/tag.entity';
@@ -12,6 +13,7 @@ import httpStatusCodes from '../constants/httpStatusCodes';
 export class AddTagController {
   constructor(private readonly repositoryProvider: RepositoryProvider) {}
 
+  @UseGuards(AuthGuard('jwt'))
   @Post()
   async addOneTag(@Res() res, @Query('text') text: string) {
     const tagRepository = this.repositoryProvider.forEntity<Tag>(
@@ -61,6 +63,7 @@ export class AddTagController {
   }
 
   // TODO support update
+  // @UseGuards(AuthGuard('jwt'))
   // @Put()
   // async updateTag(
   //   @Res() res,

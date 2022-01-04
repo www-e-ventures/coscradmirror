@@ -15,6 +15,7 @@ import { EntityViewModelController } from './controllers/entityViewModel.control
   imports: [
     AuthorizationModule,
     ConfigModule.forRoot({
+      isGlobal: true,
       envFilePath: '.env',
       cache: false,
     }),
