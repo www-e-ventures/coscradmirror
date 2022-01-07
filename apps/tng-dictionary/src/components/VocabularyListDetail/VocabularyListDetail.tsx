@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Loading from '../Loading/Loading';
 import './VocabularyListDetail.module.css';
 
 type HasIdAndName = {
@@ -32,7 +33,7 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
   }, [setAppState]);
 
   if(!appState.vocabularyList) return <div>
-    {'Loading ...'}
+    <Loading nameToDisplay={'Vocabulary Lists'}  />
   </div>
 
   return (

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Loading from '../Loading/Loading';
 import './VocabularyListIndex.module.css';
 
 type HasIdAndName = {
@@ -31,11 +32,13 @@ export function VocabularyListIndex(props: VocabularyListIndexProps) {
       }).catch(rej => console.log(rej))
   }, [setAppState]);
 
+  if(!appState.vocabularyLists || appState.vocabularyLists === []) return <Loading nameToDisplay={'All Vocabulary Lists'} />
+
   return (
     <div>
       <h1>Welcome to VocabularyListDetail!</h1>
       {
-        (appState.vocabularyLists as unknown as HasIdAndName[] || []).map((vocabularyList) =><p>
+        (appState.vocabularyLists as unknown as HasIdAndName[]).map((vocabularyList) =><p>
           {`${vocabularyList.id}: ${vocabularyList.name}`}
         </p>)
       }
