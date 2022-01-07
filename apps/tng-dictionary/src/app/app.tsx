@@ -1,3 +1,4 @@
+import VocabularyListDetail from '../components/VocabularyListDetail/VocabularyListDetail';
 import styles from './app.module.css';
 import { Routes } from "react-router-dom";
 import { Route } from 'react-router-dom';
@@ -8,7 +9,8 @@ export function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<VocabularyListIndex />} />
+        <Route path="/vocabularyLists" element={<VocabularyListIndex />} />
+        <Route path="/vocabularyLists/:id" element={<VocabularyListDetail />} />
       </Routes>
     </BrowserRouter>
 
