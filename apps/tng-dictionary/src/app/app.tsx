@@ -1,12 +1,18 @@
 import styles from './app.module.css';
-import NxWelcome from './nx-welcome';
+import { Routes } from "react-router-dom";
+import { Route } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
+import VocabularyListIndex from '../components/VocabularyListIndex/VocabularyListIndex';
 
 export function App() {
   return (
-    <>
-      <NxWelcome title="tng-dictionary" />
-      <div />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<VocabularyListIndex />} />
+      </Routes>
+    </BrowserRouter>
+
+
   );
 }
 
