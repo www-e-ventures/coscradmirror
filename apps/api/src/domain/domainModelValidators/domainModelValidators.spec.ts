@@ -39,9 +39,10 @@ const validVocabularyListDTO: PartialDTO<VocabularyList> = {
   entries: [
     {
       termId: 'term123',
-      variableValues: {
-        person: '13',
-      },
+      variableValues: 'fix me',
+      // {
+      //   person: '13',
+      // },
     },
   ],
 };
@@ -92,9 +93,10 @@ const testCases: (
           entries: [
             {
               termId: 'term123',
-              variableValues: {
-                person: '13',
-              },
+              variableValues: 'fix me',
+              // {
+              //   person: '13',
+              // },
             },
           ],
         },
@@ -108,9 +110,9 @@ const testCases: (
           entries: [
             {
               termId: 'term123',
-              variableValues: {
-                person: '13',
-              },
+              variableValues: 'fix me', // {
+              //   person: '13',
+              // },
             },
           ],
         },
