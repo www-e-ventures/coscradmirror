@@ -22,7 +22,7 @@ import { EntityViewModelController } from './controllers/entityViewModel.control
     DomainServicesModule,
     ServeStaticModule.forRoot({
       // TODO get this from the config
-      rootPath: join(__dirname, '.', 'public'),
+      rootPath: join(__dirname, '.', 'assets'),
     }),
   ],
   controllers: [AppController, EntityViewModelController, AddTagController],
