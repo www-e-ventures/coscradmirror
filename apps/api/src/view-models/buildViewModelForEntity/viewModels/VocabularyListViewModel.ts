@@ -16,7 +16,9 @@ type VocabularyListEntryViewModel = {
   variableValues: string; // Record<string, VocabularyListVariableValue>;
 };
 
-const safeParse = (serialized: string): Object => {
+const safeParse = (serialized: string | Object): Object => {
+  if (typeof serialized === 'object') return serialized;
+
   try {
     return JSON.parse(serialized);
   } catch (error) {
@@ -35,7 +37,8 @@ const cleanSerializedJSON = (input: string): string =>
         .replace(/'/g, '"')
         .replace(/False/g, 'false')
         .replace(/True/g, 'true')
-    : undefined;
+    : // Allow existing objects, undefined, null through?
+      input;
 
 // "{'positive': True, 'aspect': '2', 'usitative': False, 'person': '31'}"
 
