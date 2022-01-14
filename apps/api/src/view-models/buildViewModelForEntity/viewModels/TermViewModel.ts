@@ -26,6 +26,8 @@ export class TermViewModel {
 
   readonly audioURL?: string;
 
+  readonly sourceProject?: string;
+
   readonly isPublished: boolean = false;
 
   constructor(term: Term) {
@@ -36,6 +38,7 @@ export class TermViewModel {
       termEnglish: textEnglish,
       audioFilename,
       published: isPublished,
+      sourceProject,
     } = term;
 
     this.id = id;
@@ -49,5 +52,7 @@ export class TermViewModel {
     if (audioFilename) this.audioURL = buildAudioURL(audioFilename);
 
     if (typeof isPublished === 'boolean') this.isPublished = isPublished;
+
+    if (sourceProject) this.sourceProject = sourceProject;
   }
 }
