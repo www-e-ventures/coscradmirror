@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Loading from '../Loading/Loading';
+import TermsDetailComponent from '../TermsDetail/TermsDetail';
 import './VocabularyListDetail.module.css';
 
 type HasIdAndName = {
@@ -45,7 +46,9 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
       <p>
         {`${(appState.vocabularyList as unknown as HasIdAndName).id}: ${(appState.vocabularyList as unknown as HasIdAndName).name}`}
       </p>
-
+    <h1>Selected Term</h1>
+    {/* TODO remove all casts */}
+    <TermsDetailComponent termData={(appState.vocabularyList as unknown as any).entries[0].term}/>
     </div>
   );
 }

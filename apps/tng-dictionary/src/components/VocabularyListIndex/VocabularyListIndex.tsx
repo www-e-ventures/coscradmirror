@@ -1,3 +1,4 @@
+import { DataGrid, GridColDef, GridRenderCellParams, GridRowsProp } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Loading from '../Loading/Loading';
@@ -35,14 +36,34 @@ export function VocabularyListIndex(props: VocabularyListIndexProps) {
 
   if (!appState.vocabularyLists || appState.vocabularyLists === []) return <Loading nameToDisplay={'All Vocabulary Lists'} />
 
-  const testTable = [{
-    id: '1',
-    vocabularyList: 'to eat'
+  const rows: GridRowsProp = (appState.vocabularyLists as unknown as HasIdAndName[]).map(vocabularyList =>({
+    id: vocabularyList.id,
+    name: vocabularyList.name
+  }));
+
+  const columns: GridColDef[] = [{
+    field: 'id',
+    headerName: 'ID',
+    renderCell: (idParam: GridRenderCellParams<string>) => (
+      <Link to={`/vocabularyLists/${idParam.value}`}>{idParam.value}</Link>
+    ),
+    width: 150
+  },{
+    field: 'name',
+    headerName: 'Vocabulary List',
+    width: 150
   }]
 
   return (
     <div>
-      <h1>Welcome to VocabularyLists INDEX</h1>
+      {
+            <div style={{ textAlign: 'center' }}>
+            <div style={{ height: '90vh', width: '100%' }}>
+              <DataGrid rows={rows} columns={columns} pageSize={10} />
+            </div>
+          </div>
+}
+      /* <h1>Welcome to VocabularyLists INDEX</h1>
       {
         (appState.vocabularyLists as unknown as HasIdAndName[]).map((vocabularyList) =>
           <Link to={`/vocabularyLists/${vocabularyList.id}`}>
@@ -51,7 +72,8 @@ export function VocabularyListIndex(props: VocabularyListIndexProps) {
             </div>
           </Link>
         )
-      }
+      } */
+      
     </div>
   );
 }

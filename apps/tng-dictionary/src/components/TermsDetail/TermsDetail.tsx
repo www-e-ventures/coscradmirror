@@ -1,31 +1,57 @@
 import './TermsDetail.module.css';
 import * as React from 'react';
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
+import { Link } from 'react-router-dom';
 
-const columns: GridColDef[] = [
-  { field: 'col1', headerName: 'Tŝilhqotin', width: 150 },
-  { field: 'col2', headerName: 'English', width: 150 },
-];
+// TODO move this to shared interfaces lib
+type TermViewModel = {
+   id: string;
 
-const rows: GridRowsProp = [
-  { id: 1, col1: 'Tŝilhqotin', col2: 'Chilcotin' },
-  { id: 2, col1: 'yeŝ', col2: 'Snow' },
-  { id: 3, col1: 'mus', col2: 'Moose' },
-  { id: 4, col1: 'tabanx', col2: 'shore' },
-  { id: 5, col1: 'ses', col2: 'bear' }
-];
+   contributor: string;
+
+   term: string;
+
+   termEnglish?: string;
+
+   audioURL?: string;
+
+   sourceProject?: string;
+
+   // Should this hit the frontend?
+  //  isPublished: boolean;
+}
 
 /* eslint-disable-next-line */
-export interface TermsDetailComponentProps { }
+export interface TermsDetailComponentProps {
+  termData?: TermViewModel
+ }
 
 export function TermsDetailComponent(props: TermsDetailComponentProps) {
+  const {termData} = props;
+
+  if(!termData) return (
+    <h1>Term not found</h1>
+  );
+
+  const {
+    id, contributor, term, termEnglish, audioURL
+  } = termData;
+
+
   return (
     <div style={{ textAlign: 'center' }}>
       <div style={{ height: '90vh', width: '100%' }}>
-        <DataGrid rows={rows} columns={columns} pageSize={10} />
+        <h1>{`Term: ${id}`}</h1>
+        <div>{`contributor: ${contributor}`}</div>
+        <div>{term}</div>
+        {/* Don't add a div if there's no termEnglish */}
+       <div>{termEnglish ? termEnglish : ''}</div> 
+       <div>
+         {/* Don't render this if there is no valid source */}
+          <a href={`${audioURL}`} target="_blank">audio</a>
+       </div>
       </div>
     </div>
-
   );
 }
 
