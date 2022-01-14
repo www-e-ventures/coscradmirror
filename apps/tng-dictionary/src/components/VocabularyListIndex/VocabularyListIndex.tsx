@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Loading from '../Loading/Loading';
+import Table, { TableProps } from '../Table/Table';
 import './VocabularyListIndex.module.css';
 
 type HasIdAndName = {
@@ -34,13 +36,22 @@ export function VocabularyListIndex(props: VocabularyListIndexProps) {
 
   if(!appState.vocabularyLists || appState.vocabularyLists === []) return <Loading nameToDisplay={'All Vocabulary Lists'} />
 
+  const testTable = [{
+    id: '1',
+    vocabularyList: 'to eat'
+  }]
+
   return (
     <div>
       <h1>Welcome to VocabularyListDetail!</h1>
       {
-        (appState.vocabularyLists as unknown as HasIdAndName[]).map((vocabularyList) =><p>
+        (appState.vocabularyLists as unknown as HasIdAndName[]).map((vocabularyList) =>
+        <Link to={`/vocabularyLists/${vocabularyList.id}`}>
+        <div>
           {`${vocabularyList.id}: ${vocabularyList.name}`}
-        </p>)
+        </div>
+        </Link>
+        )
       }
     </div>
   );

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import Loading from '../Loading/Loading';
 import './VocabularyListDetail.module.css';
 
@@ -19,9 +20,11 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
     vocabularyList: null,
   });
 
+  const {id} = useParams();
+
   useEffect(() => {
     setAppState({ loading: true, vocabularyList: null });
-    const apiUrl = `http://localhost:3131/api/entities?type=vocabularyList&id=1220317`;
+    const apiUrl = `http://localhost:3131/api/entities?type=vocabularyList&id=${id}`;
     fetch(apiUrl,{mode:'cors'})
       .then((res) =>res.json())
       .then((vocabularyList) => {
@@ -38,7 +41,7 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
 
   return (
     <div>
-      <h1>Welcome to VocabularyListDetail!</h1>
+      <h1>Vocabulary List: {id}</h1>
       <p>   
         {`${(appState.vocabularyList as unknown as HasIdAndName).id}: ${(appState.vocabularyList as unknown as HasIdAndName).name}`}
         </p>
