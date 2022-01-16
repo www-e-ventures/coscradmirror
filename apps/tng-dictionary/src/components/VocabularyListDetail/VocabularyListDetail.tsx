@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Loading from '../Loading/Loading';
 import TermsDetailComponent from '../TermsDetail/TermsDetail';
+import VocabularyListForm, { VocabularyListFormElement } from '../VocabularyListForm/VocabularyListForm';
 import './VocabularyListDetail.module.css';
 
 type HasIdAndName = {
@@ -48,8 +49,10 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
       </p>
     <h1>Selected Term</h1>
     {/* TODO remove all casts */}
+    <VocabularyListForm formItems={(appState.vocabularyList as unknown as any).variables} /> 
     <TermsDetailComponent termData={(appState.vocabularyList as unknown as any).entries[0].term}/>
-    </div>
+
+   </div>
   );
 }
 

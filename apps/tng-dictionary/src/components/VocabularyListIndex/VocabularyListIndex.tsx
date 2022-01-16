@@ -27,9 +27,6 @@ export function VocabularyListIndex(props: VocabularyListIndexProps) {
     fetch(apiUrl, { mode: 'cors' })
       .then((res) => res.json())
       .then((vocabularyLists) => {
-        console.log({
-          result: vocabularyLists
-        })
         setAppState({ loading: false, vocabularyLists: vocabularyLists });
       }).catch(rej => console.log(rej))
   }, [setAppState]);
@@ -62,18 +59,7 @@ export function VocabularyListIndex(props: VocabularyListIndexProps) {
               <DataGrid rows={rows} columns={columns} pageSize={10} />
             </div>
           </div>
-}
-      /* <h1>Welcome to VocabularyLists INDEX</h1>
-      {
-        (appState.vocabularyLists as unknown as HasIdAndName[]).map((vocabularyList) =>
-          <Link to={`/vocabularyLists/${vocabularyList.id}`}>
-            <div>
-              {`${vocabularyList.id}: ${vocabularyList.name}`}
-            </div>
-          </Link>
-        )
-      } */
-      
+}      
     </div>
   );
 }
