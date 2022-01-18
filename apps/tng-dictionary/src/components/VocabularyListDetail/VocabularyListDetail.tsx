@@ -47,12 +47,12 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
       <p>
         {`${(appState.vocabularyList as unknown as HasIdAndName).id}: ${(appState.vocabularyList as unknown as HasIdAndName).name}`}
       </p>
-    <h1>Selected Term</h1>
-    {/* TODO remove all casts */}
-    <VocabularyListForm formItems={(appState.vocabularyList as unknown as any).variables} /> 
-    <TermsDetailComponent termData={(appState.vocabularyList as unknown as any).entries[0].term}/>
+      <h1>Selected Term</h1>
+      {/* TODO remove all casts */}
+      <VocabularyListForm formItems={(appState.vocabularyList as unknown as any).variables} />
+      <TermsDetailComponent termData={(appState.vocabularyList as unknown as any).entries[0].term} />
 
-   </div>
+    </div>
   );
 }
 

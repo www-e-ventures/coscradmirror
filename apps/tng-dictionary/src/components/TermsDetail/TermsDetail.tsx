@@ -5,31 +5,31 @@ import { Link } from 'react-router-dom';
 
 // TODO move this to shared interfaces lib
 type TermViewModel = {
-   id: string;
+  id: string;
 
-   contributor: string;
+  contributor: string;
 
-   term: string;
+  term: string;
 
-   termEnglish?: string;
+  termEnglish?: string;
 
-   audioURL?: string;
+  audioURL?: string;
 
-   sourceProject?: string;
+  sourceProject?: string;
 
-   // Should this hit the frontend?
+  // Should this hit the frontend?
   //  isPublished: boolean;
 }
 
 /* eslint-disable-next-line */
 export interface TermsDetailComponentProps {
   termData?: TermViewModel
- }
+}
 
 export function TermsDetailComponent(props: TermsDetailComponentProps) {
-  const {termData} = props;
+  const { termData } = props;
 
-  if(!termData) return (
+  if (!termData) return (
     <h1>Term not found</h1>
   );
 
@@ -45,11 +45,15 @@ export function TermsDetailComponent(props: TermsDetailComponentProps) {
         <div>{`contributor: ${contributor}`}</div>
         <div>{term}</div>
         {/* Don't add a div if there's no termEnglish */}
-       <div>{termEnglish ? termEnglish : ''}</div> 
-       <div>
-         {/* Don't render this if there is no valid source */}
-          <a href={`${audioURL}`} target="_blank">audio</a>
-       </div>
+        <div>{termEnglish ? termEnglish : ''}</div>
+        <div>
+          {/* Don't render this if there is no valid source */}
+          { /* <a href={`${audioURL}`} target="_blank">audio</a>*/}
+          <audio id="myAudio" controls>
+            <source src={`${audioURL}`} type="audio/ogg" />
+            Your browser does not support the audio element.
+          </audio>
+        </div>
       </div>
     </div>
   );
