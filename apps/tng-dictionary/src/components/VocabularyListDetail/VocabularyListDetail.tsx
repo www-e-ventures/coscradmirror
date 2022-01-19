@@ -4,6 +4,8 @@ import Loading from '../Loading/Loading';
 import TermsDetailComponent from '../TermsDetail/TermsDetail';
 import VocabularyListForm, { VocabularyListFormElement } from '../VocabularyListForm/VocabularyListForm';
 import './VocabularyListDetail.module.css';
+import { Paper } from '@mui/material';
+
 
 type HasIdAndName = {
   id: string;
@@ -43,11 +45,13 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
 
   return (
     <div>
-      <h1>Vocabulary List: {id}</h1>
+      <Paper>
+        <h1>Vocabulary List: {id}</h1>
+      </Paper>
       <p>
         {`${(appState.vocabularyList as unknown as HasIdAndName).id}: ${(appState.vocabularyList as unknown as HasIdAndName).name}`}
       </p>
-      <h1>Selected Term</h1>
+      <h1>Selected Terms</h1>
       {/* TODO remove all casts */}
       <VocabularyListForm formItems={(appState.vocabularyList as unknown as any).variables} />
       <TermsDetailComponent termData={(appState.vocabularyList as unknown as any).entries[0].term} />
