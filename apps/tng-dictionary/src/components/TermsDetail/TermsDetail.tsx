@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 // TODO move this to shared interfaces lib
 export type Term = {
-   id: string;
+  id: string;
 
   contributor: string;
 
@@ -24,7 +24,7 @@ export type Term = {
 /* eslint-disable-next-line */
 export interface TermsDetailComponentProps {
   termData?: Term
- }
+}
 
 export function TermsDetailComponent(props: TermsDetailComponentProps) {
   const { termData } = props;

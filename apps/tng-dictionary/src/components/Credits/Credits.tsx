@@ -5,6 +5,7 @@ import { MenuItem } from '@mui/material';
 import { FormControl } from '@mui/material';
 import { Select } from '@mui/material';
 import { Box } from '@mui/material';
+import Carousel from '../Carousel/Carousel';
 
 /* MOVE TO TEST COMPONENT */
 /* ADD SWITCH TOGGLE BUTTON */
@@ -80,6 +81,7 @@ export function Credits(props: CreditsProps) {
       {newLocal2}
       {newLocal3}
     </div>
+
   );
 }
 

@@ -12,6 +12,7 @@ import VocabularyListContext from '../context/VocabularyListContext';
 import { useState } from 'react';
 
 
+import Test from '../components/sandbox/Test/Test';
 
 export function App() {
   const vocabularyListFormState = useState({
@@ -21,18 +22,19 @@ export function App() {
 
   return (
     <VocabularyListContext.Provider value={vocabularyListFormState}>
-    <div style={{ marginTop: '80px' }}>
-      <BrowserRouter>
-        <Toolbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Credits" element={<Credits />} />
-          <Route path="/VocabularyLists" element={<VocabularyListIndex />} />
-          <Route path="/VocabularyLists/:id" element={<VocabularyListDetail />} />
-          <Route path="/Terms" element={<TermsDetailComponent />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+      <div style={{ marginTop: '80px' }}>
+        <BrowserRouter>
+          <Toolbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/Credits" element={<Credits />} />
+            <Route path="/VocabularyLists" element={<VocabularyListIndex />} />
+            <Route path="/VocabularyLists/:id" element={<VocabularyListDetail />} />
+            <Route path="/Terms" element={<TermsDetailComponent />} />
+            <Route path="/Test" element={<Test />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
     </VocabularyListContext.Provider>
   );
 }

@@ -8,6 +8,7 @@ import TermsDetailComponent, { Term } from '../TermsDetail/TermsDetail';
 import VocabularyListForm, { VocabularyListFormElement } from '../VocabularyListForm/VocabularyListForm';
 import './VocabularyListDetail.module.css';
 import { Paper } from '@mui/material';
+import Carousel from '../Carousel/Carousel';
 
 
 type HasIdAndName = {
@@ -19,13 +20,13 @@ const getData = async (endpoint: string) => fetch(endpoint).then(response => res
 
 type VocabularyListEntry = {
   term: Term;
-  variableValues: Record<string,string | boolean>;
+  variableValues: Record<string, string | boolean>;
 }
 
 
 
-const filterEntriesForSelectedTerms = (allEntries: VocabularyListEntry[],filters: Record<string,string | boolean>): Term[] =>
-allEntries.filter(({variableValues})=>doValuesMatchFilters(variableValues,filters)).map(({term})=>term)
+const filterEntriesForSelectedTerms = (allEntries: VocabularyListEntry[], filters: Record<string, string | boolean>): Term[] =>
+  allEntries.filter(({ variableValues }) => doValuesMatchFilters(variableValues, filters)).map(({ term }) => term)
 
 
 /* eslint-disable-next-line */
@@ -65,15 +66,15 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
     <Loading nameToDisplay={'Vocabulary Lists'} />
   </div>
 
-  if(!form.isReady) return (
+  if (!form.isReady) return (
     <div>
       <h1>Vocabulary List: {id}</h1>
       <p>
         {`${(appState.vocabularyList as unknown as HasIdAndName).id}: ${(appState.vocabularyList as unknown as HasIdAndName).name}`}
       </p>
-    <h1>Selected Term</h1>
-    Please complete the form to select a term.
-    <VocabularyListForm formItems={(appState.vocabularyList as unknown as any).variables} /> 
+      <h1>Selected Term</h1>
+      Please complete the form to select a term.
+      <VocabularyListForm formItems={(appState.vocabularyList as unknown as any).variables} />
     </div>
   )
 
@@ -84,7 +85,7 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
     currentSelections: form.currentSelections
   })
 
-  const selectedTerms = filterEntriesForSelectedTerms(allEntries,form.currentSelections);
+  const selectedTerms = filterEntriesForSelectedTerms(allEntries, form.currentSelections);
 
   console.log({
     selectedTerms,
@@ -92,18 +93,18 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
     formState: form
   })
 
-  if(!selectedTerms.length) return (
+  if (!selectedTerms.length) return (
     <div>
-    <h1>Vocabulary List: {id}</h1>
-    <p>
-      {`${(appState.vocabularyList as unknown as HasIdAndName).id}: ${(appState.vocabularyList as unknown as HasIdAndName).name}`}
-    </p>
-  <h1>Selected Term</h1>
-  {/* TODO remove all casts */}
-  <VocabularyListForm formItems={(appState.vocabularyList as unknown as any).variables} /> 
-  Term not found. Please search again.
+      <h1>Vocabulary List: {id}</h1>
+      <p>
+        {`${(appState.vocabularyList as unknown as HasIdAndName).id}: ${(appState.vocabularyList as unknown as HasIdAndName).name}`}
+      </p>
+      <h1>Selected Term</h1>
+      {/* TODO remove all casts */}
+      <VocabularyListForm formItems={(appState.vocabularyList as unknown as any).variables} />
+      Term not found. Please search again.
 
- </div>  
+    </div>
   )
 
   return (
@@ -114,10 +115,10 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
       <p>
         {`${(appState.vocabularyList as unknown as HasIdAndName).id}: ${(appState.vocabularyList as unknown as HasIdAndName).name}`}
       </p>
-    <h1>Selected Term</h1>
-    {/* TODO remove all casts */}
-    <VocabularyListForm formItems={(appState.vocabularyList as unknown as any).variables} /> 
-    <TermsDetailComponent termData={selectedTerms[0]}/>
+      <h1>Selected Term</h1>
+      {/* TODO remove all casts */}
+      <VocabularyListForm formItems={(appState.vocabularyList as unknown as any).variables} />
+      <TermsDetailComponent termData={selectedTerms[0]} />
 
     </div>
   );
