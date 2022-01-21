@@ -8,6 +8,7 @@ import VocabularyListIndex from '../components/VocabularyListIndex/VocabularyLis
 import Credits from '../components/Credits/Credits';
 import TermsDetailComponent from '../components/TermsDetail/TermsDetail';
 import Toolbar from '../components/Toolbar/Toolbar';
+import Test from '../components/sandbox/Test/Test';
 
 export function App() {
   return (
@@ -21,6 +22,7 @@ export function App() {
           <Route path="/VocabularyLists" element={<VocabularyListIndex />} />
           <Route path="/VocabularyLists/:id" element={<VocabularyListDetail />} />
           <Route path="/Terms" element={<TermsDetailComponent />} />
+          <Route path="/Test" element={<Test />} />
         </Routes>
       </BrowserRouter>
     </div>

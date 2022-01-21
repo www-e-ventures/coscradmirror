@@ -4,7 +4,7 @@ import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 import { Link } from 'react-router-dom';
 
 // TODO move this to shared interfaces lib
-type TermViewModel = {
+export type TermViewModel = {
   id: string;
 
   contributor: string;

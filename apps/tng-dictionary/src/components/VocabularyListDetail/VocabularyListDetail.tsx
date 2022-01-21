@@ -5,6 +5,7 @@ import TermsDetailComponent from '../TermsDetail/TermsDetail';
 import VocabularyListForm, { VocabularyListFormElement } from '../VocabularyListForm/VocabularyListForm';
 import './VocabularyListDetail.module.css';
 import { Paper } from '@mui/material';
+import Carousel from '../Carousel/Carousel';
 
 
 type HasIdAndName = {
@@ -55,7 +56,6 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
       {/* TODO remove all casts */}
       <VocabularyListForm formItems={(appState.vocabularyList as unknown as any).variables} />
       <TermsDetailComponent termData={(appState.vocabularyList as unknown as any).entries[0].term} />
-
     </div>
   );
 }
