@@ -8,10 +8,19 @@ import VocabularyListIndex from '../components/VocabularyListIndex/VocabularyLis
 import Credits from '../components/Credits/Credits';
 import TermsDetailComponent from '../components/TermsDetail/TermsDetail';
 import Toolbar from '../components/Toolbar/Toolbar';
+import VocabularyListContext from '../context/VocabularyListContext';
+import { useState } from 'react';
+
+
 
 export function App() {
-  return (
+  const vocabularyListFormState = useState({
+    currentSelections: {},
+    isReady: false
+  });
 
+  return (
+    <VocabularyListContext.Provider value={vocabularyListFormState}>
     <div style={{ marginTop: '80px' }}>
       <BrowserRouter>
         <Toolbar />
@@ -24,10 +33,8 @@ export function App() {
         </Routes>
       </BrowserRouter>
     </div>
+    </VocabularyListContext.Provider>
   );
 }
 
 export default App;
-
-// TODO ADD HOME, CREDITS, NAVIGATION FROM HOME TO CREDITS & VOCAB INDEX
-// 
