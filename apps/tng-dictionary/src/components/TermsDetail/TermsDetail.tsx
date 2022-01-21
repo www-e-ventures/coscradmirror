@@ -4,7 +4,7 @@ import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 import { Link } from 'react-router-dom';
 
 // TODO move this to shared interfaces lib
-type TermViewModel = {
+export type Term = {
    id: string;
 
    contributor: string;
@@ -23,7 +23,7 @@ type TermViewModel = {
 
 /* eslint-disable-next-line */
 export interface TermsDetailComponentProps {
-  termData?: TermViewModel
+  termData?: Term
  }
 
 export function TermsDetailComponent(props: TermsDetailComponentProps) {

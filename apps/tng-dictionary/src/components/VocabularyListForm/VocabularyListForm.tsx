@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { __values } from 'tslib';
+import VocabularyListContext, { VocabularyListFormState } from '../../context/VocabularyListContext';
 import './VocabularyListForm.module.css';
 
 export type LabelAndValue<T = any> = {
@@ -19,34 +20,55 @@ export interface VocabularyListFormProps {
   formItems: VocabularyListFormElement[];
 }
 
+const convertStringToBooleanIfApplicable = (input: string): string | boolean => {
+  if(typeof input !== 'string') return input;
+
+  if(input.toLowerCase() === 'false') return false;
+
+  if(input.toLowerCase() === 'true') return true;
+
+  return input;
+}
+
+export const isFormReady = (formPropertyNames: string[],filters: Record<string, string | boolean>)
+: boolean => formPropertyNames.every(name => Object.keys(filters).includes(name));
 
 export function VocabularyListForm({formItems}: VocabularyListFormProps) {
-  const getUpdatedFormState = (existingState: Record<string,string>,key: string, value: string) =>{
+  const getUpdatedFormState = ({currentSelections: formState}: VocabularyListFormState,key: string, value: string): VocabularyListFormState =>{
     console.log(`Time to update the form`)
 
-    console.log(`previous state: ${existingState}, next key: ${key}, next value: ${value}`);
+    console.log(`previous state: ${formState}, next key: ${key}, next value: ${value}`);
 
    // TODO Deal with invalid input
 
+   // TODO Clean up the data and remove this hack
+   const fixedKey = key === 'aspect \\ mode' ? 'aspect' : key;
+
     const updatedState = {
-      ...existingState,
-      [key]: value
+      ...formState,
+      [fixedKey]: convertStringToBooleanIfApplicable(value) 
     }
 
-    console.log({
-      updatedState
-    });
+    // TODO clean data and remove hack
+    const formItemNames = formItems.map(({name})=>name === 'aspect \\ mode' ? 'aspect' : name);
 
-    return updatedState;
+    console.log({
+      formItemNames
+    })
+
+    return {currentSelections: updatedState,
+    isReady: isFormReady(formItemNames,updatedState)
+    };
   }
 
-  const [formState,setFormState] = useState<Record<string,string>>({})
+  const [formState,setFormState] = useContext(VocabularyListContext);
 
   const buildSingleSelectElement = ({name,validValues: labelsAndValues}: VocabularyListFormElement) =>(
     <label htmlFor={name}>
     {name}
     <select
     id={name}
+    key={name}
     onChange={e =>updateFormState(formState,name,e.target.value)}
     onBlur={e =>updateFormState(formState,name,e.target.value)} 
     >
@@ -75,7 +97,7 @@ export function VocabularyListForm({formItems}: VocabularyListFormProps) {
         name,
         validValues: validValues.map(({display, value}) =>({
           display,
-          value: value === true ? 'True' : 'False'
+          value: convertStringToBooleanIfApplicable(value) //: value === true ? 'True' : 'False'
         }))
       })
       )
@@ -86,18 +108,18 @@ export function VocabularyListForm({formItems}: VocabularyListFormProps) {
   )
   
 
-  const updateFormState = (existingState: Record<string,string>,key: string, value: string): void =>{
+  const updateFormState = (existingState: VocabularyListFormState,key: string, value: string): void =>{
     const newState = getUpdatedFormState(existingState,key,value);
 
-    console.log(`Set new state: ${newState}`)
+    console.log({
+      newState
+    })
 
     setFormState(newState);
   }
 
   return (
     <div className="form">
-      HELLO WORLD
-      FORM
       <form
       onSubmit={e=>{
         e.preventDefault();
