@@ -5,6 +5,7 @@ import VocabularyListContext from '../../context/VocabularyListContext';
 import doValuesMatchFilters from '../../utilities/doValuesMatchFilters';
 import Loading from '../Loading/Loading';
 import TermsDetailComponent, { Term } from '../TermsDetail/TermsDetail';
+import TermsDetailComponent, { TermViewModel } from '../TermsDetail/TermsDetail';
 import VocabularyListForm, { VocabularyListFormElement } from '../VocabularyListForm/VocabularyListForm';
 import './VocabularyListDetail.module.css';
 import { Paper } from '@mui/material';
@@ -106,6 +107,8 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
 
     </div>
   )
+  // Extract terms from entries into separate term array
+  const allTerms = (appState.vocabularyList as unknown as any).entries.map(({ term }: { term: TermViewModel }) => term);
 
   return (
     <div>
@@ -117,10 +120,10 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
       </p>
       <h1>Selected Term</h1>
       {/* TODO remove all casts */}
-      <VocabularyListForm formItems={(appState.vocabularyList as unknown as any).variables} />
-      <TermsDetailComponent termData={selectedTerms[0]} />
-
-    </div>
+      {/* TODO Complete form filtering feature */}
+      {/* <VocabularyListForm formItems={(appState.vocabularyList as unknown as any).variables} /> */}
+      <Carousel data={allTerms} />
+    </div >
   );
 }
 
