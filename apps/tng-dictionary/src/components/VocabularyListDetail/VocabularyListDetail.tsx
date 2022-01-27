@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Loading from '../Loading/Loading';
-import TermsDetailComponent from '../TermsDetail/TermsDetail';
+import TermsDetailComponent, { TermViewModel } from '../TermsDetail/TermsDetail';
 import VocabularyListForm, { VocabularyListFormElement } from '../VocabularyListForm/VocabularyListForm';
 import './VocabularyListDetail.module.css';
 import { Paper } from '@mui/material';
@@ -44,6 +44,9 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
     <Loading nameToDisplay={'Vocabulary Lists'} />
   </div>
 
+// Extract terms from entries into separate term array
+  const allTerms = (appState.vocabularyList as unknown as any).entries.map(({term}: {term: TermViewModel})=>term);
+
   return (
     <div>
       <Paper>
@@ -54,8 +57,9 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
       </p>
       <h1>Selected Terms</h1>
       {/* TODO remove all casts */}
-      <VocabularyListForm formItems={(appState.vocabularyList as unknown as any).variables} />
-      <TermsDetailComponent termData={(appState.vocabularyList as unknown as any).entries[0].term} />
+     {/* TODO Complete form filtering feature */}
+      {/* <VocabularyListForm formItems={(appState.vocabularyList as unknown as any).variables} /> */}
+      <Carousel data={allTerms} />
     </div>
   );
 }
