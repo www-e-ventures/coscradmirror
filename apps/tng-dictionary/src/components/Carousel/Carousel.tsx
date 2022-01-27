@@ -24,6 +24,11 @@ const cyclicIncrement = (currentIndex: number, max: number): number => {
   return newIndex;
 }
 
+/**
+ * 
+ * TODO [refactor] Make Carousel a higher-order component which takes in 
+ * props and a component to wrap so we can reuse this behaviour.
+ */
 export function Carousel(props: CarouselProps) {
 
   const [currentIndex, setIndex] = useState(0)
