@@ -6,7 +6,7 @@ body {
     width: 100%;
 }
 
-h1 {font-family: cursive;}
+
 
 .home {
 text-align: center;
@@ -43,3 +43,14 @@ a:-webkit-any-link {
     color: white;
     cursor: pointer;
   }
+
+.Carousel {
+    text-align: center !important;
+    width: fit-content;
+    margin: auto;
+    padding: 20px;
+}
+
+.Arrow {
+    margin-right: 35px;
+}

@@ -10,6 +10,8 @@ import VocabularyListForm, { VocabularyListFormElement } from '../VocabularyList
 import './VocabularyListDetail.module.css';
 import { Paper } from '@mui/material';
 import Carousel from '../Carousel/Carousel';
+import { Typography } from '@mui/material';
+
 
 
 type HasIdAndName = {
@@ -111,10 +113,10 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
   const allTerms = (appState.vocabularyList as unknown as any).entries.map(({ term }: { term: TermViewModel }) => term);
 
   return (
-    <div>
-      <Paper>
-        <h1>Vocabulary List: {id}</h1>
-      </Paper>
+    <div style={{ textAlign: 'center' }}>
+
+      <h1>Vocabulary List: {id}</h1>
+
       <p>
         {`${(appState.vocabularyList as unknown as HasIdAndName).id}: ${(appState.vocabularyList as unknown as HasIdAndName).name}`}
       </p>

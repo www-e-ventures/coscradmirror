@@ -2,6 +2,12 @@ import { useState } from 'react';
 import Test from '../sandbox/Test/Test';
 import TermsDetailComponent, { TermViewModel } from '../TermsDetail/TermsDetail';
 import './Carousel.module.css';
+import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
+import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
+import { Paper } from '@mui/material';
+import { Divider } from '@mui/material';
+import { Card } from '@mui/material';
+import { Typography } from '@mui/material';
 
 /* eslint-disable-next-line */
 export interface CarouselProps {
@@ -40,11 +46,16 @@ export function Carousel(props: CarouselProps) {
   const currentItem: TermViewModel = props.data[currentIndex];
 
   return (
-    <div className='Carousel'>
-      <div onClick={e => setIndex(cyclicDecrement(currentIndex, props.data.length - 1))}>Prev</div>
-      <div onClick={e => setIndex(cyclicIncrement(currentIndex, props.data.length - 1))}>Next</div>
-      <TermsDetailComponent termData={currentItem} />
-    </div>
+    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+      <Card variant='outlined' className='Carousel' >
+        <TermsDetailComponent termData={currentItem} />
+        <Divider />
+        <div style={{ paddingBottom: '20px' }} />
+        <ArrowBackIosNewOutlinedIcon className='Arrow' fontSize='large' onClick={e => setIndex(cyclicDecrement(currentIndex, props.data.length - 1))} />
+
+        <ArrowForwardIosOutlinedIcon fontSize='large' onClick={e => setIndex(cyclicIncrement(currentIndex, props.data.length - 1))}></ArrowForwardIosOutlinedIcon>
+      </Card >
+    </Typography>
   );
 }
 

@@ -2,6 +2,7 @@ import './TermsDetail.module.css';
 import * as React from 'react';
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 import { Link } from 'react-router-dom';
+import { Typography } from '@mui/material';
 
 // TODO move this to shared interfaces lib
 export type Term = {
@@ -41,10 +42,15 @@ export function TermsDetailComponent(props: TermsDetailComponentProps) {
 
 
   return (
+
     <div style={{ textAlign: 'center' }}>
       <div style={{ height: '90vh', width: '100%' }}>
-        <h1>{`Term: ${id}`}</h1>
-        <div>{`contributor: ${contributor}`}</div>
+        {term}
+
+        <Typography variant="h5" component="div">
+          <h1>{`Term: ${id}`}</h1>
+        </Typography>
+        <Typography sx={{ mb: 1.5 }} color="text.secondary">{`contributor: ${contributor}`}</Typography>
         <div>{term}</div>
         {/* Don't add a div if there's no termEnglish */}
         <div>{termEnglish ? termEnglish : ''}</div>
@@ -58,7 +64,8 @@ export function TermsDetailComponent(props: TermsDetailComponentProps) {
           </audio>
         </div>
       </div>
-    </div>
+    </div >
+
   );
 }
 
