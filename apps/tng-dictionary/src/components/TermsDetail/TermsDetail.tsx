@@ -27,6 +27,8 @@ export interface TermsDetailComponentProps {
 }
 
 export function TermsDetailComponent(props: TermsDetailComponentProps) {
+  const audioRef = React.useRef();
+
   const { termData } = props;
 
   if (!termData) return (
@@ -50,7 +52,7 @@ export function TermsDetailComponent(props: TermsDetailComponentProps) {
         <div>
           {/* Don't render this if there is no valid source */}
           { /* <a href={`${audioURL}`} target="_blank">audio</a>*/}
-          <audio id="myAudio" controls>
+          <audio id="myAudio" controls key={audioURL}>
             <source src={`${audioURL}`} type="audio/ogg" />
             Your browser does not support the audio element.
           </audio>
