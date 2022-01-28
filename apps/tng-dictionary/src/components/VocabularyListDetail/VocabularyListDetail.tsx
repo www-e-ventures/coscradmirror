@@ -68,32 +68,21 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
     <Loading nameToDisplay={'Vocabulary Lists'} />
   </div>
 
-  if (!form.isReady) return (
-    <div>
-      <h1>Vocabulary List: {id}</h1>
-      <p>
-        {`${(appState.vocabularyList as unknown as HasIdAndName).id}: ${(appState.vocabularyList as unknown as HasIdAndName).name}`}
-      </p>
-      <h1>Selected Term</h1>
-      Please complete the form to select a term.
-      <VocabularyListForm formItems={(appState.vocabularyList as unknown as any).variables} />
-    </div>
-  )
+  // if (!form.isReady) return (
+  //   <div>
+  //     <h1>Vocabulary List: {id}</h1>
+  //     <p>
+  //       {`${(appState.vocabularyList as unknown as HasIdAndName).id}: ${(appState.vocabularyList as unknown as HasIdAndName).name}`}
+  //     </p>
+  //     <h1>Selected Term</h1>
+  //     Please complete the form to select a term.
+  //     <VocabularyListForm formItems={(appState.vocabularyList as unknown as any).variables} />
+  //   </div>
+  // )
 
   const allEntries = (appState.vocabularyList as unknown as any).entries;
 
-  console.log({
-    allEntries,
-    currentSelections: form.currentSelections
-  })
-
-  const selectedTerms = filterEntriesForSelectedTerms(allEntries, form.currentSelections);
-
-  console.log({
-    selectedTerms,
-    allEntries,
-    formState: form
-  })
+  const selectedTerms = (allEntries as any).map(({term}: Term)=>term) // filterEntriesForSelectedTerms(allEntries, form.currentSelections);
 
   if (!selectedTerms.length) return (
     <div>
@@ -109,7 +98,7 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
     </div>
   )
   // Extract terms from entries into separate term array
-  const allTerms = (appState.vocabularyList as unknown as any).entries.map(({ term }: { term: Term }) => term);
+//  const allTerms = (appState.vocabularyList as unknown as any).entries.map(({ term }: { term: Term }) => term);
 
   return (
     <div style={{ textAlign: 'center' }}>
@@ -123,7 +112,7 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
       {/* TODO remove all casts */}
       {/* TODO Complete form filtering feature */}
       {/* <VocabularyListForm formItems={(appState.vocabularyList as unknown as any).variables} /> */}
-      <Carousel data={allTerms} />
+      <Carousel data={selectedTerms} />
     </div >
   );
 }
