@@ -58,7 +58,7 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
       <h1>Selected Terms</h1>
       {/* TODO remove all casts */}
      {/* TODO Complete form filtering feature */}
-      {/* <VocabularyListForm formItems={(appState.vocabularyList as unknown as any).variables} /> */}
+      <VocabularyListForm formItems={(appState.vocabularyList as unknown as any).variables} />
       <Carousel data={allTerms} />
     </div>
   );
