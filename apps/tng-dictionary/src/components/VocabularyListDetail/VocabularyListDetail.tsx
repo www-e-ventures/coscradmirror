@@ -5,7 +5,6 @@ import VocabularyListContext from '../../context/VocabularyListContext';
 import doValuesMatchFilters from '../../utilities/doValuesMatchFilters';
 import Loading from '../Loading/Loading';
 import TermsDetailComponent, { Term } from '../TermsDetail/TermsDetail';
-import TermsDetailComponent, { TermViewModel } from '../TermsDetail/TermsDetail';
 import VocabularyListForm, { VocabularyListFormElement } from '../VocabularyListForm/VocabularyListForm';
 import './VocabularyListDetail.module.css';
 import { Paper } from '@mui/material';
@@ -110,7 +109,7 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
     </div>
   )
   // Extract terms from entries into separate term array
-  const allTerms = (appState.vocabularyList as unknown as any).entries.map(({ term }: { term: TermViewModel }) => term);
+  const allTerms = (appState.vocabularyList as unknown as any).entries.map(({ term }: { term: Term }) => term);
 
   return (
     <div style={{ textAlign: 'center' }}>

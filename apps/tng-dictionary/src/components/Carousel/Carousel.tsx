@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Test from '../sandbox/Test/Test';
-import TermsDetailComponent, { TermViewModel } from '../TermsDetail/TermsDetail';
 import './Carousel.module.css';
 import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
@@ -8,10 +7,11 @@ import { Paper } from '@mui/material';
 import { Divider } from '@mui/material';
 import { Card } from '@mui/material';
 import { Typography } from '@mui/material';
+import TermsDetailComponent, { Term } from '../TermsDetail/TermsDetail';
 
 /* eslint-disable-next-line */
 export interface CarouselProps {
-  data: TermViewModel[]
+  data: Term[]
 }
 
 const cyclicDecrement = (currentIndex: number, max: number): number => {
@@ -43,7 +43,7 @@ export function Carousel(props: CarouselProps) {
     <p>No Data</p>
   )
 
-  const currentItem: TermViewModel = props.data[currentIndex];
+  const currentItem: Term = props.data[currentIndex];
 
   return (
     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>

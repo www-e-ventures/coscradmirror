@@ -1,7 +1,8 @@
 import './Test.module.css';
 import { useState } from 'react';
-import TermsDetailComponent, { TermViewModel } from '../../TermsDetail/TermsDetail';
 import Carousel from '../../Carousel/Carousel';
+import { Term } from '../../TermsDetail/TermsDetail';
+
 
 /* eslint-disable-next-line */
 export interface TestProps {
@@ -9,7 +10,7 @@ export interface TestProps {
 
 export function Test(props: TestProps) {
 
-  const terms: TermViewModel[] = [{
+  const terms: Term[] = [{
     term: 'test term 1',
     termEnglish: 'english term 1',
     contributor: 'John Doe',
