@@ -54,7 +54,6 @@ export function TermsDetailComponent(props: TermsDetailComponentProps) {
         <div>{term}</div>
         {/* Don't add a div if there's no termEnglish */}
         <div>{termEnglish ? termEnglish : ''}</div>
-        {`${audioURL}`}
         <div>
           {/* Don't render this if there is no valid source */}
           { /* <a href={`${audioURL}`} target="_blank">audio</a>*/}

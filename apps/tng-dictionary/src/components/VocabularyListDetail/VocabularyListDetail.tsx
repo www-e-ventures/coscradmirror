@@ -108,7 +108,6 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
       <p>
         {`${(appState.vocabularyList as unknown as HasIdAndName).id}: ${(appState.vocabularyList as unknown as HasIdAndName).name}`}
       </p>
-      <h1>Selected Term</h1>
       {/* TODO remove all casts */}
       {/* TODO Complete form filtering feature */}
       {/* <VocabularyListForm formItems={(appState.vocabularyList as unknown as any).variables} /> */}
