@@ -1,4 +1,6 @@
 import { useContext, useState } from 'react';
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { useState } from 'react';
 import { __values } from 'tslib';
 import VocabularyListContext, { VocabularyListFormState } from '../../context/VocabularyListContext';
 import './VocabularyListForm.module.css';
@@ -65,21 +67,35 @@ export function VocabularyListForm({ formItems }: VocabularyListFormProps) {
   const [formState, setFormState] = useContext(VocabularyListContext);
 
   const buildSingleSelectElement = ({ name, validValues: labelsAndValues }: VocabularyListFormElement) => (
-    <label htmlFor={name}>
-      {name}
-      <select
-        id={name}
+    <FormControl variant='filled' sx={{ m: 1, minWidth: 120 }}>
+      <InputLabel id={name}>{name}</InputLabel>
+      <Select
+        value={name}
+        label={name}
         onChange={e => updateFormState(formState, name, e.target.value)}
-        onBlur={e => updateFormState(formState, name, e.target.value)}
       >
-        <option />
-        {labelsAndValues.map(({ value, display: label }) => (
-          <option value={value}>
-            {label}
-          </option>
-        ))}
-      </select>
-    </label>
+        {
+          labelsAndValues.map(({ value, display: label }) => (
+            <MenuItem value={value}>{label}</MenuItem>
+          )).concat(<MenuItem value={''}>{`ANY`}</MenuItem>)
+        }
+      </Select>
+    </FormControl>
+    // <label htmlFor={name}>
+    //   {name}
+    //   <select
+    //     id={name}
+    //     onChange={e => updateFormState(formState, name, e.target.value)}
+    //     onBlur={e => updateFormState(formState, name, e.target.value)}
+    //   >
+    //     <option />
+    //     {labelsAndValues.map(({ value, display: label }) => (
+    //       <option value={value}>
+    //         {label}
+    //       </option>
+    //     ))}
+    //   </select>
+    // </label>
   )
 
   // TODO type the return value
@@ -120,10 +136,6 @@ export function VocabularyListForm({ formItems }: VocabularyListFormProps) {
   return (
     <div className="form">
       <form
-        onSubmit={e => {
-          e.preventDefault();
-          // updateFormState();
-        }}
       >
         {buildSelectElementsForForm(formItems)}
         {buildCheckboxesForForm(formItems)}
