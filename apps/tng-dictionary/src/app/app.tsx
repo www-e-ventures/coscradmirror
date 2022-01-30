@@ -17,7 +17,7 @@ import Test from '../components/sandbox/Test/Test';
 export function App() {
   const vocabularyListFormState = useState({
     currentSelections: {},
-    isReady: false
+    // isReady: false
   });
 
   return (
