@@ -1,7 +1,7 @@
-import { useContext, useEffect, useState } from 'react';
+import { Component, useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { isNullOrUndefined } from 'util';
-import VocabularyListContext from '../../context/VocabularyListContext';
+import VocabularyListContext, { buildUnselectedFormData, FormItemValue, MaybeSelected } from '../../context/VocabularyListContext';
 import doValuesMatchFilters from '../../utilities/doValuesMatchFilters';
 import Loading from '../Loading/Loading';
 import TermsDetailComponent, { Term } from '../TermsDetail/TermsDetail';
@@ -10,6 +10,7 @@ import './VocabularyListDetail.module.css';
 import { Paper } from '@mui/material';
 import Carousel from '../Carousel/Carousel';
 import { Typography } from '@mui/material';
+import removeNoSelectionValuedPropsFromFilters from '../../utilities/removeNoSelectionValuedPropsFromFilters';
 
 
 
@@ -25,11 +26,20 @@ type VocabularyListEntry = {
   variableValues: Record<string, string | boolean>;
 }
 
+type VocabularyList = HasIdAndName & {
+  nameEnglish?: string;
+  variables: VocabularyListFormElement[];
+  entries: VocabularyListEntry[];
+}
 
 
 const filterEntriesForSelectedTerms = (allEntries: VocabularyListEntry[], filters: Record<string, string | boolean>): Term[] =>
   allEntries.filter(({ variableValues }) => doValuesMatchFilters(variableValues, filters)).map(({ term }) => term)
 
+  type ComponentState = {
+    loading: boolean;
+    vocabularyList: null | VocabularyList;
+  }
 
 /* eslint-disable-next-line */
 export interface VocabularyListDetailProps { }
@@ -38,7 +48,7 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
 
   const [form, setFormState] = useContext(VocabularyListContext);
 
-  const [appState, setAppState] = useState({
+  const [appState, setAppState] = useState<ComponentState>({
     loading: false,
     vocabularyList: null,
   });
@@ -48,19 +58,16 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
   useEffect(() => {
     setAppState({ loading: true, vocabularyList: null });
 
-    // Reset the form on the first loading of the detail page
-    setFormState({
-      currentSelections: {},
-      isReady: false
-    })
     const apiUrl = `http://localhost:3131/api/entities?type=vocabularyList&id=${id}`;
     fetch(apiUrl, { mode: 'cors' })
       .then((res) => res.json())
       .then((vocabularyList) => {
-        console.log({
-          result: vocabularyList
-        })
         setAppState({ loading: false, vocabularyList: vocabularyList });
+
+            // Reset the form on the first loading of the detail page
+    setFormState({
+      currentSelections: buildUnselectedFormData(appState.vocabularyList?.variables.map(({name})=>name))
+    })
       }).catch(rej => console.log(rej))
   }, [setAppState]);
 
@@ -82,7 +89,7 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
 
   const allEntries = (appState.vocabularyList as unknown as any).entries;
 
-  const selectedTerms = (allEntries as any).map(({ term }: Term) => term) // filterEntriesForSelectedTerms(allEntries, form.currentSelections);
+  const selectedTerms = filterEntriesForSelectedTerms(allEntries, removeNoSelectionValuedPropsFromFilters(form.currentSelections));
 
   if (!selectedTerms.length) return (
     <div>
@@ -98,7 +105,7 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
     </div>
   )
   // Extract terms from entries into separate term array
-  //  const allTerms = (appState.vocabularyList as unknown as any).entries.map(({ term }: { term: Term }) => term);
+ // const allTerms = appState.vocabularyList.entries.map(({ term }: { term: Term }) => term);
 
   return (
     <div style={{ position: 'absolute' as 'absolute', height: '90vh', width: '100vw', background: 'inherit', textAlign: 'center' }}>

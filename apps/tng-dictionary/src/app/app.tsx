@@ -18,7 +18,7 @@ import Loading from '../components/Loading/Loading';
 export function App() {
   const vocabularyListFormState = useState({
     currentSelections: {},
-    isReady: false
+    // isReady: false
   });
 
   return (

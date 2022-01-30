@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import { __values } from 'tslib';
-import VocabularyListContext, { VocabularyListFormState } from '../../context/VocabularyListContext';
+import VocabularyListContext, { FormItemValue, MaybeSelected, NoSelection, VocabularyListFormState } from '../../context/VocabularyListContext';
 import './VocabularyListForm.module.css';
 
 export type LabelAndValue<T = any> = {
@@ -21,7 +21,9 @@ export interface VocabularyListFormProps {
   formItems: VocabularyListFormElement[];
 }
 
-const convertStringToBooleanIfApplicable = (input: string): string | boolean => {
+const convertFormDataValuesIfApplicable = (input: MaybeSelected<FormItemValue>): string | boolean => {
+  if(input === NoSelection) return 'NoSelection';
+
   if (typeof input !== 'string') return input;
 
   if (input.toLowerCase() === 'false') return false;
@@ -35,10 +37,8 @@ export const isFormReady = (formPropertyNames: string[], filters: Record<string,
   : boolean => formPropertyNames.every(name => Object.keys(filters).includes(name));
 
 export function VocabularyListForm({ formItems }: VocabularyListFormProps) {
-  const getUpdatedFormState = ({ currentSelections: formState }: VocabularyListFormState, key: string, value: string): VocabularyListFormState => {
+  const getUpdatedFormState = ({ currentSelections: formState }: VocabularyListFormState, key: string, value: MaybeSelected<FormItemValue>): VocabularyListFormState => {
     console.log(`Time to update the form`)
-
-    console.log(`previous state: ${formState}, next key: ${key}, next value: ${value}`);
 
     // TODO Deal with invalid input
 
@@ -47,7 +47,7 @@ export function VocabularyListForm({ formItems }: VocabularyListFormProps) {
 
     const updatedState = {
       ...formState,
-      [fixedKey]: convertStringToBooleanIfApplicable(value)
+      [fixedKey]: convertFormDataValuesIfApplicable(value)
     }
 
     // TODO clean data and remove hack
@@ -59,24 +59,24 @@ export function VocabularyListForm({ formItems }: VocabularyListFormProps) {
 
     return {
       currentSelections: updatedState,
-      isReady: isFormReady(formItemNames, updatedState)
+      // isReady: isFormReady(formItemNames, updatedState)
     };
   }
 
   const [formState, setFormState] = useContext(VocabularyListContext);
 
-  const buildSingleSelectElement = ({ name, validValues: labelsAndValues }: VocabularyListFormElement) => (
+  const buildSingleSelectElement = ({ name, validValues: labelsAndValues }: VocabularyListFormElement, currentState: MaybeSelected<FormItemValue>) => (
     <FormControl variant='filled' sx={{ m: 1, minWidth: 120 }}>
       <InputLabel id={name}>{name}</InputLabel>
       <Select
-        value={name}
+        value={currentState}
         label={name}
-        onChange={e => updateFormState(formState, name, e.target.value)}
+        onChange={e => updateFormState(formState, name, e.target.value as MaybeSelected<FormItemValue>)}
       >
         {
           labelsAndValues.map(({ value, display: label }) => (
             <MenuItem value={value}>{label}</MenuItem>
-          )).concat(<MenuItem value={''}>{`ANY`}</MenuItem>)
+          )).concat(<MenuItem value={'NoSelection'}>{`ANY`}</MenuItem>)
         }
       </Select>
     </FormControl>
@@ -98,31 +98,31 @@ export function VocabularyListForm({ formItems }: VocabularyListFormProps) {
   )
 
   // TODO type the return value
-  const buildSelectElementsForForm = (form: VocabularyListFormElement[]) => (
+  const buildSelectElementsForForm = (form: VocabularyListFormElement[],currentSelections: Record<string,MaybeSelected<FormItemValue>>) => (
     <div>
-      {form.filter(({ type }) => type === 'dropbox').map(buildSingleSelectElement)}
+      {form.filter(({ type }) => type === 'dropbox').map(formElement => buildSingleSelectElement(formElement,currentSelections[formElement.name]))}
     </div>
   )
 
   // TODO type return value
-  const buildCheckboxesForForm = (form: VocabularyListFormElement[]) => (
+  const buildCheckboxesForForm = (form: VocabularyListFormElement[], currentSelections: Record<string,MaybeSelected<FormItemValue>>) => (
     <div>
       {form.filter(({ type }) => type === 'checkbox').map(({ type, name, validValues }) => ({
         type,
         name,
         validValues: validValues.map(({ display, value }) => ({
           display,
-          value: convertStringToBooleanIfApplicable(value) //: value === true ? 'True' : 'False'
+          value: convertFormDataValuesIfApplicable(value) //: value === true ? 'True' : 'False'
         }))
       })
       )
         // Eventually we will replace this with a checkbox builder. For now render as a dropdown
-        .map(buildSingleSelectElement)
+        .map(formElement => buildSingleSelectElement(formElement,currentSelections[formElement.name]))
       }
     </div>
   )
 
-  const updateFormState = (existingState: VocabularyListFormState, key: string, value: string): void => {
+  const updateFormState = (existingState: VocabularyListFormState, key: string, value: MaybeSelected<FormItemValue>): void => {
     const newState = getUpdatedFormState(existingState, key, value);
 
     console.log({
@@ -136,8 +136,8 @@ export function VocabularyListForm({ formItems }: VocabularyListFormProps) {
     <div className="form">
       <form
       >
-        {buildSelectElementsForForm(formItems)}
-        {buildCheckboxesForForm(formItems)}
+        {buildSelectElementsForForm(formItems,formState.currentSelections)}
+        {buildCheckboxesForForm(formItems,formState.currentSelections)}
         {/* <label htmlFor='positive'>
         positive \ negative form?
         <input
