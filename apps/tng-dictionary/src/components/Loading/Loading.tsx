@@ -4,24 +4,27 @@ import { Box } from '@mui/material';
 import { CSSProperties } from 'react';
 
 /* eslint-disable-next-line */
-export interface LoadingProps {
-  nameToDisplay: string;
-}
+
 
 export interface StylesDictionary {
   [Key: string]: CSSProperties;
 }
 
-export function Loading({ nameToDisplay }: LoadingProps): JSX.Element {
+export function Loading(): JSX.Element {
 
   return (
-    <div className='loading'>
-      <Box sx={{ display: 'flex' }}>
-        <CircularProgress style={styles.loader} thickness={4} size={140} />
-        <CircularProgress style={styles.track} thickness={4} size={140} value={100} variant="determinate" />
-        <CircularProgress style={styles.background} thickness={22} size={140} value={100} variant="determinate" />
-        <div className='Logo'><img height={80} src={logo} /></div>
-      </Box>
+    <div className='load' style={background}>
+      <div className='loading' style={{
+        backgroundImage: ''
+
+      }}>
+        <Box sx={{ display: 'flex' }}>
+          <CircularProgress style={styles.loader} thickness={4} size={140} />
+          <CircularProgress style={styles.track} thickness={4} size={140} value={100} variant="determinate" />
+          <CircularProgress style={styles.background} thickness={22} size={140} value={100} variant="determinate" />
+          <div className='Logo'><img height={80} src={logo} /></div>
+        </Box>
+      </div>
     </div>
   );
 }
@@ -41,6 +44,10 @@ const styles = {
     position: 'absolute'
   }
 } as const;
+
+const background = {
+  background: 'inherit'
+}
 
 const logo = "https://www.tsilhqotin.ca/wp-content/uploads/2020/11/cropped-tng_logo_resized.png"
 

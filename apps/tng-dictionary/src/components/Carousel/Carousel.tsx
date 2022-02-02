@@ -3,11 +3,13 @@ import Test from '../sandbox/Test/Test';
 import './Carousel.module.css';
 import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
-import { Paper } from '@mui/material';
+import { cardClasses, Paper } from '@mui/material';
 import { Divider } from '@mui/material';
 import { Card } from '@mui/material';
+import { CardContent } from '@mui/material';
 import { Typography } from '@mui/material';
 import TermsDetailComponent, { Term } from '../TermsDetail/TermsDetail';
+import ArrowBackIosNewOutlined from '@mui/icons-material/ArrowBackIosNewOutlined';
 
 /* eslint-disable-next-line */
 export interface CarouselProps {
@@ -46,16 +48,22 @@ export function Carousel(props: CarouselProps) {
   const currentItem: Term = props.data[currentIndex];
 
   return (
-    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-      <Card variant='outlined' className='Carousel' >
-        <TermsDetailComponent termData={currentItem} />
-        <Divider />
-        <div style={{ paddingBottom: '20px' }} />
-        <ArrowBackIosNewOutlinedIcon className='Arrow' fontSize='large' onClick={e => setIndex(cyclicDecrement(currentIndex, props.data.length - 1))} />
+    <div style={{ height: '90vh', textAlign: 'center' }}>
+      <Card className="Cards">
+        <CardContent>
+          <TermsDetailComponent termData={currentItem} />
+          <Divider />
+          <div style={{ textAlign: 'center', margin: '12px' }}>
+            <div>
+              <ArrowBackIosNewOutlined sx={{ marginRight: '40px' }} fontSize='large' onClick={e => setIndex(cyclicDecrement(currentIndex, props.data.length - 1))} />
+              <ArrowForwardIosOutlinedIcon fontSize='large' onClick={e => setIndex(cyclicIncrement(currentIndex, props.data.length - 1))} />
+            </div>
+          </div>
+        </CardContent>
+      </Card>
 
-        <ArrowForwardIosOutlinedIcon fontSize='large' onClick={e => setIndex(cyclicIncrement(currentIndex, props.data.length - 1))}></ArrowForwardIosOutlinedIcon>
-      </Card >
-    </Typography>
+
+    </div >
   );
 }
 

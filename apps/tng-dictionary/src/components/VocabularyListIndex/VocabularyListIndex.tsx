@@ -31,9 +31,9 @@ export function VocabularyListIndex(props: VocabularyListIndexProps) {
       }).catch(rej => console.log(rej))
   }, [setAppState]);
 
-  if (!appState.vocabularyLists || appState.vocabularyLists === []) return <Loading nameToDisplay={'All Vocabulary Lists'} />
+  if (!appState.vocabularyLists || appState.vocabularyLists === []) return <Loading />
 
-  const rows: GridRowsProp = (appState.vocabularyLists as unknown as HasIdAndName[]).map(vocabularyList =>({
+  const rows: GridRowsProp = (appState.vocabularyLists as unknown as HasIdAndName[]).map(vocabularyList => ({
     id: vocabularyList.id,
     name: vocabularyList.name
   }));
@@ -42,10 +42,10 @@ export function VocabularyListIndex(props: VocabularyListIndexProps) {
     field: 'id',
     headerName: 'ID',
     renderCell: (idParam: GridRenderCellParams<string>) => (
-      <Link to={`/vocabularyLists/${idParam.value}`}>{idParam.value}</Link>
+      <Link to={`/vocabularyLists/${idParam.value}`}><p style={{ color: 'black' }}>{idParam.value}</p></Link>
     ),
     width: 150
-  },{
+  }, {
     field: 'name',
     headerName: 'Vocabulary List',
     width: 150
@@ -54,12 +54,12 @@ export function VocabularyListIndex(props: VocabularyListIndexProps) {
   return (
     <div>
       {
-            <div style={{ textAlign: 'center' }}>
-            <div style={{ height: '90vh', width: '100%' }}>
-              <DataGrid rows={rows} columns={columns} pageSize={10} />
-            </div>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ height: '90vh', width: '60%', background: 'white', margin: 'auto', color: 'black' }}>
+            <DataGrid rows={rows} columns={columns} pageSize={100} />
           </div>
-}      
+        </div>
+      }
     </div>
   );
 }

@@ -65,7 +65,7 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
   }, [setAppState]);
 
   if (!appState.vocabularyList) return <div>
-    <Loading nameToDisplay={'Vocabulary Lists'} />
+    <Loading />
   </div>
 
   // if (!form.isReady) return (
@@ -82,7 +82,7 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
 
   const allEntries = (appState.vocabularyList as unknown as any).entries;
 
-  const selectedTerms = (allEntries as any).map(({term}: Term)=>term) // filterEntriesForSelectedTerms(allEntries, form.currentSelections);
+  const selectedTerms = (allEntries as any).map(({ term }: Term) => term) // filterEntriesForSelectedTerms(allEntries, form.currentSelections);
 
   if (!selectedTerms.length) return (
     <div>
@@ -98,10 +98,10 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
     </div>
   )
   // Extract terms from entries into separate term array
-//  const allTerms = (appState.vocabularyList as unknown as any).entries.map(({ term }: { term: Term }) => term);
+  //  const allTerms = (appState.vocabularyList as unknown as any).entries.map(({ term }: { term: Term }) => term);
 
   return (
-    <div style={{ textAlign: 'center' }}>
+    <div style={{ position: 'absolute' as 'absolute', height: '90vh', width: '100vw', background: 'inherit' }}>
 
       <h1>Vocabulary List: {id}</h1>
 
@@ -111,8 +111,9 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
       {/* TODO remove all casts */}
       {/* TODO Complete form filtering feature */}
       {/* <VocabularyListForm formItems={(appState.vocabularyList as unknown as any).variables} /> */}
-      <Carousel data={selectedTerms} />
-    </div >
+      <div style={{ margin: 'auto' }}><Carousel data={selectedTerms} /></div>
+
+    </div>
   );
 }
 

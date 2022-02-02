@@ -13,6 +13,7 @@ import { useState } from 'react';
 
 
 import Test from '../components/sandbox/Test/Test';
+import Loading from '../components/Loading/Loading';
 
 export function App() {
   const vocabularyListFormState = useState({
@@ -22,7 +23,7 @@ export function App() {
 
   return (
     <VocabularyListContext.Provider value={vocabularyListFormState}>
-      <div style={{ marginTop: '80px' }}>
+      <div className='body' style={{ marginTop: '80px' }}>
         <BrowserRouter>
           <Toolbar />
           <Routes>
@@ -32,6 +33,7 @@ export function App() {
             <Route path="/VocabularyLists/:id" element={<VocabularyListDetail />} />
             <Route path="/Terms" element={<TermsDetailComponent />} />
             <Route path="/Test" element={<Test />} />
+            <Route path="/Loading" element={<Loading />} />
           </Routes>
         </BrowserRouter>
       </div>

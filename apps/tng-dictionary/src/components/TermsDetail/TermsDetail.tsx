@@ -33,7 +33,9 @@ export function TermsDetailComponent(props: TermsDetailComponentProps) {
   const { termData } = props;
 
   if (!termData) return (
-    <h1>Term not found</h1>
+    <div className='load'>
+      <h1>Term not found</h1>
+    </div>
   );
 
   const {
@@ -44,26 +46,22 @@ export function TermsDetailComponent(props: TermsDetailComponentProps) {
   return (
 
     <div style={{ textAlign: 'center' }}>
-      <div style={{ height: '90vh', width: '100%' }}>
-        {term}
 
-        <Typography variant="h5" component="div">
-          <h1>{`Term: ${id}`}</h1>
-        </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">{`contributor: ${contributor}`}</Typography>
-        <div>{term}</div>
-        {/* Don't add a div if there's no termEnglish */}
-        <div>{termEnglish ? termEnglish : ''}</div>
-        <div>
-          {/* Don't render this if there is no valid source */}
-          { /* <a href={`${audioURL}`} target="_blank">audio</a>*/}
-          <audio id="myAudio" controls key={audioURL}>
-            <source src={`${audioURL}`} type="audio/ogg" />
-            Your browser does not support the audio element.
-          </audio>
-        </div>
+      <h1>{`Term: ${id}`}</h1>
+      <div>{`contributor: ${contributor}`}</div>
+      <div>{term}</div>
+      {/* Don't add a div if there's no termEnglish */}
+      <div>{termEnglish ? termEnglish : ''}</div>
+      {`${audioURL}`}
+      <div>
+        {/* Don't render this if there is no valid source */}
+        { /* <a href={`${audioURL}`} target="_blank">audio</a>*/}
+        <audio id="myAudio" controls key={audioURL}>
+          <source src={`${audioURL}`} type="audio/ogg" />
+          Your browser does not support the audio element.
+        </audio>
       </div>
-    </div >
+    </div>
 
   );
 }
