@@ -31,7 +31,7 @@ export function Loading(): JSX.Element {
 
 const styles = {
   loader: {
-    color: 'red'
+    color: 'white'
   },
   track: {
     color: 'rgb(170, 170, 170)',
@@ -39,7 +39,7 @@ const styles = {
     position: 'absolute'
   },
   background: {
-    color: 'rgb(220, 220, 220)',
+    color: 'rgb(168,4,4)',
     zIndex: '-2',
     position: 'absolute'
   }
@@ -49,6 +49,6 @@ const background = {
   background: 'inherit'
 }
 
-const logo = "https://www.tsilhqotin.ca/wp-content/uploads/2020/11/cropped-tng_logo_resized.png"
+const logo = "https://www.tsilhqotin.ca/wp-content/uploads/2022/02/imageedit_14_8913908156.png"
 
 export default Loading;

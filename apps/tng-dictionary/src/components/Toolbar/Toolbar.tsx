@@ -12,11 +12,11 @@ export function Toolbar(props: ToolbarProps) {
     <CssBaseline>
       <AppBar
         className="toolbar"
-        sx={{ bgcolor: 'rgb(222,37,37)', display: 'block' }}
+        sx={{ bgcolor: 'rgb(168,4,4)' }}
       >
-        <div style={{ display: 'inline-block', verticalAlign: 'sub', paddingRight: '15px' }}><img src='https://www.tsilhqotin.ca/wp-content/uploads/2021/08/tng_footer_logo_black_white.png' height={40}></img></div>
-        <div style={{ display: 'inline-block', marginTop: 'auto' }}>
-          <h1>Tŝilhqot'in Dictionary</h1>
+        {/*<div style={{}}><img src='https://www.tsilhqotin.ca/wp-content/uploads/2022/02/imageedit_14_8913908156.png' height={40}></img></div> */}
+        <div style={{ lineHeight: '80px' }}>
+          <h1><img style={{ marginRight: '14px', verticalAlign: 'sub' }} className='tool' src='https://www.tsilhqotin.ca/wp-content/uploads/2022/02/imageedit_14_8913908156.png' height={40}></img>Tŝilhqot'in Dictionary</h1>
         </div>
       </AppBar>
     </CssBaseline>

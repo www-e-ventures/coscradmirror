@@ -1,8 +1,9 @@
-import { DataGrid, GridColDef, GridRenderCellParams, GridRowsProp } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridRenderCellParams, GridRowsProp, GridToolbar } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Loading from '../Loading/Loading';
 import './VocabularyListIndex.module.css';
+
 
 type HasIdAndName = {
   id: string;
@@ -53,15 +54,16 @@ export function VocabularyListIndex(props: VocabularyListIndexProps) {
 
   return (
     <div>
-      {
-        <div style={{ textAlign: 'center' }}>
-          <div style={{ height: '90vh', width: '60%', background: 'white', margin: 'auto', color: 'black' }}>
-            <DataGrid rows={rows} columns={columns} pageSize={100} />
-          </div>
+      <div style={{ textAlign: 'center', justifySelf: 'center' }}>
+        <div style={{ height: '90vh', width: 'fit-content', background: 'white', color: 'black', textAlign: 'center', display: 'inline-block' }}>
+          <DataGrid rows={rows} columns={columns} pageSize={100} components={{ Toolbar: GridToolbar }} />
         </div>
-      }
+      </div>
     </div>
+
   );
 }
 
 export default VocabularyListIndex;
+
+
