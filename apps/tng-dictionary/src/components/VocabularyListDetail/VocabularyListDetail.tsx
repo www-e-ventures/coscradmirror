@@ -110,9 +110,9 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
       </p>
       {/* TODO remove all casts */}
       {/* TODO Complete form filtering feature */}
-      {/* <VocabularyListForm formItems={(appState.vocabularyList as unknown as any).variables} /> */}
+      <VocabularyListForm formItems={(appState.vocabularyList as unknown as any).variables} />
       <div style={{ margin: 'auto' }}><Carousel data={selectedTerms} /></div>
-    </div>
+    </div >
   );
 }
 

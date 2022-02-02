@@ -24,6 +24,44 @@ const safeParse = (serialized: string): Object => {
   }
 };
 
+// TODO add this in the database!
+const getNounParadigmVariables = () => [
+  {
+    name: 'possessor',
+    type: 'dropbox',
+    validValues: [
+      {
+        value: '1',
+        display: 'my',
+      },
+      {
+        value: '2',
+        display: 'your',
+      },
+      {
+        value: '3',
+        display: 'his, her, or its',
+      },
+      {
+        value: '4',
+        display: "the other's",
+      },
+      {
+        value: '5',
+        display: "our  you guys'",
+      },
+      {
+        value: '7',
+        display: 'their',
+      },
+      {
+        value: '0',
+        display: "someone's",
+      },
+    ],
+  },
+];
+
 /**
  * TODO- We need to do this for once and for all across all data imported from
  * the Jupyter notebook. There is invalid JSON that resulted from not serializing
@@ -105,7 +143,10 @@ export class VocabularyListViewModel {
 
     this.nameEnglish = this.nameEnglish;
 
-    this.variables = [...variables];
+    this.variables =
+      Array.isArray(variables) || variables === '[]'
+        ? getNounParadigmVariables()
+        : [...variables];
 
     const newEntries = (entries || [])
       .map(({ termId, variableValues }) => {
@@ -117,6 +158,7 @@ export class VocabularyListViewModel {
                 fixTermAudioFilename(
                   termSearchResult,
                   safeParse(
+                    // Horrible hack- fix the data instead!
                     cleanSerializedJSON(variableValues as unknown as string)
                   ) as VocabularyListVariableValue
                 ) as Term
