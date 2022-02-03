@@ -2,7 +2,7 @@ import './TermsDetail.module.css';
 import * as React from 'react';
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 import { Link } from 'react-router-dom';
-import { Typography } from '@mui/material';
+import { Divider, Typography } from '@mui/material';
 
 // TODO move this to shared interfaces lib
 export type Term = {
@@ -47,21 +47,23 @@ export function TermsDetailComponent(props: TermsDetailComponentProps) {
 
     <div style={{ textAlign: 'center' }}>
 
-      <h1>{`Term: ${id}`}</h1>
-      <div>{`contributor: ${contributor}`}</div>
-      <div>{term}</div>
+      <Typography sx={{ mb: 1.5 }} variant='h3'>{term}</Typography>
       {/* Don't add a div if there's no termEnglish */}
-      <div>{termEnglish ? termEnglish : ''}</div>
-      {`${audioURL}`}
+      <Divider sx={{ mb: 1.5 }} />
+      <Typography sx={{ mb: 1.5 }} variant="h4">English Translation{termEnglish ? termEnglish : ''}</Typography>
+      <Typography sx={{ mb: 1.5 }} color="text.secondary">{`contributor: ${contributor}`}</Typography>
+      <Typography sx={{ mb: 1.5 }} color="text.secondary">{`Term: ${id}`}</Typography>
+      <Typography sx={{ mb: 1.5 }} color="text.secondary" variant='body2'>{`${audioURL}`}</Typography>
+
       <div>
         {/* Don't render this if there is no valid source */}
         { /* <a href={`${audioURL}`} target="_blank">audio</a>*/}
-        <audio id="myAudio" controls key={audioURL}>
+        <audio style={{ marginBottom: '5px' }} id="myAudio" controls key={audioURL}>
           <source src={`${audioURL}`} type="audio/ogg" />
           Your browser does not support the audio element.
         </audio>
       </div>
-    </div>
+    </div >
 
   );
 }

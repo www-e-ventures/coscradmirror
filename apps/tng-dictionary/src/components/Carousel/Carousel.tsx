@@ -54,7 +54,7 @@ export function Carousel(props: CarouselProps) {
           <TermsDetailComponent termData={currentItem} />
           <Divider />
           <div style={{ textAlign: 'center', margin: '12px' }}>
-            <div>
+            <div style={{ padding: '10px' }}>
               <ArrowBackIosNewOutlined sx={{ marginRight: '40px' }} fontSize='large' onClick={e => setIndex(cyclicDecrement(currentIndex, props.data.length - 1))} />
               <ArrowForwardIosOutlinedIcon fontSize='large' onClick={e => setIndex(cyclicIncrement(currentIndex, props.data.length - 1))} />
             </div>

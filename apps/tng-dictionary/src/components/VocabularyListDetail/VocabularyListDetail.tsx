@@ -101,7 +101,7 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
   //  const allTerms = (appState.vocabularyList as unknown as any).entries.map(({ term }: { term: Term }) => term);
 
   return (
-    <div style={{ position: 'absolute' as 'absolute', height: '90vh', width: '100vw', background: 'inherit' }}>
+    <div style={{ position: 'absolute' as 'absolute', height: '90vh', width: '100vw', background: 'inherit', textAlign: 'center' }}>
 
       <h1>Vocabulary List: {id}</h1>
 
@@ -112,7 +112,6 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
       {/* TODO Complete form filtering feature */}
       {/* <VocabularyListForm formItems={(appState.vocabularyList as unknown as any).variables} /> */}
       <div style={{ margin: 'auto' }}><Carousel data={selectedTerms} /></div>
-
     </div>
   );
 }
