@@ -39,7 +39,7 @@ const styles = {
     position: 'absolute'
   },
   background: {
-    color: 'rgb(168,4,4)',
+    color: 'rgb(126,30,30) ',
     zIndex: '-2',
     position: 'absolute'
   }
