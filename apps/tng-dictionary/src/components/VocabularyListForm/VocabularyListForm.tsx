@@ -1,6 +1,5 @@
 import { useContext, useState } from 'react';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
-import { __values } from 'tslib';
 import VocabularyListContext, { FormItemValue, MaybeSelected, NoSelection, VocabularyListFormState } from '../../context/VocabularyListContext';
 import './VocabularyListForm.module.css';
 
