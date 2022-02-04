@@ -143,6 +143,7 @@ export class VocabularyListViewModel {
 
     this.nameEnglish = this.nameEnglish;
 
+    // @ts-expect-error
     this.variables =
       Array.isArray(variables) || variables === '[]'
         ? getNounParadigmVariables()
