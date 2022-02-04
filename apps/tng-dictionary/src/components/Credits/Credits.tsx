@@ -76,11 +76,14 @@ export function Credits(props: CreditsProps) {
     </FormControl>
   </Box>;
   return (
-    <div className='credits'>
-      {newLocal}
-      {newLocal2}
-      {newLocal3}
-    </div>
+    <div className='load'>
+      <div className='loading' style={{ color: 'white' }}>
+        <h1>Contributors</h1>
+        <p>coming soon</p>
+        <h1>Funders</h1>
+        <p>coming soon</p>
+      </div>
+    </div >
 
   );
 }

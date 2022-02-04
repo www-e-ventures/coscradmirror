@@ -1,7 +1,5 @@
 import './TermsDetail.module.css';
 import * as React from 'react';
-import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
-import { Link } from 'react-router-dom';
 import { Divider, Typography } from '@mui/material';
 
 // TODO move this to shared interfaces lib
@@ -34,8 +32,12 @@ export function TermsDetailComponent(props: TermsDetailComponentProps) {
 
   if (!termData) return (
     <div className='load'>
-      <h1>Term not found</h1>
-    </div>
+      <div className='loading' style={{ color: 'white' }}>
+        <h1>Term not found</h1>
+        <h2>Lha ts'egwediʔal</h2>
+        <h2 style={{ color: 'rgb(204, 170, 170)' }}>"One couldn't find the word."</h2>
+      </div>
+    </div >
   );
 
   const {
@@ -47,10 +49,10 @@ export function TermsDetailComponent(props: TermsDetailComponentProps) {
 
     <div style={{ textAlign: 'center' }}>
 
-      <Typography sx={{ mb: 1.5 }} variant='h3'>{term}</Typography>
+      <Typography sx={{ mb: 1.5 }} variant='h4'>{term}</Typography>
       {/* Don't add a div if there's no termEnglish */}
       <Divider sx={{ mb: 1.5 }} />
-      <Typography sx={{ mb: 1.5 }} variant="h4">English Translation{termEnglish ? termEnglish : ''}</Typography>
+      <Typography sx={{ mb: 1.5 }} variant="h5">English Translation: {termEnglish ? termEnglish : ''}</Typography>
       <Typography sx={{ mb: 1.5 }} color="text.secondary">{`contributor: ${contributor}`}</Typography>
       <Typography sx={{ mb: 1.5 }} color="text.secondary">{`Term: ${id}`}</Typography>
       <Typography sx={{ mb: 1.5 }} color="text.secondary" variant='body2'>{`${audioURL}`}</Typography>
@@ -63,7 +65,7 @@ export function TermsDetailComponent(props: TermsDetailComponentProps) {
           Your browser does not support the audio element.
         </audio>
       </div>
-    </div >
+    </div>
 
   );
 }

@@ -1,7 +1,8 @@
 import './Toolbar.module.css';
 import { CssBaseline } from '@mui/material';
 import { AppBar } from '@mui/material';
-import { motion } from 'framer-motion'
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 
 /* eslint-disable-next-line */
@@ -28,7 +29,12 @@ export function Toolbar(props: ToolbarProps) {
           }}
           transition={{ duration: 1 }}
         >
-          <h1><img style={{ marginRight: '14px', verticalAlign: 'sub' }} className='tool' src='https://api.tsilhqotinlanguage.ca/uploads/tng_log_for_language_hub_2e4ec30f17.png' height={40}></img>Tŝilhqot'in Dictionary</h1>
+          <Link style={style} to={'/'}>
+            <h2>
+              <img style={{ marginRight: '14px', verticalAlign: 'sub' }} className='tool' src='https://api.tsilhqotinlanguage.ca/uploads/tng_log_for_language_hub_2e4ec30f17.png' height={40}></img>
+              Tŝilhqot'in Dictionary
+            </h2>
+          </Link>
         </motion.div>
       </AppBar>
     </CssBaseline>
@@ -36,3 +42,8 @@ export function Toolbar(props: ToolbarProps) {
 }
 
 export default Toolbar;
+
+const style = {
+  textDecoration: 'none',
+  color: 'white'
+}

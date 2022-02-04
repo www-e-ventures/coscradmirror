@@ -36,10 +36,10 @@ type VocabularyList = HasIdAndName & {
 const filterEntriesForSelectedTerms = (allEntries: VocabularyListEntry[], filters: Record<string, string | boolean>): Term[] =>
   allEntries.filter(({ variableValues }) => doValuesMatchFilters(variableValues, filters)).map(({ term }) => term)
 
-  type ComponentState = {
-    loading: boolean;
-    vocabularyList: null | VocabularyList;
-  }
+type ComponentState = {
+  loading: boolean;
+  vocabularyList: null | VocabularyList;
+}
 
 /* eslint-disable-next-line */
 export interface VocabularyListDetailProps { }
@@ -58,16 +58,16 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
   useEffect(() => {
     setAppState({ loading: true, vocabularyList: null });
 
-    const apiUrl = `http://localhost:3131/api/entities?type=vocabularyList&id=${id}`;
+    const apiUrl = `https://newapi.tsilhqotinlanguage.ca/api/entities?type=vocabularyList&id=${id}`;
     fetch(apiUrl, { mode: 'cors' })
       .then((res) => res.json())
       .then((vocabularyList) => {
         setAppState({ loading: false, vocabularyList: vocabularyList });
 
-            // Reset the form on the first loading of the detail page
-    setFormState({
-      currentSelections: buildUnselectedFormData(appState.vocabularyList?.variables.map(({name})=>name))
-    })
+        // Reset the form on the first loading of the detail page
+        setFormState({
+          currentSelections: buildUnselectedFormData(appState.vocabularyList?.variables.map(({ name }) => name))
+        })
       }).catch(rej => console.log(rej))
   }, [setAppState]);
 
@@ -93,7 +93,7 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
 
   if (!selectedTerms.length) return (
     <div>
-      <h1>Vocabulary List: {id}</h1>
+      <p>Vocabulary List: {id}</p>
       <p>
         {`${(appState.vocabularyList as unknown as HasIdAndName).id}: ${(appState.vocabularyList as unknown as HasIdAndName).name}`}
       </p>
@@ -101,26 +101,33 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
       {/* TODO remove all casts */}
       <VocabularyListForm formItems={(appState.vocabularyList as unknown as any).variables} />
       Term not found. Please search again.
-
     </div>
   )
   // Extract terms from entries into separate term array
- // const allTerms = appState.vocabularyList.entries.map(({ term }: { term: Term }) => term);
+  // const allTerms = appState.vocabularyList.entries.map(({ term }: { term: Term }) => term);
 
   return (
-    <div style={{ position: 'absolute' as 'absolute', height: '90vh', width: '100vw', background: 'inherit', textAlign: 'center' }}>
+    <div style={center}>
 
-      <h1>Vocabulary List: {id}</h1>
+      <p>Vocabulary List: {id}</p>
 
       <p>
         {`${(appState.vocabularyList as unknown as HasIdAndName).id}: ${(appState.vocabularyList as unknown as HasIdAndName).name}`}
       </p>
       {/* TODO remove all casts */}
       {/* TODO Complete form filtering feature */}
-      <VocabularyListForm formItems={(appState.vocabularyList as unknown as any).variables} />
+      {/* <VocabularyListForm formItems={(appState.vocabularyList as unknown as any).variables} />*/}
       <div style={{ margin: 'auto' }}><Carousel data={selectedTerms} /></div>
     </div >
   );
 }
 
 export default VocabularyListDetail;
+
+const center = {
+  position: 'absolute',
+  height: '90vh',
+  width: '100vw',
+  background: 'inherit',
+  textAlign: 'center'
+} as const
