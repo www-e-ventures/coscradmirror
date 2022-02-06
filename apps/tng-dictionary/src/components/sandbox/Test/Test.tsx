@@ -1,5 +1,5 @@
 import './Test.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Carousel from '../../Carousel/Carousel';
 import { Term } from '../../TermsDetail/TermsDetail';
 
@@ -9,33 +9,29 @@ export interface TestProps {
 }
 
 export function Test(props: TestProps) {
+  const [appState, setAppState] = useState({
+    loading: false,
+    entitiesAndDescriptions: null,
+  });
 
-  const terms: Term[] = [{
-    term: 'test term 1',
-    termEnglish: 'english term 1',
-    contributor: 'John Doe',
-    audioURL: 'https://api.tsilhqotinlanguage.ca/uploads/128_d260bf5afa.wav',
-    id: '1'
-  },
-  {
-    term: 'test term 2',
-    termEnglish: 'english term 2',
-    contributor: 'John Doe2',
-    id: '2'
-  },
-  {
-    term: 'test term 3',
-    contributor: 'John Doe3',
-    audioURL: 'https://api.tsilhqotinlanguage.ca/uploads/128_d260bf5afa.wav',
-    id: '3'
-  }
-  ]
+  useEffect(() => {
+    setAppState({ loading: true, entitiesAndDescriptions: null });
+    const apiUrl = `http://localhost:3131/api/entities/descriptions`;
+    fetch(apiUrl, { mode: 'cors' })
+      .then((res) => res.json())
+      .then((entitiesAndDescriptions) => {
+        setAppState({ loading: false, entitiesAndDescriptions: entitiesAndDescriptions });
+      }).catch(rej => console.log(rej))
+  }, [setAppState]);
+
+  const [entity,description] =  Object.entries(appState.entitiesAndDescriptions || {loading: 'still loading'})[0]
 
   return (
-    <div className='Carousel'>
-      <Carousel data={terms} />
+    <div>
+      <h1>{entity}</h1>
+      {description}
     </div>
-  );
+  )
 }
 
 export default Test;
