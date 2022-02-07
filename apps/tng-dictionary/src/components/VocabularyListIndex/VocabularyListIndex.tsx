@@ -29,7 +29,7 @@ export function VocabularyListIndex(props: VocabularyListIndexProps) {
 
   useEffect(() => {
     setAppState({ loading: true, vocabularyLists: null });
-    const apiUrl = `https://newapi.tsilhqotinlanguage.ca/api/entities?type=vocabularyList`;
+    const apiUrl = `http://104.225.142.106:3131/api/entities?type=vocabularyList`;
     fetch(apiUrl, { mode: 'cors' })
       .then((res) => res.json())
       .then((vocabularyLists) => {
