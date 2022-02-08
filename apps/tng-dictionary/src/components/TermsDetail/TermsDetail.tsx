@@ -47,15 +47,15 @@ export function TermsDetailComponent(props: TermsDetailComponentProps) {
 
   return (
 
-    <div style={{ textAlign: 'center' }}>
+    <div>
 
       <Typography sx={{ mb: 1.5 }} variant='h4'>{term}</Typography>
       {/* Don't add a div if there's no termEnglish */}
       <Divider sx={{ mb: 1.5 }} />
-      <Typography sx={{ mb: 1.5 }} variant="h5">English Translation: {termEnglish ? termEnglish : ''}</Typography>
-      <Typography sx={{ mb: 1.5 }} color="text.secondary">{`contributor: ${contributor}`}</Typography>
-      <Typography sx={{ mb: 1.5 }} color="text.secondary">{`Term: ${id}`}</Typography>
-      <Typography sx={{ mb: 1.5 }} color="text.secondary" variant='body2'>{`${audioURL}`}</Typography>
+      <Typography sx={{ mb: 1.5, textAlign: 'left' }} variant="h5">English: {termEnglish ? termEnglish : ''}</Typography>
+      <Typography sx={{ mb: 1.5, textAlign: 'left' }} color="text.secondary">{`contributor: ${contributor}`}</Typography>
+      <Typography sx={{ mb: 1.5, textAlign: 'left' }} color="text.secondary">{`Term: ${id}`}</Typography>
+      <Typography sx={{ mb: 1.5, textAlign: 'left' }} color="text.secondary" variant='body2'>{`${audioURL}`}</Typography>
 
       <div>
         {/* Don't render this if there is no valid source */}

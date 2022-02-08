@@ -110,14 +110,13 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
     <div style={center}>
 
       <p>Vocabulary List: {id}</p>
-
       <p>
         {`${(appState.vocabularyList as unknown as HasIdAndName).id}: ${(appState.vocabularyList as unknown as HasIdAndName).name}`}
       </p>
       {/* TODO remove all casts */}
       {/* TODO Complete form filtering feature */}
       {/* <VocabularyListForm formItems={(appState.vocabularyList as unknown as any).variables} />*/}
-      <div style={{ margin: 'auto' }}><Carousel data={selectedTerms} /></div>
+      <div><Carousel data={selectedTerms} /></div>
     </div >
   );
 }

@@ -31,7 +31,7 @@ export function Toolbar(props: ToolbarProps) {
         >
           <Link style={style} to={'/'}>
             <h2>
-              <img style={{ marginRight: '14px', verticalAlign: 'sub' }} className='tool' src='https://api.tsilhqotinlanguage.ca/uploads/tng_log_for_language_hub_2e4ec30f17.png' height={40}></img>
+              <img style={{ marginRight: '14px', verticalAlign: 'middle' }} className='tool' src='https://api.tsilhqotinlanguage.ca/uploads/tng_log_for_language_hub_2e4ec30f17.png' height={40}></img>
               Tŝilhqot'in Dictionary
             </h2>
           </Link>
@@ -45,5 +45,5 @@ export default Toolbar;
 
 const style = {
   textDecoration: 'none',
-  color: 'white'
+  color: 'white',
 }

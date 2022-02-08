@@ -50,20 +50,18 @@ export function Carousel(props: CarouselProps) {
   const currentItem: Term = props.data[currentIndex];
 
   return (
-    <div style={{ height: '90vh', textAlign: 'center' }}>
+    <div style={{ height: '90vh' }}>
       <Card className="Cards">
         <CardContent>
           <TermsDetailComponent termData={currentItem} />
           <Divider />
-          <div style={{ textAlign: 'center', margin: '12px' }}>
-            <div style={{ paddingTop: '0px' }}>
-              {/* 
+          <div style={{ margin: '12px' }}>
+            {/* 
                             <ArrowBackIosNewOutlined sx={{ marginRight: '40px' }} fontSize='large' onClick={e => setIndex(cyclicDecrement(currentIndex, props.data.length - 1))} />
               <ArrowForwardIosOutlinedIcon fontSize='large' onClick={e => setIndex(cyclicIncrement(currentIndex, props.data.length - 1))} />
                             <Button style={mobile} variant='outlined' onClick={e => setIndex(cyclicDecrement(currentIndex, props.data.length - 1))}><ArrowBackIosNewOutlinedIcon /> Back</Button>
               <Button style={mobile} variant='outlined' onClick={e => setIndex(cyclicIncrement(currentIndex, props.data.length - 1))}>Next <ArrowForwardIosOutlinedIcon /></Button>
               */}
-            </div>
           </div>
         </CardContent>
       </Card>

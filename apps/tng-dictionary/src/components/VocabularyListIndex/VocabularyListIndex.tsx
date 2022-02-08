@@ -4,9 +4,6 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Loading from '../Loading/Loading';
 import './VocabularyListIndex.module.css';
-import { purple } from '@mui/material/colors';
-import { textAlign } from '@mui/system';
-import { ClassNames } from '@emotion/react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 
@@ -48,7 +45,7 @@ export function VocabularyListIndex(props: VocabularyListIndexProps) {
     field: 'id',
     headerName: 'ID',
     renderCell: (idParam: GridRenderCellParams<string>) => (
-      <Link to={`/vocabularyLists/${idParam.value}`}><p style={{ color: 'black' }}>{idParam.value}</p></Link>
+      <Link to={`/vocabularyLists/${idParam.value}`}><p style={{ color: 'red' }}>{idParam.value}</p></Link>
     ),
     width: 150
   }, {
@@ -65,7 +62,7 @@ export function VocabularyListIndex(props: VocabularyListIndexProps) {
     <ThemeProvider theme={theme}>
       <Typography style={center} className='body'>
         <Typography style={style}>
-          <DataGrid rows={rows} columns={columns} pageSize={100} components={{ Toolbar: GridToolbar }} />
+          <DataGrid sx={height} rows={rows} columns={columns} pageSize={100} components={{ Toolbar: GridToolbar }} />
         </Typography>
       </Typography>
     </ThemeProvider>
@@ -74,6 +71,13 @@ export function VocabularyListIndex(props: VocabularyListIndexProps) {
 
 
 export default VocabularyListIndex;
+
+const height = {
+  height: '80vh',
+  background: 'white',
+}
+
+
 
 const theme = createTheme({
   palette: {
@@ -91,7 +95,10 @@ const center = {
 const style = {
   height: '90vh',
   width: 'fit-content',
-  background: 'white',
+  background: 'inherit',
+  backgroundRepeat: 'no-repeat',
+  backgroundAttachment: 'fixed',
+  backgroundPosition: 'center',
   color: 'black',
   textAlign: 'center',
   display: 'inline-block'
