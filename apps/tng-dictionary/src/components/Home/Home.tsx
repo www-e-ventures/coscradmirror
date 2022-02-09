@@ -7,6 +7,7 @@ import AndroidIcon from '@mui/icons-material/Android';
 import AppleIcon from '@mui/icons-material/Apple';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import BackdropUnstyled from '@mui/base/BackdropUnstyled';
+import { motion } from 'framer-motion';
 
 /* eslint-disable-next-line */
 export interface HomeProps { }
@@ -24,12 +25,44 @@ export function Home(props: HomeProps) {
     <div style={{ position: 'relative' }}>
       <div className='home'>
         <div className='Center' style={{ display: 'grid' }}>
-          <Link to="/terms"><Button className='button' style={style} variant="outlined"><SearchIcon />Terms</Button></Link>
-          <Link to="/VocabularyLists"><Button style={style} variant='outlined'><SearchIcon />Paradigms and Vocabulary Lists</Button></Link>
-          <Link to="/credits"><Button style={style} variant='outlined'><InfoOutlinedIcon />Credits</Button></Link>
+
+          <Link to="/terms">
+            <motion.div
+              whileHover={{ scale: 1.1, }}
+              whileTap={{ scale: 0.95 }}>
+              <Button className='button' style={style} variant="outlined">
+                <SearchIcon />Terms
+              </Button>
+            </motion.div>
+          </Link>
+
+          <Link to="/VocabularyLists">
+            <motion.div
+              whileHover={{ scale: 1.1, }}
+              whileTap={{ scale: 0.95 }}>
+              <Button style={style} variant='outlined'>
+                <SearchIcon />Paradigms and Vocabulary Lists
+              </Button>
+            </motion.div>
+          </Link>
+
+          <Link to="/credits">
+            <motion.div
+              whileHover={{ scale: 1.1, }}
+              whileTap={{ scale: 0.95 }}>
+              <Button style={style} variant='outlined'>
+                <InfoOutlinedIcon />Credits
+              </Button>
+            </motion.div>
+          </Link>
+
           <div style={{ display: 'column', marginBlock: '10px' }}>
-            <Button style={mobile} variant='outlined'><AndroidIcon />Download for Android</Button>
-            <Button style={mobile} variant='outlined' ><AppleIcon />Download for iOS</Button>
+            <Button style={mobile} variant='outlined'>
+              <AndroidIcon />Download for Android
+            </Button>
+            <Button style={mobile} variant='outlined' >
+              <AppleIcon />Download for iOS
+            </Button>
 
           </div>
         </div>

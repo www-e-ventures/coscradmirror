@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="84a90b68-72e2-4d72-938a-9a0f6877a3fa" name="Default Changelist" comment="" />
+    <list default="true" id="84a90b68-72e2-4d72-938a-9a0f6877a3fa" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../tng-dictionary/src/components/TermsDetail/TermsDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../tng-dictionary/src/components/TermsDetail/TermsDetail.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

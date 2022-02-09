@@ -7,9 +7,9 @@ body {
 }
 
 .Cards {
-    width: 50vw;
     text-align: center;
     margin: auto;
+    border-radius: 20px !important;
 }
 
 .home {
@@ -85,12 +85,12 @@ a:-webkit-any-link {
 
   @media only screen and (min-width: 800px) {
     .Cards {
-      width: 50vw;
+      width: 35vw;
     }
   }
 
   @media only screen and (min-width: 900px) {
     .Cards {
-      width: 40vw;
+      width: 35vw;
     }
   }
