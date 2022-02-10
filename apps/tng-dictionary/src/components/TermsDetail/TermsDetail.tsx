@@ -33,11 +33,25 @@ export function TermsDetailComponent(props: TermsDetailComponentProps) {
 
   if (!termData) return (
     <div className='load'>
-      <div className='loading' style={{ color: 'white' }}>
-        <h1>Term not found</h1>
-        <h2>Lha ts'egwediʔal</h2>
-        <h2 style={{ color: 'rgb(204, 170, 170)' }}>"One couldn't find the word."</h2>
-      </div>
+      <motion.div
+        initial={{
+          opacity: 0
+        }}
+        animate={{
+          opacity: 1
+        }}
+        exit={{
+          opacity: 0
+        }}
+        transition={{ duration: 1 }}
+      >
+
+        <div className='loading' style={{ color: 'white' }}>
+          <h1>Term not found</h1>
+          <h2>Lha ts'egwediʔal</h2>
+          <h2 style={{ color: 'rgb(204, 170, 170)' }}>"One couldn't find the word."</h2>
+        </div>
+      </motion.div>
     </div >
   );
 
@@ -49,23 +63,37 @@ export function TermsDetailComponent(props: TermsDetailComponentProps) {
   return (
 
     <div>
+      <motion.div
+        initial={{
+          opacity: 0
+        }}
+        animate={{
+          opacity: 1
+        }}
+        exit={{
+          opacity: 0
+        }}
+        transition={{ duration: 1 }}
+      >
 
-      <Typography sx={{ mb: 1.5 }} variant='h5'>{term}</Typography>
-      {/* Don't add a div if there's no termEnglish */}
-      <Divider sx={{ mb: 1.5, background: 'rgb(150, 150, 150)' }} />
-      <Typography sx={{ mb: 1.5, textAlign: 'left' }}>English: {termEnglish ? termEnglish : ''}</Typography>
-      <Typography sx={{ mb: 1.5, textAlign: 'left' }} color="text.secondary">{`contributor: ${contributor}`}</Typography>
-      <Typography sx={{ mb: 1.5, textAlign: 'left' }} color="text.secondary">{`Term: ${id}`}</Typography>
-      <Typography sx={{ mb: 1.5, textAlign: 'left', display: 'none' }} color="text.secondary" variant='body2'>{`${audioURL}`}</Typography>
 
-      <div>
-        {/* Don't render this if there is no valid source */}
-        { /* <a href={`${audioURL}`} target="_blank">audio</a>*/}
-        <audio style={{ marginBottom: '5px' }} id="myAudio" controls key={audioURL}>
-          <source src={`${audioURL}`} type="audio/ogg" />
-          Your browser does not support the audio element.
-        </audio>
-      </div>
+        <Typography sx={{ mb: 1.5 }} variant='h5'>{term}</Typography>
+        {/* Don't add a div if there's no termEnglish */}
+        <Divider sx={{ mb: 1.5, background: 'rgb(150, 150, 150)' }} />
+        <Typography sx={{ mb: 1.5, textAlign: 'left' }}>English: {termEnglish ? termEnglish : ''}</Typography>
+        <Typography sx={{ mb: 1.5, textAlign: 'left' }} color="text.secondary">{`contributor: ${contributor}`}</Typography>
+        <Typography sx={{ mb: 1.5, textAlign: 'left' }} color="text.secondary">{`Term: ${id}`}</Typography>
+        <Typography sx={{ mb: 1.5, textAlign: 'left', display: 'none' }} color="text.secondary" variant='body2'>{`${audioURL}`}</Typography>
+
+        <div>
+          {/* Don't render this if there is no valid source */}
+          { /* <a href={`${audioURL}`} target="_blank">audio</a>*/}
+          <audio style={{ marginBottom: '5px' }} id="myAudio" controls key={audioURL}>
+            <source src={`${audioURL}`} type="audio/ogg" />
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+      </motion.div>
     </div>
 
   );

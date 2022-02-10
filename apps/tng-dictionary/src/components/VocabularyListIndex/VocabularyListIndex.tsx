@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Loading from '../Loading/Loading';
 import './VocabularyListIndex.module.css';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { motion } from 'framer-motion';
 
 
 type HasIdAndName = {
@@ -59,12 +60,26 @@ export function VocabularyListIndex(props: VocabularyListIndexProps) {
   } as const
 
   return (
+
     <ThemeProvider theme={theme}>
-      <Typography style={center} className='body'>
-        <Typography style={style}>
-          <DataGrid sx={height} rows={rows} columns={columns} pageSize={100} components={{ Toolbar: GridToolbar }} />
+      <motion.div
+        initial={{
+          opacity: 0
+        }}
+        animate={{
+          opacity: 1
+        }}
+        exit={{
+          opacity: 0
+        }}
+        transition={{ duration: .6 }}
+      >
+        <Typography style={center} className='body'>
+          <Typography style={style}>
+            <DataGrid sx={height} rows={rows} columns={columns} pageSize={100} components={{ Toolbar: GridToolbar }} />
+          </Typography>
         </Typography>
-      </Typography>
+      </motion.div>
     </ThemeProvider>
   );
 }

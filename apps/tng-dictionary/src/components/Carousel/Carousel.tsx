@@ -61,41 +61,57 @@ export function Carousel(props: CarouselProps) {
       <AnimatePresence>
 
         <Card className="Cards">
-          <motion.div
-            animate={{ opacity: isToggled }}
-            initial={{ opacity: 0 }}
-            exit={{ opacity: 1 }}
-            key={currentIndex}
-            transition={{ delay: 0.25 }}
-          >
-            <CardContent>
+
+          <CardContent>
+            <motion.div
+              key={currentIndex}
+              initial={{
+                x: isToggled
+              }}
+              animate={{
+                x: 0,
+                y: 0,
+                scale: 1,
+                rotate: 0,
+              }}
+              exit={{
+                x: 1,
+                y: 0,
+                scale: 1,
+                rotate: 0,
+              }}
+              transition={{ duration: .6 }}
+            >
               <motion.div>
                 <TermsDetailComponent termData={currentItem} />
               </motion.div>
 
               <Divider sx={{ background: 'rgb(150, 150, 150)' }} />
+            </motion.div>
 
-              <div onClick={() => setToggle(prevValue => {
-                return prevValue ? 1 : 0;
-              })} style={{ marginTop: '16px', marginBottom: '0', display: 'flex', textAlign: 'center', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ marginTop: '16px', marginBottom: '0', display: 'flex', textAlign: 'center', alignItems: 'center', justifyContent: 'center' }}>
 
-                <motion.div whileHover={{ scale: 1.2, transition: { duration: 0.5 } }}
-                  whileTap={{ scale: 0.9 }}>
-                  <Button style={{ color: 'red' }} onClick={e => setIndex(cyclicDecrement(currentIndex, props.data.length - 1))}><ArrowBackIosNewOutlinedIcon /> Back</Button>
-                </motion.div>
-                <motion.div whileHover={{ scale: 1.2, transition: { duration: 0.5 } }}
-                  whileTap={{ scale: 0.9 }}>
-                  <Button style={{ color: 'red' }} onClick={e => setIndex(cyclicIncrement(currentIndex, props.data.length - 1))}>Next <ArrowForwardIosOutlinedIcon /></Button>
-                </motion.div>
-                {/* 
+              <motion.div onClick={() => setToggle(prevValue => {
+                return prevValue ? -500 : -500;
+              })} whileHover={{ scale: 1.2, transition: { duration: 0.5 } }}
+                whileTap={{ scale: 0.9 }}>
+                <Button style={{ color: 'red' }} onClick={e => setIndex(cyclicDecrement(currentIndex, props.data.length - 1))}><ArrowBackIosNewOutlinedIcon /> Back</Button>
+              </motion.div>
+              <motion.div onClick={() => setToggle(prevValue => {
+                return prevValue ? 500 : 500;
+              })} whileHover={{ scale: 1.2, transition: { duration: 0.5 } }}
+                whileTap={{ scale: 0.9 }}>
+                <Button style={{ color: 'red' }} onClick={e => setIndex(cyclicIncrement(currentIndex, props.data.length - 1))}>Next <ArrowForwardIosOutlinedIcon /></Button>
+              </motion.div>
+              {/* 
                   <ArrowBackIosNewOutlined sx={{ marginRight: '40px' }} fontSize='large' onClick={e => setIndex(cyclicDecrement(currentIndex, props.data.length - 1))} />
     <ArrowForwardIosOutlinedIcon fontSize='large' onClick={e => setIndex(cyclicIncrement(currentIndex, props.data.length - 1))} />
                   <Button style={mobile} variant='outlined' onClick={e => setIndex(cyclicDecrement(currentIndex, props.data.length - 1))}><ArrowBackIosNewOutlinedIcon /> Back</Button>
     <Button style={mobile} variant='outlined' onClick={e => setIndex(cyclicIncrement(currentIndex, props.data.length - 1))}>Next <ArrowForwardIosOutlinedIcon /></Button>
     */}
-              </div>
-            </CardContent>
-          </motion.div>
+            </div>
+          </CardContent>
+
         </Card>
 
       </AnimatePresence>

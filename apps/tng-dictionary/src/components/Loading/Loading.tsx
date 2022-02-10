@@ -2,6 +2,7 @@ import './Loading.module.css';
 import { CircularProgress } from '@mui/material';
 import { Box } from '@mui/material';
 import { CSSProperties } from 'react';
+import { motion } from 'framer-motion';
 
 /* eslint-disable-next-line */
 
@@ -14,6 +15,7 @@ export function Loading(): JSX.Element {
 
   return (
     <div className='load' style={background}>
+
       <div className='loading' style={{
         backgroundImage: ''
 
@@ -22,9 +24,23 @@ export function Loading(): JSX.Element {
           <CircularProgress style={styles.loader} thickness={4} size={140} />
           <CircularProgress style={styles.track} thickness={4} size={140} value={100} variant="determinate" />
           <CircularProgress style={styles.background} thickness={22} size={140} value={100} variant="determinate" />
-          <div className='Logo'><img height={80} src={logo} /></div>
+          <motion.div
+            initial={{
+              opacity: 0.5
+            }}
+            animate={{
+              opacity: 1
+            }}
+            exit={{
+              opacity: 0
+            }}
+            transition={{ duration: 1.5 }}
+          >
+            <div className='Logo'><img height={80} src={logo} /></div>
+          </motion.div>
         </Box>
       </div>
+
     </div>
   );
 }

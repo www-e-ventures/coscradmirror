@@ -27,7 +27,7 @@ export function Toolbar(props: ToolbarProps) {
           exit={{
             opacity: 0
           }}
-          transition={{ duration: 1 }}
+          transition={{ duration: .6 }}
         >
           <Link style={style} to={'/'}>
             <h2>
