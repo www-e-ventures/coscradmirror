@@ -134,14 +134,19 @@ export class VocabularyListViewModel {
 
   readonly variables: VocabularyListVariable[];
 
+  readonly isPublished: boolean;
+
   constructor(vocabularyList: VocabularyList, allTerms: Term[]) {
-    const { entries, id, name, variables } = vocabularyList;
+    const { entries, id, name, nameEnglish, variables, published } =
+      vocabularyList;
 
     this.id = id;
 
     this.name = name;
 
-    this.nameEnglish = this.nameEnglish;
+    this.nameEnglish = nameEnglish;
+
+    this.isPublished = published;
 
     // @ts-expect-error
     this.variables =

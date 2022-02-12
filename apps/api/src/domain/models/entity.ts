@@ -23,6 +23,7 @@ export abstract class Entity {
 
   abstract readonly type: EntityType;
 
+  // TODO: Rename this 'isPublished' - db migration
   readonly published: boolean;
 
   constructor(dto: unknown) {

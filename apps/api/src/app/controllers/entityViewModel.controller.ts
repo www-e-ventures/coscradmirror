@@ -1,6 +1,5 @@
 import { Controller, Get, Query, Res } from '@nestjs/common';
 import { isError } from 'util';
-import { Entity } from '../../domain/models/entity';
 import { EntityId } from '../../domain/models/types/entity-id';
 import { isEntityId } from '../../domain/types/entity-id';
 import { isEntityType } from '../../domain/types/entityType';
@@ -8,11 +7,18 @@ import { Maybe } from '../../lib/types/maybe';
 import { isNotFound, NotFound } from '../../lib/types/not-found';
 import { RepositoryProvider } from '../../persistence/repositories/repository.provider';
 import buildViewModelForEntity from '../../view-models/buildViewModelForEntity/buildViewModelForEntity';
+import { VocabularyListViewModel } from '../../view-models/buildViewModelForEntity/viewModels';
+import { TagViewModel } from '../../view-models/buildViewModelForEntity/viewModels/TagViewModel';
+import {
+  TermViewModel,
+  ViewModelId,
+} from '../../view-models/buildViewModelForEntity/viewModels/TermViewModel';
 import { buildAllEntityDescriptions } from '../../view-models/entityDescriptions/buildAllEntityDescriptions';
 import httpStatusCodes from '../constants/httpStatusCodes';
+import filterOutUnpublishedEntities from './utilities/filterOutUnpublishedEntities';
 
-type HasEntityId = {
-  id: EntityId;
+type HasViewModelId = {
+  id: ViewModelId;
 };
 
 const NotProvided = Symbol('Client did not provide this param');
@@ -20,10 +26,10 @@ const NotProvided = Symbol('Client did not provide this param');
 const wasNotProvided = (input: unknown): input is typeof NotProvided =>
   input === NotProvided;
 
-const findEntityById = <TEntity extends HasEntityId = Entity>(
+const findEntityById = <T extends HasViewModelId>(
   idToFind: EntityId,
-  allEntities: TEntity[]
-): Maybe<TEntity> => {
+  allEntities: T[]
+): Maybe<T> => {
   const searchResult =
     allEntities.find(({ id }) => id === idToFind) || NotFound;
 
@@ -61,14 +67,25 @@ export class EntityViewModelController {
         error: JSON.stringify(allEntities),
       });
 
+    allEntities;
+
+    // This is doing too much!
     const result = !wasNotProvided(id)
       ? // TODO remove cast
-        findEntityById(id, allEntities as unknown as Entity[])
+        findEntityById<TermViewModel | VocabularyListViewModel | TagViewModel>(
+          id,
+          allEntities
+        )
       : allEntities;
 
     if (isNotFound(result)) return res.sendStatus(httpStatusCodes.notFound);
 
-    res.status(httpStatusCodes.ok).send(result);
+    return Array.isArray(result)
+      ? res
+          .status(httpStatusCodes.ok)
+          // TODO remove cast
+          .send(filterOutUnpublishedEntities(result as any))
+      : res.status(httpStatusCodes.ok).send(result);
   }
 
   @Get('descriptions')
