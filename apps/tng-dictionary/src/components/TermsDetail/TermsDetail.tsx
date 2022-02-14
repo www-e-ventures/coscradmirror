@@ -2,6 +2,8 @@ import './TermsDetail.module.css';
 import * as React from 'react';
 import { Divider, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
+import VocabularyListDetail from '../VocabularyListDetail/VocabularyListDetail';
+import VolumeUpTwoToneIcon from '@mui/icons-material/VolumeUpTwoTone';
 
 // TODO move this to shared interfaces lib
 export type Term = {
@@ -33,18 +35,7 @@ export function TermsDetailComponent(props: TermsDetailComponentProps) {
 
   if (!termData) return (
     <div className='load'>
-      <motion.div
-        initial={{
-          opacity: 0
-        }}
-        animate={{
-          opacity: 1
-        }}
-        exit={{
-          opacity: 0
-        }}
-        transition={{ duration: 1 }}
-      >
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 1 }}>
 
         <div className='loading' style={{ color: 'white' }}>
           <h1>Term not found</h1>
@@ -59,44 +50,63 @@ export function TermsDetailComponent(props: TermsDetailComponentProps) {
     id, contributor, term, termEnglish, audioURL
   } = termData;
 
+  /* AUDIO PLAYER */
+  let audio = new Audio(`${audioURL}`)
+
+  const start = () => {
+    audio.play().catch(console.log)
+  }
 
   return (
 
     <div>
-      <motion.div
-        initial={{
-          opacity: 0
-        }}
-        animate={{
-          opacity: 1
-        }}
-        exit={{
-          opacity: 0
-        }}
-        transition={{ duration: 1 }}
-      >
-
-
-        <Typography sx={{ mb: 1.5 }} variant='h5'>{term}</Typography>
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 1 }}>
+        <Typography sx={{ mb: 1.5, color: 'rgb(159,2,2)' }} variant='h5'>
+          <b>{term}</b><VolumeUpTwoToneIcon style={play} key={audioURL} onClick={start} />
+        </Typography>
         {/* Don't add a div if there's no termEnglish */}
-        <Divider sx={{ mb: 1.5, background: 'rgb(150, 150, 150)' }} />
-        <Typography sx={{ mb: 1.5, textAlign: 'left' }}>English: {termEnglish ? termEnglish : ''}</Typography>
-        <Typography sx={{ mb: 1.5, textAlign: 'left' }} color="text.secondary">{`contributor: ${contributor}`}</Typography>
-        <Typography sx={{ mb: 1.5, textAlign: 'left' }} color="text.secondary">{`Term: ${id}`}</Typography>
-        <Typography sx={{ mb: 1.5, textAlign: 'left', display: 'none' }} color="text.secondary" variant='body2'>{`${audioURL}`}</Typography>
-
+        <Divider style={divider} />
+        <Typography style={style}>
+          Vocabulary List:
+        </Typography>
+        <Typography style={style} >
+          English: {termEnglish ? termEnglish : ''}
+        </Typography>
+        <Typography style={style} color="text.secondary">
+          {`contributor: ${contributor}`}
+        </Typography>
+        <Typography style={style} color="text.secondary">
+          {`Term: ${id}`}
+        </Typography>
+        <Typography style={style} color="text.secondary" variant='body2'>
+          {`${audioURL}`}
+        </Typography>
         <div>
           {/* Don't render this if there is no valid source */}
           { /* <a href={`${audioURL}`} target="_blank">audio</a>*/}
-          <audio style={{ marginBottom: '5px' }} id="myAudio" controls key={audioURL}>
+          <audio id="myAudio" controls key={audioURL}>
             <source src={`${audioURL}`} type="audio/ogg" />
             Your browser does not support the audio element.
           </audio>
         </div>
       </motion.div>
     </div>
-
   );
 }
 
 export default TermsDetailComponent;
+
+const style = {
+  marginBottom: 1.5,
+  textAlign: 'left'
+} as const
+
+const divider = {
+  marginBottom: 1.5,
+  background: 'rgb(150, 150, 150)'
+}
+
+const play = {
+  fontSize: '38px',
+  verticalAlign: 'bottom'
+}

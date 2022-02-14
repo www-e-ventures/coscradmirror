@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="84a90b68-72e2-4d72-938a-9a0f6877a3fa" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tng-dictionary/src/components/Carousel/Carousel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../tng-dictionary/src/components/Carousel/Carousel.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../tng-dictionary/src/components/TermsDetail/TermsDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../tng-dictionary/src/components/TermsDetail/TermsDetail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tng-dictionary/src/components/VocabularyListDetail/VocabularyListDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../tng-dictionary/src/components/VocabularyListDetail/VocabularyListDetail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tng-dictionary/src/components/sandbox/Test/Test.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../tng-dictionary/src/components/sandbox/Test/Test.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -107,8 +107,8 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
   // const allTerms = appState.vocabularyList.entries.map(({ term }: { term: Term }) => term);
 
   return (
-    <div style={center}>
 
+    <div style={center}>
       <p>Vocabulary List: {id}</p>
       <p>
         {`${(appState.vocabularyList as unknown as HasIdAndName).id}: ${(appState.vocabularyList as unknown as HasIdAndName).name}`}
