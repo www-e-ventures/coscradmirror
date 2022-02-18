@@ -50,29 +50,29 @@ export function Carousel(props: CarouselProps) {
 
   return (
 
-    <div style={{ height: '90vh' }}>
+    <div>
       <AnimatePresence>
 
         <Card className="Cards">
 
           <CardContent>
-            <motion.div key={currentIndex} initial={{ x: isToggled }} animate={{ x: 0, y: 0, scale: 1, rotate: 0, }} exit={{ x: 1, y: 0, scale: 1, rotate: 0, }} transition={{ duration: .4 }}>
+            <motion.div key={currentIndex} initial={{ x: isToggled }} animate={{ x: 0, y: 0, scale: 1, rotate: 0, }} exit={{ x: 12, y: 0, scale: 1, rotate: 0, }} transition={{ duration: 1 }}>
               <TermsDetailComponent termData={currentItem} />
               <Divider sx={{ background: 'rgb(150, 150, 150)' }} />
             </motion.div>
 
             <div style={clicker}>
               <motion.div onClick={() => setToggle(prevValue => {
-                return prevValue ? -500 : -500;
-              })} whileHover={{ scale: 1.2, transition: { duration: 0.5 } }}
+                return prevValue ? -200 : -200;
+              })} whileHover={{ scale: 1.2, transition: { duration: 0.1 } }}
                 whileTap={{ scale: 0.9 }}>
-                <Button style={buttons} onClick={e => setIndex(cyclicDecrement(currentIndex, props.data.length - 1))}><ArrowBackIosNewOutlinedIcon /> Back</Button>
+                <Button className='clicker' disableRipple={true} style={buttons} onClick={e => setIndex(cyclicDecrement(currentIndex, props.data.length - 1))}><ArrowBackIosNewOutlinedIcon /> Back</Button>
               </motion.div>
               <motion.div onClick={() => setToggle(prevValue => {
-                return prevValue ? 500 : 500;
-              })} whileHover={{ scale: 1.2, transition: { duration: 0.5 } }}
+                return prevValue ? 200 : 200;
+              })} whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
                 whileTap={{ scale: 0.9 }}>
-                <Button style={buttons} onClick={e => setIndex(cyclicIncrement(currentIndex, props.data.length - 1))}>Next <ArrowForwardIosOutlinedIcon /></Button>
+                <Button className='clicker' disableRipple={true} style={buttons} onClick={e => setIndex(cyclicIncrement(currentIndex, props.data.length - 1))}>Next <ArrowForwardIosOutlinedIcon /></Button>
               </motion.div>
             </div>
           </CardContent>
@@ -87,7 +87,7 @@ export function Carousel(props: CarouselProps) {
 export default Carousel;
 
 const buttons = {
-  color: 'rgb(250,28,28)'
+  color: 'rgb(159,2,2)'
 }
 
 const clicker = {

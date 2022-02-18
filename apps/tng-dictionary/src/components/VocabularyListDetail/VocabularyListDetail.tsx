@@ -92,7 +92,7 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
   const selectedTerms = filterEntriesForSelectedTerms(allEntries, removeNoSelectionValuedPropsFromFilters(form.currentSelections));
 
   if (!selectedTerms.length) return (
-    <div>
+    <div className='home'>
       <p>Vocabulary List: {id}</p>
       <p>
         {`${(appState.vocabularyList as unknown as HasIdAndName).id}: ${(appState.vocabularyList as unknown as HasIdAndName).name}`}
@@ -115,7 +115,7 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
       </p>
       {/* TODO remove all casts */}
       {/* TODO Complete form filtering feature */}
-      {/* <VocabularyListForm formItems={(appState.vocabularyList as unknown as any).variables} />*/}
+      <VocabularyListForm formItems={(appState.vocabularyList as unknown as any).variables} />
       <div><Carousel data={selectedTerms} /></div>
     </div >
   );

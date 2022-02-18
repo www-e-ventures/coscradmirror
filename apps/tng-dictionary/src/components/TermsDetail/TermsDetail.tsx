@@ -36,7 +36,6 @@ export function TermsDetailComponent(props: TermsDetailComponentProps) {
   if (!termData) return (
     <div className='load'>
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 1 }}>
-
         <div className='loading' style={{ color: 'white' }}>
           <h1>Term not found</h1>
           <h2>Lha ts'egwediʔal</h2>
@@ -59,21 +58,27 @@ export function TermsDetailComponent(props: TermsDetailComponentProps) {
 
   return (
 
-    <div>
+    <div >
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 1 }}>
         <Typography sx={{ mb: 1.5, color: 'rgb(159,2,2)' }} variant='h5'>
-          <b>{term}</b><VolumeUpTwoToneIcon style={play} key={audioURL} onClick={start} />
+          <b>{term}</b>
+          <motion.div
+            whileHover={{ scale: 1.2, }}
+            whileTap={{ scale: 0.95 }}
+            style={{ width: 'fit-content', display: 'inline-block', paddingLeft: '5px' }}>
+            <VolumeUpTwoToneIcon style={play} key={audioURL} onClick={start} />
+          </motion.div>
         </Typography>
         {/* Don't add a div if there's no termEnglish */}
         <Divider style={divider} />
         <Typography style={style}>
-          Vocabulary List:
+          <div style={{ color: 'rgb(159,2,2)' }}>Vocabulary List:&nbsp;</div>
         </Typography>
-        <Typography style={style} >
-          English: {termEnglish ? termEnglish : ''}
+        <Typography style={style} sx={{ display: 'flex' }} >
+          <div style={{ color: 'rgb(159,2,2)' }}>English:&nbsp; </div> {termEnglish ? termEnglish : ''}
         </Typography>
-        <Typography style={style} color="text.secondary">
-          {`contributor: ${contributor}`}
+        <Typography style={style} sx={{ display: 'flex' }} color="text.secondary">
+          <div style={{ color: 'rgb(159,2,2)' }}>Contributor:&nbsp;</div>{` ${contributor}`}
         </Typography>
         <Typography style={style} color="text.secondary">
           {`Term: ${id}`}
@@ -98,7 +103,7 @@ export default TermsDetailComponent;
 
 const style = {
   marginBottom: 1.5,
-  textAlign: 'left'
+  textAlign: 'left',
 } as const
 
 const divider = {

@@ -1,9 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 100vh;
+    width: 100vw;
+    background-image: radial-gradient(circle at 17% 77%, rgba(17, 17, 17, 0.37) 0%, rgba(17, 17, 17, 0.301) 50%,rgba(197, 197, 197,0.04) 50%, rgba(197, 197, 197,0.04) 100%),radial-gradient(circle at 26% 17%, rgba(64,64,64, 0.05) 0%, rgba(64, 64, 64, 0.24) 50%,rgba(244, 244, 244,0.04) 50%, rgba(244, 244, 244,0.04) 100%),radial-gradient(circle at 44% 60%, rgba(177, 177, 177, 0.185) 0%, rgba(177,177,177, 0) 50%,rgba(187, 187, 187,0.04) 50%, rgba(187, 187, 187, 0.11) 100%),linear-gradient(19deg, rgb(250,28,28),rgb(159,2,2));
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+overflow: scroll;
+
 }
 
 .Cards {
@@ -22,7 +30,7 @@ min-height: calc(100vh - 80px);
     color: white;
 }
 
-.load {
+.load, .form {
     min-height: calc(100vh - 80px);
 }
 
@@ -59,21 +67,15 @@ a:-webkit-any-link {
     margin-right: 35px;
 }
 
-
-.body {
-    overflow: auto;
-    background-image: radial-gradient(circle at 17% 77%, rgba(17, 17, 17, 0.37) 0%, rgba(17, 17, 17, 0.301) 50%,rgba(197, 197, 197,0.04) 50%, rgba(197, 197, 197,0.04) 100%),radial-gradient(circle at 26% 17%, rgba(64,64,64, 0.05) 0%, rgba(64, 64, 64, 0.24) 50%,rgba(244, 244, 244,0.04) 50%, rgba(244, 244, 244,0.04) 100%),radial-gradient(circle at 44% 60%, rgba(177, 177, 177, 0.185) 0%, rgba(177,177,177, 0) 50%,rgba(187, 187, 187,0.04) 50%, rgba(187, 187, 187, 0.11) 100%),linear-gradient(19deg, rgb(250,28,28),rgb(159,2,2));
-}
-
 @media only screen and (max-width: 600px) {
     .Cards {
-      width: 100vw;
+      max-width: 100vw;
     }
   }
 
   @media only screen and (max-width: 700px) {
     .Cards {
-      width: 90vw;
+      max-width: 90vw;
     }
   }
 
@@ -96,3 +98,15 @@ a:-webkit-any-link {
   }
 
  
+.icon {
+  margin: 5px !important;
+}
+
+.submit:hover, .clicker:hover {
+background: white!important;
+}
+
+.clicker:active, .clicker:focus {
+  background: white !important;
+  outline: none !important;
+}

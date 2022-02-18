@@ -46,7 +46,7 @@ export function VocabularyListIndex(props: VocabularyListIndexProps) {
     field: 'id',
     headerName: 'ID',
     renderCell: (idParam: GridRenderCellParams<string>) => (
-      <Link to={`/vocabularyLists/${idParam.value}`}><p style={{ color: 'red' }}>{idParam.value}</p></Link>
+      <Link style={{ textDecoration: 'none' }} to={`/vocabularyLists/${idParam.value}`}><p style={{ color: 'rgb(159,2,2)' }}>{idParam.value}</p></Link>
     ),
     width: 150
   }, {
@@ -108,7 +108,6 @@ const center = {
 } as const
 
 const style = {
-  height: '90vh',
   width: 'fit-content',
   background: 'inherit',
   backgroundRepeat: 'no-repeat',
