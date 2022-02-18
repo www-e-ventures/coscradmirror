@@ -14,15 +14,15 @@ export default (): VocabularyListModels => ({
       entries: [
         {
           termId: '1',
-          variableValues: `{
+          variableValues: {
             person: '11',
-          }`,
+          },
         },
         {
           termId: '2',
-          variableValues: `{
+          variableValues: {
             person: '21',
-          }`,
+          },
         },
       ],
       variables: [
@@ -48,9 +48,9 @@ export default (): VocabularyListModels => ({
       entries: [
         {
           termId: '2',
-          variableValues: `{
+          variableValues: {
             person: '23',
-          }`,
+          },
         },
       ],
       variables: [],
