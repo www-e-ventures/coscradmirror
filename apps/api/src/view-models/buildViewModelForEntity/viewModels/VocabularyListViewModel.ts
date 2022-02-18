@@ -1,5 +1,4 @@
 import { isNullOrUndefined } from 'apps/api/src/domain/utilities/validation/is-null-or-undefined';
-import isStringWithNonzeroLength from 'apps/api/src/lib/utilities/isStringWithNonzeroLength';
 import { PartialDTO } from 'apps/api/src/types/partial-dto';
 import { Term } from '../../../domain/models/term/entities/term.entity';
 import { VocabularyList } from '../../../domain/models/vocabulary-list/entities/vocabulary-list.entity';
@@ -9,76 +8,18 @@ import { EntityId } from '../../../domain/types/entity-id';
 import { NotFound } from '../../../lib/types/not-found';
 import { TermViewModel } from './TermViewModel';
 
+type VariableValues = Record<string, VocabularyListVariableValue>;
+
 type VocabularyListEntryViewModel = {
   term: TermViewModel;
 
-  // TODO JSON.parse
-  variableValues: string; // Record<string, VocabularyListVariableValue>;
+  variableValues: VariableValues;
 };
-
-const safeParse = (serialized: string): Object => {
-  try {
-    return JSON.parse(serialized);
-  } catch (error) {
-    return {};
-  }
-};
-
-// TODO add this in the database!
-const getNounParadigmVariables = () => [
-  {
-    name: 'possessor',
-    type: 'dropbox',
-    validValues: [
-      {
-        value: '1',
-        display: 'my',
-      },
-      {
-        value: '2',
-        display: 'your',
-      },
-      {
-        value: '3',
-        display: 'his, her, or its',
-      },
-      {
-        value: '4',
-        display: "the other's",
-      },
-      {
-        value: '5',
-        display: "our  you guys'",
-      },
-      {
-        value: '7',
-        display: 'their',
-      },
-      {
-        value: '0',
-        display: "someone's",
-      },
-    ],
-  },
-];
-
-/**
- * TODO- We need to do this for once and for all across all data imported from
- * the Jupyter notebook. There is invalid JSON that resulted from not serializing
- * a dict to JSON properly.
- */
-const cleanSerializedJSON = (input: string): string =>
-  isStringWithNonzeroLength(input) && input !== 'undefined'
-    ? input
-        .replace(/'/g, '"')
-        .replace(/False/g, 'false')
-        .replace(/True/g, 'true')
-    : undefined;
 
 // "{'positive': True, 'aspect': '2', 'usitative': False, 'person': '31'}"
 
 const buildSuffixFromVariableValues = (
-  variableValues: VocabularyListVariableValue
+  variableValues: VariableValues
 ): string => {
   const test = variableValues as any;
 
@@ -104,14 +45,14 @@ const buildSuffixFromVariableValues = (
 
 const appendPrefixAndSuffixToAudioFilename = (
   originalName: string,
-  variableValues: VocabularyListVariableValue
+  variableValues: VariableValues
 ): string => {
   return `BA_${originalName}_${buildSuffixFromVariableValues(variableValues)}`;
 };
 
 const fixTermAudioFilename = (
   term: Term,
-  variableValues: VocabularyListVariableValue
+  variableValues: VariableValues
 ): PartialDTO<Term> =>
   term.contributorId !== '1'
     ? { ...term }
@@ -148,11 +89,7 @@ export class VocabularyListViewModel {
 
     this.isPublished = published;
 
-    // @ts-expect-error
-    this.variables =
-      Array.isArray(variables) || variables === '[]'
-        ? getNounParadigmVariables()
-        : [...variables];
+    this.variables = variables;
 
     const newEntries = (entries || [])
       .map(({ termId, variableValues }) => {
@@ -161,19 +98,11 @@ export class VocabularyListViewModel {
         return {
           term: termSearchResult
             ? new TermViewModel(
-                fixTermAudioFilename(
-                  termSearchResult,
-                  safeParse(
-                    // Horrible hack- fix the data instead!
-                    cleanSerializedJSON(variableValues as unknown as string)
-                  ) as VocabularyListVariableValue
-                ) as Term
+                fixTermAudioFilename(termSearchResult, variableValues) as Term
               )
             : NotFound,
           // TODO fix this
-          variableValues: safeParse(
-            cleanSerializedJSON(variableValues as unknown as string)
-          ) as VocabularyListVariableValue,
+          variableValues,
         };
       })
       .filter(({ term }) => term !== NotFound);
