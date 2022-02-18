@@ -10,6 +10,7 @@ import TermsDetailComponent from '../components/TermsDetail/TermsDetail';
 import Toolbar from '../components/Toolbar/Toolbar';
 import VocabularyListContext from '../context/VocabularyListContext';
 import { useState } from 'react';
+import TermIndex from '../components/TermIndex/TermIndex';
 
 
 import Test from '../components/sandbox/Test/Test';
@@ -32,6 +33,7 @@ export function App() {
             <Route path="/VocabularyLists" element={<VocabularyListIndex />} />
             <Route path="/VocabularyLists/:id" element={<VocabularyListDetail />} />
             <Route path="/Terms" element={<TermsDetailComponent />} />
+            <Route path="/TermIndex" element={<TermIndex />} />
             <Route path="/Test" element={<Test />} />
             <Route path="/Loading" element={<Loading />} />
           </Routes>
