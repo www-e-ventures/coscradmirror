@@ -12,6 +12,8 @@ import { Term } from '../TermsDetail/TermsDetail';
 import { useState } from 'react';
 import doValuesMatchFilters from '../../utilities/doValuesMatchFilters';
 
+const stringIncludes = (input: string, textToMatch: string) => input.includes(textToMatch)
+
 const determineSelectedTerms = (allTerms: Term[], filters: Record<string, string>) => {
 
   console.log({
@@ -20,7 +22,8 @@ const determineSelectedTerms = (allTerms: Term[], filters: Record<string, string
     match: doValuesMatchFilters(terms[0], filters)
   })
 
-  return allTerms.filter(term => doValuesMatchFilters(term, filters))
+  // @ts-ignore
+  return allTerms.filter(term => doValuesMatchFilters(term, filters, stringIncludes))
 }
 
 const columns: GridColDef[] = [
