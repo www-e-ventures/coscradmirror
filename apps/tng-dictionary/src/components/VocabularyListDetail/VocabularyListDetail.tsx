@@ -58,7 +58,7 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
   useEffect(() => {
     setAppState({ loading: true, vocabularyList: null });
 
-    const apiUrl = `http://104.225.142.106:3131/api/entities?type=vocabularyList&id=${id}`;
+    const apiUrl = `http://localhost:3131/api/entities?type=vocabularyList&id=${id}`;
     fetch(apiUrl, { mode: 'cors' })
       .then((res) => res.json())
       .then((vocabularyList) => {
@@ -90,6 +90,10 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
   const allEntries = (appState.vocabularyList as unknown as any).entries;
 
   const selectedTerms = filterEntriesForSelectedTerms(allEntries, removeNoSelectionValuedPropsFromFilters(form.currentSelections));
+
+console.log({
+  filters: removeNoSelectionValuedPropsFromFilters(form.currentSelections)
+})
 
   if (!selectedTerms.length) return (
     <div className='home'>

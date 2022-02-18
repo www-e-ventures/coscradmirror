@@ -81,10 +81,7 @@ export function TermsDetailComponent(props: TermsDetailComponentProps) {
           <div style={{ color: 'rgb(159,2,2)' }}>Contributor:&nbsp;</div>{` ${contributor}`}
         </Typography>
         <Typography style={style} color="text.secondary">
-          {`Term: ${id}`}
-        </Typography>
-        <Typography style={style} color="text.secondary" variant='body2'>
-          {`${audioURL}`}
+          {`Term ID: ${id}`}
         </Typography>
         <div>
           {/* Don't render this if there is no valid source */}

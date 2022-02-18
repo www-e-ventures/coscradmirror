@@ -30,7 +30,7 @@ export interface VocabularyListFormProps {
 }
 
 const convertFormDataValuesIfApplicable = (input: MaybeSelected<FormItemValue>): string | boolean => {
-  if (input === NoSelection) return 'NoSelection';
+  if (input === NoSelection) return NoSelection;
 
   if (typeof input !== 'string') return input;
 
@@ -89,7 +89,7 @@ export function VocabularyListForm({ formItems }: VocabularyListFormProps) {
             {
               labelsAndValues.map(({ value, display: label }) => (
                 <MenuItem value={value}>{label}</MenuItem>
-              )).concat(<MenuItem value={'NoSelection'}>{`ANY`}</MenuItem>)
+              )).concat(<MenuItem value={NoSelection}>{`ANY`}</MenuItem>)
             }
           </Select>
         </FormControl>
