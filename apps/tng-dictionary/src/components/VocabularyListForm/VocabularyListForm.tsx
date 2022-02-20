@@ -95,21 +95,6 @@ export function VocabularyListForm({ formItems }: VocabularyListFormProps) {
         </FormControl>
       </Box>
     </ThemeProvider>
-    // <label htmlFor={name}>
-    //   {name}
-    //   <select
-    //     id={name}
-    //     onChange={e => updateFormState(formState, name, e.target.value)}
-    //     onBlur={e => updateFormState(formState, name, e.target.value)}
-    //   >
-    //     <option />
-    //     {labelsAndValues.map(({ value, display: label }) => (
-    //       <option value={value}>
-    //         {label}
-    //       </option>
-    //     ))}
-    //   </select>
-    // </label>
   )
 
   // TODO type the return value
@@ -155,31 +140,6 @@ export function VocabularyListForm({ formItems }: VocabularyListFormProps) {
             {buildSelectElementsForForm(formItems, formState.currentSelections)}
             {buildCheckboxesForForm(formItems, formState.currentSelections)}
           </div>
-          <div>
-            <ThemeProvider theme={theme}>
-              <Switch
-                id={`positive`}
-                onChange={e => { console.log(`checkbox: ${e.target.value}`) }}
-              />
-            </ThemeProvider>
-            <label htmlFor='positive'>
-              Positive \ Negative form
-              {/*
-                            <input
-                id={`positive`}
-                type="checkbox"
-                onChange={e => { console.log(`checkbox: ${e.target.value}`) }}
-              />
-              */}
-
-            </label>
-          </div>
-
-          <ThemeProvider theme={button}>
-            <motion.div whileHover={{ scale: 1.1, transition: { duration: 0.1 } }} whileTap={{ scale: 0.9 }}>
-              <Button style={submit} variant='contained' className='submit'>SUBMIT <DoubleArrowRounded /> </Button>
-            </motion.div>
-          </ThemeProvider>
         </FormControl>
       </Card>
     </div>

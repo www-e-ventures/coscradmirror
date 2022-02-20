@@ -5,14 +5,14 @@ import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutl
 import { Divider } from '@mui/material';
 import { Card } from '@mui/material';
 import { CardContent } from '@mui/material';
-import TermsDetailComponent, { Term } from '../TermsDetail/TermsDetail';
 import { Button } from '@mui/material';
 import { AnimatePresence, motion } from 'framer-motion';
+import TermData, { Term } from '../Term/Term';
 
 
 /* eslint-disable-next-line */
 export interface CarouselProps {
-  data: Term[]
+  data: TermData[]
 }
 
 const cyclicDecrement = (currentIndex: number, max: number): number => {
@@ -44,7 +44,7 @@ export function Carousel(props: CarouselProps) {
     <p>No Data</p>
   )
 
-  const currentItem: Term = props.data[currentIndex];
+  const currentItem: TermData = props.data[currentIndex];
 
   const [isToggled, setToggle] = useState(1);
 
@@ -57,7 +57,7 @@ export function Carousel(props: CarouselProps) {
 
           <CardContent>
             <motion.div key={currentIndex} initial={{ x: isToggled }} animate={{ x: 0, y: 0, scale: 1, rotate: 0, }} exit={{ x: 12, y: 0, scale: 1, rotate: 0, }} transition={{ duration: 1 }}>
-              <TermsDetailComponent termData={currentItem} />
+              <Term termData={currentItem} />
               <Divider sx={{ background: 'rgb(150, 150, 150)' }} />
             </motion.div>
 

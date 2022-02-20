@@ -1,16 +1,13 @@
-import { Component, useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { isNullOrUndefined } from 'util';
 import VocabularyListContext, { buildUnselectedFormData, FormItemValue, MaybeSelected } from '../../context/VocabularyListContext';
 import doValuesMatchFilters from '../../utilities/doValuesMatchFilters';
 import Loading from '../Loading/Loading';
-import TermsDetailComponent, { Term } from '../TermsDetail/TermsDetail';
 import VocabularyListForm, { VocabularyListFormElement } from '../VocabularyListForm/VocabularyListForm';
 import './VocabularyListDetail.module.css';
-import { Paper } from '@mui/material';
 import Carousel from '../Carousel/Carousel';
-import { Typography } from '@mui/material';
 import removeNoSelectionValuedPropsFromFilters from '../../utilities/removeNoSelectionValuedPropsFromFilters';
+import TermData from '../Term/Term';
 
 
 
@@ -22,7 +19,7 @@ type HasIdAndName = {
 const getData = async (endpoint: string) => fetch(endpoint).then(response => response.json())
 
 type VocabularyListEntry = {
-  term: Term;
+  term: TermData;
   variableValues: Record<string, string | boolean>;
 }
 
@@ -33,7 +30,7 @@ type VocabularyList = HasIdAndName & {
 }
 
 
-const filterEntriesForSelectedTerms = (allEntries: VocabularyListEntry[], filters: Record<string, string | boolean>): Term[] =>
+const filterEntriesForSelectedTerms = (allEntries: VocabularyListEntry[], filters: Record<string, string | boolean>): TermData[] =>
   allEntries.filter(({ variableValues }) => doValuesMatchFilters(variableValues, filters)).map(({ term }) => term)
 
 type ComponentState = {
@@ -74,18 +71,6 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
   if (!appState.vocabularyList) return <div>
     <Loading />
   </div>
-
-  // if (!form.isReady) return (
-  //   <div>
-  //     <h1>Vocabulary List: {id}</h1>
-  //     <p>
-  //       {`${(appState.vocabularyList as unknown as HasIdAndName).id}: ${(appState.vocabularyList as unknown as HasIdAndName).name}`}
-  //     </p>
-  //     <h1>Selected Term</h1>
-  //     Please complete the form to select a term.
-  //     <VocabularyListForm formItems={(appState.vocabularyList as unknown as any).variables} />
-  //   </div>
-  // )
 
   const allEntries = (appState.vocabularyList as unknown as any).entries;
 
