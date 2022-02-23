@@ -89,7 +89,7 @@ export function Home(props: HomeProps) {
         </div>
         <div>
 
-          {backdrop}
+          {/* {backdrop} */}
         </div>
       </motion.div>
     </div>

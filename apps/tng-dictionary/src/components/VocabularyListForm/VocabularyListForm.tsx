@@ -134,14 +134,14 @@ export function VocabularyListForm({ formItems }: VocabularyListFormProps) {
 
   return (
     <div style={{ padding: '4px' }}>
-      <Card className='Cards' sx={{ padding: '14px', margin: 'auto' }}>
+      <div className='Cards' style={{ padding: '14px', margin: 'auto' }}>
         <FormControl>
           <div>
             {buildSelectElementsForForm(formItems, formState.currentSelections)}
             {buildCheckboxesForForm(formItems, formState.currentSelections)}
           </div>
         </FormControl>
-      </Card>
+      </div>
     </div>
 
   );

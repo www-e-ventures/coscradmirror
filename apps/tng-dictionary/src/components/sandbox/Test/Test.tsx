@@ -101,7 +101,7 @@ const tsilhqotin = [
 
 ];
 
-const theme = createTheme({
+export const theme = createTheme({
   palette: {
     primary: {
       main: 'rgb(255,28,28)', // main color
@@ -110,5 +110,5 @@ const theme = createTheme({
 });
 
 const card = {
-  height: '400px', width: '500px', padding: '12px'
+  height: '400px', width: '500px', padding: '12px', background: 'white'
 }
