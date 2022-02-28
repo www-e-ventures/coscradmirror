@@ -84,7 +84,7 @@ export function VocabularyListForm({ formItems }: VocabularyListFormProps) {
             value={currentState}
             label={name}
             onChange={e => updateFormState(formState, name, e.target.value as MaybeSelected<FormItemValue>)}
-
+            sx={{ borderRadius: '24px', backgroundColor: 'white' }}
           >
             {
               labelsAndValues.map(({ value, display: label }) => (
@@ -133,10 +133,10 @@ export function VocabularyListForm({ formItems }: VocabularyListFormProps) {
   }
 
   return (
-    <div style={{ padding: '4px' }}>
-      <div className='Cards' style={{ padding: '14px', margin: 'auto' }}>
+    <div>
+      <div style={{ padding: '14px', margin: 'auto' }}>
         <FormControl>
-          <div>
+          <div style={{ display: 'flex', width: '100%' }}>
             {buildSelectElementsForForm(formItems, formState.currentSelections)}
             {buildCheckboxesForForm(formItems, formState.currentSelections)}
           </div>
@@ -168,7 +168,6 @@ const button = createTheme({
 const form = {
   m: 1,
   minWidth: 120,
-  background: 'white',
   color: 'rgb(159,2,2)'
 }
 

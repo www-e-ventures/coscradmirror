@@ -1,6 +1,6 @@
 import './TermsDetail.module.css';
 import * as React from 'react';
-import { Divider, Typography } from '@mui/material';
+import { Card, Divider, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 import VocabularyListDetail from '../VocabularyListDetail/VocabularyListDetail';
 import VolumeUpTwoToneIcon from '@mui/icons-material/VolumeUpTwoTone';
@@ -10,14 +10,14 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 /* eslint-disable-next-line */
-export interface TermsDetailComponentProps {}
+export interface TermsDetailComponentProps { }
 
 type ComponentState = {
   termData: null | TermData;
 }
 
 export function TermsDetailComponent(props: TermsDetailComponentProps) {
-  
+
   const [componentState, setComponentState] = useState<ComponentState>({
     termData: null
   })
@@ -40,7 +40,14 @@ export function TermsDetailComponent(props: TermsDetailComponentProps) {
   );
 
   return (
-    <Term termData={componentState.termData}></Term>
+    <div style={{ textAlign: 'center', alignContent: 'center', margin: '0 auto', alignSelf: 'center', color: 'white', padding: '0px' }}>
+      <Card sx={{ width: '100vw', minHeight: '100vh', margin: '0 auto' }}>
+        <div style={{ padding: '2px' }}>
+          <Term termData={componentState.termData}></Term>
+        </div>
+      </Card>
+    </div>
+
   );
 }
 

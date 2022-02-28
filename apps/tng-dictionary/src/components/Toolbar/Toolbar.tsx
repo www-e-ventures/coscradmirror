@@ -13,7 +13,7 @@ export function Toolbar(props: ToolbarProps) {
     <CssBaseline>
       <AppBar
         className="toolbar"
-        sx={{ bgcolor: 'rgb(168,4,4)' }}
+        sx={{ bgcolor: 'rgb(159,2,2)' }}
       >
         {/*<div style={{}}><img src='https://www.tsilhqotin.ca/wp-content/uploads/2022/02/imageedit_14_8913908156.png' height={40}></img></div> */}
         <motion.div

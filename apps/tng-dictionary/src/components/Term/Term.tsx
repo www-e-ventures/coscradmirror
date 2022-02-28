@@ -32,7 +32,7 @@ export function Term(props: TermsDetailComponentProps) {
   if (!termData) return (
     <div className='load'>
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 1 }}>
-        <div className='loading' style={{ color: 'white' }}>
+        <div style={{ color: 'white' }}>
           <h1>Term not found</h1>
           <h2>Lha ts'egwediʔal</h2>
           <h2 style={{ color: 'rgb(204, 170, 170)' }}>"One couldn't find the word."</h2>
@@ -54,7 +54,7 @@ export function Term(props: TermsDetailComponentProps) {
 
   return (
 
-    <div >
+    <div>
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 1 }}>
         <Typography sx={{ mb: 1.5, color: 'rgb(159,2,2)' }} variant='h5'>
           <b>{term}</b>
@@ -67,11 +67,11 @@ export function Term(props: TermsDetailComponentProps) {
         </Typography>
         {/* Don't add a div if there's no termEnglish */}
         <Divider style={divider} />
-        <Typography style={style} sx={{ display: 'flex' }} >
-          <div style={{ color: 'rgb(159,2,2)' }}>English:&nbsp; </div> {termEnglish ? termEnglish : ''}
+        <Typography style={style} sx={{ display: 'flex', fontSize: '24px' }} >
+          <div style={{ color: 'rgb(159,2,2)', fontSize: '24px' }}>English:&nbsp; </div> {termEnglish ? termEnglish : ''}
         </Typography>
-        <Typography style={style} sx={{ display: 'flex' }} color="text.secondary">
-          <div style={{ color: 'rgb(159,2,2)' }}>Contributor:&nbsp;</div>{` ${contributor}`}
+        <Typography style={style} sx={{ display: 'flex', fontSize: '24px' }} color="text.secondary">
+          <div style={{ color: 'rgb(159,2,2)', fontSize: '24px' }}>Contributor:&nbsp;</div>{` ${contributor}`}
         </Typography>
         <Typography style={style} color="text.secondary">
           {`Term ID: ${id}`}
@@ -85,7 +85,7 @@ export function Term(props: TermsDetailComponentProps) {
           </audio>
         </div>
       </motion.div>
-    </div>
+    </div >
   );
 }
 

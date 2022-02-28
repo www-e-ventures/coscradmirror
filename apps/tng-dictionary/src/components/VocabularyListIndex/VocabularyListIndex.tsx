@@ -1,11 +1,15 @@
 import { Typography } from '@mui/material';
 import { DataGrid, GridColDef, GridRenderCellParams, GridRowsProp, GridToolbar } from '@mui/x-data-grid';
-import { useEffect, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Loading from '../Loading/Loading';
 import './VocabularyListIndex.module.css';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { motion } from 'framer-motion';
+import { TextField } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
+import MenuBookTwoToneIcon from '@mui/icons-material/MenuBookTwoTone';
+
 
 
 type HasIdAndName = {
@@ -59,24 +63,27 @@ export function VocabularyListIndex(props: VocabularyListIndexProps) {
     color: 'black'
   } as const
 
+
+  const search =
+    <TextField placeholder="Search Vocabulary Lists" InputProps={{
+      sx: { borderRadius: '24px', bgcolor: 'white', width: '300px' },
+      endAdornment: (
+        <SearchIcon sx={{ color: 'rgb(159,2,2)' }} />
+      )
+    }} />;
+
   return (
 
     <ThemeProvider theme={theme}>
-      <motion.div
-        initial={{
-          opacity: 0
-        }}
-        animate={{
-          opacity: 1
-        }}
-        exit={{
-          opacity: 0
-        }}
-        transition={{ duration: .6 }}
-      >
-        <Typography style={center} className='body'>
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: .6 }}>
+        <Typography style={center}>
+          <div style={{ background: 'rgb(159,2,2)', paddingTop: '4px', paddingBottom: '38px' }}>
+            <h1 style={{ lineHeight: '0px', color: 'white' }}>Vocabulary Lists <MenuBookTwoToneIcon /> </h1>
+            {search}
+          </div>
           <Typography style={style}>
-            <DataGrid sx={height} rows={rows} columns={columns} pageSize={100} components={{ Toolbar: GridToolbar }} />
+            <DataGrid sx={height} rows={rows} columns={columns} rowsPerPageOptions={[20, 50, 100]}
+            />
           </Typography>
         </Typography>
       </motion.div>
@@ -88,11 +95,11 @@ export function VocabularyListIndex(props: VocabularyListIndexProps) {
 export default VocabularyListIndex;
 
 const height = {
-  height: '80vh',
+  height: '70vh',
+  width: '100vw',
   background: 'white',
+  display: 'flex', flexDirection: "column-reverse"
 }
-
-
 
 const theme = createTheme({
   palette: {
@@ -109,13 +116,7 @@ const center = {
 
 const style = {
   width: 'fit-content',
-  background: 'inherit',
-  backgroundRepeat: 'no-repeat',
-  backgroundAttachment: 'fixed',
-  backgroundPosition: 'center',
-  color: 'black',
-  textAlign: 'center',
-  display: 'inline-block'
+
 } as const
 
 
