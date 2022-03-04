@@ -1,21 +1,28 @@
 import { Typography } from '@mui/material';
 import { DataGrid, GridColDef, GridRenderCellParams, GridRowsProp, GridToolbar } from '@mui/x-data-grid';
-import { SetStateAction, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Loading from '../Loading/Loading';
 import './VocabularyListIndex.module.css';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { motion } from 'framer-motion';
-import { TextField } from '@mui/material';
+import { TextField, CircularProgress } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import MenuBookTwoToneIcon from '@mui/icons-material/MenuBookTwoTone';
+import doValuesMatchFilters from '../../utilities/doValuesMatchFilters';
+import Stack from '@mui/material/Stack';
+import stringIncludes from '../../utilities/matchers/stringIncludes';
+import { HasIdAndName } from '../../types/HasNameAndId';
 
 
 
-type HasIdAndName = {
-  id: string;
-  name: string;
+type ComponentState = {
+  vocabularyLists: HasIdAndName[];
+  searchContext: 'name'
 }
+
+const determineSelectedVocabularyLists = (vocabularyLists: HasIdAndName[], filters: Record<string, string>) =>
+  // @ts-ignore
+  vocabularyLists.filter(name => doValuesMatchFilters(name, filters, stringIncludes))
 
 const getData = async (endpoint: string) => fetch(endpoint).then(response => response.json())
 
@@ -24,24 +31,29 @@ export interface VocabularyListIndexProps { }
 
 export function VocabularyListIndex(props: VocabularyListIndexProps) {
 
-  const [appState, setAppState] = useState({
-    loading: false,
-    vocabularyLists: null,
+  const [appState, setAppState] = useState<ComponentState>({
+    //  loading: false,
+    vocabularyLists: [],
+    searchContext: 'name'
+  });
+  const [searchResults, setSearchResults] = useState({
+    selectedLists: appState.vocabularyLists,
   });
 
   useEffect(() => {
-    setAppState({ loading: true, vocabularyLists: null });
+    setAppState({ vocabularyLists: [], searchContext: 'name' });
     const apiUrl = `http://localhost:3131/api/entities?type=vocabularyList`;
     fetch(apiUrl, { mode: 'cors' })
       .then((res) => res.json())
       .then((vocabularyLists) => {
-        setAppState({ loading: false, vocabularyLists: vocabularyLists });
+        setAppState({ ...appState, vocabularyLists: vocabularyLists });
+        setSearchResults({ selectedLists: vocabularyLists })
       }).catch(rej => console.log(rej))
   }, [setAppState]);
 
-  if (!appState.vocabularyLists || appState.vocabularyLists === []) return <Loading />
+  // if (!appState.vocabularyLists || appState.vocabularyLists === []) return <Loading />
 
-  const rows: GridRowsProp = (appState.vocabularyLists as unknown as HasIdAndName[]).map(vocabularyList => ({
+  const rows: GridRowsProp = (searchResults.selectedLists).map(vocabularyList => ({
     id: vocabularyList.id,
     name: vocabularyList.name
   }));
@@ -56,33 +68,50 @@ export function VocabularyListIndex(props: VocabularyListIndexProps) {
   }, {
     field: 'name',
     headerName: 'Vocabulary List',
-    width: 150
-  }]
+    width: 150,
+    flex: 1
+  }];
 
   const stylez = {
     color: 'black'
   } as const
 
-
   const search =
-    <TextField placeholder="Search Vocabulary Lists" InputProps={{
-      sx: { borderRadius: '24px', bgcolor: 'white', width: '300px' },
-      endAdornment: (
-        <SearchIcon sx={{ color: 'rgb(159,2,2)' }} />
-      )
-    }} />;
+    <TextField placeholder="Search Vocabulary Lists"
+      onChange={(event) => setSearchResults({ selectedLists: event.target.value ? determineSelectedVocabularyLists(appState.vocabularyLists, { [appState.searchContext]: event.target.value }) : appState.vocabularyLists })}
+      InputProps={{
+        sx: { borderRadius: '24px', bgcolor: 'white', width: '300px' },
+        endAdornment: (
+          <SearchIcon sx={{ color: 'rgb(159,2,2)' }} />
+        )
+      }} />;
 
   return (
 
     <ThemeProvider theme={theme}>
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: .6 }}>
         <Typography style={center}>
-          <div style={{ background: 'rgb(159,2,2)', paddingTop: '4px', paddingBottom: '38px' }}>
-            <h1 style={{ lineHeight: '0px', color: 'white' }}>Vocabulary Lists <MenuBookTwoToneIcon /> </h1>
+          <div style={searchConsole}>
+            <h1 style={header}>Vocabulary Lists <MenuBookTwoToneIcon /> </h1>
             {search}
           </div>
           <Typography style={style}>
-            <DataGrid sx={height} rows={rows} columns={columns} rowsPerPageOptions={[20, 50, 100]}
+            <DataGrid sx={height} rows={rows} columns={columns} rowsPerPageOptions={[10, 50, 100]}
+              initialState={{
+                pagination: {
+                  pageSize: 10,
+                }
+              }}
+              components={{
+                NoRowsOverlay: () => (
+                  <Stack height="100%" alignItems="center" justifyContent="center" >
+                    <CircularProgress sx={{ color: 'rgb(255,28,28)' }} />
+                  </Stack>
+                ),
+                Panel: () => (
+                  <p style={{ textAlign: 'center' }}>© 2022 Tŝilhqot'in National Government</p>
+                )
+              }}
             />
           </Typography>
         </Typography>
@@ -95,10 +124,11 @@ export function VocabularyListIndex(props: VocabularyListIndexProps) {
 export default VocabularyListIndex;
 
 const height = {
-  height: '70vh',
+  height: '65vh',
   width: '100vw',
   background: 'white',
-  display: 'flex', flexDirection: "column-reverse"
+  display: 'flex',
+  flexDirection: "column-reverse"
 }
 
 const theme = createTheme({
@@ -119,6 +149,13 @@ const style = {
 
 } as const
 
+const searchConsole = {
+  background: 'rgb(159,2,2)',
+  paddingTop: '2px',
+  paddingBottom: '37px'
+} as const
 
-
-
+const header = {
+  lineHeight: '0px',
+  color: 'white'
+} as const
