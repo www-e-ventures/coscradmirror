@@ -18,7 +18,23 @@ This monorepo workspace is managed using [Nx](https://nx.dev). See the `README` 
 
 Install Nx globally
 
-> > npm install -g @nrwl/cli
+>> npm install -g @nrwl/cli
+
+Clone this repo
+>> git clone https://github.com/COSCRAD/coscrad.git
+
+Install the dependencies
+>> npm install
+
+#### Configuring the environment
+##### API (backend)
+We use [dotenv](https://www.npmjs.com/package/dotenv) to manage environment variables. All `.env` files for the `api` are maintained in 
+/COSCRAD/apps/api/src/app/config/. For your convenience, a sample configuration file, `sample.env` is provided. Use this as a starting point for setting up the following configuration files, which are required:
+- development.env
+- test.env
+- production.env
+
+Note that these files are named according to the corresponding environments, defined in the `Environment` enum in `./constants/Environment.ts` within the same directory. Finally, note that invalid.env is only used for testing the config setup, and should not be modified. 
 
 ## Workflow
 
