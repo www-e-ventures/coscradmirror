@@ -20,14 +20,36 @@ Install Nx globally
 
 > > npm install -g @nrwl/cli
 
-## Workflow
+Clone this repo
 
-### Spinning up a development instance of `ArangoDb`
+> > git clone https://github.com/COSCRAD/coscrad.git
+
+Install the dependencies
+
+> > npm install
+
+#### Configuring the environment
+
+##### API (backend)
+
+We use [dotenv](https://www.npmjs.com/package/dotenv) to manage environment variables. All `.env` files for the `api` are maintained in
+/COSCRAD/apps/api/src/app/config/. For your convenience, a sample configuration file, `sample.env` is provided. Use this as a starting point for setting up the following configuration files, which are required:
+
+- development.env
+- test.env
+- production.env
+
+Note that these files are named according to the corresponding environments, defined in the `Environment` enum in `./constants/Environment.ts` within the same directory. Finally, note that invalid.env is only used for testing the config setup, and should not be modified.
+
+### Spinning up a development instance of `ArangoDb` (Optional)
+
+We provide an optional shell script for spinning up an ArangoDB instance. This will only work if you have docker installed on your development machine. Alternatively, you could run an ArangoDB instance on a VirtualBox VM, a local physical machine, or in the cloud.
 
 To fire up a disposable development instance of `ArangoDB` with docker, run
 
 > > npm run start:db:dev
-> > from the project root.
+
+from the project root.
 
 In order for this to work, you'll need to add the following environment variables:
 
@@ -38,29 +60,47 @@ In order for this to work, you'll need to add the following environment variable
 The script will bind the default arango port 8529 of the container to `$ARANGO_DB_PORT` on the host. To verify, you can open
 
 ```
-localhost:${ARANGO_DB_PORT}
+http://localhost:${ARANGO_DB_PORT}
 ```
 
 in your browser and access the dashboard using `${ARANGO_DB_ROOT_PASSWORD}`.
 
-### Lint
+## Workflow
+
+<!-- ### Lint
 
 In the project root, run
 
-> > npm run lint
+> > npm run lint -->
 
 ### Tests
 
-Note: Make sure nx cli is installed globally to run the following command.
+Note: Make sure nx cli is installed globally to run the following commands.
 
-> > nx test <project-name>
+To run the tests for a specific project, run
+
+> > nx test <project-name>.
 
 For example, to run the tests for the project `api`, run
 
 > > nx test api
 
-<!-- TODO Add License info \ choose open source license -->
+To run a single test, use the `testFile` flag as follows:
 
-<!-- TODO Add getting started -->
+> > nx run <project-name>:test --testFile <name-of-test-file>
+
+e.g.
+
+> > nx run api:test --testFile entities.e2e.spec.ts
+
+To run all tests whose names match a RegEx pattern, run
+
+> > nx run <project-name>:test --testPathPattern <regex-to-match-file-paths>
+
+e.g.
+
+> > nx run api:test --testPathPattern 'src/.\*validate.\*'
+
+<!-- TODO Add License info \ choose open source license -->
 
 <!-- TODO Add build instructions -->
