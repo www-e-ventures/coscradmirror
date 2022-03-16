@@ -7,7 +7,7 @@ export interface HomeProps {}
 export function Home(props: HomeProps) {
   return (
     <div>
-      <h1>Welcome to Home!</h1>
+      <h1>Welcome to coscrad</h1>
       <Link to='/About'>About</Link>
       <Link to='/AllEntities'>All Entities</Link>
     </div>
