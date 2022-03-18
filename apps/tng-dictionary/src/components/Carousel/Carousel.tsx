@@ -67,6 +67,7 @@ export function Carousel(props: CarouselProps) {
               whileTap={{ scale: 0.9 }}>
               <Button className='clicker' disableRipple={true} onClick={e => setIndex(cyclicDecrement(currentIndex, props.data.length - 1))}><ArrowBackIosNewOutlinedIcon /> Back</Button>
             </motion.div>
+
             <motion.div onClick={() => setToggle(prevValue => {
               return prevValue ? 200 : 200;
             })} whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}

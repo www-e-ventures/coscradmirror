@@ -11,7 +11,6 @@ import MenuBookTwoToneIcon from '@mui/icons-material/MenuBookTwoTone';
 import doValuesMatchFilters from '../../utilities/doValuesMatchFilters';
 import stringIncludes from '../../utilities/matchers/stringIncludes';
 import { HasIdAndName } from '../../types/HasNameAndId';
-import Test from '../sandbox/Test/Test';
 import MiniLoading from '../MiniLoading/mini-loading';
 
 type ComponentState = {
