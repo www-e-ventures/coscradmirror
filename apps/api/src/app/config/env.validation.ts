@@ -51,6 +51,9 @@ class EnvironmentVariables {
   @IsString()
   @IsNotEmpty()
   AUTH0_AUDIENCE: string;
+
+  @IsUrl()
+  BASE_AUDIO_URL: string;
 }
 
 export const validate = (

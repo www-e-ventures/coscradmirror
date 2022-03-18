@@ -1,3 +1,4 @@
+import { ConfigService } from '@nestjs/config';
 import { EntityType, entityTypes } from '../../domain/types/entityType';
 import { InternalError } from '../../lib/errors/InternalError';
 import { RepositoryProvider } from '../../persistence/repositories/repository.provider';
@@ -7,6 +8,7 @@ import buildVocabularyListViewModels from './viewModelBuilders/buildVocabularyLi
 
 export type ViewModelBuilderDependencies = {
   repositoryProvider: RepositoryProvider;
+  configService: ConfigService;
 };
 
 export default (

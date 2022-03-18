@@ -5,7 +5,7 @@ import { Environment } from '../../app/config/constants/Environment';
 import removeAllCustomEntironmentVariables from '../../app/config/__tests__/utilities/removeAllCustomEnvironmentVariables';
 import getInstanceFactoryForEntity from '../../domain/factories/getInstanceFactoryForEntity';
 import { Entity } from '../../domain/models/entity';
-import { entityTypes, InMemorySnapshot } from '../../domain/types/entityType';
+import { entityTypes } from '../../domain/types/entityType';
 import { InternalError, isInternalError } from '../../lib/errors/InternalError';
 import { NotFound } from '../../lib/types/not-found';
 import buildTestData from '../../test-data/buildTestData';
@@ -16,7 +16,7 @@ import TestRepositoryProvider from './TestRepositoryProvider';
 const originalEnv = process.env;
 
 describe('Repository provider > repositoryForEntity', () => {
-  let testData: InMemorySnapshot;
+  const testData = buildTestData();
 
   let databaseProvider: DatabaseProvider;
 
@@ -24,12 +24,10 @@ describe('Repository provider > repositoryForEntity', () => {
 
   let configService: ConfigService;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     jest.resetModules();
 
     removeAllCustomEntironmentVariables();
-
-    testData = buildTestData();
 
     const moduleRef = await Test.createTestingModule({
       imports: [
@@ -51,12 +49,6 @@ describe('Repository provider > repositoryForEntity', () => {
     await testRepositoryProvider.testSetup();
   });
 
-  afterEach(async () => {
-    process.env = originalEnv;
-
-    await testRepositoryProvider.testTeardown();
-  });
-
   describe('the configuration', () => {
     it('should use the correct database', () => {
       expect(configService.get('ARANGO_DB_NAME')).toEqual('e2etestdb');
@@ -67,6 +59,10 @@ describe('Repository provider > repositoryForEntity', () => {
     describe(`Repository for entity of type ${entityType}`, () => {
       beforeEach(async () => {
         await testRepositoryProvider.addEntitiesOfManyTypes(testData);
+      });
+
+      afterEach(async () => {
+        await testRepositoryProvider.testTeardown();
       });
       describe('fetchMany', () => {
         it('should return the expected result', async () => {
@@ -112,6 +108,7 @@ describe('Repository provider > repositoryForEntity', () => {
         });
       });
 
+      //
       describe('getCount', () => {
         it('should return the expected count', async () => {
           const expectedCount = testData[entityType].length;

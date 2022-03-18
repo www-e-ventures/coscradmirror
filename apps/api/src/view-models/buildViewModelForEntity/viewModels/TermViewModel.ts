@@ -1,58 +1,61 @@
-import { Term } from 'apps/api/src/domain/models/term/entities/term.entity';
-
-const baseURL = `https://be.tsilhqotinlanguage.ca:3003/download?id=`;
-
-const buildAudioURL = (filename: string, extension = 'mp3'): string =>
-  `${baseURL}${filename}.${extension}`;
+import { Term } from 'apps/api/src/domain/models/term/entities/term.entity'
 
 // TODO Add proper contributors repository \ collection
 const contributors = {
-  1: 'Bella Alphonse',
-  2: 'William Myers',
-};
+    1: 'Bella Alphonse',
+    2: 'William Myers',
+}
 
-const getContributorNameFromId = (id: string): string => contributors[id] || '';
+const getContributorNameFromId = (id: string): string => contributors[id] || ''
 
-export type ViewModelId = string;
+export type ViewModelId = string
 
 export class TermViewModel {
-  readonly id: ViewModelId;
+    readonly id: ViewModelId
 
-  readonly contributor: string;
+    readonly contributor: string
 
-  readonly term: string;
+    readonly term: string
 
-  readonly termEnglish?: string;
+    readonly termEnglish?: string
 
-  readonly audioURL?: string;
+    readonly audioURL?: string
 
-  readonly sourceProject?: string;
+    readonly sourceProject?: string
 
-  readonly isPublished: boolean = false;
+    readonly isPublished: boolean = false
 
-  constructor(term: Term) {
-    const {
-      id,
-      contributorId,
-      term: text,
-      termEnglish: textEnglish,
-      audioFilename,
-      published: isPublished,
-      sourceProject,
-    } = term;
+    readonly #baseAudioURL: string
 
-    this.id = id;
+    constructor(term: Term, baseAudioURL: string) {
+        const {
+            id,
+            contributorId,
+            term: text,
+            termEnglish: textEnglish,
+            audioFilename,
+            published: isPublished,
+            sourceProject,
+        } = term
 
-    this.contributor = getContributorNameFromId(contributorId);
+        this.#baseAudioURL = baseAudioURL
 
-    this.term = text;
+        this.id = id
 
-    this.termEnglish = textEnglish;
+        this.contributor = getContributorNameFromId(contributorId)
 
-    if (audioFilename) this.audioURL = buildAudioURL(audioFilename);
+        this.term = text
 
-    if (typeof isPublished === 'boolean') this.isPublished = isPublished;
+        this.termEnglish = textEnglish
 
-    if (sourceProject) this.sourceProject = sourceProject;
-  }
+        if (audioFilename) this.audioURL = this.#buildAudioURL(audioFilename)
+
+        if (typeof isPublished === 'boolean') this.isPublished = isPublished
+
+        if (sourceProject) this.sourceProject = sourceProject
+    }
+
+    #buildAudioURL(filename: string, extension = 'mp3'): string {
+        return `${this.#baseAudioURL}${filename}.${extension}`
+    }
 }
