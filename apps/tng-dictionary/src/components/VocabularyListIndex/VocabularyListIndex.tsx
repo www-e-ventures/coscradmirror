@@ -68,7 +68,7 @@ export function VocabularyListIndex(props: VocabularyListIndexProps) {
   }, {
     field: 'name',
     headerName: 'Vocabulary List',
-    width: 150,
+                                                     width: 150,
     flex: 1
   }];
 
