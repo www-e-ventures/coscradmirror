@@ -1,382 +1,291 @@
 {
-  "version": 1,
-  "projects": {
-    "api": {
-      "root": "apps/api",
-      "sourceRoot": "apps/api/src",
-      "projectType": "application",
-      "architect": {
-        "build": {
-          "builder": "@nrwl/node:build",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "outputPath": "dist/apps/api",
-            "main": "apps/api/src/main.ts",
-            "tsConfig": "apps/api/tsconfig.app.json",
-            "assets": ["apps/api/src/assets"]
-          },
-          "configurations": {
-            "production": {
-              "optimization": true,
-              "extractLicenses": true,
-              "inspect": false,
-              "fileReplacements": [
-                {
-                  "replace": "apps/api/src/environments/environment.ts",
-                  "with": "apps/api/src/environments/environment.prod.ts"
-                }
-              ]
-            }
-          }
-        },
-        "serve": {
-          "builder": "@nrwl/node:execute",
-          "options": {
-            "buildTarget": "api:build"
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/api/**/*.ts"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/api"],
-          "options": {
-            "jestConfig": "apps/api/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "api-interfaces": {
-      "root": "libs/api-interfaces",
-      "sourceRoot": "libs/api-interfaces/src",
-      "projectType": "library",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/api-interfaces/**/*.ts"]
-          }
-        }
-      }
-    },
-    "coscrad-frontend": {
-      "root": "apps/coscrad-frontend",
-      "sourceRoot": "apps/coscrad-frontend/src",
-      "projectType": "application",
-      "architect": {
-        "build": {
-          "builder": "@nrwl/web:webpack",
-          "outputs": ["{options.outputPath}"],
-          "defaultConfiguration": "production",
-          "options": {
-            "compiler": "babel",
-            "outputPath": "dist/apps/coscrad-frontend",
-            "index": "apps/coscrad-frontend/src/index.html",
-            "baseHref": "/",
-            "main": "apps/coscrad-frontend/src/main.tsx",
-            "polyfills": "apps/coscrad-frontend/src/polyfills.ts",
-            "tsConfig": "apps/coscrad-frontend/tsconfig.app.json",
-            "assets": [
-              "apps/coscrad-frontend/src/favicon.ico",
-              "apps/coscrad-frontend/src/assets"
-            ],
-            "styles": ["apps/coscrad-frontend/src/styles.scss"],
-            "scripts": [],
-            "webpackConfig": "@nrwl/react/plugins/webpack"
-          },
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "apps/coscrad-frontend/src/environments/environment.ts",
-                  "with": "apps/coscrad-frontend/src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false
-            }
-          }
-        },
-        "serve": {
-          "builder": "@nrwl/web:dev-server",
-          "options": {
-            "buildTarget": "coscrad-frontend:build",
-            "hmr": true
-          },
-          "configurations": {
-            "production": {
-              "buildTarget": "coscrad-frontend:build:production",
-              "hmr": false
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": ["apps/coscrad-frontend/**/*.{ts,tsx,js,jsx}"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/coscrad-frontend"],
-          "options": {
-            "jestConfig": "apps/coscrad-frontend/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "tags": []
-    },
-    "coscrad-frontend-e2e": {
-      "root": "apps/coscrad-frontend-e2e",
-      "sourceRoot": "apps/coscrad-frontend-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/coscrad-frontend-e2e/cypress.json",
-            "devServerTarget": "coscrad-frontend:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "coscrad-frontend:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": ["apps/coscrad-frontend-e2e/**/*.{js,ts}"]
-          }
-        }
-      },
-      "tags": [],
-      "implicitDependencies": ["coscrad-frontend"]
-    },
-    "tng-dictionary": {
-      "root": "apps/tng-dictionary",
-      "sourceRoot": "apps/tng-dictionary/src",
-      "projectType": "application",
-      "architect": {
-        "build": {
-          "builder": "@nrwl/web:webpack",
-          "outputs": ["{options.outputPath}"],
-          "defaultConfiguration": "production",
-          "options": {
-            "compiler": "babel",
-            "outputPath": "dist/apps/tng-dictionary",
-            "index": "apps/tng-dictionary/src/index.html",
-            "baseHref": "/",
-            "main": "apps/tng-dictionary/src/main.tsx",
-            "polyfills": "apps/tng-dictionary/src/polyfills.ts",
-            "tsConfig": "apps/tng-dictionary/tsconfig.app.json",
-            "assets": ["apps/tng-dictionary/src/favicon.ico", "apps/tng-dictionary/src/assets"],
-            "styles": ["apps/tng-dictionary/src/styles.css"],
-            "scripts": [],
-            "webpackConfig": "@nrwl/react/plugins/webpack"
-          },
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "apps/tng-dictionary/src/environments/environment.ts",
-                  "with": "apps/tng-dictionary/src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false
-            }
-          }
-        },
-        "serve": {
-          "builder": "@nrwl/web:dev-server",
-          "options": {
-            "buildTarget": "tng-dictionary:build",
-            "hmr": true
-          },
-          "configurations": {
-            "production": {
-              "buildTarget": "tng-dictionary:build:production",
-              "hmr": false
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": ["apps/tng-dictionary/**/*.{ts,tsx,js,jsx}"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/tng-dictionary"],
-          "options": {
-            "jestConfig": "apps/tng-dictionary/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "tags": []
-    },
-    "tng-dictionary-e2e": {
-      "root": "apps/tng-dictionary-e2e",
-      "sourceRoot": "apps/tng-dictionary-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/tng-dictionary-e2e/cypress.json",
-            "devServerTarget": "tng-dictionary:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "tng-dictionary:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": ["apps/tng-dictionary-e2e/**/*.{js,ts}"]
-          }
-        }
-      },
-      "tags": [],
-      "implicitDependencies": ["tng-dictionary"]
-    },
-    "tw-research": {
-      "projectType": "application",
-      "root": "apps/tw-research",
-      "sourceRoot": "apps/tw-research/src",
-      "prefix": "coscrad",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "outputPath": "dist/apps/tw-research",
-            "index": "apps/tw-research/src/index.html",
-            "main": "apps/tw-research/src/main.ts",
-            "polyfills": "apps/tw-research/src/polyfills.ts",
-            "tsConfig": "apps/tw-research/tsconfig.app.json",
-            "assets": ["apps/tw-research/src/favicon.ico", "apps/tw-research/src/assets"],
-            "styles": ["apps/tw-research/src/styles.css"],
-            "scripts": []
-          },
-          "configurations": {
-            "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+    "version": 1,
+    "projects": {
+        "api": {
+            "root": "apps/api",
+            "sourceRoot": "apps/api/src",
+            "projectType": "application",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/node:build",
+                    "outputs": ["{options.outputPath}"],
+                    "options": {
+                        "outputPath": "dist/apps/api",
+                        "main": "apps/api/src/main.ts",
+                        "tsConfig": "apps/api/tsconfig.app.json",
+                        "assets": ["apps/api/src/assets"]
+                    },
+                    "configurations": {
+                        "production": {
+                            "optimization": true,
+                            "extractLicenses": true,
+                            "inspect": false,
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/api/src/environments/environment.ts",
+                                    "with": "apps/api/src/environments/environment.prod.ts"
+                                }
+                            ]
+                        }
+                    }
                 },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                "serve": {
+                    "builder": "@nrwl/node:execute",
+                    "options": {
+                        "buildTarget": "api:build"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["apps/api/**/*.ts"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "outputs": ["coverage/apps/api"],
+                    "options": {
+                        "jestConfig": "apps/api/jest.config.js",
+                        "passWithNoTests": true
+                    }
                 }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "apps/tw-research/src/environments/environment.ts",
-                  "with": "apps/tw-research/src/environments/environment.prod.ts"
+            }
+        },
+        "api-interfaces": {
+            "root": "libs/api-interfaces",
+            "sourceRoot": "libs/api-interfaces/src",
+            "projectType": "library",
+            "architect": {
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["libs/api-interfaces/**/*.ts"]
+                    }
                 }
-              ],
-              "outputHashing": "all"
-            },
-            "development": {
-              "buildOptimizer": false,
-              "optimization": false,
-              "vendorChunk": true,
-              "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
             }
-          },
-          "defaultConfiguration": "production"
         },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "configurations": {
-            "production": {
-              "browserTarget": "tw-research:build:production"
-            },
-            "development": {
-              "browserTarget": "tw-research:build:development"
+        "coscrad-frontend": {
+            "root": "apps/coscrad-frontend",
+            "sourceRoot": "apps/coscrad-frontend/src",
+            "projectType": "application",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/web:webpack",
+                    "outputs": ["{options.outputPath}"],
+                    "defaultConfiguration": "production",
+                    "options": {
+                        "compiler": "babel",
+                        "outputPath": "dist/apps/coscrad-frontend",
+                        "index": "apps/coscrad-frontend/src/index.html",
+                        "baseHref": "/",
+                        "main": "apps/coscrad-frontend/src/main.tsx",
+                        "polyfills": "apps/coscrad-frontend/src/polyfills.ts",
+                        "tsConfig": "apps/coscrad-frontend/tsconfig.app.json",
+                        "assets": [
+                            "apps/coscrad-frontend/src/favicon.ico",
+                            "apps/coscrad-frontend/src/assets"
+                        ],
+                        "styles": ["apps/coscrad-frontend/src/styles.scss"],
+                        "scripts": [],
+                        "webpackConfig": "@nrwl/react/plugins/webpack"
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/coscrad-frontend/src/environments/environment.ts",
+                                    "with": "apps/coscrad-frontend/src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "namedChunks": false,
+                            "extractLicenses": true,
+                            "vendorChunk": false
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@nrwl/web:dev-server",
+                    "options": {
+                        "buildTarget": "coscrad-frontend:build",
+                        "hmr": true
+                    },
+                    "configurations": {
+                        "production": {
+                            "buildTarget": "coscrad-frontend:build:production",
+                            "hmr": false
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "outputs": ["{options.outputFile}"],
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/coscrad-frontend/**/*.{ts,tsx,js,jsx}"
+                        ]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "outputs": ["coverage/apps/coscrad-frontend"],
+                    "options": {
+                        "jestConfig": "apps/coscrad-frontend/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                }
             }
-          },
-          "defaultConfiguration": "development",
-          "options": {
-            "proxyConfig": "apps/tw-research/proxy.conf.json"
-          }
         },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "tw-research:build"
-          }
+        "coscrad-frontend-e2e": {
+            "root": "apps/coscrad-frontend-e2e",
+            "sourceRoot": "apps/coscrad-frontend-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/coscrad-frontend-e2e/cypress.json",
+                        "devServerTarget": "coscrad-frontend:serve"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "coscrad-frontend:serve:production"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "outputs": ["{options.outputFile}"],
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/coscrad-frontend-e2e/**/*.{js,ts}"
+                        ]
+                    }
+                }
+            }
         },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/tw-research/src/**/*.ts", "apps/tw-research/src/**/*.html"]
-          }
+        "tng-dictionary": {
+            "root": "apps/tng-dictionary",
+            "sourceRoot": "apps/tng-dictionary/src",
+            "projectType": "application",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/web:webpack",
+                    "outputs": ["{options.outputPath}"],
+                    "defaultConfiguration": "production",
+                    "options": {
+                        "compiler": "babel",
+                        "outputPath": "dist/apps/tng-dictionary",
+                        "index": "apps/tng-dictionary/src/index.html",
+                        "baseHref": "/",
+                        "main": "apps/tng-dictionary/src/main.tsx",
+                        "polyfills": "apps/tng-dictionary/src/polyfills.ts",
+                        "tsConfig": "apps/tng-dictionary/tsconfig.app.json",
+                        "assets": [
+                            "apps/tng-dictionary/src/favicon.ico",
+                            "apps/tng-dictionary/src/assets"
+                        ],
+                        "styles": ["apps/tng-dictionary/src/styles.css"],
+                        "scripts": [],
+                        "webpackConfig": "@nrwl/react/plugins/webpack"
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/tng-dictionary/src/environments/environment.ts",
+                                    "with": "apps/tng-dictionary/src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "namedChunks": false,
+                            "extractLicenses": true,
+                            "vendorChunk": false
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@nrwl/web:dev-server",
+                    "options": {
+                        "buildTarget": "tng-dictionary:build",
+                        "hmr": true
+                    },
+                    "configurations": {
+                        "production": {
+                            "buildTarget": "tng-dictionary:build:production",
+                            "hmr": false
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "outputs": ["{options.outputFile}"],
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/tng-dictionary/**/*.{ts,tsx,js,jsx}"
+                        ]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "outputs": ["coverage/apps/tng-dictionary"],
+                    "options": {
+                        "jestConfig": "apps/tng-dictionary/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                }
+            }
         },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/tw-research"],
-          "options": {
-            "jestConfig": "apps/tw-research/jest.config.js",
-            "passWithNoTests": true
-          }
+        "tng-dictionary-e2e": {
+            "root": "apps/tng-dictionary-e2e",
+            "sourceRoot": "apps/tng-dictionary-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/tng-dictionary-e2e/cypress.json",
+                        "devServerTarget": "tng-dictionary:serve"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "tng-dictionary:serve:production"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "outputs": ["{options.outputFile}"],
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/tng-dictionary-e2e/**/*.{js,ts}"
+                        ]
+                    }
+                }
+            }
         }
-      }
     },
-    "tw-research-e2e": {
-      "root": "apps/tw-research-e2e",
-      "sourceRoot": "apps/tw-research-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/tw-research-e2e/cypress.json",
-            "tsConfig": "apps/tw-research-e2e/tsconfig.e2e.json",
-            "devServerTarget": "tw-research:serve:development"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "tw-research:serve:production"
+    "cli": {
+        "defaultCollection": "@nrwl/angular"
+    },
+    "schematics": {
+        "@nrwl/react": {
+            "application": {
+                "style": "css",
+                "linter": "eslint",
+                "babel": true
+            },
+            "component": {
+                "style": "css"
+            },
+            "library": {
+                "style": "css",
+                "linter": "eslint"
             }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/tw-research-e2e/**/*.{js,ts}"]
-          }
         }
-      }
     }
-  }
 }
