@@ -39,10 +39,9 @@ const validVocabularyListDTO: PartialDTO<VocabularyList> = {
   entries: [
     {
       termId: 'term123',
-      variableValues: 'fix me',
-      // {
-      //   person: '13',
-      // },
+      variableValues: {
+        person: '13',
+      },
     },
   ],
 };
@@ -50,6 +49,7 @@ const validVocabularyListDTO: PartialDTO<VocabularyList> = {
 const validTagDTO: PartialDTO<Tag> = {
   id: '11',
   text: 'wardrobe',
+  published: true,
 };
 
 const testCases: (
@@ -66,6 +66,7 @@ const testCases: (
           term: 'test term in language',
           termEnglish: 'test term in english',
           id: '123',
+          published: true,
         },
       },
     ],
@@ -90,13 +91,13 @@ const testCases: (
           name: 'vlist name in language',
           nameEnglish: 'vlist name in English',
           id: '123',
+          published: false,
           entries: [
             {
               termId: 'term123',
-              variableValues: 'fix me',
-              // {
-              //   person: '13',
-              // },
+              variableValues: {
+                person: '13',
+              },
             },
           ],
         },
@@ -110,9 +111,9 @@ const testCases: (
           entries: [
             {
               termId: 'term123',
-              variableValues: 'fix me', // {
-              //   person: '13',
-              // },
+              variableValues: {
+                person: '13',
+              },
             },
           ],
         },
