@@ -11,16 +11,14 @@ import { EntityId } from './entity-id';
  * is to call the `entity id` `_key` and the `CompositeIdentifier` `_id`.
  */
 export type EntityCompositeIdentifier<TEntityType = EntityType> = {
-  type: EntityType;
-  id: EntityId;
+    type: TEntityType;
+    id: EntityId;
 };
 
-export const isEntityCompositeIdentifier = (
-  input: unknown
-): input is EntityCompositeIdentifier => {
-  if (isNullOrUndefined(input)) return false;
+export const isEntityCompositeIdentifier = (input: unknown): input is EntityCompositeIdentifier => {
+    if (isNullOrUndefined(input)) return false;
 
-  const { type, id } = input as EntityCompositeIdentifier;
+    const { type, id } = input as EntityCompositeIdentifier;
 
-  isEntityType(type) && isEntityId(id);
+    isEntityType(type) && isEntityId(id);
 };

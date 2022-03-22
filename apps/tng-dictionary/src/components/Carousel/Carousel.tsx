@@ -9,8 +9,6 @@ import { Button } from '@mui/material';
 import { AnimatePresence, motion } from 'framer-motion';
 import TermData, { Term } from '../Term/Term';
 
-
-/* eslint-disable-next-line */
 export interface CarouselProps {
   data: TermData[]
 }
@@ -40,13 +38,13 @@ export function Carousel(props: CarouselProps) {
 
   const [currentIndex, setIndex] = useState(0)
 
+  const [isToggled, setToggle] = useState(1);
+
   if (props.data.length === 0) return (
     <p>No Data</p>
   )
 
   const currentItem: TermData = props.data[currentIndex];
-
-  const [isToggled, setToggle] = useState(1);
 
   return (
 

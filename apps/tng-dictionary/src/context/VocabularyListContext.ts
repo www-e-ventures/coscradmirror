@@ -4,42 +4,40 @@ export const NoSelection = '<No Selection>';
 
 export type MaybeSelected<T> = T | typeof NoSelection;
 
-export const isSelected = <T>(input: MaybeSelected<T>): input is T =>
-  input !== NoSelection;
+export const isSelected = <T>(input: MaybeSelected<T>): input is T => input !== NoSelection;
 
 export type FormItemValue = string | boolean;
 
 export const buildUnselectedFormData = (
-  formPropNames?: string[]
+    formPropNames?: string[]
 ): Record<string, MaybeSelected<FormItemValue>> =>
-  !formPropNames
-    ? {}
-    : formPropNames.reduce(
-        (
-          accumulatedFormData: Record<string, MaybeSelected<FormItemValue>>,
-          key
-        ) => ({
-          ...accumulatedFormData,
-          [key]: NoSelection,
-        }),
-        {}
-      );
+    !formPropNames
+        ? {}
+        : formPropNames.reduce(
+              (accumulatedFormData: Record<string, MaybeSelected<FormItemValue>>, key) => ({
+                  ...accumulatedFormData,
+                  [key]: NoSelection,
+              }),
+              {}
+          );
 
 export type VocabularyListFormState = {
-  currentSelections: Record<string, MaybeSelected<FormItemValue>>;
-  // isReady: boolean;
+    currentSelections: Record<string, MaybeSelected<FormItemValue>>;
+    // isReady: boolean;
 };
 
 const VocabularyListContext = createContext<
-  [
-    formState: VocabularyListFormState,
-    dispatch: Dispatch<SetStateAction<VocabularyListFormState>>
-  ]
+    [
+        formState: VocabularyListFormState,
+        dispatch: Dispatch<SetStateAction<VocabularyListFormState>>
+    ]
 >([
-  {
-    currentSelections: {},
-  },
-  () => {},
+    {
+        currentSelections: {},
+    },
+    // TODO Remove this
+    /* eslint-disable */
+    () => {},
 ]);
 
 export default VocabularyListContext;

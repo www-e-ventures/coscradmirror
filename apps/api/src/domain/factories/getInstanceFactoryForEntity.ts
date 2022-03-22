@@ -12,29 +12,23 @@ import buildInstanceFactory from './utilities/buildInstanceFactory';
 
 export type InstanceFactory<TEntity> = (dto: unknown) => ResultOrError<TEntity>;
 
-export default <TEntity extends Entity>(
-  entityType: EntityType
-): InstanceFactory<TEntity> => {
-  switch (entityType) {
-    case entityTypes.term:
-      // @ts-expect-error TODO fix this tricky type error
-      return buildInstanceFactory<Term>(termValidator, Term);
+export default <TEntity extends Entity>(entityType: EntityType): InstanceFactory<TEntity> => {
+    switch (entityType) {
+        case entityTypes.term:
+            // @ts-expect-error TODO fix this tricky type error
+            return buildInstanceFactory<Term>(termValidator, Term);
 
-    case entityTypes.vocabularyList:
-      // @ts-expect-error TODO fix this tricky type error
-      return buildInstanceFactory<VocabularyList>(
-        vocabularyListValidator,
-        VocabularyList
-      );
+        case entityTypes.vocabularyList:
+            // @ts-expect-error TODO fix this tricky type error
+            return buildInstanceFactory<VocabularyList>(vocabularyListValidator, VocabularyList);
 
-    case entityTypes.tag:
-      // @ts-expect-error TODO fix this tricky type error
-      return buildInstanceFactory<Tag>(tagValidator, Tag);
+        case entityTypes.tag:
+            // @ts-expect-error TODO fix this tricky type error
+            return buildInstanceFactory<Tag>(tagValidator, Tag);
 
-    default:
-      const exhaustiveCheck: never = entityType;
-      throw new InternalError(
-        `Failed to build instance factory for unknown entity type ${exhaustiveCheck}`
-      );
-  }
+        default:
+            throw new InternalError(
+                `Failed to build instance factory for unknown entity type ${entityType}`
+            );
+    }
 };

@@ -7,29 +7,24 @@ import buildTermViewModels from './viewModelBuilders/buildTermViewModels';
 import buildVocabularyListViewModels from './viewModelBuilders/buildVocabularyListViewModels';
 
 export type ViewModelBuilderDependencies = {
-  repositoryProvider: RepositoryProvider;
-  configService: ConfigService;
+    repositoryProvider: RepositoryProvider;
+    configService: ConfigService;
 };
 
-export default (
-  entityType: EntityType,
-  dependencies: ViewModelBuilderDependencies
-) => {
-  switch (entityType) {
-    case entityTypes.term:
-      return buildTermViewModels(dependencies);
+export default (entityType: EntityType, dependencies: ViewModelBuilderDependencies) => {
+    switch (entityType) {
+        case entityTypes.term:
+            return buildTermViewModels(dependencies);
 
-    case entityTypes.vocabularyList:
-      return buildVocabularyListViewModels(dependencies);
+        case entityTypes.vocabularyList:
+            return buildVocabularyListViewModels(dependencies);
 
-    case entityTypes.tag:
-      return buildTagViewModels(dependencies);
+        case entityTypes.tag:
+            return buildTagViewModels(dependencies);
 
-    default:
-      const exhaustiveCheck: never = entityType;
-
-      return new InternalError(
-        `Cannot build view model for unsupported entity type: ${exhaustiveCheck}`
-      );
-  }
+        default:
+            return new InternalError(
+                `Cannot build view model for unsupported entity type: ${entityType}`
+            );
+    }
 };

@@ -4,5 +4,6 @@
  * [reference link](https://bigfont.ca/data-transfer-object-wrapper/)
  */
 export type DataPropertyNames<T> = {
-  [K in keyof T]: T[K] extends Function ? never : K;
+    /* eslint-disable */ // This is a rare case where Function is ok as a type
+    [K in keyof T]: T[K] extends Function ? never : K;
 }[keyof T];

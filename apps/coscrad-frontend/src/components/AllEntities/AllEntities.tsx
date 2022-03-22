@@ -13,7 +13,7 @@ export function AllEntities(props: AllEntitiesProps) {
   return (
     <div>
       <h1>Welcome to AllEntities!</h1>
-      <p>{Object.entries(entityData).map(([entityType,description])=>(<p>{entityType}:{description}</p>))}</p>
+      <div>{Object.entries(entityData).map(([entityType,description])=>(<p key={entityType}>{entityType}:{description}</p>))}</div>
     </div>
   );
 }
