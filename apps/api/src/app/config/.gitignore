@@ -1,5 +1,2 @@
-.env
-production.env
-test.env
-development.env
-
+!sample.env
+!invalid.env
