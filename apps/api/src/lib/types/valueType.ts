@@ -1,1 +1,1 @@
-export type ValueType<T extends object> = T[keyof T];
+export type ValueType<T extends Record<string, unknown>> = T[keyof T];

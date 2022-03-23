@@ -8,11 +8,11 @@ import { VocabularyListVariableValue } from './vocabulary-list-variable-value';
  * type:checkbox <-> boolean values
  */
 export type VocabularyListVariable<
-  TVariableType extends VocabularyListVariableValue = VocabularyListVariableValue
+    TVariableType extends VocabularyListVariableValue = VocabularyListVariableValue
 > = {
-  name: string;
+    name: string;
 
-  type: DropboxOrCheckbox;
+    type: DropboxOrCheckbox;
 
-  validValues: ValueAndDisplay<VocabularyListVariableValue>[];
+    validValues: ValueAndDisplay<TVariableType>[];
 };

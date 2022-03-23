@@ -8,29 +8,25 @@ import vocabularyListValidator from './vocabularyListValidator';
 export type DomainModelValidator = (inputDTO: unknown) => Valid | InternalError;
 
 // TODO should we put these on the classes and use polymorphism?
-export const getValidatorForEntity = (
-  entityType: EntityType
-): DomainModelValidator => {
-  switch (entityType) {
-    case entityTypes.tag:
-      return tagValidator;
+export const getValidatorForEntity = (entityType: EntityType): DomainModelValidator => {
+    switch (entityType) {
+        case entityTypes.tag:
+            return tagValidator;
 
-    case entityTypes.term:
-      return termValidator;
+        case entityTypes.term:
+            return termValidator;
 
-    case entityTypes.vocabularyList:
-      return vocabularyListValidator;
+        case entityTypes.vocabularyList:
+            return vocabularyListValidator;
 
-    default:
-      const exhaustiveCheck: never = entityType;
-
-      throw new InternalError(
-        `Failed to get validator for unknown entity type: ${exhaustiveCheck}`
-      );
-  }
+        default:
+            throw new InternalError(
+                `Failed to get validator for unknown entity type: ${entityType}`
+            );
+    }
 };
 
 export default {
-  termValidator,
-  vocabularyListValidator,
+    termValidator,
+    vocabularyListValidator,
 };

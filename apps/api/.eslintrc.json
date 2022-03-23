@@ -4,11 +4,17 @@
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
-      "rules": {}
+      "rules": {
+        // TODO: Re-enable this
+        "@nrwl/nx/enforce-module-boundaries": [0]
+      }
     },
     {
       "files": ["*.ts", "*.tsx"],
-      "rules": {}
+      "rules": {
+        // TODO: Re-enable this
+        "@nrwl/nx/enforce-module-boundaries": [0]
+      }
     },
     {
       "files": ["*.js", "*.jsx"],

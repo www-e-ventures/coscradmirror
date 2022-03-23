@@ -1,44 +1,71 @@
 {
-  "npmScope": "coscrad",
-  "affected": {
-    "defaultBase": "master"
-  },
-  "implicitDependencies": {
-    "package.json": {
-      "dependencies": "*",
-      "devDependencies": "*"
+    "npmScope": "coscrad",
+    "affected": {
+        "defaultBase": "master"
     },
-    ".eslintrc.json": "*"
-  },
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "@nrwl/workspace/tasks-runners/default",
-      "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
-      }
-    }
-  },
-  "targetDependencies": {
-    "build": [
-      {
-        "target": "build",
-        "projects": "dependencies"
-      }
-    ]
-  },
-  "projects": {
-    "api": {
-      "tags": []
+    "implicitDependencies": {
+        "package.json": {
+            "dependencies": "*",
+            "devDependencies": "*"
+        },
+        ".eslintrc.json": "*"
     },
-    "api-interfaces": {
-      "tags": []
+    "tasksRunnerOptions": {
+        "default": {
+            "runner": "@nrwl/workspace/tasks-runners/default",
+            "options": {
+                "cacheableOperations": ["build", "lint", "test", "e2e"]
+            }
+        }
     },
-    "tw-research": {
-      "tags": []
+    "targetDependencies": {
+        "build": [
+            {
+                "target": "build",
+                "projects": "dependencies"
+            }
+        ]
     },
-    "tw-research-e2e": {
-      "tags": [],
-      "implicitDependencies": ["tw-research"]
-    }
-  }
+    "projects": {
+        "api": {
+            "tags": []
+        },
+        "api-interfaces": {
+            "tags": []
+        },
+        "coscrad-frontend": {
+            "tags": []
+        },
+        "coscrad-frontend-e2e": {
+            "tags": [],
+            "implicitDependencies": ["coscrad-frontend"]
+        },
+        "tng-dictionary": {
+            "tags": []
+        },
+        "tng-dictionary-e2e": {
+            "tags": [],
+            "implicitDependencies": ["tng-dictionary"]
+        }
+    },
+    "cli": {
+        "defaultCollection": "@nrwl/angular"
+    },
+    "generators": {
+        "@nrwl/react": {
+            "application": {
+                "style": "css",
+                "linter": "eslint",
+                "babel": true
+            },
+            "component": {
+                "style": "css"
+            },
+            "library": {
+                "style": "css",
+                "linter": "eslint"
+            }
+        }
+    },
+    "defaultProject": "api"
 }

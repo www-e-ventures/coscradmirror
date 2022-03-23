@@ -1,17 +1,15 @@
-import { EntityType, EntityTypeToInstance } from '../domain/types/entityType';
-import { PartialDTO } from '../types/partial-dto';
+import { entityTypes, InMemorySnapshot } from '../domain/types/entityType';
 import buildTagTestData from './buildTagTestData';
 import buildTermTestData from './buildTermTestData';
 import buildVocabularyListTestData from './buildVocabularyListTestData';
 
-export type CollectionNamesAndModels = {
-  [k in EntityType]: PartialDTO<EntityTypeToInstance[k]>[];
-};
-
-export default (): CollectionNamesAndModels =>
-  ({
-    ...buildTagTestData(),
-    ...buildTermTestData(),
-    ...buildVocabularyListTestData(),
-    // TODO fix types
-  } as CollectionNamesAndModels);
+/**
+ * **note** When adding new test data \ modifying existing test data, be sure to
+ * run `validateTestData.spec.ts` to ensure your test data satisfies all domain
+ * invariants.
+ */
+export default (): InMemorySnapshot => ({
+  [entityTypes.tag]: buildTagTestData(),
+  [entityTypes.term]: buildTermTestData(),
+  [entityTypes.vocabularyList]: buildVocabularyListTestData(),
+});
