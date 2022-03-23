@@ -1,4 +1,4 @@
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
 import { Test } from '@nestjs/testing';
 import buildConfigFilePath from '../../app/config/buildConfigFilePath';
 import { Environment } from '../../app/config/constants/Environment';
@@ -22,8 +22,6 @@ describe('Repository provider > repositoryForEntity', () => {
 
     let testRepositoryProvider: TestRepositoryProvider;
 
-    let configService: ConfigService;
-
     beforeAll(async () => {
         jest.resetModules();
 
@@ -44,19 +42,11 @@ describe('Repository provider > repositoryForEntity', () => {
 
         testRepositoryProvider = new TestRepositoryProvider(databaseProvider);
 
-        configService = moduleRef.get<ConfigService>(ConfigService);
-
         await testRepositoryProvider.testSetup();
     });
 
     afterAll(() => {
         process.env = originalEnv;
-    });
-
-    describe('the configuration', () => {
-        it('should use the correct database', () => {
-            expect(configService.get('ARANGO_DB_NAME')).toEqual('e2etestdb');
-        });
     });
 
     Object.values(entityTypes).forEach((entityType) => {
