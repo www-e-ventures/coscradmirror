@@ -13,7 +13,7 @@
     "start:db:staging": "./scripts/arangodb-docker-container-setup/start-arango-db.sh staging",
     "start:db:production": "./scripts/arangodb-docker-container-setup/start-arango-db.sh production",
     "build": "ng build",
-    "lint:coscrad":"nx lint api",
+    "lint:coscrad": "nx lint api",
     "test:coscrad": "nx test api && nx test coscrad-frontend",
     "build:coscrad": "nx build api && nx build coscrad-frontend",
     "test": "nx test",
