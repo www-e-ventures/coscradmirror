@@ -112,6 +112,12 @@ not be modified, nor should `sample.env`.
 
 ## Workflow
 
+For convenience we have included a quality check script. This script will run lint, jest tests and build for the front-end (coscrad-frontend) and back-end (api).
+
+> > npm run quality-check:coscrad
+
+Contributors should ensure all of these quality checks pass on their end prior to submitting a PR.
+
 ### Lint
 
 To run lint for the full-stack, run
@@ -183,7 +189,7 @@ is the project with the Cypress tests for `coscrad-frontend`.
 
 To build both the Coscrad front-end and back-end, run
 
-> > npm run build:coscrad
+> > npm run build:coscrad:prod
 
 A project's build will appear in `/dist/<project-name>`. E.g., the build for the
 backend, whose project is called `api` will appear in `/dist/api`

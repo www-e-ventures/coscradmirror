@@ -1,7 +1,7 @@
 {
     "npmScope": "coscrad",
     "affected": {
-        "defaultBase": "master"
+        "defaultBase": "main"
     },
     "implicitDependencies": {
         "package.json": {
@@ -26,28 +26,7 @@
             }
         ]
     },
-    "projects": {
-        "api": {
-            "tags": []
-        },
-        "api-interfaces": {
-            "tags": []
-        },
-        "coscrad-frontend": {
-            "tags": []
-        },
-        "coscrad-frontend-e2e": {
-            "tags": [],
-            "implicitDependencies": ["coscrad-frontend"]
-        },
-        "tng-dictionary": {
-            "tags": []
-        },
-        "tng-dictionary-e2e": {
-            "tags": [],
-            "implicitDependencies": ["tng-dictionary"]
-        }
-    },
+    "projects": {},
     "cli": {
         "defaultCollection": "@nrwl/angular"
     },

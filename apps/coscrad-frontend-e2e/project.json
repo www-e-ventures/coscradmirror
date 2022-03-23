@@ -1,0 +1,28 @@
+{
+    "root": "apps/coscrad-frontend-e2e",
+    "sourceRoot": "apps/coscrad-frontend-e2e/src",
+    "projectType": "application",
+    "targets": {
+        "e2e": {
+            "executor": "@nrwl/cypress:cypress",
+            "options": {
+                "cypressConfig": "apps/coscrad-frontend-e2e/cypress.json",
+                "devServerTarget": "coscrad-frontend:serve"
+            },
+            "configurations": {
+                "production": {
+                    "devServerTarget": "coscrad-frontend:serve:production"
+                }
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": ["apps/coscrad-frontend-e2e/**/*.{js,ts}"]
+            }
+        }
+    },
+    "tags": [],
+    "implicitDependencies": ["coscrad-frontend"]
+}

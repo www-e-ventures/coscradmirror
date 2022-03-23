@@ -1,0 +1,28 @@
+{
+    "root": "apps/tng-dictionary-e2e",
+    "sourceRoot": "apps/tng-dictionary-e2e/src",
+    "projectType": "application",
+    "targets": {
+        "e2e": {
+            "executor": "@nrwl/cypress:cypress",
+            "options": {
+                "cypressConfig": "apps/tng-dictionary-e2e/cypress.json",
+                "devServerTarget": "tng-dictionary:serve"
+            },
+            "configurations": {
+                "production": {
+                    "devServerTarget": "tng-dictionary:serve:production"
+                }
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": ["apps/tng-dictionary-e2e/**/*.{js,ts}"]
+            }
+        }
+    },
+    "tags": [],
+    "implicitDependencies": ["tng-dictionary"]
+}

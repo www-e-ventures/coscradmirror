@@ -1,0 +1,72 @@
+{
+    "root": "apps/tng-dictionary",
+    "sourceRoot": "apps/tng-dictionary/src",
+    "projectType": "application",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/web:webpack",
+            "outputs": ["{options.outputPath}"],
+            "defaultConfiguration": "production",
+            "options": {
+                "compiler": "babel",
+                "outputPath": "dist/apps/tng-dictionary",
+                "index": "apps/tng-dictionary/src/index.html",
+                "baseHref": "/",
+                "main": "apps/tng-dictionary/src/main.tsx",
+                "polyfills": "apps/tng-dictionary/src/polyfills.ts",
+                "tsConfig": "apps/tng-dictionary/tsconfig.app.json",
+                "assets": [
+                    "apps/tng-dictionary/src/favicon.ico",
+                    "apps/tng-dictionary/src/assets"
+                ],
+                "styles": ["apps/tng-dictionary/src/styles.css"],
+                "scripts": [],
+                "webpackConfig": "@nrwl/react/plugins/webpack"
+            },
+            "configurations": {
+                "production": {
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/tng-dictionary/src/environments/environment.ts",
+                            "with": "apps/tng-dictionary/src/environments/environment.prod.ts"
+                        }
+                    ],
+                    "optimization": true,
+                    "outputHashing": "all",
+                    "sourceMap": false,
+                    "namedChunks": false,
+                    "extractLicenses": true,
+                    "vendorChunk": false
+                }
+            }
+        },
+        "serve": {
+            "executor": "@nrwl/web:dev-server",
+            "options": {
+                "buildTarget": "tng-dictionary:build",
+                "hmr": true
+            },
+            "configurations": {
+                "production": {
+                    "buildTarget": "tng-dictionary:build:production",
+                    "hmr": false
+                }
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": ["apps/tng-dictionary/**/*.{ts,tsx,js,jsx}"]
+            }
+        },
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": ["coverage/apps/tng-dictionary"],
+            "options": {
+                "jestConfig": "apps/tng-dictionary/jest.config.js",
+                "passWithNoTests": true
+            }
+        }
+    },
+    "tags": []
+}
