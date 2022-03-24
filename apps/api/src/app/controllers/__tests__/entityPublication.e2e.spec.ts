@@ -6,11 +6,11 @@ import { Entity } from 'apps/api/src/domain/models/entity';
 import { EntityType, entityTypes } from 'apps/api/src/domain/types/entityType';
 import { InternalError, isInternalError } from 'apps/api/src/lib/errors/InternalError';
 import { ArangoConnectionProvider } from 'apps/api/src/persistence/database/arango-connection.provider';
-import TestRepositoryProvider from 'apps/api/src/persistence/repositories/TestRepositoryProvider';
+import { PersistenceModule } from 'apps/api/src/persistence/persistence.module';
+import TestRepositoryProvider from 'apps/api/src/persistence/repositories/__tests__/TestRepositoryProvider';
 import buildTestData from 'apps/api/src/test-data/buildTestData';
 import * as request from 'supertest';
 import { DatabaseProvider } from '../../../persistence/database/database.provider';
-import { RepositoryProvider } from '../../../persistence/repositories/repository.provider';
 import buildConfigFilePath from '../../config/buildConfigFilePath';
 import { Environment } from '../../config/constants/Environment';
 import removeAllCustomEntironmentVariables from '../../config/__tests__/utilities/removeAllCustomEnvironmentVariables';
@@ -25,6 +25,8 @@ type HasId = {
 
 describe('GET /entities (fetch view models)- publication status filtering', () => {
     let app: INestApplication;
+
+    let arangoConnectionProvider: ArangoConnectionProvider;
 
     let databaseProvider: DatabaseProvider;
 
@@ -56,12 +58,15 @@ describe('GET /entities (fetch view models)- publication status filtering', () =
                     envFilePath: buildConfigFilePath(Environment.test),
                     cache: false,
                 }),
+                PersistenceModule.forRootAsync(),
             ],
             controllers: [EntityViewModelController],
-            providers: [DatabaseProvider, RepositoryProvider, ArangoConnectionProvider],
         }).compile();
 
-        databaseProvider = moduleRef.get<DatabaseProvider>(DatabaseProvider);
+        arangoConnectionProvider =
+            moduleRef.get<ArangoConnectionProvider>(ArangoConnectionProvider);
+
+        databaseProvider = new DatabaseProvider(arangoConnectionProvider);
 
         testRepositoryProvider = new TestRepositoryProvider(databaseProvider);
 

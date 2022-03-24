@@ -3,6 +3,7 @@ import { Test } from '@nestjs/testing';
 import buildConfigFilePath from '../../app/config/buildConfigFilePath';
 import { Environment } from '../../app/config/constants/Environment';
 import removeAllCustomEntironmentVariables from '../../app/config/__tests__/utilities/removeAllCustomEnvironmentVariables';
+import { EntityViewModelController } from '../../app/controllers/entityViewModel.controller';
 import getInstanceFactoryForEntity from '../../domain/factories/getInstanceFactoryForEntity';
 import { Entity } from '../../domain/models/entity';
 import { entityTypes } from '../../domain/types/entityType';
@@ -11,12 +12,15 @@ import { NotFound } from '../../lib/types/not-found';
 import buildTestData from '../../test-data/buildTestData';
 import { ArangoConnectionProvider } from '../database/arango-connection.provider';
 import { DatabaseProvider } from '../database/database.provider';
-import TestRepositoryProvider from './TestRepositoryProvider';
+import { PersistenceModule } from '../persistence.module';
+import TestRepositoryProvider from './__tests__/TestRepositoryProvider';
 
 const originalEnv = process.env;
 
 describe('Repository provider > repositoryForEntity', () => {
     const testData = buildTestData();
+
+    let arangoConnectionProvider: ArangoConnectionProvider;
 
     let databaseProvider: DatabaseProvider;
 
@@ -34,11 +38,15 @@ describe('Repository provider > repositoryForEntity', () => {
                     envFilePath: buildConfigFilePath(Environment.test),
                     cache: false,
                 }),
+                PersistenceModule.forRootAsync(),
             ],
-            providers: [DatabaseProvider, ArangoConnectionProvider],
+            controllers: [EntityViewModelController],
         }).compile();
 
-        databaseProvider = moduleRef.get<DatabaseProvider>(DatabaseProvider);
+        arangoConnectionProvider =
+            moduleRef.get<ArangoConnectionProvider>(ArangoConnectionProvider);
+
+        databaseProvider = new DatabaseProvider(arangoConnectionProvider);
 
         testRepositoryProvider = new TestRepositoryProvider(databaseProvider);
 
