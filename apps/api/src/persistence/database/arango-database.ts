@@ -4,6 +4,8 @@ import { Database } from 'arangojs';
 import { AqlQuery } from 'arangojs/aql';
 import { isArangoDatabase } from 'arangojs/database';
 import { Entity } from '../../domain/models/entity';
+import { ISpecification } from '../../domain/repositories/interfaces/ISpecification';
+import { QueryOperator } from '../../domain/repositories/interfaces/QueryOperator';
 import { InternalError } from '../../lib/errors/InternalError';
 import { PartialDTO } from '../../types/partial-dto';
 import { IDatabase } from './interfaces/database';
@@ -11,6 +13,18 @@ import { IDatabase } from './interfaces/database';
 type ArangoDTO<T> = T & {
     _key: string;
     _id: string;
+};
+
+const aqlQueryOperators = {
+    [QueryOperator.equals]: '==',
+} as const;
+
+const interpretQueryOperatorForAQL = (operator: QueryOperator): string => {
+    const lookupResult = aqlQueryOperators[operator];
+
+    if (!lookupResult) throw new InternalError(`Failed to parse operator: ${operator} for AQL.`);
+
+    return lookupResult;
 };
 
 /**
@@ -52,11 +66,18 @@ export class ArangoDatabase implements IDatabase {
      * @param collectionName name of the collection
      * @returns array of `DTOs`, empty array if none found
      */
-    fetchMany = async <TCreateEntityDTO>(collectionName: string): Promise<TCreateEntityDTO[]> => {
-        const query = `
-      FOR t IN ${collectionName}
+    fetchMany = async <TCreateEntityDTO>(
+        collectionName: string,
+        specification?: ISpecification<TCreateEntityDTO>
+    ): Promise<TCreateEntityDTO[]> => {
+        const query = specification
+            ? `
+      FOR t IN ${collectionName} \n\t${this.#convertSpecificationToAQLFilter(specification, 't')}
         return t
-      `;
+      `
+            : `FOR t IN ${collectionName} 
+      return t
+    `;
 
         const bindVars = {};
 
@@ -69,7 +90,6 @@ export class ArangoDatabase implements IDatabase {
 
         if (cursor.count === 0) return [];
 
-        // TODO remove cast
         return cursor.all();
     };
 
@@ -79,7 +99,6 @@ export class ArangoDatabase implements IDatabase {
         return isNotFound(results) ? 0 : results.length;
     };
 
-    // TODO Error handling.
     create = async <TCreateEntityDto>(
         dto: TCreateEntityDto,
         collectionName: string
@@ -91,6 +110,7 @@ export class ArangoDatabase implements IDatabase {
         const collectionExists = await this.#doesCollectionExist(collectionName);
 
         if (!collectionExists) throw new Error(`Collection ${collectionName} not found!`);
+
         const query = `
     INSERT @dto
         INTO ${collectionName}
@@ -110,7 +130,6 @@ export class ArangoDatabase implements IDatabase {
         dtos: TCreateEntityDto[],
         collectionName: string
     ): Promise<void> => {
-        // remove this check. It's the callers responsibility to verify the `Collection` exists
         const collectionExists = await this.#doesCollectionExist(collectionName);
 
         if (!collectionExists) throw new Error(`Collection ${collectionName} not found!`);
@@ -193,4 +212,13 @@ export class ArangoDatabase implements IDatabase {
             .then((collections) =>
                 collections.some((collection) => collection.name === collectionName)
             );
+
+    #convertSpecificationToAQLFilter<TModel>(
+        { criterion: { field, operator, value } }: ISpecification<TModel>,
+        docNamePlaceholder: string
+    ): string {
+        return `FILTER ${docNamePlaceholder}.${field} ${interpretQueryOperatorForAQL(
+            operator
+        )} '${value}'`;
+    }
 }
