@@ -3,9 +3,9 @@ import { IDatabase } from './database';
 import { IDatabaseForCollection } from './database-for-collection';
 
 export interface IDatabaseProvider {
-  getDBInstance: () => Promise<IDatabase>;
+    getDBInstance: () => IDatabase;
 
-  getDatabaseForCollection: <TEntity extends Entity>(
-    collectionId: string
-  ) => IDatabaseForCollection<TEntity>;
+    getDatabaseForCollection: <TEntity extends Entity>(
+        collectionId: string
+    ) => IDatabaseForCollection<TEntity>;
 }

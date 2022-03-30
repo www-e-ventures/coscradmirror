@@ -23,7 +23,7 @@ export class DatabaseProvider implements IDatabaseProvider {
         this.#databaseConnection = arangoConnectionProvider.getConnection();
     }
 
-    getDBInstance = async (): Promise<ArangoDatabase> => {
+    getDBInstance = (): ArangoDatabase => {
         if (!this.#arangoInstance)
             // TODO inject this in the constructor
             this.#arangoInstance = new ArangoDatabase(this.#databaseConnection);

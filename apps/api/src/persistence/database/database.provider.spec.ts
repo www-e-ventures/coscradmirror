@@ -1,5 +1,6 @@
 import { ConfigService } from '@nestjs/config';
-import { Test } from '@nestjs/testing';
+import createTestModule from '../../app/controllers/__tests__/createTestModule';
+import generateRandomTestDatabaseName from '../repositories/__tests__/generateRandomTestDatabaseName';
 import { ArangoConnectionProvider } from './arango-connection.provider';
 import { ArangoDatabase } from './arango-database';
 import { DatabaseProvider } from './database.provider';
@@ -10,9 +11,7 @@ describe('Database Provider', () => {
     let configService: ConfigService;
 
     beforeAll(async () => {
-        const moduleRef = await Test.createTestingModule({
-            providers: [ConfigService, ArangoConnectionProvider],
-        }).compile();
+        const moduleRef = await createTestModule(generateRandomTestDatabaseName());
 
         configService = moduleRef.get<ConfigService>(ConfigService);
         if (!configService) throw new Error('Config service not injected.');
@@ -20,11 +19,10 @@ describe('Database Provider', () => {
         const arangoConnectionProvider =
             moduleRef.get<ArangoConnectionProvider>(ArangoConnectionProvider);
 
-        await arangoConnectionProvider.initialize();
-
         if (!arangoConnectionProvider) throw new Error('Connection provider not injected');
 
         databaseProvider = new DatabaseProvider(arangoConnectionProvider);
+        if (!databaseProvider) throw new Error('Connection provider not injected');
     });
 
     describe('get database instance', () => {
