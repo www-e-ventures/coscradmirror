@@ -18,13 +18,13 @@ This monorepo workspace is managed using [Nx](https://nx.dev). See the `README` 
 
 You'll need Node 14 and . It is recommended that you install node using [nvm](https://github.com/nvm-sh/nvm)).
 
-You'll also need an instance of [ArangoDB](https://www.arangodb.com/). 
+You'll also need an instance of [ArangoDB](https://www.arangodb.com/).
 
 We provide an optional shell script for spinning up an ArangoDB instance. This will only work if you have docker installed on your development machine. Alternatively, you could run an ArangoDB instance on a VirtualBox VM, a local physical machine, or in the cloud.
 
 #### Arango Setup Script
 
-To fire up a disposable development instance of `ArangoDB` with docker, first from the config directory in the API project, copy sample.env to test.env and development.env in the same directory.  Then run
+To fire up a disposable development instance of `ArangoDB` with docker, first from the config directory in the API project, copy sample.env to test.env and development.env in the same directory. Then run
 
 > > npm run start:db:dev
 
@@ -184,6 +184,15 @@ To build both the Coscrad front-end and back-end, run
 
 A project's build will appear in `/dist/<project-name>`. E.g., the build for the
 backend, whose project is called `api` will appear in `/dist/api`
+
+### Swagger
+
+We use [Swagger](https://swagger.io/) to generate our API documentation. To run
+swagger locally, run
+
+> > npm run serve:api
+
+and navigate to `http://localhost:{NODE_PORT}/api/docs`.
 
 ### Deployment
 
