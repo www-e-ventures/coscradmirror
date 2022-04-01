@@ -17,7 +17,6 @@ body {
 }
 
 .Cards {
-  height: 300px;
   text-align: left;
   margin: auto;
   border-radius: 20px !important;
@@ -79,6 +78,9 @@ min-height: calc(100vh - 80px);
     .Cards {
       max-width: 100vw;
     }
+    .navHeader {
+      font-size: small;
+    }
   }
 
   @media only screen and (min-width: 650px) {
@@ -122,18 +124,34 @@ min-height: calc(100vh - 80px);
    * {
      font-size: medium !important;
    }
+   
   }
   @media only screen and (max-width: 360px) {
     * {
-      font-size: small !important;
+      font-size: medium !important;
     }
 
     .Cards {
       height: fit-content;
     }
 
-    .termInfo,h1 {
+    .termInfo,h1,p {
+      font-size: medium !important;
+    }
+
+    p {
       font-size: small !important;
+    }
+    .button {
+      width: 90vw !important;
+      height: 70px !important;
+      font-size: smaller !important;
+    }
+    .grid {
+     height: calc(100vh - 80px - 39px - 100px) !important;
+    }
+    .searchBars {
+      width: 95vw !important;
     }
    }
 
@@ -154,7 +172,6 @@ justify-content: center;
 }
 
 .grid {
-  height: calc(100vh - 80px - 39px - 120px) !important;
   width: 100vw !important;
   background: white !important;
   display: flex !important;
@@ -256,6 +273,8 @@ background: white!important;
 .termInfo {
   color: rgb(159, 2, 2);
   font-size: 24px !important;
+  margin: 0;
+  font-style: unset !important;
 }
 
 .termClass {
