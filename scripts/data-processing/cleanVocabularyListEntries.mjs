@@ -5,29 +5,13 @@ import replaceNanWithNull from './utilities/replaceNanWithNull.mjs';
  * - X Replace NaN with `null`
  * - X Filter out entries with `termId` = null
  * - X Remove entries with `vocabularyListName` = NaN
- * - Determine what list entires with `vocabularyListName` = NaN belong in
- * - *********** At top level ***********
- * - validate all variable values
- * - replace ' with ` in all data sets
- * - replace `vocabularyListName` with `vocabularyListId` by searching \ joining on vocabulary lists
- * - create `add entry for vocabulary list` command and batch upload!
+ * - Rename `to lay 3 rows of X` to `to lay 3 rows of 4`
  */
 
 const parseVariableValues = (serializedInput) => {
     const validPropertyTypes = ['string', 'boolean'];
 
-    const errors = [];
-
-    let variableValues;
-
-    try {
-        variableValues = JSON.parse(serializedInput);
-    } catch (error) {
-        errors.push(error);
-    }
-
-    // Exit early if the serialized string input was invalid JSON
-    if (errors.length) return errors;
+    const variableValues = JSON.parse(serializedInput);
 
     if (variableValues === null || variableValues === undefined)
         return errors.concat(new Error(`variableValues undefined`));
@@ -46,9 +30,7 @@ const parseVariableValues = (serializedInput) => {
         []
     );
 
-    errors.push(propertyTypeErrors);
-
-    return errors.length > 0 ? errors : variableValues;
+    return propertyTypeErrors.length > 0 ? errors : variableValues;
 };
 
 export default (filepath) => {
@@ -58,7 +40,16 @@ export default (filepath) => {
 
     const dirtyEntries = JSON.parse(cleanedText);
 
-    const cleanedEntries = dirtyEntries.filter(({ termId }) => termId !== null);
+    const correctedDirtyEntries = dirtyEntries.map((dto) => ({
+        ...dto,
+        vocabularyListName:
+            typeof dto.vocabularyListName === 'string' &&
+            dto.vocabularyListName.includes('to lay 3 rows')
+                ? 'to lay 3 rows of 4'
+                : dto.vocabularyListName,
+    }));
+
+    const cleanedEntries = correctedDirtyEntries.filter(({ termId }) => termId !== null);
 
     const entriesMissingVocabularyListIdToRecover = cleanedEntries.filter(
         ({ vocabularyListName }) => vocabularyListName === null
@@ -70,18 +61,27 @@ export default (filepath) => {
 
     const cleanedEntriesWithInvalidVariableValues = cleanedEntriesWithValidVocabularyListId
         .map(({ variableValues }) => parseVariableValues(variableValues))
-        .filter((errorOrResult) => errorOrResult instanceof Error)
-        .filter(({ length }) => length > 0);
+        .filter(Array.isArray);
 
     if (cleanedEntriesWithInvalidVariableValues.length > 0) {
-        throw new Error(`Some entries have invalid variable values`);
+        console.log({
+            cleanedEntriesWithInvalidVariableValuesLength:
+                cleanedEntriesWithInvalidVariableValues.length,
+        });
+        // cleanedEntriesWithInvalidVariableValues.forEach((entry) => {
+        //     console.log({
+        //         entry,
+        //     });
+        // });
+        throw new Error(
+            `${cleanedEntriesWithInvalidVariableValues.length} entries have invalid variable values`
+        );
     }
 
     const entriesMissingVocabularyListIdToRecoverWithInvalidVariableValues =
         entriesMissingVocabularyListIdToRecover
             .map(({ variableValues }) => parseVariableValues(variableValues))
-            .filter((errorOrResult) => errorOrResult instanceof Error)
-            .filter(({ length }) => length > 0);
+            .filter(Array.isArray);
 
     if (entriesMissingVocabularyListIdToRecoverWithInvalidVariableValues.length > 0) {
         throw new Error(`Some entries to recover have invalid variable values`);
