@@ -27,7 +27,7 @@ export function TermsDetailComponent(props: TermsDetailComponentProps) {
     useEffect(() => {
         setComponentState({ termData: null });
 
-        const apiUrl = `http://localhost:3131/api/entities/terms/${id}`;
+        const apiUrl = `http://104.225.142.106:3131/api/entities/terms/${id}`;
         fetch(apiUrl, { mode: 'cors' })
             .then((res) => res.json())
             .then((term) => {

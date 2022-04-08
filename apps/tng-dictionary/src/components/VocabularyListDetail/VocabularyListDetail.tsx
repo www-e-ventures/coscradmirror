@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import VocabularyListContext, {
-    buildUnselectedFormData,
+    buildUnselectedFormData
 } from '../../context/VocabularyListContext';
 import doValuesMatchFilters from '../../utilities/doValuesMatchFilters';
 import removeNoSelectionValuedPropsFromFilters from '../../utilities/removeNoSelectionValuedPropsFromFilters';
@@ -14,7 +14,7 @@ import Carousel from '../Carousel/Carousel';
 import Loading from '../Loading/Loading';
 import TermData from '../Term/Term';
 import VocabularyListForm, {
-    VocabularyListFormElement,
+    VocabularyListFormElement
 } from '../VocabularyListForm/VocabularyListForm';
 import './VocabularyListDetail.module.css';
 
@@ -65,7 +65,7 @@ export function VocabularyListDetail(props: VocabularyListDetailProps) {
     useEffect(() => {
         setAppState({ loading: true, vocabularyList: null });
 
-        const apiUrl = `http://localhost:3131/api/entities/vocabularyLists/${id}`;
+        const apiUrl = `http://104.225.142.106:3131/api/entities/vocabularyLists/${id}`;
         fetch(apiUrl, { mode: 'cors' })
             .then((res) => res.json())
             .then((vocabularyList) => {

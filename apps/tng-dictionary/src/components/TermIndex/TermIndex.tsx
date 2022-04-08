@@ -55,7 +55,7 @@ export default function DataGridDemo(): JSX.Element {
             searchText: '',
             selectedTerms: [],
         });
-        const apiUrl = `http://localhost:3131/api/entities/terms`;
+        const apiUrl = `http://104.225.142.106:3131/api/entities/terms`;
         fetch(apiUrl, { mode: 'cors' })
             .then((res) => res.json())
             .then((allTerms) => {

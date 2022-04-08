@@ -41,7 +41,7 @@ export function VocabularyListIndex(props: VocabularyListIndexProps) {
 
     useEffect(() => {
         setAppState({ vocabularyLists: [], searchContext: 'name' });
-        const apiUrl = `http://localhost:3131/api/entities/vocabularyLists`;
+        const apiUrl = `http://104.225.142.106:3131/api/entities/vocabularyLists`;
         fetch(apiUrl, { mode: 'cors' })
             .then((res) => res.json())
             .then((vocabularyLists) => {
