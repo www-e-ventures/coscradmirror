@@ -20,7 +20,7 @@ export default async (
         ...optionOverrides,
     };
 
-    const baseAudioURL = configService.get<string>('BASE_DIGITAL_ASSET_URL');
+    const baseURL = configService.get<string>('BASE_DIGITAL_ASSET_URL');
 
     const isPublishedSpecification = shouldReturnUnpublishedEntities ? null : new IsPublished(true);
 
@@ -32,7 +32,7 @@ export default async (
 
     const allPhotographViewModels = searchResult
         .filter((result): result is Photograph => !isInternalError(result))
-        .map((Photograph) => new PhotographViewModel(Photograph, baseAudioURL));
+        .map((Photograph) => new PhotographViewModel(Photograph, baseURL));
 
     return allPhotographViewModels;
 };

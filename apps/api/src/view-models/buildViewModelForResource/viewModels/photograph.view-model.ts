@@ -23,11 +23,11 @@ export class PhotographViewModel extends BaseViewModel {
      * there.
      */
 
-    constructor({ id, filename, photographer }: Photograph, baseAudioURL: string) {
+    constructor({ id, filename, photographer }: Photograph, baseURL: string) {
         super({ id });
 
         // We need to store the MIME/type on the Photograph domain model
-        this.imageURL = buildFullDigitalAssetURL(baseAudioURL, filename, 'png');
+        this.imageURL = buildFullDigitalAssetURL(baseURL, filename, 'png');
 
         this.photographer = photographer;
     }
