@@ -216,7 +216,7 @@
     "photographs": [
         {
             "_key": "0",
-            "published": false,
+            "published": true,
             "type": "photograph",
             "allowedContextTypes": [
                 "general"
@@ -230,7 +230,7 @@
         },
         {
             "_key": "1",
-            "published": false,
+            "published": true,
             "type": "photograph",
             "allowedContextTypes": [
                 "general"

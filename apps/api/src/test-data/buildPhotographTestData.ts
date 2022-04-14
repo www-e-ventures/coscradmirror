@@ -21,4 +21,4 @@ const dtos: PartialDTO<Photograph>[] = [
 ];
 
 export default (): Photograph[] =>
-    dtos.map((dto, index) => new Photograph({ ...dto, id: `${index}` }));
+    dtos.map((dto, index) => new Photograph({ ...dto, id: `${index}`, published: true }));
