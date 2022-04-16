@@ -1,5 +1,6 @@
 import cloneToPlainObject from 'apps/api/src/lib/utilities/cloneToPlainObject';
 import { ResourceType, resourceTypes } from '../../types/resourceTypes';
+import { isNullOrUndefined } from '../../utilities/validation/is-null-or-undefined';
 import { EdgeConnectionContextType } from '../context/types/EdgeConnectionContextType';
 
 const resourceTypeToAllowedContextTypes = {
@@ -14,10 +15,13 @@ const resourceTypeToAllowedContextTypes = {
         EdgeConnectionContextType.point2D,
         EdgeConnectionContextType.freeMultiline,
     ],
-    // TODO [https://www.pivotaltracker.com/story/show/181861405] remove tag
+    // TODO [https://www.pivotaltracker.com/story/show/181861405] remove tag from resource types
     [resourceTypes.tag]: [EdgeConnectionContextType.general],
     [resourceTypes.term]: [EdgeConnectionContextType.general, EdgeConnectionContextType.textField],
-    [resourceTypes.transcribedAudio]: [EdgeConnectionContextType.timeRange],
+    [resourceTypes.transcribedAudio]: [
+        EdgeConnectionContextType.general,
+        EdgeConnectionContextType.timeRange,
+    ],
     [resourceTypes.vocabularyList]: [
         EdgeConnectionContextType.general,
         EdgeConnectionContextType.textField,
@@ -29,7 +33,7 @@ export const getAllowedContextsForModel = (
 ): EdgeConnectionContextType[] => {
     const allowedContexts = resourceTypeToAllowedContextTypes[resourceType];
 
-    return cloneToPlainObject(allowedContexts);
+    return isNullOrUndefined(allowedContexts) ? [] : cloneToPlainObject(allowedContexts);
 };
 
 export default (contextType: EdgeConnectionContextType, resourceType: ResourceType): boolean =>

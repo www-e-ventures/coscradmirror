@@ -115,15 +115,6 @@ describe('buildTestData', () => {
         });
     });
 
-    /**
-    We need to validate our Edge Connection test data
-        For each ResourceType there should be at least one of each of the following
-            an EdgeConnection with a resource of that type as the to member
-            an EdgeConnection with a resource of that type as the from member
-            a (self) EdgeConnection with a resource of that type as the self memeber
-        Every EdgeConnection should satisfy the Edge Connection Invariant Validation
-            i.e. we need to pass the EdgeConnection DTOs through the Edge Connection Validator
-     */
     describe('test data for edge connections', () => {
         const { connections: connectionTestData, resources: resourceTestData } = buildTestData();
 
