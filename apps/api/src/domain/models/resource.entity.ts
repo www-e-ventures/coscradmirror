@@ -1,5 +1,6 @@
 import { PartialDTO } from 'apps/api/src/types/partial-dto';
 import { InternalError } from '../../lib/errors/InternalError';
+import capitalizeFirstLetter from '../../lib/utilities/strings/capitalizeFirstLetter';
 import { Valid } from '../domainModelValidators/Valid';
 import { EntityId } from '../types/ResourceId';
 import { ResourceType } from '../types/resourceTypes';
@@ -48,7 +49,7 @@ export abstract class Resource extends BaseDomainModel {
         if (!this.allowedContextTypes.includes(type))
             return new InternalError(`Disallowed context type for ${this.type}: ${type}`);
 
-        const validator = this[`is${type}ContextValid`];
+        const validator = this[`validate${capitalizeFirstLetter(type)}Context`];
 
         if (!validator)
             throw new InternalError(

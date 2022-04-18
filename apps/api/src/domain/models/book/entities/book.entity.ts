@@ -44,7 +44,7 @@ export class Book extends Resource {
      * This relies on convention. It's a clever way to avoid a switch statement.
      * TODO capitalize first letter
      */
-    protected ispageRangeContextValid(context: PageRangeContext): Valid | InternalError {
+    protected validatePageRangeContext(context: PageRangeContext): Valid | InternalError {
         if (isNullOrUndefined(context))
             return new InternalError(`Page Range Context is undefined for book: ${this.id}`);
 
