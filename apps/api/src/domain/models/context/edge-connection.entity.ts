@@ -11,6 +11,9 @@ export enum EdgeConnectionType {
     dual = 'dual',
 }
 
+export const isEdgeConnectionType = (input: unknown): input is EdgeConnectionType =>
+    Object.values(EdgeConnectionType).includes(input as EdgeConnectionType);
+
 export enum EdgeConnectionMemberRole {
     to = 'to',
     from = 'from',

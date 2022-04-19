@@ -39,7 +39,7 @@ export default (): EdgeConnection[] =>
                         type: resourceTypes.book,
                     },
                     context: new PageRangeContext({
-                        pages: ['ix'],
+                        pageIdentifiers: ['ix'],
                     }).toDTO(),
                 },
             ],

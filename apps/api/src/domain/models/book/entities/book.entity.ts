@@ -39,25 +39,23 @@ export class Book extends Resource {
         this.pages = (pageDTOs as BookPage[]).map((pageDTO) => new BookPage(pageDTO));
     }
 
-    /**
-     *
-     * This relies on convention. It's a clever way to avoid a switch statement.
-     * TODO capitalize first letter
-     */
     protected validatePageRangeContext(context: PageRangeContext): Valid | InternalError {
+        // TODO Is this really necessary?
         if (isNullOrUndefined(context))
             return new InternalError(`Page Range Context is undefined for book: ${this.id}`);
 
-        const { pages } = context;
+        // We may want to rename the pages property in the PageRangeContext
+        const { pageIdentifiers: contextPageIdentifiers } = context;
 
-        const missingPages = pages.reduce(
-            (accumulatedList, pageIdentifier) =>
-                this.pages.some(({ identifier }) => identifier === pageIdentifier)
+        const missingPages = contextPageIdentifiers.reduce(
+            (accumulatedList, contextPageIdentifier) =>
+                this.pages.some(({ identifier }) => identifier === contextPageIdentifier)
                     ? accumulatedList
-                    : accumulatedList.concat(pageIdentifier),
+                    : accumulatedList.concat(contextPageIdentifier),
             []
         );
 
+        // TODO Break this out into a proper error
         if (missingPages.length > 0) return new InternalError(`Missing pages`);
 
         return Valid;
