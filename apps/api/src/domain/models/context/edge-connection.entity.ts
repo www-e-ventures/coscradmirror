@@ -43,8 +43,10 @@ export class EdgeConnection extends BaseDomainModel {
 
     readonly note: string;
 
-    constructor({ id, members, tagIDs, note }: PartialDTO<EdgeConnection>) {
+    constructor({ id, members, tagIDs, note, type }: PartialDTO<EdgeConnection>) {
         super();
+
+        this.type = type;
 
         this.id = id;
 

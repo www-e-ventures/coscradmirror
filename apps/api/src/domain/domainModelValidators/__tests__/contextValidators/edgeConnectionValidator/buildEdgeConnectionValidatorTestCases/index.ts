@@ -1,4 +1,6 @@
 import {
+    EdgeConnection,
+    EdgeConnectionMember,
     EdgeConnectionMemberRole,
     EdgeConnectionType,
 } from 'apps/api/src/domain/models/context/edge-connection.entity';
@@ -9,26 +11,77 @@ import { resourceTypes } from 'apps/api/src/domain/types/resourceTypes';
 import { InternalError } from 'apps/api/src/lib/errors/InternalError';
 import NoteMissingFromEdgeConnectionError from '../../../../../domainModelValidators/errors/context/edgeConnections/NoteMissingFromEdgeConnectionError';
 import NullOrUndefinedEdgeConnectionDTOError from '../../../../../domainModelValidators/errors/context/edgeConnections/NullOrUndefindEdgeConnectionDTOError';
+import BothMembersInEdgeConnectionHaveSameRoleError from '../../../../errors/context/edgeConnections/BothMembersInEdgeConnectionHaveSameRoleError';
 import ContextTypeIsNotAllowedForGivenResourceTypeError from '../../../../errors/context/edgeConnections/ContextTypeIsNotAllowedForGivenResourceTypeError';
 import InvalidEdgeConnectionDTOError from '../../../../errors/context/edgeConnections/InvalidEdgeConnectionDTOError';
-import InvalidEdgeConnectionMemberRoleError from '../../../../errors/context/edgeConnections/InvalidEdgeConnectionMemberRoleError';
+import InvalidEdgeConnectionMemberRolesError from '../../../../errors/context/edgeConnections/InvalidEdgeConnectionMemberRolesError';
 import InvalidNumberOfMembersInEdgeConnectionError from '../../../../errors/context/edgeConnections/InvalidNumberOfMembersInEdgeConnectionError';
+import InvalidChronologicallyOrderedTimeRangeError from '../../../../errors/context/InvalidChronologicallyOrderedTimeRangeError';
 import { EdgeConnectionValidatorTestCase } from '../types/EdgeConnectionValidatorTestCase';
 
 const buildTopLevelError = (innerErrors: InternalError[]): InternalError =>
     new InvalidEdgeConnectionDTOError(innerErrors);
 
+const validPageRangeContext = new PageRangeContext({
+    pageIdentifiers: ['1', '2', '3', 'iv'],
+});
+
+const buildValidBookEdgeConnectionMember = (
+    role: EdgeConnectionMemberRole
+): EdgeConnectionMember<PageRangeContext> => ({
+    compositeIdentifier: {
+        type: resourceTypes.book,
+        id: '1123',
+    },
+    role,
+    context: validPageRangeContext,
+});
+
+const validTimeRangeContext = new TimeRangeContext({
+    timeRange: {
+        inPoint: 3789,
+        outPoint: 3890,
+    },
+});
+
+const buildValidTranscribedAudioConnectionMember = (
+    role: EdgeConnectionMemberRole
+): EdgeConnectionMember<TimeRangeContext> => ({
+    compositeIdentifier: {
+        type: resourceTypes.transcribedAudio,
+        id: '15',
+    },
+    role,
+    context: validTimeRangeContext,
+});
+
+const validBookSelfConnection = new EdgeConnection({
+    type: EdgeConnectionType.self,
+    id: '12345',
+    tagIDs: ['44'],
+    note: 'This is an awesome note',
+    members: [buildValidBookEdgeConnectionMember(EdgeConnectionMemberRole.self)],
+});
+
+const validBookToTranscribedAudioDualConnection = new EdgeConnection({
+    type: EdgeConnectionType.dual,
+    members: [
+        buildValidBookEdgeConnectionMember(EdgeConnectionMemberRole.from),
+        buildValidTranscribedAudioConnectionMember(EdgeConnectionMemberRole.to),
+    ],
+    id: '123',
+    tagIDs: ['55'],
+    note: 'These are both about bears',
+}).toDTO();
+
 export default (): EdgeConnectionValidatorTestCase[] => [
     {
         validCases: [
             {
-                dto: {
-                    type: EdgeConnectionType.dual,
-                    members: [{}, {}],
-                    id: '123',
-                    tagIDs: ['55'],
-                    note: 'These are both about bears',
-                },
+                dto: validBookToTranscribedAudioDualConnection,
+            },
+            {
+                dto: validBookSelfConnection,
             },
         ],
         invalidCases: [
@@ -51,10 +104,7 @@ export default (): EdgeConnectionValidatorTestCase[] => [
             {
                 description: 'the DTO is missing a note',
                 invalidDTO: {
-                    type: EdgeConnectionType.dual,
-                    id: '123',
-                    tagIDs: ['55'],
-                    members: [{}, {}], // TODO Add some valid members here
+                    ...validBookToTranscribedAudioDualConnection,
                     note: null,
                 },
                 expectedError: buildTopLevelError([new NoteMissingFromEdgeConnectionError()]),
@@ -62,18 +112,11 @@ export default (): EdgeConnectionValidatorTestCase[] => [
             {
                 description: 'the DTO is for a Self connection, but has 2 members',
                 invalidDTO: {
-                    type: EdgeConnectionType.self,
-                    id: '123',
-                    tagIDs: ['55'],
+                    ...validBookSelfConnection,
                     members: [
-                        {
-                            role: EdgeConnectionMemberRole.self,
-                        },
-                        {
-                            role: EdgeConnectionMemberRole.self,
-                        },
-                    ], // TODO Add some valid members here
-                    note: 'This is the note',
+                        buildValidBookEdgeConnectionMember(EdgeConnectionMemberRole.self),
+                        buildValidBookEdgeConnectionMember(EdgeConnectionMemberRole.self),
+                    ],
                 },
                 expectedError: buildTopLevelError([
                     new InvalidNumberOfMembersInEdgeConnectionError(EdgeConnectionType.self, 2),
@@ -85,7 +128,7 @@ export default (): EdgeConnectionValidatorTestCase[] => [
                     type: EdgeConnectionType.self,
                     id: '123',
                     tagIDs: ['55'],
-                    members: [], // TODO Add some valid members here
+                    members: [],
                     note: 'This is the note',
                 },
                 expectedError: buildTopLevelError([
@@ -93,13 +136,12 @@ export default (): EdgeConnectionValidatorTestCase[] => [
                 ]),
             },
             {
-                description: 'the DTO is for a Dual connection, but has 1 members',
+                description: 'the DTO is for a Dual connection, but has 1 member',
                 invalidDTO: {
-                    type: EdgeConnectionType.dual,
-                    id: '123',
-                    tagIDs: ['55'],
-                    members: [{}], // TODO Add some valid members here
-                    note: 'This is the note',
+                    ...validBookToTranscribedAudioDualConnection,
+                    members: [
+                        buildValidTranscribedAudioConnectionMember(EdgeConnectionMemberRole.to),
+                    ],
                 },
                 expectedError: buildTopLevelError([
                     new InvalidNumberOfMembersInEdgeConnectionError(EdgeConnectionType.dual, 1),
@@ -108,35 +150,39 @@ export default (): EdgeConnectionValidatorTestCase[] => [
             {
                 description: 'the DTO is for a Dual connection, but has 0 members',
                 invalidDTO: {
-                    type: EdgeConnectionType.dual,
-                    id: '123',
-                    tagIDs: ['55'],
-                    members: [], // TODO Add some valid members here
-                    note: 'This is the note',
+                    ...validBookToTranscribedAudioDualConnection,
+                    members: [],
                 },
                 expectedError: buildTopLevelError([
                     new InvalidNumberOfMembersInEdgeConnectionError(EdgeConnectionType.dual, 0),
                 ]),
             },
             {
-                description:
-                    'the DTO is for a Self connection but one of the members has the role "to"',
+                description: 'the DTO is for a Self connection but its member has the role "to"',
                 invalidDTO: {
-                    type: EdgeConnectionType.self,
-                    id: '123',
-                    tagIDs: ['55'],
+                    ...validBookSelfConnection,
                     members: [
-                        {
-                            role: EdgeConnectionMemberRole.to,
-                        },
+                        buildValidTranscribedAudioConnectionMember(EdgeConnectionMemberRole.to),
                     ],
-                    note: 'This is the note',
                 },
                 expectedError: buildTopLevelError([
-                    new InvalidEdgeConnectionMemberRoleError(
-                        EdgeConnectionType.self,
-                        EdgeConnectionMemberRole.to
-                    ),
+                    new InvalidEdgeConnectionMemberRolesError(EdgeConnectionType.self, [
+                        buildValidTranscribedAudioConnectionMember(EdgeConnectionMemberRole.to),
+                    ]),
+                ]),
+            },
+            {
+                description: 'the DTO is for a Self connection but its has the role "from"',
+                invalidDTO: {
+                    ...validBookSelfConnection,
+                    members: [
+                        buildValidTranscribedAudioConnectionMember(EdgeConnectionMemberRole.from),
+                    ],
+                },
+                expectedError: buildTopLevelError([
+                    new InvalidEdgeConnectionMemberRolesError(EdgeConnectionType.self, [
+                        buildValidTranscribedAudioConnectionMember(EdgeConnectionMemberRole.from),
+                    ]),
                 ]),
             },
             {
@@ -147,49 +193,66 @@ export default (): EdgeConnectionValidatorTestCase[] => [
                     id: '123',
                     tagIDs: ['55'],
                     members: [
-                        {
-                            role: EdgeConnectionMemberRole.self,
-                        },
-                        {
-                            role: EdgeConnectionMemberRole.to,
-                        },
+                        buildValidBookEdgeConnectionMember(EdgeConnectionMemberRole.self),
+                        buildValidTranscribedAudioConnectionMember(EdgeConnectionMemberRole.from),
                     ],
                     note: 'This is the note',
                 },
                 expectedError: buildTopLevelError([
-                    new InvalidEdgeConnectionMemberRoleError(
-                        EdgeConnectionType.dual,
-                        EdgeConnectionMemberRole.self
-                    ),
+                    new InvalidEdgeConnectionMemberRolesError(EdgeConnectionType.dual, [
+                        buildValidBookEdgeConnectionMember(EdgeConnectionMemberRole.self),
+                    ]),
                 ]),
             },
             {
-                description: 'the DTO is not consistent with the resource type in the composite id',
+                description:
+                    'the DTO is for a Dual connection but both of the members have the role "to"',
                 invalidDTO: {
-                    type: EdgeConnectionType.dual,
-                    id: '123',
-                    tagIDs: ['44'],
+                    ...validBookToTranscribedAudioDualConnection,
+                    members: [
+                        buildValidBookEdgeConnectionMember(EdgeConnectionMemberRole.to),
+                        buildValidTranscribedAudioConnectionMember(EdgeConnectionMemberRole.to),
+                    ],
+                },
+                expectedError: buildTopLevelError([
+                    new BothMembersInEdgeConnectionHaveSameRoleError(EdgeConnectionMemberRole.to),
+                ]),
+            },
+            {
+                description:
+                    'the DTO is for a Dual connection but both of the members have the role "from"',
+                invalidDTO: {
+                    ...validBookToTranscribedAudioDualConnection,
+                    members: [
+                        buildValidBookEdgeConnectionMember(EdgeConnectionMemberRole.from),
+                        buildValidTranscribedAudioConnectionMember(EdgeConnectionMemberRole.from),
+                    ],
+                },
+                expectedError: buildTopLevelError([
+                    new BothMembersInEdgeConnectionHaveSameRoleError(EdgeConnectionMemberRole.from),
+                ]),
+            },
+            {
+                description:
+                    'the context type is not consistent with the resource type in the composite id',
+                invalidDTO: {
+                    ...validBookToTranscribedAudioDualConnection,
                     members: [
                         {
                             role: EdgeConnectionMemberRole.to,
                             context: new TimeRangeContext({
-                                timeRange: [3487, 3499],
+                                timeRange: {
+                                    inPoint: 3789,
+                                    outPoint: 3890,
+                                },
                             }),
                             compositeIdentifier: {
                                 type: resourceTypes.book,
                                 id: '345',
                             },
                         },
-                        {
-                            role: EdgeConnectionMemberRole.from,
-                            context: new PageRangeContext({}),
-                            compositeIdentifier: {
-                                type: resourceTypes.book,
-                                id: '678',
-                            },
-                        },
+                        buildValidBookEdgeConnectionMember(EdgeConnectionMemberRole.from),
                     ],
-                    note: 'This is the note',
                 },
                 expectedError: buildTopLevelError([
                     new ContextTypeIsNotAllowedForGivenResourceTypeError(
@@ -198,11 +261,35 @@ export default (): EdgeConnectionValidatorTestCase[] => [
                     ),
                 ]),
             },
+            {
+                description:
+                    'When the "to" member context does not satisfy its context model invariants',
+                invalidDTO: {
+                    ...validBookToTranscribedAudioDualConnection,
+                    members: [
+                        buildValidBookEdgeConnectionMember(EdgeConnectionMemberRole.from),
+                        {
+                            ...buildValidTranscribedAudioConnectionMember(
+                                EdgeConnectionMemberRole.to
+                            ),
+                            context: new TimeRangeContext({
+                                timeRange: {
+                                    inPoint: 1200,
+                                    outPoint: 1000,
+                                },
+                            }).toDTO(),
+                        },
+                    ],
+                },
+                expectedError: buildTopLevelError([
+                    new InvalidChronologicallyOrderedTimeRangeError({
+                        inPoint: 1200,
+                        outPoint: 1000,
+                    }),
+                ]),
+            },
             /**
-             * TODO Add invalid cases for members
-             * - members[0].compositeIdentifier.type does not allow context of type
-             *    members[0].context.type
-             *
+             * TODO Add invalid cases
              * - deferred context model validation invalid cases
              *     - How far do we want to go here? We already have the lower level
              *      test. This is essentially an integration test. We only need to

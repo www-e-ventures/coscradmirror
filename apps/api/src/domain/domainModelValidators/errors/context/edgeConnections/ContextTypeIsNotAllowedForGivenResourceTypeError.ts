@@ -4,6 +4,6 @@ import { InternalError } from 'apps/api/src/lib/errors/InternalError';
 
 export default class ContextTypeIsNotAllowedForGivenResourceTypeError extends InternalError {
     constructor(contextType: EdgeConnectionContextType, resourceType: ResourceType) {
-        super(`Context type: ${contextType} is not allow for resource type: ${resourceType}`);
+        super(`Context type: ${contextType} is not allowed for resource type: ${resourceType}`);
     }
 }
