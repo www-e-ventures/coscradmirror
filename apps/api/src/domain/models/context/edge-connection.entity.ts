@@ -21,7 +21,7 @@ export enum EdgeConnectionMemberRole {
 }
 
 // Consider using a class for this
-type EdgeConnectionMember<TContextModel extends ContextModelUnion = ContextModelUnion> = {
+export type EdgeConnectionMember<TContextModel extends ContextModelUnion = ContextModelUnion> = {
     compositeIdentifier: ResourceCompositeIdentifier;
     context: TContextModel;
     role: EdgeConnectionMemberRole;
