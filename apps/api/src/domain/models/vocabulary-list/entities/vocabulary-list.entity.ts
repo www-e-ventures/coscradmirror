@@ -1,14 +1,15 @@
+import { InternalError } from 'apps/api/src/lib/errors/InternalError';
 import { PartialDTO } from 'apps/api/src/types/partial-dto';
+import { Valid } from '../../../domainModelValidators/Valid';
 import { resourceTypes } from '../../../types/resourceTypes';
-import { EdgeConnectionContextType } from '../../context/types/EdgeConnectionContextType';
+import { TextFieldContext } from '../../context/text-field-context/text-field-context.entity';
 import { Resource } from '../../resource.entity';
+import validateTextFieldContextForModel from '../../shared/contextValidators/validateTextFieldContextForModel';
 import { VocabularyListEntry } from '../vocabulary-list-entry';
 import { VocabularyListVariable } from './vocabulary-list-variable.entity';
 
 export class VocabularyList extends Resource {
     readonly type = resourceTypes.vocabularyList;
-
-    readonly allowedContextTypes = [EdgeConnectionContextType.general];
 
     readonly name?: string;
 
@@ -31,5 +32,9 @@ export class VocabularyList extends Resource {
         this.entries = [...(entries as VocabularyListEntry[])];
 
         this.variables = [...(variables as VocabularyListVariable[])];
+    }
+
+    validateTextFieldContext(context: TextFieldContext): Valid | InternalError {
+        return validateTextFieldContextForModel(this, context);
     }
 }
