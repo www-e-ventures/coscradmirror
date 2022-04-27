@@ -1,6 +1,6 @@
 import { InternalError } from 'apps/api/src/lib/errors/InternalError';
 import isNumberWithinRange from 'apps/api/src/lib/validation/geometry/isNumberWithinRange';
-import { PartialDTO } from 'apps/api/src/types/partial-dto';
+import { DTO } from 'apps/api/src/types/DTO';
 import InconsistentTimeRangeError from '../../../domainModelValidators/errors/context/invalidContextStateErrors/timeRangeContext/InconsistentTimeRangeError';
 import { Valid } from '../../../domainModelValidators/Valid';
 import { resourceTypes } from '../../../types/resourceTypes';
@@ -20,7 +20,7 @@ export class TranscribedAudio extends Resource {
 
     readonly transcript: Transcript;
 
-    constructor(dto: PartialDTO<TranscribedAudio>) {
+    constructor(dto: DTO<TranscribedAudio>) {
         super({ ...dto, type: resourceTypes.transcribedAudio });
 
         const {
@@ -42,15 +42,14 @@ export class TranscribedAudio extends Resource {
     validateTimeRangeContext({ timeRange }: TimeRangeContext): Valid | InternalError {
         const { inPoint, outPoint } = timeRange;
 
+        const isNumberOutOfRange = (n: number): boolean =>
+            !isNumberWithinRange(n, this.getTimeBounds());
+
         /**
-         * Note that the `startMilliseconds` doesn't have to be 0, so unlike the
-         * geometric models, we do need to confirm here that `inPoint` isn't too low.
+         * Note that the `startMilliseconds` doesn't have to be 0, so we need to
+         * confirm here that `inPoint` isn't too low.
          */
-        if (
-            [inPoint, outPoint].some(
-                (timePoint) => !isNumberWithinRange(timePoint, this.getTimeBounds())
-            )
-        )
+        if ([inPoint, outPoint].some(isNumberOutOfRange))
             return new InconsistentTimeRangeError(timeRange, this);
 
         return Valid;
