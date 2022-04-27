@@ -6,7 +6,7 @@
  * more of a high level test compared to `edgeConnectionContextValidators.spec.ts`.
  */
 
-import { InternalError } from 'apps/api/src/lib/errors/InternalError';
+import { InternalError } from '../../../../../lib/errors/InternalError';
 import validateEdgeConnection from '../../../contextValidators/validateEdgeConnection/index';
 import { Valid } from '../../../Valid';
 import buildEdgeConnectionValidatorTestCases from './buildEdgeConnectionValidatorTestCases';

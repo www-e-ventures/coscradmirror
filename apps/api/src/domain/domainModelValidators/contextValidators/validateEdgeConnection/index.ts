@@ -1,4 +1,4 @@
-import { InternalError } from 'apps/api/src/lib/errors/InternalError';
+import { InternalError } from '../../../../lib/errors/InternalError';
 import isContextAllowedForGivenResourceType from '../../../models/allowedContexts/isContextAllowedForGivenResourceType';
 import {
     EdgeConnection,
@@ -20,7 +20,7 @@ import NullOrUndefinedEdgeConnectionDTOError from '../../errors/context/edgeConn
 import { isValid, Valid } from '../../Valid';
 import validateContextModelInvariants from '../validateContextModelInvariants';
 
-const buildTopLevelError = (innerErrors: InternalError[]): InternalError =>
+const buildTopLevelError = (innerErrors: InternalError[]) =>
     new InvalidEdgeConnectionDTOError(innerErrors);
 
 /**

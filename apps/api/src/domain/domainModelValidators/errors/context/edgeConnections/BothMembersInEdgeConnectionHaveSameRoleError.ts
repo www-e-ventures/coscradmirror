@@ -1,5 +1,5 @@
-import { EdgeConnectionMemberRole } from 'apps/api/src/domain/models/context/edge-connection.entity';
-import { InternalError } from 'apps/api/src/lib/errors/InternalError';
+import { InternalError } from '../../../../../lib/errors/InternalError';
+import { EdgeConnectionMemberRole } from '../../../../models/context/edge-connection.entity';
 
 export default class BothMembersInEdgeConnectionHaveSameRoleError extends InternalError {
     constructor(role: EdgeConnectionMemberRole) {

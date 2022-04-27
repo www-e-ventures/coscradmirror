@@ -1,4 +1,4 @@
-import { InternalError } from 'apps/api/src/lib/errors/InternalError';
+import { InternalError } from '../../../../../../lib/errors/InternalError';
 import InvalidLineTypeError from '../../../../errors/context/InvalidLineTypeError';
 import { isValid, Valid } from '../../../../Valid';
 import validatePosition2D from './validatePosition2D';

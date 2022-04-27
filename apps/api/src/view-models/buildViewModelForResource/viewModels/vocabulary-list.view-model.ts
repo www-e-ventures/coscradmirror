@@ -1,9 +1,9 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { VocabularyListVariable } from 'apps/api/src/domain/models/vocabulary-list/entities/vocabulary-list-variable.entity';
-import { VocabularyListEntry } from 'apps/api/src/domain/models/vocabulary-list/vocabulary-list-entry';
 import { Term } from '../../../domain/models/term/entities/term.entity';
+import { VocabularyListVariable } from '../../../domain/models/vocabulary-list/entities/vocabulary-list-variable.entity';
 import { VocabularyList } from '../../../domain/models/vocabulary-list/entities/vocabulary-list.entity';
 import { VocabularyListVariableValue } from '../../../domain/models/vocabulary-list/types/vocabulary-list-variable-value';
+import { VocabularyListEntry } from '../../../domain/models/vocabulary-list/vocabulary-list-entry';
 import { NotFound } from '../../../lib/types/not-found';
 import { BaseViewModel } from './base.view-model';
 import { TermViewModel } from './term.view-model';

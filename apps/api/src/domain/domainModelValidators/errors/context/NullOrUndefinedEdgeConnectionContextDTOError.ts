@@ -1,4 +1,4 @@
-import { InternalError } from 'apps/api/src/lib/errors/InternalError';
+import { InternalError } from '../../../../lib/errors/InternalError';
 import { EdgeConnectionContextType } from '../../../models/context/types/EdgeConnectionContextType';
 
 export default class NullOrUndefinedResourceDTOError extends InternalError {

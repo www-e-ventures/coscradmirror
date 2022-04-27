@@ -1,6 +1,6 @@
-import { IGeometricFeature } from 'apps/api/src/domain/models/spatial-feature/GeometricFeature';
-import { ISpatialFeature } from 'apps/api/src/domain/models/spatial-feature/ISpatialFeature';
-import cloneToPlainObject from 'apps/api/src/lib/utilities/cloneToPlainObject';
+import { IGeometricFeature } from '../../../../domain/models/spatial-feature/GeometricFeature';
+import { ISpatialFeature } from '../../../../domain/models/spatial-feature/ISpatialFeature';
+import cloneToPlainObject from '../../../../lib/utilities/cloneToPlainObject';
 import { BaseViewModel } from '../base.view-model';
 
 /**

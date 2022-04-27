@@ -1,14 +1,14 @@
-import { EdgeConnectionContextType } from 'apps/api/src/domain/models/context/types/EdgeConnectionContextType';
-import { resourceTypes } from 'apps/api/src/domain/types/resourceTypes';
-import { InternalError } from 'apps/api/src/lib/errors/InternalError';
-import { DTO } from 'apps/api/src/types/DTO';
-import formatResourceCompositeIdentifier from 'apps/api/src/view-models/presentation/formatResourceCompositeIdentifier';
 import {
     EdgeConnection,
     EdgeConnectionMember,
     EdgeConnectionMemberRole,
     EdgeConnectionType,
 } from '../../../domain/models/context/edge-connection.entity';
+import { EdgeConnectionContextType } from '../../../domain/models/context/types/EdgeConnectionContextType';
+import { resourceTypes } from '../../../domain/types/resourceTypes';
+import { InternalError } from '../../../lib/errors/InternalError';
+import { DTO } from '../../../types/DTO';
+import formatResourceCompositeIdentifier from '../../../view-models/presentation/formatResourceCompositeIdentifier';
 import buildOneSelfEdgeConnectionForEachResourceType from '../buildSelfConnectionTestData/buildOneSelfEdgeConnectionForEachResourceType';
 import buildOneDualEdgeConnectionForEveryContextType from './buildOneDualEdgeConnectionForEveryContextType';
 import buildOneFromConnectionForInstanceOfEachResourceType from './buildOneFromConnectionForInstanceOfEachResourceType';

@@ -1,5 +1,5 @@
-import { DomainModelCtor } from 'apps/api/src/lib/types/DomainModelCtor';
-import { DTO } from 'apps/api/src/types/DTO';
+import { DomainModelCtor } from '../../../lib/types/DomainModelCtor';
+import { DTO } from '../../../types/DTO';
 import { DomainModelValidator } from '../../domainModelValidators/types/DomainModelValidator';
 import { isValid } from '../../domainModelValidators/Valid';
 import { Resource } from '../../models/resource.entity';

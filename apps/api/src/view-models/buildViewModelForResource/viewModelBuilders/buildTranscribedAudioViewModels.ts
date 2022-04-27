@@ -1,6 +1,6 @@
-import { TranscribedAudio } from 'apps/api/src/domain/models/transcribed-audio/entities/transcribed-audio.entity';
-import { resourceTypes } from 'apps/api/src/domain/types/resourceTypes';
-import { isInternalError } from 'apps/api/src/lib/errors/InternalError';
+import { TranscribedAudio } from '../../../domain/models/transcribed-audio/entities/transcribed-audio.entity';
+import { resourceTypes } from '../../../domain/types/resourceTypes';
+import { isInternalError } from '../../../lib/errors/InternalError';
 import { TranscribedAudioViewModel } from '../viewModels/transcribed-audio/transcribed-audio.view-model';
 import { ViewModelBuilderDependencies } from './types/ViewModelBuilderDependencies';
 

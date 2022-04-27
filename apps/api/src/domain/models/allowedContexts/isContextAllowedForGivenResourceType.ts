@@ -1,4 +1,4 @@
-import cloneToPlainObject from 'apps/api/src/lib/utilities/cloneToPlainObject';
+import cloneToPlainObject from '../../../lib/utilities/cloneToPlainObject';
 import { ResourceType, resourceTypes } from '../../types/resourceTypes';
 import { isNullOrUndefined } from '../../utilities/validation/is-null-or-undefined';
 import { EdgeConnectionContextType } from '../context/types/EdgeConnectionContextType';

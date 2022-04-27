@@ -1,4 +1,4 @@
-import { InternalError } from 'apps/api/src/lib/errors/InternalError';
+import { InternalError } from '../../../lib/errors/InternalError';
 import { ResourceType } from '../../types/resourceTypes';
 
 export default class InvalidEntityDTOError extends InternalError {

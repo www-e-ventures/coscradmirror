@@ -1,4 +1,4 @@
-import { Position2D } from 'apps/api/src/domain/models/spatial-feature/types/Coordinates/Position2D';
+import { Position2D } from '../../../../../domain/models/spatial-feature/types/Coordinates/Position2D';
 import { DTO } from '../../../../../types/DTO';
 import { PointContext } from '../../../../models/context/point-context/point-context.entity';
 import { EdgeConnectionContextType } from '../../../../models/context/types/EdgeConnectionContextType';

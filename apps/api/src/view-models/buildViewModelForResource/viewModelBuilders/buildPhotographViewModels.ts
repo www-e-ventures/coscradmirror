@@ -1,7 +1,7 @@
-import { Photograph } from 'apps/api/src/domain/models/photograph/entities/photograph.entity';
-import IsPublished from 'apps/api/src/domain/repositories/specifications/isPublished';
-import { resourceTypes } from 'apps/api/src/domain/types/resourceTypes';
-import { isInternalError } from 'apps/api/src/lib/errors/InternalError';
+import { Photograph } from '../../../domain/models/photograph/entities/photograph.entity';
+import IsPublished from '../../../domain/repositories/specifications/isPublished';
+import { resourceTypes } from '../../../domain/types/resourceTypes';
+import { isInternalError } from '../../../lib/errors/InternalError';
 import { PhotographViewModel } from '../viewModels/photograph.view-model';
 import { ViewModelBuilderDependencies } from './types/ViewModelBuilderDependencies';
 import {

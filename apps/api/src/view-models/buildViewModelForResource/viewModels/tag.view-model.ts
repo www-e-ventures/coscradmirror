@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Tag } from 'apps/api/src/domain/models/tag/tag.entity';
+import { Tag } from '../../../domain/models/tag/tag.entity';
 import { BaseViewModel } from './base.view-model';
 
 export class TagViewModel extends BaseViewModel {

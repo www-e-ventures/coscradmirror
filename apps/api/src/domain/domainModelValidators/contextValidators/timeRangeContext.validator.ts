@@ -1,4 +1,4 @@
-import { InternalError } from 'apps/api/src/lib/errors/InternalError';
+import { InternalError } from '../../../lib/errors/InternalError';
 import { TimeRangeContext } from '../../models/context/time-range-context/time-range-context.entity';
 import { EdgeConnectionContextType } from '../../models/context/types/EdgeConnectionContextType';
 import { isNullOrUndefined } from '../../utilities/validation/is-null-or-undefined';

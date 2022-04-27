@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Photograph } from 'apps/api/src/domain/models/photograph/entities/photograph.entity';
+import { Photograph } from '../../../domain/models/photograph/entities/photograph.entity';
 import { BaseViewModel } from './base.view-model';
 import buildFullDigitalAssetURL from './utilities/buildFullDigitalAssetURL';
 

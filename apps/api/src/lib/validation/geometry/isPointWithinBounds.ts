@@ -1,7 +1,7 @@
 import {
     isPosition2D,
     Position2D,
-} from 'apps/api/src/domain/models/spatial-feature/types/Coordinates/Position2D';
+} from '../../../domain/models/spatial-feature/types/Coordinates/Position2D';
 import isFiniteNumber from '../../utilities/isFiniteNumber';
 import isNumberWithinRange from './isNumberWithinRange';
 

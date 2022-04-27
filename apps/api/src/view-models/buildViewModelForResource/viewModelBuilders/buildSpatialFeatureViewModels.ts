@@ -1,7 +1,7 @@
-import { ISpatialFeature } from 'apps/api/src/domain/models/spatial-feature/ISpatialFeature';
-import IsPublished from 'apps/api/src/domain/repositories/specifications/isPublished';
-import { resourceTypes } from 'apps/api/src/domain/types/resourceTypes';
-import { isInternalError } from 'apps/api/src/lib/errors/InternalError';
+import { ISpatialFeature } from '../../../domain/models/spatial-feature/ISpatialFeature';
+import IsPublished from '../../../domain/repositories/specifications/isPublished';
+import { resourceTypes } from '../../../domain/types/resourceTypes';
+import { isInternalError } from '../../../lib/errors/InternalError';
 import { SpatialFeatureViewModel } from '../viewModels/spatial-data/spatial-feature.view-model';
 import { ViewModelBuilderDependencies } from './types/ViewModelBuilderDependencies';
 import {

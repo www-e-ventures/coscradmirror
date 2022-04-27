@@ -1,6 +1,6 @@
-import { DTO } from 'apps/api/src/types/DTO';
 import { InternalError } from '../../lib/errors/InternalError';
 import capitalizeFirstLetter from '../../lib/utilities/strings/capitalizeFirstLetter';
+import { DTO } from '../../types/DTO';
 import DisallowedContextTypeForResourceError from '../domainModelValidators/errors/context/invalidContextStateErrors/DisallowedContextTypeForResourceError';
 import { Valid } from '../domainModelValidators/Valid';
 import { EntityId } from '../types/ResourceId';

@@ -1,4 +1,4 @@
-import { MediaTimeRange } from 'apps/api/src/domain/models/transcribed-audio/entities/MediaTimeRange';
+import { MediaTimeRange } from '../../../../../domain/models/transcribed-audio/entities/MediaTimeRange';
 import convertTimeRangeDataToPlainTextTranscript from './convertTimeRangeDataToPlainTextTranscript';
 
 // TODO- add this to the test data and import it here!

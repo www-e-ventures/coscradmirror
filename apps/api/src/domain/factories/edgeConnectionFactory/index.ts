@@ -1,5 +1,5 @@
-import { DTO } from 'apps/api/src/types/DTO';
-import { ResultOrError } from 'apps/api/src/types/ResultOrError';
+import { DTO } from '../../../types/DTO';
+import { ResultOrError } from '../../../types/ResultOrError';
 import validateEdgeConnection from '../../domainModelValidators/contextValidators/validateEdgeConnection';
 import { isValid } from '../../domainModelValidators/Valid';
 import { EdgeConnection } from '../../models/context/edge-connection.entity';

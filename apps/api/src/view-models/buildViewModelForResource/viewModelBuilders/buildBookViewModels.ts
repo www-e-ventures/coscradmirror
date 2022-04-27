@@ -1,7 +1,7 @@
-import { Book } from 'apps/api/src/domain/models/book/entities/book.entity';
-import IsPublished from 'apps/api/src/domain/repositories/specifications/isPublished';
-import { resourceTypes } from 'apps/api/src/domain/types/resourceTypes';
-import { isInternalError } from 'apps/api/src/lib/errors/InternalError';
+import { Book } from '../../../domain/models/book/entities/book.entity';
+import IsPublished from '../../../domain/repositories/specifications/isPublished';
+import { resourceTypes } from '../../../domain/types/resourceTypes';
+import { isInternalError } from '../../../lib/errors/InternalError';
 import { BookViewModel } from '../viewModels/book.view-model';
 import { ViewModelBuilderDependencies } from './types/ViewModelBuilderDependencies';
 import {

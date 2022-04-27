@@ -1,7 +1,7 @@
-import { IGeometricFeature } from 'apps/api/src/domain/models/spatial-feature/GeometricFeature';
-import { LineCoordinates } from 'apps/api/src/domain/models/spatial-feature/types/Coordinates/LineCoordinates';
-import { GeometricFeatureType } from 'apps/api/src/domain/models/spatial-feature/types/GeometricFeatureType';
-import { InternalError } from 'apps/api/src/lib/errors/InternalError';
+import { InternalError } from '../../../../../lib/errors/InternalError';
+import { IGeometricFeature } from '../../../../models/spatial-feature/GeometricFeature';
+import { LineCoordinates } from '../../../../models/spatial-feature/types/Coordinates/LineCoordinates';
+import { GeometricFeatureType } from '../../../../models/spatial-feature/types/GeometricFeatureType';
 import { isValid } from '../../../Valid';
 import validateAllCoordinatesInLinearStructure from './utilities/validateAllCoordinatesInLinearStructure';
 

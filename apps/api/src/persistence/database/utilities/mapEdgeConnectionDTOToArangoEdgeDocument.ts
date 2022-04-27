@@ -1,5 +1,5 @@
-import { EdgeConnection } from 'apps/api/src/domain/models/context/edge-connection.entity';
-import { DTO } from 'apps/api/src/types/DTO';
+import { EdgeConnection } from '../../../domain/models/context/edge-connection.entity';
+import { DTO } from '../../../types/DTO';
 import { ArangoEdgeDocument } from '../types/ArangoEdgeDocument';
 import getArangoDocumentDirectionAttributesFromEdgeConnectionMembers from './getArangoDocumentDirectionAttributesFromEdgeConnectionMembers';
 import mapEntityDTOToDatabaseDTO from './mapEntityDTOToDatabaseDTO';

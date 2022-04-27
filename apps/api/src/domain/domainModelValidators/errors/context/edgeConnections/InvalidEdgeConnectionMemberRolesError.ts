@@ -1,9 +1,9 @@
+import { InternalError } from '../../../../../lib/errors/InternalError';
+import formatResourceCompositeIdentifier from '../../../../../view-models/presentation/formatResourceCompositeIdentifier';
 import {
     EdgeConnectionMember,
     EdgeConnectionType,
-} from 'apps/api/src/domain/models/context/edge-connection.entity';
-import { InternalError } from 'apps/api/src/lib/errors/InternalError';
-import formatResourceCompositeIdentifier from 'apps/api/src/view-models/presentation/formatResourceCompositeIdentifier';
+} from '../../../../models/context/edge-connection.entity';
 
 export default class InvalidEdgeConnectionMemberRolesError extends InternalError {
     constructor(

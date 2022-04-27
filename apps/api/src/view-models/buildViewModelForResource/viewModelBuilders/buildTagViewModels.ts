@@ -1,6 +1,6 @@
-import { Tag } from 'apps/api/src/domain/models/tag/tag.entity';
-import { resourceTypes } from 'apps/api/src/domain/types/resourceTypes';
-import { isInternalError } from 'apps/api/src/lib/errors/InternalError';
+import { Tag } from '../../../domain/models/tag/tag.entity';
+import { resourceTypes } from '../../../domain/types/resourceTypes';
+import { isInternalError } from '../../../lib/errors/InternalError';
 import { TagViewModel } from '../viewModels/tag.view-model';
 import { ViewModelBuilderDependencies } from './types/ViewModelBuilderDependencies';
 

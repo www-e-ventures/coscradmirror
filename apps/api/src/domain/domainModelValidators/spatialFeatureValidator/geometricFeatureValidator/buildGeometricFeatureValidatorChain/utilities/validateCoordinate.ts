@@ -1,5 +1,5 @@
-import { InternalError } from 'apps/api/src/lib/errors/InternalError';
 import { isNumber } from 'class-validator';
+import { InternalError } from '../../../../../../lib/errors/InternalError';
 import { Valid } from '../../../../Valid';
 
 export default (coordinate: unknown, index?: number): Valid | InternalError => {

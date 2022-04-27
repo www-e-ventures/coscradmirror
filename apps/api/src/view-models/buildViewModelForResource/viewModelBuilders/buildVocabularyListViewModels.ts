@@ -1,8 +1,8 @@
-import { Term } from 'apps/api/src/domain/models/term/entities/term.entity';
-import { VocabularyList } from 'apps/api/src/domain/models/vocabulary-list/entities/vocabulary-list.entity';
-import IsPublished from 'apps/api/src/domain/repositories/specifications/isPublished';
-import { resourceTypes } from 'apps/api/src/domain/types/resourceTypes';
-import { isInternalError } from 'apps/api/src/lib/errors/InternalError';
+import { Term } from '../../../domain/models/term/entities/term.entity';
+import { VocabularyList } from '../../../domain/models/vocabulary-list/entities/vocabulary-list.entity';
+import IsPublished from '../../../domain/repositories/specifications/isPublished';
+import { resourceTypes } from '../../../domain/types/resourceTypes';
+import { isInternalError } from '../../../lib/errors/InternalError';
 import { VocabularyListViewModel } from '../viewModels';
 import { ViewModelBuilderDependencies } from './types/ViewModelBuilderDependencies';
 import {

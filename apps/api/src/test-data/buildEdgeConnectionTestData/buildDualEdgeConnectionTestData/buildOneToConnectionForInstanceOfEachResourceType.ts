@@ -1,5 +1,5 @@
-import { DTO } from 'apps/api/src/types/DTO';
 import { EdgeConnection } from '../../../domain/models/context/edge-connection.entity';
+import { DTO } from '../../../types/DTO';
 
 /**
  * We split up seeding our test \ demonstration data for `Edge Connections` into

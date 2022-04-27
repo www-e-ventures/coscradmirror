@@ -1,6 +1,6 @@
-import { HasEntityID } from 'apps/api/src/domain/models/types/HasEntityId';
-import { isResourceId } from 'apps/api/src/domain/types/ResourceId';
-import { DTO } from 'apps/api/src/types/DTO';
+import { HasEntityID } from '../../../domain/models/types/HasEntityId';
+import { isResourceId } from '../../../domain/types/ResourceId';
+import { DTO } from '../../../types/DTO';
 
 export type DatabaseDTO<TEntityDTO extends HasEntityID = HasEntityID> = Omit<TEntityDTO, 'id'> & {
     _key: string;

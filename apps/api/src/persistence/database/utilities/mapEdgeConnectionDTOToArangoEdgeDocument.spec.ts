@@ -3,12 +3,12 @@ import {
     EdgeConnectionMember,
     EdgeConnectionMemberRole,
     EdgeConnectionType,
-} from 'apps/api/src/domain/models/context/edge-connection.entity';
-import { PageRangeContext } from 'apps/api/src/domain/models/context/page-range-context/page-range.context.entity';
-import { TimeRangeContext } from 'apps/api/src/domain/models/context/time-range-context/time-range-context.entity';
-import { EdgeConnectionContextType } from 'apps/api/src/domain/models/context/types/EdgeConnectionContextType';
-import { resourceTypes } from 'apps/api/src/domain/types/resourceTypes';
-import { DTO } from 'apps/api/src/types/DTO';
+} from '../../../domain/models/context/edge-connection.entity';
+import { PageRangeContext } from '../../../domain/models/context/page-range-context/page-range.context.entity';
+import { TimeRangeContext } from '../../../domain/models/context/time-range-context/time-range-context.entity';
+import { EdgeConnectionContextType } from '../../../domain/models/context/types/EdgeConnectionContextType';
+import { resourceTypes } from '../../../domain/types/resourceTypes';
+import { DTO } from '../../../types/DTO';
 import { ArangoEdgeDocument } from '../types/ArangoEdgeDocument';
 import mapEdgeConnectionDTOToArangoEdgeDocument from './mapEdgeConnectionDTOToArangoEdgeDocument';
 

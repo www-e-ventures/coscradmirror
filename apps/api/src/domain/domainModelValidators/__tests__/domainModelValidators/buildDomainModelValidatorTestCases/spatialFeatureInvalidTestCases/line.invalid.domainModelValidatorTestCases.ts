@@ -1,6 +1,6 @@
-import { GeometricFeatureType } from 'apps/api/src/domain/models/spatial-feature/types/GeometricFeatureType';
-import { resourceTypes } from 'apps/api/src/domain/types/resourceTypes';
+import { resourceTypes } from '../../../../../../domain/types/resourceTypes';
 import { Line } from '../../../../../models/spatial-feature/line.entity';
+import { GeometricFeatureType } from '../../../../../models/spatial-feature/types/GeometricFeatureType';
 import InvalidEntityDTOError from '../../../../errors/InvalidEntityDTOError';
 import { DomainModelValidatorInvalidTestCase } from '../../../types/DomainModelValidatorTestCase';
 import { getValidSpatialFeatureInstanceForTest } from '../utils/getValidSpatialFeatureInstanceForTest';

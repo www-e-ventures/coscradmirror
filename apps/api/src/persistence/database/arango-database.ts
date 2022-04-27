@@ -1,5 +1,3 @@
-import { Maybe } from 'apps/api/src/lib/types/maybe';
-import { isNotFound, NotFound } from 'apps/api/src/lib/types/not-found';
 import { Database } from 'arangojs';
 import { AqlQuery } from 'arangojs/aql';
 import { isArangoDatabase } from 'arangojs/database';
@@ -7,6 +5,8 @@ import { Resource } from '../../domain/models/resource.entity';
 import { ISpecification } from '../../domain/repositories/interfaces/ISpecification';
 import { QueryOperator } from '../../domain/repositories/interfaces/QueryOperator';
 import { InternalError } from '../../lib/errors/InternalError';
+import { Maybe } from '../../lib/types/maybe';
+import { isNotFound, NotFound } from '../../lib/types/not-found';
 import { DatabaseDTO } from './utilities/mapEntityDTOToDatabaseDTO';
 
 type ArangoDTO<T> = T & {
