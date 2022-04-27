@@ -1,4 +1,4 @@
-import { InternalError } from 'apps/api/src/lib/errors/InternalError';
+import { InternalError } from '../../../lib/errors/InternalError';
 import { PageRangeContext } from '../../models/context/page-range-context/page-range.context.entity';
 import { EdgeConnectionContextType } from '../../models/context/types/EdgeConnectionContextType';
 import findDuplicatesInStringArray from '../../utilities/validation/findDuplicatesInStringArray';

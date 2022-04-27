@@ -1,4 +1,4 @@
-import { InternalError } from 'apps/api/src/lib/errors/InternalError';
+import { InternalError } from '../../../../lib/errors/InternalError';
 import { EdgeConnectionContextType } from '../../../models/context/types/EdgeConnectionContextType';
 import { Valid } from '../../Valid';
 import buildEdgeConnectionContextValidatorTestCases from './buildEdgeConnectionContextValidatorTestCases';

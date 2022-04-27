@@ -1,4 +1,4 @@
-import { InternalError } from 'apps/api/src/lib/errors/InternalError';
+import { InternalError } from '../../../lib/errors/InternalError';
 import { Valid } from '../../domainModelValidators/Valid';
 import { ResourceType, resourceTypes } from '../../types/resourceTypes';
 import isContextAllowedForGivenResourceType from '../allowedContexts/isContextAllowedForGivenResourceType';

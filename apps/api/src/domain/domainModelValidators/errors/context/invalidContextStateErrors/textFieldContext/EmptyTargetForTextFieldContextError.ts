@@ -1,6 +1,6 @@
-import { ResourceCompositeIdentifier } from 'apps/api/src/domain/models/types/entityCompositeIdentifier';
-import { InternalError } from 'apps/api/src/lib/errors/InternalError';
-import formatResourceCompositeIdentifier from 'apps/api/src/view-models/presentation/formatResourceCompositeIdentifier';
+import { InternalError } from '../../../../../../lib/errors/InternalError';
+import formatResourceCompositeIdentifier from '../../../../../../view-models/presentation/formatResourceCompositeIdentifier';
+import { ResourceCompositeIdentifier } from '../../../../../models/types/entityCompositeIdentifier';
 
 export default class EmptyTargetForTextFieldContextError extends InternalError {
     constructor(targetModel: ResourceCompositeIdentifier, targetField: string) {

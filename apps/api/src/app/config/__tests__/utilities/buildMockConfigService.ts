@@ -1,6 +1,6 @@
-import { DTO } from 'apps/api/src/types/DTO';
 import * as dotenv from 'dotenv';
 import * as fs from 'fs';
+import { DTO } from '../../../../types/DTO';
 import { EnvironmentVariables } from '../../env.validation';
 
 type ConfigOverrides = Partial<DTO<EnvironmentVariables>>;

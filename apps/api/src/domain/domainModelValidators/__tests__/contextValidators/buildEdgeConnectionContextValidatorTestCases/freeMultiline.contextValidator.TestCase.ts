@@ -1,10 +1,10 @@
-import { Line2D } from 'apps/api/src/domain/models/spatial-feature/types/Coordinates/Line2d';
 import { InternalError } from '../../../../../lib/errors/InternalError';
 import { DTO } from '../../../../../types/DTO';
 import InvalidLineInFreeMultilineError from '../../../../domainModelValidators/errors/context/InvalidLineInFreeMultilineError';
 import MissingLineContextError from '../../../../domainModelValidators/errors/context/MissingLineContextError';
 import { FreeMultilineContext } from '../../../../models/context/free-multiline-context/free-multiline-context.entity';
 import { EdgeConnectionContextType } from '../../../../models/context/types/EdgeConnectionContextType';
+import { Line2D } from '../../../../models/spatial-feature/types/Coordinates/Line2d';
 import { freeMultilineContextValidator } from '../../../contextValidators/freeMultilineContext.validator';
 import InvalidLineTypeError from '../../../errors/context/InvalidLineTypeError';
 import NullOrUndefinedEdgeConnectionContextDTOError from '../../../errors/context/NullOrUndefinedEdgeConnectionContextDTOError';

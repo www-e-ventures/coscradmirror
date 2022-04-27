@@ -1,5 +1,5 @@
-import { ResultOrError } from 'apps/api/src/types/ResultOrError';
 import { Maybe } from '../../../lib/types/maybe';
+import { ResultOrError } from '../../../types/ResultOrError';
 import { Resource } from '../../models/resource.entity';
 import { EntityId } from '../../types/ResourceId';
 import { ISpecification } from './ISpecification';

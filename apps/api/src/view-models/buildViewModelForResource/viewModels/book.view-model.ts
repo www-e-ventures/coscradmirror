@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Book } from 'apps/api/src/domain/models/book/entities/book.entity';
+import { Book } from '../../../domain/models/book/entities/book.entity';
 import { BaseViewModel } from './base.view-model';
 
 export class BookViewModel extends BaseViewModel {

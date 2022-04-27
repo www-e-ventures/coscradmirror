@@ -1,17 +1,17 @@
 import { INestApplication } from '@nestjs/common';
-import { Resource } from 'apps/api/src/domain/models/resource.entity';
+import * as request from 'supertest';
+import { Resource } from '../../../domain/models/resource.entity';
 import {
     InMemorySnapshotOfResources,
     ResourceType,
     resourceTypes,
-} from 'apps/api/src/domain/types/resourceTypes';
-import { isInternalError } from 'apps/api/src/lib/errors/InternalError';
-import { ArangoConnectionProvider } from 'apps/api/src/persistence/database/arango-connection.provider';
-import TestRepositoryProvider from 'apps/api/src/persistence/repositories/__tests__/TestRepositoryProvider';
-import buildTestData from 'apps/api/src/test-data/buildTestData';
-import * as request from 'supertest';
+} from '../../../domain/types/resourceTypes';
+import { isInternalError } from '../../../lib/errors/InternalError';
+import { ArangoConnectionProvider } from '../../../persistence/database/arango-connection.provider';
 import { DatabaseProvider } from '../../../persistence/database/database.provider';
 import generateRandomTestDatabaseName from '../../../persistence/repositories/__tests__/generateRandomTestDatabaseName';
+import TestRepositoryProvider from '../../../persistence/repositories/__tests__/TestRepositoryProvider';
+import buildTestData from '../../../test-data/buildTestData';
 import httpStatusCodes from '../../constants/httpStatusCodes';
 import buildViewModelPathForRe from '../utilities/buildViewModelPathForResourceType';
 import createTestModule from './createTestModule';

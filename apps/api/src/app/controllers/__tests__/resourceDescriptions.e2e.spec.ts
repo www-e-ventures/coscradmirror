@@ -1,8 +1,8 @@
 import { INestApplication } from '@nestjs/common';
-import { ArangoConnectionProvider } from 'apps/api/src/persistence/database/arango-connection.provider';
-import generateRandomTestDatabaseName from 'apps/api/src/persistence/repositories/__tests__/generateRandomTestDatabaseName';
-import { buildAllResourceDescriptions } from 'apps/api/src/view-models/resourceDescriptions/buildAllResourceDescriptions';
 import * as request from 'supertest';
+import { ArangoConnectionProvider } from '../../../persistence/database/arango-connection.provider';
+import generateRandomTestDatabaseName from '../../../persistence/repositories/__tests__/generateRandomTestDatabaseName';
+import { buildAllResourceDescriptions } from '../../../view-models/resourceDescriptions/buildAllResourceDescriptions';
 import createTestModule from './createTestModule';
 describe('GET /entities/descriptions', () => {
     const testDatabaseName = generateRandomTestDatabaseName();

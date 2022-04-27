@@ -1,6 +1,6 @@
-import { IGeometricFeature } from 'apps/api/src/domain/models/spatial-feature/GeometricFeature';
-import { GeometricFeatureType } from 'apps/api/src/domain/models/spatial-feature/types/GeometricFeatureType';
-import { InternalError } from 'apps/api/src/lib/errors/InternalError';
+import { InternalError } from '../../../../../lib/errors/InternalError';
+import { IGeometricFeature } from '../../../../models/spatial-feature/GeometricFeature';
+import { GeometricFeatureType } from '../../../../models/spatial-feature/types/GeometricFeatureType';
 
 const polygonChainValidator = (
     input: IGeometricFeature,

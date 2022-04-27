@@ -1,6 +1,6 @@
-import { InternalError } from 'apps/api/src/lib/errors/InternalError';
-import isNumberWithinRange from 'apps/api/src/lib/validation/geometry/isNumberWithinRange';
-import { DTO } from 'apps/api/src/types/DTO';
+import { InternalError } from '../../../../lib/errors/InternalError';
+import isNumberWithinRange from '../../../../lib/validation/geometry/isNumberWithinRange';
+import { DTO } from '../../../../types/DTO';
 import InconsistentTimeRangeError from '../../../domainModelValidators/errors/context/invalidContextStateErrors/timeRangeContext/InconsistentTimeRangeError';
 import { Valid } from '../../../domainModelValidators/Valid';
 import { resourceTypes } from '../../../types/resourceTypes';

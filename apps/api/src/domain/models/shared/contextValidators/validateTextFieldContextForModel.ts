@@ -1,5 +1,5 @@
-import { InternalError } from 'apps/api/src/lib/errors/InternalError';
-import isStringWithNonzeroLength from 'apps/api/src/lib/utilities/isStringWithNonzeroLength';
+import { InternalError } from '../../../../lib/errors/InternalError';
+import isStringWithNonzeroLength from '../../../../lib/utilities/isStringWithNonzeroLength';
 import EmptyTargetForTextFieldContextError from '../../../domainModelValidators/errors/context/invalidContextStateErrors/textFieldContext/EmptyTargetForTextFieldContextError';
 import InconsistentCharRangeError from '../../../domainModelValidators/errors/context/invalidContextStateErrors/textFieldContext/InconsistentCharRangeError';
 import { Valid } from '../../../domainModelValidators/Valid';

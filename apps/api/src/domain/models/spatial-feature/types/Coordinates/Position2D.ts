@@ -1,4 +1,4 @@
-import isFiniteNumber from 'apps/api/src/lib/utilities/isFiniteNumber';
+import isFiniteNumber from '../../../../../lib/utilities/isFiniteNumber';
 
 export type Position2D = [number, number];
 

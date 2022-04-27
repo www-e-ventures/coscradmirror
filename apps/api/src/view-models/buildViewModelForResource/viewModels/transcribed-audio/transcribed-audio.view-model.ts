@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { TranscribedAudio } from 'apps/api/src/domain/models/transcribed-audio/entities/transcribed-audio.entity';
+import { TranscribedAudio } from '../../../../domain/models/transcribed-audio/entities/transcribed-audio.entity';
 import { BaseViewModel } from '../base.view-model';
 import buildFullDigitalAssetURL from '../utilities/buildFullDigitalAssetURL';
 import convertTimeRangeDataToPlainTextTranscript from './utilities/convertTimeRangeDataToPlainTextTranscript';

@@ -1,4 +1,4 @@
-import { ResourceType, resourceTypes } from 'apps/api/src/domain/types/resourceTypes';
+import { ResourceType, resourceTypes } from '../../../domain/types/resourceTypes';
 
 // For irregular plural forms or forms that lead to awkward grammar
 const exceptions: Partial<Record<ResourceType, string>> = {

@@ -1,4 +1,4 @@
-import { InternalError } from 'apps/api/src/lib/errors/InternalError';
+import { InternalError } from '../../../../lib/errors/InternalError';
 import { PageIdentifier } from '../../../models/book/entities/types/PageIdentifier';
 
 export default class DuplicatePageIdentifierError extends InternalError {

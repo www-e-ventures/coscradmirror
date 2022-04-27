@@ -1,4 +1,4 @@
-import { InternalError } from 'apps/api/src/lib/errors/InternalError';
+import { InternalError } from '../../../../../../lib/errors/InternalError';
 import { isValid, Valid } from '../../../../Valid';
 import validateCoordinate from './validateCoordinate';
 

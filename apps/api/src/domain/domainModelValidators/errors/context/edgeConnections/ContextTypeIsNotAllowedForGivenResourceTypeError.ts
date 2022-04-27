@@ -1,6 +1,6 @@
-import { EdgeConnectionContextType } from 'apps/api/src/domain/models/context/types/EdgeConnectionContextType';
-import { ResourceType } from 'apps/api/src/domain/types/resourceTypes';
-import { InternalError } from 'apps/api/src/lib/errors/InternalError';
+import { InternalError } from '../../../../../lib/errors/InternalError';
+import { EdgeConnectionContextType } from '../../../../models/context/types/EdgeConnectionContextType';
+import { ResourceType } from '../../../../types/resourceTypes';
 
 export default class ContextTypeIsNotAllowedForGivenResourceTypeError extends InternalError {
     constructor(contextType: EdgeConnectionContextType, resourceType: ResourceType) {

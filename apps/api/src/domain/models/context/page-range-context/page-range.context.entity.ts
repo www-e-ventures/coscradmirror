@@ -1,4 +1,4 @@
-import { DTO } from 'apps/api/src/types/DTO';
+import { DTO } from '../../../../types/DTO';
 import { PageIdentifier } from '../../book/entities/types/PageIdentifier';
 import { EdgeConnectionContext } from '../context.entity';
 import { EdgeConnectionContextType } from '../types/EdgeConnectionContextType';

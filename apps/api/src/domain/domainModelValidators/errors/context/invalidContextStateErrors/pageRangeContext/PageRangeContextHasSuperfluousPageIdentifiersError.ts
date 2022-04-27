@@ -1,8 +1,8 @@
-import { PageIdentifier } from 'apps/api/src/domain/models/book/entities/types/PageIdentifier';
-import { ResourceCompositeIdentifier } from 'apps/api/src/domain/models/types/entityCompositeIdentifier';
-import { InternalError } from 'apps/api/src/lib/errors/InternalError';
-import formatListOfPageIdentifiers from 'apps/api/src/view-models/presentation/formatListOfPageIdentifiers';
-import formatResourceCompositeIdentifier from 'apps/api/src/view-models/presentation/formatResourceCompositeIdentifier';
+import { InternalError } from '../../../../../../lib/errors/InternalError';
+import formatListOfPageIdentifiers from '../../../../../../view-models/presentation/formatListOfPageIdentifiers';
+import formatResourceCompositeIdentifier from '../../../../../../view-models/presentation/formatResourceCompositeIdentifier';
+import { PageIdentifier } from '../../../../../models/book/entities/types/PageIdentifier';
+import { ResourceCompositeIdentifier } from '../../../../../models/types/entityCompositeIdentifier';
 
 export default class PageRangeContextHasSuperfluousPageIdentifiersError extends InternalError {
     constructor(

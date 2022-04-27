@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Term } from 'apps/api/src/domain/models/term/entities/term.entity';
+import { Term } from '../../../domain/models/term/entities/term.entity';
 import { BaseViewModel } from './base.view-model';
 import buildFullDigitalAssetURL from './utilities/buildFullDigitalAssetURL';
 

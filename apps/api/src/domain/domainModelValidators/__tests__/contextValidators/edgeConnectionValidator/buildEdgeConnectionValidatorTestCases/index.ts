@@ -1,16 +1,16 @@
+import { InternalError } from '../../../../../../lib/errors/InternalError';
+import NoteMissingFromEdgeConnectionError from '../../../../../domainModelValidators/errors/context/edgeConnections/NoteMissingFromEdgeConnectionError';
+import NullOrUndefinedEdgeConnectionDTOError from '../../../../../domainModelValidators/errors/context/edgeConnections/NullOrUndefindEdgeConnectionDTOError';
 import {
     EdgeConnection,
     EdgeConnectionMember,
     EdgeConnectionMemberRole,
     EdgeConnectionType,
-} from 'apps/api/src/domain/models/context/edge-connection.entity';
-import { PageRangeContext } from 'apps/api/src/domain/models/context/page-range-context/page-range.context.entity';
-import { TimeRangeContext } from 'apps/api/src/domain/models/context/time-range-context/time-range-context.entity';
-import { EdgeConnectionContextType } from 'apps/api/src/domain/models/context/types/EdgeConnectionContextType';
-import { resourceTypes } from 'apps/api/src/domain/types/resourceTypes';
-import { InternalError } from 'apps/api/src/lib/errors/InternalError';
-import NoteMissingFromEdgeConnectionError from '../../../../../domainModelValidators/errors/context/edgeConnections/NoteMissingFromEdgeConnectionError';
-import NullOrUndefinedEdgeConnectionDTOError from '../../../../../domainModelValidators/errors/context/edgeConnections/NullOrUndefindEdgeConnectionDTOError';
+} from '../../../../../models/context/edge-connection.entity';
+import { PageRangeContext } from '../../../../../models/context/page-range-context/page-range.context.entity';
+import { TimeRangeContext } from '../../../../../models/context/time-range-context/time-range-context.entity';
+import { EdgeConnectionContextType } from '../../../../../models/context/types/EdgeConnectionContextType';
+import { resourceTypes } from '../../../../../types/resourceTypes';
 import BothMembersInEdgeConnectionHaveSameRoleError from '../../../../errors/context/edgeConnections/BothMembersInEdgeConnectionHaveSameRoleError';
 import ContextTypeIsNotAllowedForGivenResourceTypeError from '../../../../errors/context/edgeConnections/ContextTypeIsNotAllowedForGivenResourceTypeError';
 import InvalidEdgeConnectionDTOError from '../../../../errors/context/edgeConnections/InvalidEdgeConnectionDTOError';

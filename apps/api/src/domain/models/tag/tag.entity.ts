@@ -1,4 +1,4 @@
-import { DTO } from 'apps/api/src/types/DTO';
+import { DTO } from '../../../types/DTO';
 import { resourceTypes } from '../../types/resourceTypes';
 import { Resource } from '../resource.entity';
 

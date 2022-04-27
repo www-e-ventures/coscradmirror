@@ -1,8 +1,8 @@
 import { ConfigService } from '@nestjs/config';
 import { Test } from '@nestjs/testing';
-import { ArangoConnectionProvider } from 'apps/api/src/persistence/database/arango-connection.provider';
-import { RepositoryProvider } from 'apps/api/src/persistence/repositories/repository.provider';
+import { ArangoConnectionProvider } from '../../../persistence/database/arango-connection.provider';
 import { DatabaseProvider } from '../../../persistence/database/database.provider';
+import { RepositoryProvider } from '../../../persistence/repositories/repository.provider';
 import buildConfigFilePath from '../../config/buildConfigFilePath';
 import { Environment } from '../../config/constants/Environment';
 import buildMockConfigServiceSpec from '../../config/__tests__/utilities/buildMockConfigService';

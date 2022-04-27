@@ -1,4 +1,4 @@
-import { Position2D } from 'apps/api/src/domain/models/spatial-feature/types/Coordinates/Position2D';
+import { Position2D } from '../../../domain/models/spatial-feature/types/Coordinates/Position2D';
 import isPointWithinBounds from './isPointWithinBounds';
 
 type IndexAndPoint = {

@@ -1,5 +1,5 @@
-import { GeometricFeatureType } from 'apps/api/src/domain/models/spatial-feature/types/GeometricFeatureType';
 import { ISpatialFeature } from '../../../../models/spatial-feature/ISpatialFeature';
+import { GeometricFeatureType } from '../../../../models/spatial-feature/types/GeometricFeatureType';
 import { resourceTypes } from '../../../../types/resourceTypes';
 import InvalidEntityDTOError from '../../../errors/InvalidEntityDTOError';
 import NullOrUndefinedResourceDTOError from '../../../errors/NullOrUndefinedResourceDTOError';

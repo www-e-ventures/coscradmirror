@@ -1,7 +1,7 @@
-import { Resource } from 'apps/api/src/domain/models/resource.entity';
-import { InternalError } from 'apps/api/src/lib/errors/InternalError';
-import formatCharacterRange from 'apps/api/src/view-models/presentation/formatCharacterRange';
-import formatResourceCompositeIdentifier from 'apps/api/src/view-models/presentation/formatResourceCompositeIdentifier';
+import { InternalError } from '../../../../../../lib/errors/InternalError';
+import formatCharacterRange from '../../../../../../view-models/presentation/formatCharacterRange';
+import formatResourceCompositeIdentifier from '../../../../../../view-models/presentation/formatResourceCompositeIdentifier';
+import { Resource } from '../../../../../models/resource.entity';
 
 // TODO we should really alias [number,number] already!
 export default class InconsistentCharRangeError extends InternalError {

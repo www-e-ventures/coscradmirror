@@ -1,8 +1,8 @@
-import { InternalError } from 'apps/api/src/lib/errors/InternalError';
-import findAllPointsInLineNotWithinBounds from 'apps/api/src/lib/validation/geometry/findAllPointsInLineNotWithinBounds';
-import isPointWithinBounds from 'apps/api/src/lib/validation/geometry/isPointWithinBounds';
-import { DTO } from 'apps/api/src/types/DTO';
-import formatPosition2D from 'apps/api/src/view-models/presentation/formatPosition2D';
+import { InternalError } from '../../../../lib/errors/InternalError';
+import findAllPointsInLineNotWithinBounds from '../../../../lib/validation/geometry/findAllPointsInLineNotWithinBounds';
+import isPointWithinBounds from '../../../../lib/validation/geometry/isPointWithinBounds';
+import { DTO } from '../../../../types/DTO';
+import formatPosition2D from '../../../../view-models/presentation/formatPosition2D';
 import FreeMultilineContextOutOfBoundsError from '../../../domainModelValidators/errors/context/invalidContextStateErrors/freeMultilineContext/FreeMultilineContextOutOfBoundsError';
 import PointContextOutOfBoundsError from '../../../domainModelValidators/errors/context/invalidContextStateErrors/pointContext/PointContextOutOfBoundsError';
 import { Valid } from '../../../domainModelValidators/Valid';

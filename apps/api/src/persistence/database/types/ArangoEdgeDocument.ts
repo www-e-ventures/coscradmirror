@@ -1,9 +1,9 @@
-import { EdgeConnectionContext } from 'apps/api/src/domain/models/context/context.entity';
+import { EdgeConnectionContext } from '../../../domain/models/context/context.entity';
 import {
     EdgeConnectionMemberRole,
     EdgeConnectionType,
-} from 'apps/api/src/domain/models/context/edge-connection.entity';
-import { DTO } from 'apps/api/src/types/DTO';
+} from '../../../domain/models/context/edge-connection.entity';
+import { DTO } from '../../../types/DTO';
 import { HasArangoDocumentDirectionAttributes } from '../types/HasArangoDocumentDirectionAttributes';
 
 type ArangoEdgeMemberContext = {

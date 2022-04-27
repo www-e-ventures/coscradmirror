@@ -1,17 +1,17 @@
-import { EdgeConnection } from 'apps/api/src/domain/models/context/edge-connection.entity';
-import { FreeMultilineContext } from 'apps/api/src/domain/models/context/free-multiline-context/free-multiline-context.entity';
-import { GeneralContext } from 'apps/api/src/domain/models/context/general-context/general-context.entity';
-import { PointContext } from 'apps/api/src/domain/models/context/point-context/point-context.entity';
-import { TimeRangeContext } from 'apps/api/src/domain/models/context/time-range-context/time-range-context.entity';
-import { EdgeConnectionContextType } from 'apps/api/src/domain/models/context/types/EdgeConnectionContextType';
-import { DTO } from 'apps/api/src/types/DTO';
 import {
+    EdgeConnection,
     EdgeConnectionMemberRole,
     EdgeConnectionType,
 } from '../../../domain/models/context/edge-connection.entity';
+import { FreeMultilineContext } from '../../../domain/models/context/free-multiline-context/free-multiline-context.entity';
+import { GeneralContext } from '../../../domain/models/context/general-context/general-context.entity';
 import { PageRangeContext } from '../../../domain/models/context/page-range-context/page-range.context.entity';
+import { PointContext } from '../../../domain/models/context/point-context/point-context.entity';
 import { TextFieldContext } from '../../../domain/models/context/text-field-context/text-field-context.entity';
+import { TimeRangeContext } from '../../../domain/models/context/time-range-context/time-range-context.entity';
+import { EdgeConnectionContextType } from '../../../domain/models/context/types/EdgeConnectionContextType';
 import { resourceTypes } from '../../../domain/types/resourceTypes';
+import { DTO } from '../../../types/DTO';
 
 const role = EdgeConnectionMemberRole.self;
 
