@@ -36,7 +36,10 @@ export class TagController {
 
         const allErrors = result.filter(isInternalError);
 
-        if (allErrors.length > 0) return res.status(httpStatusCodes.internalError).send(allErrors);
+        if (allErrors.length > 0)
+            return res
+                .status(httpStatusCodes.internalError)
+                .send(allErrors.reduce((msg, error) => msg + '\n' + error.toString(), ''));
 
         // Can we make the above condition a typeguard and avoid casting?
         const allTags = result as Tag[];
