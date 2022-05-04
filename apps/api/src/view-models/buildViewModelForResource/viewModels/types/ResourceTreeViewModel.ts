@@ -5,7 +5,7 @@ import { BookViewModel } from '../book.view-model';
 import { TagViewModel } from '../tag.view-model';
 import { ResourceTypeToViewModel } from './ResourceTypeToViewModel';
 
-export type TreeViewModel<TResourceType extends ResourceType> = {
+export type ResourceTreeViewModel<TResourceType extends ResourceType> = {
     resourceType: TResourceType;
 
     nodes: ResourceTree<ResourceTypeToViewModel[TResourceType]>[];
@@ -19,7 +19,7 @@ type ResourceTree<TViewModel extends BaseViewModel> = {
     children: ResourceTree<TViewModel>[];
 };
 
-const foo: TreeViewModel<typeof resourceTypes.book> = {
+const foo: ResourceTreeViewModel<typeof resourceTypes.book> = {
     resourceType: resourceTypes.book,
     nodes: [
         {
