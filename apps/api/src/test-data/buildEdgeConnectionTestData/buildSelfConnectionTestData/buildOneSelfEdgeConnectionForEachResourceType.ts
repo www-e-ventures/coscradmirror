@@ -11,10 +11,11 @@ import { TextFieldContext } from '../../../domain/models/context/text-field-cont
 import { TimeRangeContext } from '../../../domain/models/context/time-range-context/time-range-context.entity';
 import { EdgeConnectionContextType } from '../../../domain/models/context/types/EdgeConnectionContextType';
 import { resourceTypes } from '../../../domain/types/resourceTypes';
+import { DTO } from '../../../types/DTO';
 
 const role = EdgeConnectionMemberRole.self;
 
-const selfEdgeConnectionInstancesWithSpecificContext = [
+const edgeConnectionDTOs: Omit<DTO<EdgeConnection>, 'type' | 'id'>[] = [
     {
         note: 'This first 4 letters of this term form a syllable that indicates this is a plant ',
         members: [
@@ -166,7 +167,30 @@ const selfEdgeConnectionInstancesWithSpecificContext = [
             },
         ],
     },
-].map((partialDTO) => ({ ...partialDTO, type: EdgeConnectionType.self }));
+    {
+        note: 'this is a song',
+        members: [
+            {
+                role,
+                compositeIdentifier: {
+                    id: '1',
+                    type: resourceTypes.song,
+                },
+                context: new TimeRangeContext({
+                    timeRange: {
+                        inPoint: 300,
+                        outPoint: 500,
+                    },
+                    type: EdgeConnectionContextType.timeRange,
+                }),
+            },
+        ],
+    },
+];
+const selfEdgeConnectionInstancesWithSpecificContext = edgeConnectionDTOs.map((partialDTO) => ({
+    ...partialDTO,
+    type: EdgeConnectionType.self,
+}));
 
 const selfEdgeConnectionsWithGeneralContext = selfEdgeConnectionInstancesWithSpecificContext.map(
     (edgeConnection) => ({
