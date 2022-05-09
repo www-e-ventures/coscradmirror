@@ -5,6 +5,7 @@ const arangoResourceCollectionIDs = [
     'books',
     'photographs',
     'spatial_features',
+    'bibliographic_references',
 ] as const;
 
 export const arangoEdgeCollectionID = 'resource_edge_connections';
