@@ -1,149 +1,127 @@
-import BookBibliographicReferenceData from '../../../../../../domain/models/bibliographic-reference/entities/BookBibliographicReferenceData';
-import { EntityId } from '../../../../../../domain/types/ResourceId';
-import { resourceTypes } from '../../../../../../domain/types/resourceTypes';
 import { InternalError } from '../../../../../../lib/errors/InternalError';
 import { DTO } from '../../../../../../types/DTO';
-import { BookBibliographicReference } from '../../../../../models/bibliographic-reference/entities/book-bibliographic-reference.entity';
+import { JournalArticleBibliographicReference } from '../../../../../models/bibliographic-reference/entities/journal-article-bibliographic-reference.entity';
+import JournalArticleBibliographicReferenceData from '../../../../../models/bibliographic-reference/entities/JournalArticleBibliographicReferenceData';
 import { BibliographicReferenceType } from '../../../../../models/bibliographic-reference/types/BibliographicReferenceType';
+import { EntityId } from '../../../../../types/ResourceId';
+import { resourceTypes } from '../../../../../types/resourceTypes';
 import InvalidEntityDTOError from '../../../../errors/InvalidEntityDTOError';
 import { DomainModelValidatorInvalidTestCase } from '../../../types/DomainModelValidatorTestCase';
 import getValidBibliographicReferenceInstanceForTest from '../utils/getValidBibliographicReferenceInstanceForTest';
 
-const validDto = getValidBibliographicReferenceInstanceForTest(BibliographicReferenceType.book);
+const validDto = getValidBibliographicReferenceInstanceForTest(
+    BibliographicReferenceType.journalArticle
+);
 
 const buildTopLevelError = (id: EntityId, innerErrors: InternalError[]): InternalError =>
     new InvalidEntityDTOError(resourceTypes.bibliographicReference, id, innerErrors);
 
-export const buildBookBibliographicReferenceTestCases =
-    (): DomainModelValidatorInvalidTestCase<BookBibliographicReference>[] => [
+export const buildJournalArticleBibliographicReferenceTestCases =
+    (): DomainModelValidatorInvalidTestCase<JournalArticleBibliographicReference>[] => [
         {
-            description: 'The Book title is an empty string',
+            description: 'The Journal Article title is an empty string',
             invalidDTO: {
                 ...validDto,
                 data: {
                     ...validDto.data,
                     title: '',
-                } as DTO<BookBibliographicReferenceData>,
+                } as DTO<JournalArticleBibliographicReferenceData>,
             },
             expectedError: buildTopLevelError(validDto.id, []),
         },
         {
-            description: 'The Book creators array is empty',
+            description: 'The Journal Article creators array is empty',
             invalidDTO: {
                 ...validDto,
                 data: {
                     ...validDto.data,
                     creators: [],
                     // TODO remove cast
-                } as unknown as DTO<BookBibliographicReferenceData>,
+                } as unknown as DTO<JournalArticleBibliographicReferenceData>,
             },
             expectedError: buildTopLevelError(validDto.id, []),
         },
         {
-            description: 'The Book abstract is an empty string',
+            description: 'The Journal Article abstract is an empty string',
             invalidDTO: {
                 ...validDto,
                 data: {
                     ...validDto.data,
                     abstract: '',
                     // TODO remove cast
-                } as DTO<BookBibliographicReferenceData>,
+                } as DTO<JournalArticleBibliographicReferenceData>,
             },
             expectedError: buildTopLevelError(validDto.id, []),
         },
         {
-            description: 'The Book year is too big',
+            description: 'The Journal Article date is an empty string',
             invalidDTO: {
                 ...validDto,
                 data: {
                     ...validDto.data,
-                    year: 2100,
+                    issueDate: '',
                     // TODO remove cast
-                } as DTO<BookBibliographicReferenceData>,
+                } as DTO<JournalArticleBibliographicReferenceData>,
             },
             expectedError: buildTopLevelError(validDto.id, []),
         },
         {
-            description: 'The Book publisher is an empty string',
+            description: 'The Journal Article publication title is an empty string',
             invalidDTO: {
                 ...validDto,
                 data: {
                     ...validDto.data,
-                    publisher: '',
+                    publicationTitle: '',
                     // TODO remove cast
-                } as DTO<BookBibliographicReferenceData>,
+                } as DTO<JournalArticleBibliographicReferenceData>,
             },
             expectedError: buildTopLevelError(validDto.id, []),
         },
         {
-            description: 'The Book place is an empty string',
+            description: 'The Journal Article url is an empty string',
             invalidDTO: {
                 ...validDto,
                 data: {
                     ...validDto.data,
-                    place: '',
+                    url: '',
                     // TODO remove cast
-                } as DTO<BookBibliographicReferenceData>,
+                } as DTO<JournalArticleBibliographicReferenceData>,
             },
             expectedError: buildTopLevelError(validDto.id, []),
         },
         {
-            description: 'The Book url has an invalid protocol',
+            description: 'The Journal Article pages is an empty string',
             invalidDTO: {
                 ...validDto,
                 data: {
                     ...validDto.data,
-                    url: 'qttps://www.sample.com',
+                    pages: '',
                     // TODO remove cast
-                } as DTO<BookBibliographicReferenceData>,
+                } as DTO<JournalArticleBibliographicReferenceData>,
             },
             expectedError: buildTopLevelError(validDto.id, []),
         },
         {
-            description: 'The Book ISBN includes a letter in place of a numeric character',
+            description: 'The Journal Article issn is an empty string',
             invalidDTO: {
                 ...validDto,
                 data: {
                     ...validDto.data,
-                    isbn: '978-1-8k5811-34-6',
+                    issn: '',
                     // TODO remove cast
-                } as DTO<BookBibliographicReferenceData>,
+                } as DTO<JournalArticleBibliographicReferenceData>,
             },
             expectedError: buildTopLevelError(validDto.id, []),
         },
         {
-            description: 'The Book number of pages is not a positive integer',
+            description: 'The Journal Article doi is an empty string',
             invalidDTO: {
                 ...validDto,
                 data: {
                     ...validDto.data,
-                    numberOfPages: -34,
+                    doi: '',
                     // TODO remove cast
-                } as DTO<BookBibliographicReferenceData>,
-            },
-            expectedError: buildTopLevelError(validDto.id, []),
-        },
-        {
-            description: 'The Book number of pages is not a number',
-            invalidDTO: {
-                ...validDto,
-                data: {
-                    ...validDto.data,
-                    numberOfPages: '347',
-                    // TODO remove cast
-                } as unknown as DTO<BookBibliographicReferenceData>,
-            },
-            expectedError: buildTopLevelError(validDto.id, []),
-        },
-        {
-            description: 'The Book number of pages is infinite',
-            invalidDTO: {
-                ...validDto,
-                data: {
-                    ...validDto.data,
-                    numberOfPages: Infinity,
-                    // TODO remove cast
-                } as unknown as DTO<BookBibliographicReferenceData>,
+                } as DTO<JournalArticleBibliographicReferenceData>,
             },
             expectedError: buildTopLevelError(validDto.id, []),
         },
