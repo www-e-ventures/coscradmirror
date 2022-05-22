@@ -1,19 +1,20 @@
 import {
-    ArrayNotEmpty,
     IsInt,
     IsISBN,
+    IsNonEmptyArray,
     IsOptional,
     IsPositive,
     IsStringWithNonzeroLength,
     IsUrl,
     IsYear,
 } from '@coscrad/validation';
+import { IsNumber } from 'class-validator';
 import { DTO } from '../../../../types/DTO';
 import { isNullOrUndefined } from '../../../utilities/validation/is-null-or-undefined';
 import BaseDomainModel from '../../BaseDomainModel';
 import { IBibliographicReferenceData } from '../interfaces/IBibliographicReferenceData';
 import { BibliographicReferenceType } from '../types/BibliographicReferenceType';
-import Creator from '../types/Creator';
+import BibliographicReferenceCreator from './BibliographicReferenceCreator';
 
 export default class BookBibliographicReferenceData
     extends BaseDomainModel
@@ -24,8 +25,8 @@ export default class BookBibliographicReferenceData
     @IsStringWithNonzeroLength()
     readonly title: string;
 
-    @ArrayNotEmpty()
-    readonly creators: Creator[];
+    @IsNonEmptyArray()
+    readonly creators: BibliographicReferenceCreator[];
 
     @IsOptional()
     @IsStringWithNonzeroLength()
@@ -49,6 +50,7 @@ export default class BookBibliographicReferenceData
     readonly url?: string;
 
     @IsOptional()
+    @IsNumber({ allowInfinity: false })
     @IsInt()
     @IsPositive()
     readonly numberOfPages?: number;
@@ -64,7 +66,7 @@ export default class BookBibliographicReferenceData
 
         this.title = dto.title;
 
-        this.creators = dto.creators as Creator[];
+        this.creators = dto.creators as BibliographicReferenceCreator[];
 
         this.abstract = dto.abstract;
 

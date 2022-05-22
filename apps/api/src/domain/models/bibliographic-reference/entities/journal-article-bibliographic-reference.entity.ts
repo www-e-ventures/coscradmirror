@@ -3,21 +3,21 @@ import { resourceTypes } from '../../../types/resourceTypes';
 import { isNullOrUndefined } from '../../../utilities/validation/is-null-or-undefined';
 import { Resource } from '../../resource.entity';
 import { IBibliographicReference } from '../interfaces/IBibliographicReference';
-import BookBibliographicReferenceData from './BookBibliographicReferenceData';
+import JournalArticleBibliographicReferenceData from './JournalArticleBibliographicReferenceData';
 
-export class BookBibliographicReference
+export class JournalArticleBibliographicReference
     extends Resource
-    implements IBibliographicReference<BookBibliographicReferenceData>
+    implements IBibliographicReference<JournalArticleBibliographicReferenceData>
 {
     readonly type = resourceTypes.bibliographicReference;
 
-    readonly data: BookBibliographicReferenceData;
+    readonly data: JournalArticleBibliographicReferenceData;
 
-    constructor(dto: DTO<BookBibliographicReference>) {
+    constructor(dto: DTO<JournalArticleBibliographicReference>) {
         super({ ...dto, type: resourceTypes.bibliographicReference });
 
         if (isNullOrUndefined(dto)) return;
 
-        this.data = new BookBibliographicReferenceData(dto.data);
+        this.data = new JournalArticleBibliographicReferenceData(dto.data);
     }
 }
