@@ -6,6 +6,7 @@ import EmptyTimeRangeContextError from '../errors/context/EmptyTimeRangeContextE
 import InvalidChronologicallyOrderedTimeRangeError from '../errors/context/InvalidChronologicallyOrderedTimeRangeError';
 import InvalidEdgeConnectionContextError from '../errors/context/InvalidEdgeConnectionContextError';
 import NullOrUndefinedEdgeConnectionContextDTOError from '../errors/context/NullOrUndefinedEdgeConnectionContextDTOError';
+import validateSimpleInvariants from '../utilities/validateSimpleInvariants';
 import { Valid } from '../Valid';
 
 export const timeRangeContextValidator = (input: unknown): Valid | InternalError => {
@@ -15,6 +16,8 @@ export const timeRangeContextValidator = (input: unknown): Valid | InternalError
         );
 
     const allErrors: InternalError[] = [];
+
+    allErrors.push(...validateSimpleInvariants(TimeRangeContext, input));
 
     const { timeRange } = input as TimeRangeContext;
 

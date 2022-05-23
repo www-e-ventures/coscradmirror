@@ -8,6 +8,7 @@ import { EdgeConnectionContextType } from '../../../../models/context/types/Edge
 import { timeRangeContextValidator } from '../../../contextValidators/timeRangeContext.validator';
 import EmptyTimeRangeContextError from '../../../errors/context/EmptyTimeRangeContextError';
 import InvalidChronologicallyOrderedTimeRangeError from '../../../errors/context/InvalidChronologicallyOrderedTimeRangeError';
+import InvalidEdgeConnectionContextError from '../../../errors/context/InvalidEdgeConnectionContextError';
 import NullOrUndefinedEdgeConnectionContextDTOError from '../../../errors/context/NullOrUndefinedEdgeConnectionContextDTOError';
 import { ContextModelValidatorTestCase } from '../types/ContextModelValidatorTestCase';
 import createInvalidContextErrorFactory from './utilities/createInvalidContextErrorFactory';
@@ -43,6 +44,16 @@ export const buildTimeRangeTestCase = (): ContextModelValidatorTestCase<TimeRang
                 EdgeConnectionContextType.timeRange
                 // TODO remove cast
             ) as InternalError,
+        },
+        {
+            description: 'the context type is invalid',
+            invalidDTO: {
+                ...validDTO,
+                type: 'foobert' as EdgeConnectionContextType.timeRange,
+            },
+            expectedError: new InvalidEdgeConnectionContextError(
+                EdgeConnectionContextType.timeRange
+            ),
         },
         {
             description: 'the time range is empty',

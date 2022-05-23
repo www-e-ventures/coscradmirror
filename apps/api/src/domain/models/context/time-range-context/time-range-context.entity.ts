@@ -13,8 +13,12 @@ export class TimeRangeContext extends EdgeConnectionContext {
 
     timeRange: TimeRangeWithoutData;
 
-    constructor({ timeRange }: DTO<TimeRangeContext>) {
+    constructor(dto: DTO<TimeRangeContext>) {
         super();
+
+        if (!dto) return;
+
+        const { timeRange } = dto;
 
         // avoid side-effects
         this.timeRange = cloneToPlainObject(timeRange);
