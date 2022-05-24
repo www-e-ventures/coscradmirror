@@ -1,5 +1,5 @@
 import { InternalError } from '../../../lib/errors/InternalError';
-import { TimeRangeContext } from '../../models/context/time-range-context/time-range-context.entity';
+import { TimeRangeContext } from '../../models/context/time-range-context/entities/time-range-context.entity';
 import { EdgeConnectionContextType } from '../../models/context/types/EdgeConnectionContextType';
 import { isNullOrUndefined } from '../../utilities/validation/is-null-or-undefined';
 import EmptyTimeRangeContextError from '../errors/context/EmptyTimeRangeContextError';
@@ -17,8 +17,6 @@ export const timeRangeContextValidator = (input: unknown): Valid | InternalError
 
     const allErrors: InternalError[] = [];
 
-    allErrors.push(...validateSimpleInvariants(TimeRangeContext, input));
-
     const { timeRange } = input as TimeRangeContext;
 
     // Exit early if this fails, as further validation depends on this existing
@@ -27,6 +25,8 @@ export const timeRangeContextValidator = (input: unknown): Valid | InternalError
             EdgeConnectionContextType.timeRange,
             allErrors.concat(new EmptyTimeRangeContextError())
         );
+
+    allErrors.push(...validateSimpleInvariants(TimeRangeContext, input));
 
     const { inPoint, outPoint } = timeRange;
 

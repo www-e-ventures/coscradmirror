@@ -8,7 +8,7 @@ import {
     EdgeConnectionType,
 } from '../../../../../models/context/edge-connection.entity';
 import { PageRangeContext } from '../../../../../models/context/page-range-context/page-range.context.entity';
-import { TimeRangeContext } from '../../../../../models/context/time-range-context/time-range-context.entity';
+import { TimeRangeContext } from '../../../../../models/context/time-range-context/entities/time-range-context.entity';
 import { EdgeConnectionContextType } from '../../../../../models/context/types/EdgeConnectionContextType';
 import { resourceTypes } from '../../../../../types/resourceTypes';
 import BothMembersInEdgeConnectionHaveSameRoleError from '../../../../errors/context/edgeConnections/BothMembersInEdgeConnectionHaveSameRoleError';

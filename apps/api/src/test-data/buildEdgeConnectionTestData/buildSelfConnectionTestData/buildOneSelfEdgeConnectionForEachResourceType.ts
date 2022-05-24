@@ -8,7 +8,7 @@ import { GeneralContext } from '../../../domain/models/context/general-context/g
 import { PageRangeContext } from '../../../domain/models/context/page-range-context/page-range.context.entity';
 import { PointContext } from '../../../domain/models/context/point-context/point-context.entity';
 import { TextFieldContext } from '../../../domain/models/context/text-field-context/text-field-context.entity';
-import { TimeRangeContext } from '../../../domain/models/context/time-range-context/time-range-context.entity';
+import { TimeRangeContext } from '../../../domain/models/context/time-range-context/entities/time-range-context.entity';
 import { EdgeConnectionContextType } from '../../../domain/models/context/types/EdgeConnectionContextType';
 import { resourceTypes } from '../../../domain/types/resourceTypes';
 

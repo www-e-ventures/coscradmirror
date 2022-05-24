@@ -1,6 +1,6 @@
 import { InternalError } from '../../../../../../lib/errors/InternalError';
 import formatTimeRange from '../../../../../../view-models/presentation/formatTimeRange';
-import { TimeRangeWithoutData } from '../../../../../models/context/time-range-context/time-range-context.entity';
+import { TimeRangeWithoutData } from '../../../../../models/context/time-range-context/entities/time-range-context.entity';
 import { TimeBoundable } from '../../../../../models/interfaces/TimeBoundable';
 import { Resource } from '../../../../../models/resource.entity';
 

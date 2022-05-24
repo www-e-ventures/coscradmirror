@@ -4,7 +4,7 @@ import { DTO } from '../../../../types/DTO';
 import InconsistentTimeRangeError from '../../../domainModelValidators/errors/context/invalidContextStateErrors/timeRangeContext/InconsistentTimeRangeError';
 import { Valid } from '../../../domainModelValidators/Valid';
 import { resourceTypes } from '../../../types/resourceTypes';
-import { TimeRangeContext } from '../../context/time-range-context/time-range-context.entity';
+import { TimeRangeContext } from '../../context/time-range-context/entities/time-range-context.entity';
 import { Resource } from '../../resource.entity';
 import { Transcript } from './Transcript';
 

@@ -3,7 +3,7 @@ import { resourceTypes } from '../../../types/resourceTypes';
 import {
     TimeRangeContext,
     TimeRangeWithoutData,
-} from '../../context/time-range-context/time-range-context.entity';
+} from '../../context/time-range-context/entities/time-range-context.entity';
 import { EdgeConnectionContextType } from '../../context/types/EdgeConnectionContextType';
 import { ResourceModelContextStateValidatorInvalidTestCase } from '../resourceModelContextStateValidators.spec';
 import buildAllInvalidTestCasesForResource from '../utilities/buildAllInvalidTestCasesForResource';

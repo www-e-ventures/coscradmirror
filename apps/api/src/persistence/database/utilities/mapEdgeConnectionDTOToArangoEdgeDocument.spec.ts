@@ -5,7 +5,7 @@ import {
     EdgeConnectionType,
 } from '../../../domain/models/context/edge-connection.entity';
 import { PageRangeContext } from '../../../domain/models/context/page-range-context/page-range.context.entity';
-import { TimeRangeContext } from '../../../domain/models/context/time-range-context/time-range-context.entity';
+import { TimeRangeContext } from '../../../domain/models/context/time-range-context/entities/time-range-context.entity';
 import { EdgeConnectionContextType } from '../../../domain/models/context/types/EdgeConnectionContextType';
 import { resourceTypes } from '../../../domain/types/resourceTypes';
 import { DTO } from '../../../types/DTO';

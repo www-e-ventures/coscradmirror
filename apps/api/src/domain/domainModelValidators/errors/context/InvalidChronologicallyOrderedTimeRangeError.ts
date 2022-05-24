@@ -1,8 +1,8 @@
 import { InternalError } from '../../../../lib/errors/InternalError';
-import { TimeRangeWithoutData } from '../../../models/context/time-range-context/time-range-context.entity';
+import TimeRange from '../../../models/context/time-range-context/entities/TimeRange';
 
 export default class InvalidChronologicallyOrderedTimeRangeError extends InternalError {
-    constructor({ inPoint, outPoint }: TimeRangeWithoutData) {
+    constructor({ inPoint, outPoint }: Pick<TimeRange, 'inPoint' | 'outPoint'>) {
         const msg = [
             `Invalid chronological order in time range:`,
             `in: ${inPoint}`,

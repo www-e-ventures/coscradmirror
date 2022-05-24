@@ -1,9 +1,7 @@
 import { InternalError } from '../../../../../lib/errors/InternalError';
 import { DTO } from '../../../../../types/DTO';
-import {
-    TimeRangeContext,
-    TimeRangeWithoutData,
-} from '../../../../models/context/time-range-context/time-range-context.entity';
+import { TimeRangeContext } from '../../../../models/context/time-range-context/entities/time-range-context.entity';
+import TimeRange from '../../../../models/context/time-range-context/entities/TimeRange';
 import { EdgeConnectionContextType } from '../../../../models/context/types/EdgeConnectionContextType';
 import { timeRangeContextValidator } from '../../../contextValidators/timeRangeContext.validator';
 import EmptyTimeRangeContextError from '../../../errors/context/EmptyTimeRangeContextError';
@@ -23,7 +21,7 @@ const validDTO: DTO<TimeRangeContext> = {
 
 const topLevelErrorFactory = createInvalidContextErrorFactory(EdgeConnectionContextType.timeRange);
 
-const reversedTimeStamp: TimeRangeWithoutData = {
+const reversedTimeStamp: DTO<TimeRange> = {
     inPoint: validDTO.timeRange.outPoint,
     outPoint: validDTO.timeRange.inPoint,
 };
@@ -59,9 +57,20 @@ export const buildTimeRangeTestCase = (): ContextModelValidatorTestCase<TimeRang
             description: 'the time range is empty',
             invalidDTO: {
                 ...validDTO,
-                timeRange: null as TimeRangeWithoutData,
+                timeRange: null as TimeRange,
             },
             expectedError: topLevelErrorFactory([new EmptyTimeRangeContextError()]),
+        },
+        {
+            description: 'the in point is negative',
+            invalidDTO: {
+                ...validDTO,
+                timeRange: {
+                    inPoint: -100,
+                    outPoint: 200,
+                },
+            },
+            expectedError: topLevelErrorFactory([]),
         },
         {
             description: 'the inPoint and outPoint are in the wrong chronological order',
