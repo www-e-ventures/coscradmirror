@@ -1,14 +1,15 @@
 import { InternalError } from '../../../../../../lib/errors/InternalError';
+import { DTO } from '../../../../../../types/DTO';
 import formatTimeRange from '../../../../../../view-models/presentation/formatTimeRange';
-import { TimeRangeWithoutData } from '../../../../../models/context/time-range-context/entities/time-range-context.entity';
+import TimeRange from '../../../../../models/context/time-range-context/entities/TimeRange';
 import { TimeBoundable } from '../../../../../models/interfaces/TimeBoundable';
 import { Resource } from '../../../../../models/resource.entity';
 
 export default class InconsistentTimeRangeError extends InternalError {
-    constructor(timeRange: TimeRangeWithoutData, resource: TimeBoundable & Resource) {
+    constructor(timeRange: TimeRange, resource: TimeBoundable & Resource) {
         const [inPoint, outPoint] = resource.getTimeBounds();
 
-        const resourceTimeBounds: TimeRangeWithoutData = {
+        const resourceTimeBounds: DTO<TimeRange> = {
             inPoint,
             outPoint,
         };

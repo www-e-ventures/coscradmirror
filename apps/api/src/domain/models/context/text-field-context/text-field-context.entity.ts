@@ -1,8 +1,9 @@
 import { DTO } from '../../../../types/DTO';
-import { EdgeConnectionContext } from '../context.entity';
+import BaseDomainModel from '../../BaseDomainModel';
+import { IEdgeConnectionContext } from '../interfaces/IEdgeConnectionContext';
 import { EdgeConnectionContextType } from '../types/EdgeConnectionContextType';
 
-export class TextFieldContext extends EdgeConnectionContext {
+export class TextFieldContext extends BaseDomainModel implements IEdgeConnectionContext {
     readonly type = EdgeConnectionContextType.textField;
 
     // This is the key (field name) of the target text property on the model

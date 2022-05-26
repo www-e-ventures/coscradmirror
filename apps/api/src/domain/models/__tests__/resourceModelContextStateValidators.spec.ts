@@ -2,14 +2,14 @@ import { InternalError } from '../../../lib/errors/InternalError';
 import { Valid } from '../../domainModelValidators/Valid';
 import { ResourceType, resourceTypes } from '../../types/resourceTypes';
 import isContextAllowedForGivenResourceType from '../allowedContexts/isContextAllowedForGivenResourceType';
-import { EdgeConnectionContext } from '../context/context.entity';
+import { IEdgeConnectionContext } from '../context/interfaces/IEdgeConnectionContext';
 import { EdgeConnectionContextType } from '../context/types/EdgeConnectionContextType';
 import { Resource } from '../resource.entity';
 import buildResourceModelContextStateValidatorTestCases from './buildResourceModelContextStateValidatorTestCases';
 
 type ResourceAndContext<
     TResource extends Resource = Resource,
-    UContext extends EdgeConnectionContext = EdgeConnectionContext
+    UContext extends IEdgeConnectionContext = IEdgeConnectionContext
 > = {
     resource: TResource;
     context: UContext;
@@ -17,14 +17,14 @@ type ResourceAndContext<
 
 export type ResourceModelContextStateValidatorValidTestCase<
     TResource extends Resource = Resource,
-    UContext extends EdgeConnectionContext = EdgeConnectionContext
+    UContext extends IEdgeConnectionContext = IEdgeConnectionContext
 > = ResourceAndContext<TResource, UContext> & {
     description: string;
 };
 
 export type ResourceModelContextStateValidatorInvalidTestCase<
     TResource extends Resource = Resource,
-    UContext extends EdgeConnectionContext = EdgeConnectionContext
+    UContext extends IEdgeConnectionContext = IEdgeConnectionContext
 > = ResourceAndContext<TResource, UContext> & {
     description: string;
     expectedError: InternalError;

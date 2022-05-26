@@ -6,8 +6,11 @@ import BaseDomainModel from '../../../BaseDomainModel';
  * TODO Consolidate this with `MediaTimeRange`
  */
 export default class TimeRange extends BaseDomainModel {
+    // TODO Use `@IsNonNegativeFiniteNumber`
     @IsPositive()
     readonly inPoint: number;
+
+    // TODO Use `@IsNonNegativeFiniteNumber`
 
     @IsPositive()
     readonly outPoint: number;

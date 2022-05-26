@@ -7,7 +7,7 @@ import { EntityId } from '../types/ResourceId';
 import { ResourceType } from '../types/resourceTypes';
 import { getAllowedContextsForModel } from './allowedContexts/isContextAllowedForGivenResourceType';
 import BaseDomainModel from './BaseDomainModel';
-import { EdgeConnectionContext } from './context/context.entity';
+import { IEdgeConnectionContext } from './context/interfaces/IEdgeConnectionContext';
 import { EdgeConnectionContextType } from './context/types/EdgeConnectionContextType';
 import { HasEntityID } from './types/HasEntityId';
 import { ResourceCompositeIdentifier } from './types/ResourceCompositeIdentifier';
@@ -46,7 +46,7 @@ export abstract class Resource extends BaseDomainModel implements HasEntityID {
      * state of the resource. Therefore, this seems like a good place for this kind
      * of validation logic.
      */
-    validateContext(context: EdgeConnectionContext): Valid | InternalError {
+    validateContext(context: IEdgeConnectionContext): Valid | InternalError {
         const { type } = context;
 
         if (type === EdgeConnectionContextType.general) return Valid;

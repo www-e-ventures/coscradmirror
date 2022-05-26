@@ -1,14 +1,15 @@
-import { IsValidClassInstance } from '../../../../../../../../libs/validation/src';
-import cloneToPlainObject from '../../../../../lib/utilities/cloneToPlainObject';
+import { IsEnum, ValidateNested } from '@coscrad/validation';
 import { DTO } from '../../../../../types/DTO';
-import { EdgeConnectionContext } from '../../context.entity';
+import BaseDomainModel from '../../../BaseDomainModel';
+import { IEdgeConnectionContext } from '../../interfaces/IEdgeConnectionContext';
 import { EdgeConnectionContextType } from '../../types/EdgeConnectionContextType';
 import TimeRange from './TimeRange';
 
-export class TimeRangeContext extends EdgeConnectionContext {
+export class TimeRangeContext extends BaseDomainModel implements IEdgeConnectionContext {
+    @IsEnum(EdgeConnectionContextType)
     readonly type = EdgeConnectionContextType.timeRange;
 
-    @IsValidClassInstance(TimeRange)
+    @ValidateNested()
     timeRange: TimeRange;
 
     constructor(dto: DTO<TimeRangeContext>) {
@@ -16,9 +17,8 @@ export class TimeRangeContext extends EdgeConnectionContext {
 
         if (!dto) return;
 
-        const { timeRange } = dto;
+        const { timeRange: timeRangeDTO } = dto;
 
-        // avoid side-effects
-        this.timeRange = cloneToPlainObject(timeRange);
+        this.timeRange = new TimeRange(timeRangeDTO);
     }
 }

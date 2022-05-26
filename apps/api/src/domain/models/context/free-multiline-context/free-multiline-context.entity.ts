@@ -1,7 +1,8 @@
 import cloneToPlainObject from '../../../../lib/utilities/cloneToPlainObject';
 import { DTO } from '../../../../types/DTO';
+import BaseDomainModel from '../../BaseDomainModel';
 import { Line2D } from '../../spatial-feature/types/Coordinates/Line2d';
-import { EdgeConnectionContext } from '../context.entity';
+import { IEdgeConnectionContext } from '../interfaces/IEdgeConnectionContext';
 import { EdgeConnectionContextType } from '../types/EdgeConnectionContextType';
 
 /**
@@ -10,7 +11,7 @@ import { EdgeConnectionContextType } from '../types/EdgeConnectionContextType';
  * lines are subject to no topological constraints. Figure eights, spirographs,
  * zig-zags, and so on are allowed.
  */
-export class FreeMultilineContext extends EdgeConnectionContext {
+export class FreeMultilineContext extends BaseDomainModel implements IEdgeConnectionContext {
     readonly type = EdgeConnectionContextType.freeMultiline;
 
     readonly lines: Line2D[];
