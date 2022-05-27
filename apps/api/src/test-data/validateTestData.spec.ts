@@ -7,7 +7,11 @@ import { isValid, Valid } from '../domain/domainModelValidators/Valid';
 import { Category } from '../domain/models/categories/entities/category.entity';
 import { EdgeConnectionMemberRole } from '../domain/models/context/edge-connection.entity';
 import { Resource } from '../domain/models/resource.entity';
-import { isResourceType, ResourceType, ResourceTypeToInstance } from '../domain/types/ResourceType';
+import {
+    isResourceType,
+    ResourceType,
+    ResourceTypeToResourceModel,
+} from '../domain/types/ResourceType';
 import { isNullOrUndefined } from '../domain/utilities/validation/is-null-or-undefined';
 import isStringWithNonzeroLength from '../lib/utilities/isStringWithNonzeroLength';
 import { getArangoCollectionIDFromResourceType } from '../persistence/database/getArangoCollectionIDFromResourceType';
@@ -25,7 +29,7 @@ import buildTestData from './buildTestData';
  * utilities.
  */
 type InMemorySnapshotOfResourceDTOs = {
-    [K in keyof ResourceTypeToInstance]?: DTO<ResourceTypeToInstance>[K][];
+    [K in keyof ResourceTypeToResourceModel]?: DTO<ResourceTypeToResourceModel>[K][];
 };
 
 describe('buildTestData', () => {

@@ -186,6 +186,42 @@ const edgeConnectionDTOs: Omit<DTO<EdgeConnection>, 'type' | 'id'>[] = [
             },
         ],
     },
+    {
+        note: 'this is an awesome show',
+        members: [
+            {
+                role,
+                compositeIdentifier: {
+                    id: '1',
+                    type: resourceTypes.mediaItem,
+                },
+                context: new TextFieldContext({
+                    target: 'title',
+                    charRange: [0, 2],
+                    type: EdgeConnectionContextType.textField,
+                }),
+            },
+        ],
+    },
+    {
+        note: 'important clip from the show',
+        members: [
+            {
+                role,
+                compositeIdentifier: {
+                    id: '1',
+                    type: resourceTypes.mediaItem,
+                },
+                context: new TimeRangeContext({
+                    type: EdgeConnectionContextType.timeRange,
+                    timeRange: {
+                        inPoint: 650,
+                        outPoint: 1230,
+                    },
+                }),
+            },
+        ],
+    },
 ];
 const selfEdgeConnectionInstancesWithSpecificContext = edgeConnectionDTOs.map((partialDTO) => ({
     ...partialDTO,

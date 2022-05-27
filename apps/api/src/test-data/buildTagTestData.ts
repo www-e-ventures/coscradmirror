@@ -131,6 +131,10 @@ const allTagsDTOs: DTO<Tag>[] = [
                 type: CategorizableType.note,
                 id: '1',
             },
+            {
+                type: resourceTypes.mediaItem,
+                id: '1',
+            },
         ],
     },
 ];

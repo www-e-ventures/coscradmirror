@@ -2,6 +2,7 @@ import { IBibliographicReference } from '../models/bibliographic-reference/inter
 import { Book } from '../models/book/entities/book.entity';
 import { Category } from '../models/categories/entities/category.entity';
 import { EdgeConnection } from '../models/context/edge-connection.entity';
+import { MediaItem } from '../models/media-item/entities/media-item.entity';
 import { Photograph } from '../models/photograph/entities/photograph.entity';
 import { Song } from '../models/song/song.entity';
 import { ISpatialFeature } from '../models/spatial-feature/ISpatialFeature';
@@ -19,13 +20,14 @@ export enum ResourceType {
     spatialFeature = 'spatialFeature',
     bibliographicReference = 'bibliographicReference',
     song = 'song',
+    mediaItem = 'mediaItem',
 }
 
 export const isResourceType = (input: unknown): input is ResourceType =>
     Object.values(ResourceType).includes(input as ResourceType);
 
 // We should use this for type inference a few places.
-export type ResourceTypeToInstance = {
+export type ResourceTypeToResourceModel = {
     term: Term;
     vocabularyList: VocabularyList;
     transcribedAudio: TranscribedAudio;
@@ -34,13 +36,14 @@ export type ResourceTypeToInstance = {
     spatialFeature: ISpatialFeature;
     bibliographicReference: IBibliographicReference;
     song: Song;
+    mediaItem: MediaItem;
 };
 
 /**
  * This represents the state of all domain models, excluding their `Connections`
  */
 export type InMemorySnapshotOfResources = {
-    [K in ResourceType]?: ResourceTypeToInstance[K][];
+    [K in ResourceType]?: ResourceTypeToResourceModel[K][];
 };
 
 export type InMemorySnapshot = {

@@ -29,7 +29,8 @@ const resourceTypesThatCurrentlyOnlySupportGeneralContext =
     getResourceTypesThatOnlySupportGeneralContext();
 
 const generateComprehensiveDualEdgeConnectionTestData = (
-    uniqueIdOffset: number
+    uniqueIdOffset: number,
+    resourceTypesThatHaveBeenManuallyGenerated: ResourceType[]
 ): EdgeConnection[] => {
     const validSelfMembers = buildOneSelfEdgeConnectionForEachResourceType(uniqueIdOffset)
         .flatMap(({ members }) => members)
@@ -48,7 +49,11 @@ const generateComprehensiveDualEdgeConnectionTestData = (
                 ) || member.context.type !== EdgeConnectionContextType.general
         );
 
-    const oneToMemberOfEachResourceType = Object.values(ResourceType).reduce(
+    const resourceTypesRequiringDataGeneration = Object.values(ResourceType).filter(
+        (resourceType) => !resourceTypesThatHaveBeenManuallyGenerated.includes(resourceType)
+    );
+
+    const oneToMemberOfEachResourceType = resourceTypesRequiringDataGeneration.reduce(
         (allToMembers: EdgeConnectionMember[], resourceType) => {
             const firstSelfMemberOfGivenType = validSelfMembers.find(
                 ({ compositeIdentifier: { type } }) => type === resourceType
@@ -91,7 +96,11 @@ const generateComprehensiveDualEdgeConnectionTestData = (
 };
 
 export default (uniqueIdOffset: number): EdgeConnection[] => [
-    ...generateComprehensiveDualEdgeConnectionTestData(uniqueIdOffset),
+    /**
+     * TODO [https://www.pivotaltracker.com/story/show/182302542]
+     * "Strangle out" auto generation of test data.
+     */
+    ...generateComprehensiveDualEdgeConnectionTestData(uniqueIdOffset, [ResourceType.mediaItem]),
     ...buildOneDualEdgeConnectionForEveryContextType(),
     ...buildOneFromConnectionForInstanceOfEachResourceType(),
     ...buildOneToConnectionForInstanceOfEachResourceType(),

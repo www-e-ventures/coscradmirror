@@ -1,7 +1,7 @@
 import buildTestData from '../../../../../test-data/buildTestData';
-import { ResourceType, ResourceTypeToInstance } from '../../../../types/ResourceType';
+import { ResourceType, ResourceTypeToResourceModel } from '../../../../types/ResourceType';
 
 export default <TResourceType extends ResourceType>(
     ResourceType: TResourceType
-): ResourceTypeToInstance[TResourceType] =>
-    buildTestData().resources[ResourceType][0] as ResourceTypeToInstance[TResourceType];
+): ResourceTypeToResourceModel[TResourceType] =>
+    buildTestData().resources[ResourceType][0] as ResourceTypeToResourceModel[TResourceType];
