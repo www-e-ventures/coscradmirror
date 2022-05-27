@@ -164,6 +164,115 @@ Array [
       },
     ],
   },
+  Object {
+    "id": "3101",
+    "note": "this selection from the media item portrays the events in the book",
+    "relatedResources": Array [
+      Object {
+        "compositeIdentifier": Object {
+          "id": "1",
+          "type": "mediaItem",
+        },
+        "context": Object {
+          "timeRange": Object {
+            "inPoint": 300,
+            "outPoint": 1800,
+          },
+          "type": "timeRange",
+        },
+        "role": "to",
+      },
+      Object {
+        "compositeIdentifier": Object {
+          "id": "24",
+          "type": "book",
+        },
+        "context": Object {
+          "pageIdentifiers": Array [
+            "ix",
+          ],
+          "type": "pageRange",
+        },
+        "role": "from",
+      },
+    ],
+    "tags": Array [],
+  },
+]
+`;
+
+exports[`When querying for edge connections GET /connections/forResource when the composite id for the resource is valid for a resource of type: mediaItem should return the expected result 1`] = `
+Array [
+  Object {
+    "id": "3001",
+    "note": "this media item mentions a word in the term",
+    "relatedResources": Array [
+      Object {
+        "compositeIdentifier": Object {
+          "id": "1",
+          "type": "mediaItem",
+        },
+        "context": Object {
+          "timeRange": Object {
+            "inPoint": 100,
+            "outPoint": 1200,
+          },
+          "type": "timeRange",
+        },
+        "role": "from",
+      },
+      Object {
+        "compositeIdentifier": Object {
+          "id": "2",
+          "type": "term",
+        },
+        "context": Object {
+          "charRange": Array [
+            1,
+            4,
+          ],
+          "target": "term",
+          "type": "textField",
+        },
+        "role": "to",
+      },
+    ],
+    "tags": Array [],
+  },
+  Object {
+    "id": "3101",
+    "note": "this selection from the media item portrays the events in the book",
+    "relatedResources": Array [
+      Object {
+        "compositeIdentifier": Object {
+          "id": "1",
+          "type": "mediaItem",
+        },
+        "context": Object {
+          "timeRange": Object {
+            "inPoint": 300,
+            "outPoint": 1800,
+          },
+          "type": "timeRange",
+        },
+        "role": "to",
+      },
+      Object {
+        "compositeIdentifier": Object {
+          "id": "24",
+          "type": "book",
+        },
+        "context": Object {
+          "pageIdentifiers": Array [
+            "ix",
+          ],
+          "type": "pageRange",
+        },
+        "role": "from",
+      },
+    ],
+    "tags": Array [],
+  },
 ]
 `;
 
@@ -511,6 +620,42 @@ Array [
           "type": "textField",
         },
         "role": "from",
+      },
+    ],
+    "tags": Array [],
+  },
+  Object {
+    "id": "3001",
+    "note": "this media item mentions a word in the term",
+    "relatedResources": Array [
+      Object {
+        "compositeIdentifier": Object {
+          "id": "1",
+          "type": "mediaItem",
+        },
+        "context": Object {
+          "timeRange": Object {
+            "inPoint": 100,
+            "outPoint": 1200,
+          },
+          "type": "timeRange",
+        },
+        "role": "from",
+      },
+      Object {
+        "compositeIdentifier": Object {
+          "id": "2",
+          "type": "term",
+        },
+        "context": Object {
+          "charRange": Array [
+            1,
+            4,
+          ],
+          "target": "term",
+          "type": "textField",
+        },
+        "role": "to",
       },
     ],
     "tags": Array [],
@@ -933,15 +1078,20 @@ Array [
   },
   Object {
     "id": "11",
-    "note": "This first 4 letters of this term form a syllable that indicates this is a plant ",
+    "note": "this is an awesome show",
     "relatedResources": Array [
       Object {
         "compositeIdentifier": Object {
-          "id": "2",
-          "type": "term",
+          "id": "1",
+          "type": "mediaItem",
         },
         "context": Object {
-          "type": "general",
+          "charRange": Array [
+            0,
+            2,
+          ],
+          "target": "title",
+          "type": "textField",
         },
         "role": "self",
       },
@@ -955,6 +1105,44 @@ Array [
   },
   Object {
     "id": "12",
+    "note": "important clip from the show",
+    "relatedResources": Array [
+      Object {
+        "compositeIdentifier": Object {
+          "id": "1",
+          "type": "mediaItem",
+        },
+        "context": Object {
+          "timeRange": Object {
+            "inPoint": 650,
+            "outPoint": 1230,
+          },
+          "type": "timeRange",
+        },
+        "role": "self",
+      },
+    ],
+    "tags": Array [],
+  },
+  Object {
+    "id": "13",
+    "note": "This first 4 letters of this term form a syllable that indicates this is a plant ",
+    "relatedResources": Array [
+      Object {
+        "compositeIdentifier": Object {
+          "id": "2",
+          "type": "term",
+        },
+        "context": Object {
+          "type": "general",
+        },
+        "role": "self",
+      },
+    ],
+    "tags": Array [],
+  },
+  Object {
+    "id": "14",
     "note": "This page is about bears",
     "relatedResources": Array [
       Object {
@@ -971,7 +1159,7 @@ Array [
     "tags": Array [],
   },
   Object {
-    "id": "13",
+    "id": "15",
     "note": "This is the first letter of the list name",
     "relatedResources": Array [
       Object {
@@ -988,7 +1176,7 @@ Array [
     "tags": Array [],
   },
   Object {
-    "id": "14",
+    "id": "16",
     "note": "there is a placename for this point at the base of the mountain",
     "relatedResources": Array [
       Object {
@@ -1005,7 +1193,7 @@ Array [
     "tags": Array [],
   },
   Object {
-    "id": "15",
+    "id": "17",
     "note": "this clip talks about songs",
     "relatedResources": Array [
       Object {
@@ -1022,7 +1210,7 @@ Array [
     "tags": Array [],
   },
   Object {
-    "id": "16",
+    "id": "18",
     "note": "this is the stem of the flower",
     "relatedResources": Array [
       Object {
@@ -1039,7 +1227,7 @@ Array [
     "tags": Array [],
   },
   Object {
-    "id": "17",
+    "id": "19",
     "note": "this is the base of the flower",
     "relatedResources": Array [
       Object {
@@ -1056,7 +1244,7 @@ Array [
     "tags": Array [],
   },
   Object {
-    "id": "18",
+    "id": "20",
     "note": "this section is the best part of an illustrated book about birds",
     "relatedResources": Array [
       Object {
@@ -1073,7 +1261,7 @@ Array [
     "tags": Array [],
   },
   Object {
-    "id": "19",
+    "id": "21",
     "note": "found this in the archives",
     "relatedResources": Array [
       Object {
@@ -1090,13 +1278,47 @@ Array [
     "tags": Array [],
   },
   Object {
-    "id": "20",
+    "id": "22",
     "note": "this is a song",
     "relatedResources": Array [
       Object {
         "compositeIdentifier": Object {
           "id": "1",
           "type": "song",
+        },
+        "context": Object {
+          "type": "general",
+        },
+        "role": "self",
+      },
+    ],
+    "tags": Array [],
+  },
+  Object {
+    "id": "23",
+    "note": "this is an awesome show",
+    "relatedResources": Array [
+      Object {
+        "compositeIdentifier": Object {
+          "id": "1",
+          "type": "mediaItem",
+        },
+        "context": Object {
+          "type": "general",
+        },
+        "role": "self",
+      },
+    ],
+    "tags": Array [],
+  },
+  Object {
+    "id": "24",
+    "note": "important clip from the show",
+    "relatedResources": Array [
+      Object {
+        "compositeIdentifier": Object {
+          "id": "1",
+          "type": "mediaItem",
         },
         "context": Object {
           "type": "general",
@@ -1429,6 +1651,76 @@ Array [
     ],
     "tags": Array [],
   },
+  Object {
+    "id": "3001",
+    "note": "this media item mentions a word in the term",
+    "relatedResources": Array [
+      Object {
+        "compositeIdentifier": Object {
+          "id": "1",
+          "type": "mediaItem",
+        },
+        "context": Object {
+          "timeRange": Object {
+            "inPoint": 100,
+            "outPoint": 1200,
+          },
+          "type": "timeRange",
+        },
+        "role": "from",
+      },
+      Object {
+        "compositeIdentifier": Object {
+          "id": "2",
+          "type": "term",
+        },
+        "context": Object {
+          "charRange": Array [
+            1,
+            4,
+          ],
+          "target": "term",
+          "type": "textField",
+        },
+        "role": "to",
+      },
+    ],
+    "tags": Array [],
+  },
+  Object {
+    "id": "3101",
+    "note": "this selection from the media item portrays the events in the book",
+    "relatedResources": Array [
+      Object {
+        "compositeIdentifier": Object {
+          "id": "1",
+          "type": "mediaItem",
+        },
+        "context": Object {
+          "timeRange": Object {
+            "inPoint": 300,
+            "outPoint": 1800,
+          },
+          "type": "timeRange",
+        },
+        "role": "to",
+      },
+      Object {
+        "compositeIdentifier": Object {
+          "id": "24",
+          "type": "book",
+        },
+        "context": Object {
+          "pageIdentifiers": Array [
+            "ix",
+          ],
+          "type": "pageRange",
+        },
+        "role": "from",
+      },
+    ],
+    "tags": Array [],
+  },
 ]
 `;
 
@@ -1457,7 +1749,7 @@ Array [
     ],
   },
   Object {
-    "id": "19",
+    "id": "21",
     "note": "found this in the archives",
     "relatedResources": Array [
       Object {
@@ -1519,7 +1811,7 @@ Array [
     "tags": Array [],
   },
   Object {
-    "id": "12",
+    "id": "14",
     "note": "This page is about bears",
     "relatedResources": Array [
       Object {
@@ -1536,13 +1828,100 @@ Array [
     "tags": Array [],
   },
   Object {
-    "id": "18",
+    "id": "20",
     "note": "this section is the best part of an illustrated book about birds",
     "relatedResources": Array [
       Object {
         "compositeIdentifier": Object {
           "id": "24",
           "type": "book",
+        },
+        "context": Object {
+          "type": "general",
+        },
+        "role": "self",
+      },
+    ],
+    "tags": Array [],
+  },
+]
+`;
+
+exports[`When querying for edge connections GET /connections/selfNotes when the resource composite id is valid for a resource of type: mediaItem should return the expected result 1`] = `
+Array [
+  Object {
+    "id": "11",
+    "note": "this is an awesome show",
+    "relatedResources": Array [
+      Object {
+        "compositeIdentifier": Object {
+          "id": "1",
+          "type": "mediaItem",
+        },
+        "context": Object {
+          "charRange": Array [
+            0,
+            2,
+          ],
+          "target": "title",
+          "type": "textField",
+        },
+        "role": "self",
+      },
+    ],
+    "tags": Array [
+      Object {
+        "id": "1",
+        "label": "plants",
+      },
+    ],
+  },
+  Object {
+    "id": "12",
+    "note": "important clip from the show",
+    "relatedResources": Array [
+      Object {
+        "compositeIdentifier": Object {
+          "id": "1",
+          "type": "mediaItem",
+        },
+        "context": Object {
+          "timeRange": Object {
+            "inPoint": 650,
+            "outPoint": 1230,
+          },
+          "type": "timeRange",
+        },
+        "role": "self",
+      },
+    ],
+    "tags": Array [],
+  },
+  Object {
+    "id": "23",
+    "note": "this is an awesome show",
+    "relatedResources": Array [
+      Object {
+        "compositeIdentifier": Object {
+          "id": "1",
+          "type": "mediaItem",
+        },
+        "context": Object {
+          "type": "general",
+        },
+        "role": "self",
+      },
+    ],
+    "tags": Array [],
+  },
+  Object {
+    "id": "24",
+    "note": "important clip from the show",
+    "relatedResources": Array [
+      Object {
+        "compositeIdentifier": Object {
+          "id": "1",
+          "type": "mediaItem",
         },
         "context": Object {
           "type": "general",
@@ -1621,7 +2000,7 @@ Array [
     ],
   },
   Object {
-    "id": "16",
+    "id": "18",
     "note": "this is the stem of the flower",
     "relatedResources": Array [
       Object {
@@ -1638,7 +2017,7 @@ Array [
     "tags": Array [],
   },
   Object {
-    "id": "17",
+    "id": "19",
     "note": "this is the base of the flower",
     "relatedResources": Array [
       Object {
@@ -1681,7 +2060,7 @@ Array [
     "tags": Array [],
   },
   Object {
-    "id": "20",
+    "id": "22",
     "note": "this is a song",
     "relatedResources": Array [
       Object {
@@ -1720,7 +2099,7 @@ Array [
     "tags": Array [],
   },
   Object {
-    "id": "14",
+    "id": "16",
     "note": "there is a placename for this point at the base of the mountain",
     "relatedResources": Array [
       Object {
@@ -1769,7 +2148,7 @@ Array [
     ],
   },
   Object {
-    "id": "11",
+    "id": "13",
     "note": "This first 4 letters of this term form a syllable that indicates this is a plant ",
     "relatedResources": Array [
       Object {
@@ -1783,12 +2162,7 @@ Array [
         "role": "self",
       },
     ],
-    "tags": Array [
-      Object {
-        "id": "1",
-        "label": "plants",
-      },
-    ],
+    "tags": Array [],
   },
 ]
 `;
@@ -1822,7 +2196,7 @@ Array [
     ],
   },
   Object {
-    "id": "15",
+    "id": "17",
     "note": "this clip talks about songs",
     "relatedResources": Array [
       Object {
@@ -1871,7 +2245,7 @@ Array [
     ],
   },
   Object {
-    "id": "13",
+    "id": "15",
     "note": "This is the first letter of the list name",
     "relatedResources": Array [
       Object {
