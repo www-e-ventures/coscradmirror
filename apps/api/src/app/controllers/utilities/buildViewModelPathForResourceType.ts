@@ -1,8 +1,8 @@
-import { ResourceType, resourceTypes } from '../../../domain/types/resourceTypes';
+import { ResourceType } from '../../../domain/types/ResourceType';
 
 // For irregular plural forms or forms that lead to awkward grammar
 const exceptions: Partial<Record<ResourceType, string>> = {
-    [resourceTypes.transcribedAudio]: 'transcribedAudioItems',
+    [ResourceType.transcribedAudio]: 'transcribedAudioItems',
 };
 
 export default (resourceType: ResourceType): string =>

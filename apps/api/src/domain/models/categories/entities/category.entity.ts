@@ -6,13 +6,13 @@ import { Valid } from '../../../domainModelValidators/Valid';
 import { HasEntityIdAndLabel } from '../../../interfaces/HasEntityIdAndLabel';
 import { ValidatesExternalState } from '../../../interfaces/ValidatesExternalState';
 import { EntityId } from '../../../types/ResourceId';
-import { InMemorySnapshot } from '../../../types/resourceTypes';
+import { InMemorySnapshot } from '../../../types/ResourceType';
 import validateEntityReferencesAgainstExternalState from '../../../utilities/validation/validateEntityReferencesAgainstExternalState';
 import BaseDomainModel from '../../BaseDomainModel';
 import ChildCategoryDoesNotExistError from '../errors/ChildCategoryDoesNotExistError';
 import InvalidExternalReferenceInCategoryError from '../errors/InvalidExternalReferenceInCategoryError';
 import InvalidExternalStateForCategoryError from '../errors/InvalidExternalStateForCategoryError';
-import { ResourceOrNoteCompositeIdentifier } from '../types/ResourceOrNoteCompositeIdentifier';
+import { CategorizableCompositeIdentifier } from '../types/ResourceOrNoteCompositeIdentifier';
 
 export class Category
     extends BaseDomainModel
@@ -22,7 +22,7 @@ export class Category
 
     label: string;
 
-    members: ResourceOrNoteCompositeIdentifier[];
+    members: CategorizableCompositeIdentifier[];
 
     // These are `Category` IDs for the children categories of this category
     childrenIDs: EntityId[];
@@ -45,7 +45,7 @@ export class Category
         const memberReferenceValidationResult = validateEntityReferencesAgainstExternalState(
             externalState,
             this.members,
-            (missing: ResourceOrNoteCompositeIdentifier[]) =>
+            (missing: CategorizableCompositeIdentifier[]) =>
                 new InvalidExternalReferenceInCategoryError(this, missing)
         );
 

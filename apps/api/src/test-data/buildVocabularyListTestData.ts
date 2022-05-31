@@ -1,6 +1,6 @@
 import { VocabularyList } from '../domain/models/vocabulary-list/entities/vocabulary-list.entity';
 import { DropboxOrCheckbox } from '../domain/models/vocabulary-list/types/dropbox-or-checkbox';
-import { resourceTypes } from '../domain/types/resourceTypes';
+import { ResourceType } from '../domain/types/ResourceType';
 
 const vocabularyListDTOs = [
     // Vocabulary List 1
@@ -64,5 +64,5 @@ const vocabularyListDTOs = [
  */
 export default (): VocabularyList[] =>
     vocabularyListDTOs.map(
-        (dto) => new VocabularyList({ ...dto, type: resourceTypes.vocabularyList })
+        (dto) => new VocabularyList({ ...dto, type: ResourceType.vocabularyList })
     );

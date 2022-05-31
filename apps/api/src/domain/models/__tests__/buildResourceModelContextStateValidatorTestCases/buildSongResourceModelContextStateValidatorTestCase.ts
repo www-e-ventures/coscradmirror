@@ -1,5 +1,5 @@
 import InconsistentTimeRangeError from '../../../domainModelValidators/errors/context/invalidContextStateErrors/timeRangeContext/InconsistentTimeRangeError';
-import { resourceTypes } from '../../../types/resourceTypes';
+import { ResourceType } from '../../../types/ResourceType';
 import {
     TimeRangeContext,
     TimeRangeWithoutData,
@@ -8,8 +8,8 @@ import { EdgeConnectionContextType } from '../../context/types/EdgeConnectionCon
 import buildAllInvalidTestCasesForResource from '../utilities/buildAllInconsistentContextTypeTestCases';
 import buildAllValidTestCasesForResource from '../utilities/buildAllValidTestCasesForResource';
 
-const validCases = buildAllValidTestCasesForResource(resourceTypes.song);
-const inconsistentContextTypeTestCases = buildAllInvalidTestCasesForResource(resourceTypes.song);
+const validCases = buildAllValidTestCasesForResource(ResourceType.song);
+const inconsistentContextTypeTestCases = buildAllInvalidTestCasesForResource(ResourceType.song);
 const validSongStartingPoint = 100;
 const validSong = validCases[0].resource.clone({
     startMilliseconds: validSongStartingPoint,

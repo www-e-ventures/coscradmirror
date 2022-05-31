@@ -1,6 +1,6 @@
 import FreeMultilineContextOutOfBoundsError from '../../../domainModelValidators/errors/context/invalidContextStateErrors/freeMultilineContext/FreeMultilineContextOutOfBoundsError';
 import PointContextOutOfBoundsError from '../../../domainModelValidators/errors/context/invalidContextStateErrors/pointContext/PointContextOutOfBoundsError';
-import { resourceTypes } from '../../../types/resourceTypes';
+import { ResourceType } from '../../../types/ResourceType';
 import { FreeMultilineContext } from '../../context/free-multiline-context/free-multiline-context.entity';
 import { PointContext } from '../../context/point-context/point-context.entity';
 import { EdgeConnectionContextType } from '../../context/types/EdgeConnectionContextType';
@@ -8,7 +8,7 @@ import { ResourceModelContextStateValidatorInvalidTestCase } from '../resourceMo
 import buildAllInvalidTestCasesForResource from '../utilities/buildAllInconsistentContextTypeTestCases';
 import buildAllValidTestCasesForResource from '../utilities/buildAllValidTestCasesForResource';
 
-const validCases = buildAllValidTestCasesForResource(resourceTypes.photograph);
+const validCases = buildAllValidTestCasesForResource(ResourceType.photograph);
 
 const validPhotograph = validCases[0].resource.clone({
     dimensions: {
@@ -18,7 +18,7 @@ const validPhotograph = validCases[0].resource.clone({
 });
 
 const invalidCases: ResourceModelContextStateValidatorInvalidTestCase[] = [
-    ...buildAllInvalidTestCasesForResource(resourceTypes.photograph),
+    ...buildAllInvalidTestCasesForResource(ResourceType.photograph),
     {
         description: `the 2d point is outside the horizontal bounds of the photograph`,
         resource: validPhotograph,

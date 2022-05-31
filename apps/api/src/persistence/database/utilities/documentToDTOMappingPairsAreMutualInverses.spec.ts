@@ -6,7 +6,7 @@ import {
 import { PageRangeContext } from '../../../domain/models/context/page-range-context/page-range.context.entity';
 import { EdgeConnectionContextType } from '../../../domain/models/context/types/EdgeConnectionContextType';
 import { HasEntityID } from '../../../domain/models/types/HasEntityId';
-import { resourceTypes } from '../../../domain/types/resourceTypes';
+import { ResourceType } from '../../../domain/types/ResourceType';
 import buildTestData from '../../../test-data/buildTestData';
 import { DTO } from '../../../types/DTO';
 import { ArangoEdgeDocument } from '../types/ArangoEdgeDocument';
@@ -40,7 +40,7 @@ const edgeConnections: DTO<EdgeConnection>[] = [
                     pageIdentifiers: ['134', 'ix'],
                 }),
                 compositeIdentifier: {
-                    type: resourceTypes.book,
+                    type: ResourceType.book,
                     id: '5353',
                 },
             },

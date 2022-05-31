@@ -1,4 +1,4 @@
-import { ResourceType, ResourceTypeToInstance } from '../../../types/resourceTypes';
+import { ResourceType, ResourceTypeToInstance } from '../../../types/ResourceType';
 import { getAllowedContextsForModel } from '../../allowedContexts/isContextAllowedForGivenResourceType';
 import { ResourceModelContextStateValidatorValidTestCase } from '../resourceModelContextStateValidators.spec';
 import getValidResourceAndContextPairForTest from './getValidResourceAndContextPairForTest';

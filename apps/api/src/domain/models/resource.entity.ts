@@ -4,7 +4,7 @@ import { DTO } from '../../types/DTO';
 import DisallowedContextTypeForResourceError from '../domainModelValidators/errors/context/invalidContextStateErrors/DisallowedContextTypeForResourceError';
 import { Valid } from '../domainModelValidators/Valid';
 import { EntityId } from '../types/ResourceId';
-import { ResourceType } from '../types/resourceTypes';
+import { ResourceType } from '../types/ResourceType';
 import { getAllowedContextsForModel } from './allowedContexts/isContextAllowedForGivenResourceType';
 import BaseDomainModel from './BaseDomainModel';
 import { EdgeConnectionContext } from './context/context.entity';

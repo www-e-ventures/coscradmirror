@@ -1,10 +1,10 @@
 import { Song } from '../domain/models/song/song.entity';
-import { resourceTypes } from '../domain/types/resourceTypes';
+import { ResourceType } from '../domain/types/ResourceType';
 
 export default (): Song[] =>
     [
         {
-            type: resourceTypes.song,
+            type: ResourceType.song,
             title: 'Song title in language',
             titleEnglish: 'Mary had a little lamb',
             lyrics: 'Mary had a little lamb, little lamb.',
@@ -19,9 +19,11 @@ export default (): Song[] =>
                 },
             ],
         },
-    ]
-        .map((partialDTO, index) => ({
-            ...partialDTO,
-            id: `${index + 1}`,
-        }))
-        .map((dto) => new Song(dto));
+    ].map(
+        (partialDTO, index) =>
+            new Song({
+                ...partialDTO,
+                id: `${index + 1}`,
+                type: ResourceType.song,
+            })
+    );

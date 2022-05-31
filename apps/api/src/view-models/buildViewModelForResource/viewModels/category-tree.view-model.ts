@@ -1,5 +1,5 @@
 import { Category } from '../../../domain/models/categories/entities/category.entity';
-import { ResourceOrNoteCompositeIdentifier } from '../../../domain/models/categories/types/ResourceOrNoteCompositeIdentifier';
+import { CategorizableCompositeIdentifier } from '../../../domain/models/categories/types/ResourceOrNoteCompositeIdentifier';
 import { EntityId } from '../../../domain/types/ResourceId';
 import cloneToPlainObject from '../../../lib/utilities/cloneToPlainObject';
 import { BaseViewModel } from './base.view-model';
@@ -11,7 +11,7 @@ export class CateogryTreeViewModel extends BaseViewModel {
 
     readonly label: string;
 
-    readonly members: ResourceOrNoteCompositeIdentifier[];
+    readonly members: CategorizableCompositeIdentifier[];
 
     readonly children: CateogryTreeViewModel[];
 

@@ -1,4 +1,4 @@
-import { InMemorySnapshot, resourceTypes } from '../domain/types/resourceTypes';
+import { InMemorySnapshot, ResourceType } from '../domain/types/ResourceType';
 import buildBibliographicReferenceTestData from './buildBibliographicReferenceTestData';
 import buildBookTestData from './buildBookTestData';
 import buildCategoryTestData from './buildCategoryTestData';
@@ -18,14 +18,14 @@ import buildVocabularyListTestData from './buildVocabularyListTestData';
  */
 export default (): InMemorySnapshot => ({
     resources: {
-        [resourceTypes.term]: buildTermTestData(),
-        [resourceTypes.vocabularyList]: buildVocabularyListTestData(),
-        [resourceTypes.transcribedAudio]: buildTranscribedAudioTestData(),
-        [resourceTypes.book]: buildBookTestData(),
-        [resourceTypes.photograph]: buildPhotographTestData(),
-        [resourceTypes.spatialFeature]: buildSpatialFeatureTestData(),
-        [resourceTypes.bibliographicReference]: buildBibliographicReferenceTestData(),
-        [resourceTypes.song]: buildSongTestData(),
+        [ResourceType.term]: buildTermTestData(),
+        [ResourceType.vocabularyList]: buildVocabularyListTestData(),
+        [ResourceType.transcribedAudio]: buildTranscribedAudioTestData(),
+        [ResourceType.book]: buildBookTestData(),
+        [ResourceType.photograph]: buildPhotographTestData(),
+        [ResourceType.spatialFeature]: buildSpatialFeatureTestData(),
+        [ResourceType.bibliographicReference]: buildBibliographicReferenceTestData(),
+        [ResourceType.song]: buildSongTestData(),
     },
     connections: buildEdgeConnectionTestData(),
     tags: buildTagTestData(),

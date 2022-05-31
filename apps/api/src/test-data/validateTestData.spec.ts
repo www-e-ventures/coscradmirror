@@ -7,12 +7,7 @@ import { isValid, Valid } from '../domain/domainModelValidators/Valid';
 import { Category } from '../domain/models/categories/entities/category.entity';
 import { EdgeConnectionMemberRole } from '../domain/models/context/edge-connection.entity';
 import { Resource } from '../domain/models/resource.entity';
-import {
-    isResourceType,
-    ResourceType,
-    resourceTypes,
-    ResourceTypeToInstance,
-} from '../domain/types/resourceTypes';
+import { isResourceType, ResourceType, ResourceTypeToInstance } from '../domain/types/ResourceType';
 import { isNullOrUndefined } from '../domain/utilities/validation/is-null-or-undefined';
 import isStringWithNonzeroLength from '../lib/utilities/isStringWithNonzeroLength';
 import { getArangoCollectionIDFromResourceType } from '../persistence/database/getArangoCollectionIDFromResourceType';
@@ -55,7 +50,7 @@ describe('buildTestData', () => {
 
     describe('test data for resources', () => {
         describe('the resulting test data', () => {
-            Object.values(resourceTypes).forEach((key) => {
+            Object.values(ResourceType).forEach((key) => {
                 const models = resourceTestDataDTOs[key];
                 describe(`Resource of type ${key}`, () => {
                     it(`Should be a valid entity type`, () => {
@@ -126,7 +121,7 @@ describe('buildTestData', () => {
                 .filter(({ compositeIdentifier: { type } }) => type === targetResourceType)
                 .some(({ role }) => role === targetRole);
 
-        Object.values(resourceTypes).forEach((resourceType) => {
+        Object.values(ResourceType).forEach((resourceType) => {
             /**
              * Ensure there is a `self`,`to`, and `from` edge connection instance
              * for each resource type.

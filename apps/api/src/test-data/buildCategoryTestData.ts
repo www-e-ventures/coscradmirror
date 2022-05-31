@@ -1,6 +1,5 @@
 import { Category } from '../domain/models/categories/entities/category.entity';
-import { noteType } from '../domain/models/categories/types/ResourceTypeOrNoteType';
-import { resourceTypes } from '../domain/types/resourceTypes';
+import { CategorizableType } from '../domain/types/CategorizableType';
 
 export default (): Category[] =>
     [
@@ -15,7 +14,7 @@ export default (): Category[] =>
             label: 'animals',
             members: [
                 {
-                    type: resourceTypes.vocabularyList,
+                    type: CategorizableType.vocabularyList,
                     id: '1',
                 },
             ],
@@ -26,11 +25,11 @@ export default (): Category[] =>
             label: 'mammals',
             members: [
                 {
-                    type: resourceTypes.term,
+                    type: CategorizableType.term,
                     id: '1',
                 },
                 {
-                    type: resourceTypes.book,
+                    type: CategorizableType.book,
                     id: '23',
                 },
             ],
@@ -47,7 +46,7 @@ export default (): Category[] =>
             label: 'canines',
             members: [
                 {
-                    type: resourceTypes.term,
+                    type: CategorizableType.term,
                     id: '2',
                 },
             ],
@@ -70,11 +69,11 @@ export default (): Category[] =>
             label: 'domestic cats',
             members: [
                 {
-                    type: resourceTypes.vocabularyList,
+                    type: CategorizableType.vocabularyList,
                     id: '2',
                 },
                 {
-                    type: resourceTypes.photograph,
+                    type: CategorizableType.photograph,
                     id: '0',
                 },
             ],
@@ -85,7 +84,7 @@ export default (): Category[] =>
             label: 'wolves',
             members: [
                 {
-                    type: resourceTypes.spatialFeature,
+                    type: CategorizableType.spatialFeature,
                     id: '101',
                 },
             ],
@@ -96,15 +95,15 @@ export default (): Category[] =>
             label: 'songs',
             members: [
                 {
-                    type: resourceTypes.term,
+                    type: CategorizableType.term,
                     id: '3',
                 },
                 {
-                    type: resourceTypes.spatialFeature,
+                    type: CategorizableType.spatialFeature,
                     id: '102',
                 },
                 {
-                    type: resourceTypes.bibliographicReference,
+                    type: CategorizableType.bibliographicReference,
                     id: '1',
                 },
             ],
@@ -115,7 +114,7 @@ export default (): Category[] =>
             label: 'domestic dogs',
             members: [
                 {
-                    type: resourceTypes.photograph,
+                    type: CategorizableType.photograph,
                     id: '1',
                 },
             ],
@@ -126,7 +125,7 @@ export default (): Category[] =>
             label: 'rodents',
             members: [
                 {
-                    type: resourceTypes.book,
+                    type: CategorizableType.book,
                     id: '24',
                 },
             ],
@@ -155,7 +154,7 @@ export default (): Category[] =>
             label: 'tools',
             members: [
                 {
-                    type: resourceTypes.transcribedAudio,
+                    type: CategorizableType.transcribedAudio,
                     id: '110',
                 },
             ],
@@ -172,7 +171,7 @@ export default (): Category[] =>
             label: 'clothing',
             members: [
                 {
-                    type: noteType,
+                    type: CategorizableType.note,
                     id: '1',
                 } as const,
             ],

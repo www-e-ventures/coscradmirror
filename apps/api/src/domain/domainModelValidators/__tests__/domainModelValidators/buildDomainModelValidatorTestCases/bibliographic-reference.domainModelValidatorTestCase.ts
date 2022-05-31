@@ -1,6 +1,6 @@
 import { IBibliographicReference } from '../../../../models/bibliographic-reference/interfaces/IBibliographicReference';
 import { BibliographicReferenceType } from '../../../../models/bibliographic-reference/types/BibliographicReferenceType';
-import { resourceTypes } from '../../../../types/resourceTypes';
+import { ResourceType } from '../../../../types/ResourceType';
 import bibliographicReferenceValidator from '../../../bibliographicReferenceValidator';
 import InvalidEntityDTOError from '../../../errors/InvalidEntityDTOError';
 import { DomainModelValidatorTestCase } from '../../types/DomainModelValidatorTestCase';
@@ -20,19 +20,19 @@ const modelSpecificTestCases = [
 
 export const buildBibliographicReferenceTestCase =
     (): DomainModelValidatorTestCase<IBibliographicReference> => ({
-        resourceType: resourceTypes.bibliographicReference,
+        resourceType: ResourceType.bibliographicReference,
         validator: bibliographicReferenceValidator,
         validCases,
         invalidCases: [
             {
                 description: 'the dto is undefined',
                 invalidDTO: undefined,
-                expectedError: new InvalidEntityDTOError(resourceTypes.bibliographicReference),
+                expectedError: new InvalidEntityDTOError(ResourceType.bibliographicReference),
             },
             {
                 description: 'the dto is null',
                 invalidDTO: null,
-                expectedError: new InvalidEntityDTOError(resourceTypes.bibliographicReference),
+                expectedError: new InvalidEntityDTOError(ResourceType.bibliographicReference),
             },
             {
                 description: 'the dto has an invalid bibliographic reference type',
@@ -44,7 +44,7 @@ export const buildBibliographicReferenceTestCase =
                     },
                 },
                 expectedError: new InvalidEntityDTOError(
-                    resourceTypes.bibliographicReference,
+                    ResourceType.bibliographicReference,
                     validCases[0].dto.id
                 ),
             },

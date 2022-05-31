@@ -4,7 +4,7 @@ import JournalArticleBibliographicReferenceData from '../../models/bibliographic
 import { IBibliographicReference } from '../../models/bibliographic-reference/interfaces/IBibliographicReference';
 import { BibliographicReferenceType } from '../../models/bibliographic-reference/types/BibliographicReferenceType';
 import { EntityId } from '../../types/ResourceId';
-import { resourceTypes } from '../../types/resourceTypes';
+import { ResourceType } from '../../types/ResourceType';
 import { isNullOrUndefined } from '../../utilities/validation/is-null-or-undefined';
 import InvalidEntityDTOError from '../errors/InvalidEntityDTOError';
 import { DomainModelValidator } from '../types/DomainModelValidator';
@@ -12,13 +12,13 @@ import buildSimpleDiscriminatedUnionValidationFunction from '../utilities/buildS
 import { Valid } from '../Valid';
 
 const buildTopLevelError = (id: EntityId, innerErrors: InternalError[]): InternalError =>
-    new InvalidEntityDTOError(resourceTypes.bibliographicReference, id, innerErrors);
+    new InvalidEntityDTOError(ResourceType.bibliographicReference, id, innerErrors);
 
 const bibliographicReferenceValidator: DomainModelValidator = (
     dto: unknown
 ): Valid | InternalError => {
     if (isNullOrUndefined(dto))
-        return new InvalidEntityDTOError(resourceTypes.bibliographicReference);
+        return new InvalidEntityDTOError(ResourceType.bibliographicReference);
 
     const allErrors: InternalError[] = [];
 

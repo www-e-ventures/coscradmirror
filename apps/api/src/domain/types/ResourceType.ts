@@ -1,4 +1,3 @@
-import { ValueType } from '../../lib/types/valueType';
 import { IBibliographicReference } from '../models/bibliographic-reference/interfaces/IBibliographicReference';
 import { Book } from '../models/book/entities/book.entity';
 import { Category } from '../models/categories/entities/category.entity';
@@ -11,21 +10,19 @@ import { Term } from '../models/term/entities/term.entity';
 import { TranscribedAudio } from '../models/transcribed-audio/entities/transcribed-audio.entity';
 import { VocabularyList } from '../models/vocabulary-list/entities/vocabulary-list.entity';
 
-export const resourceTypes = {
-    term: 'term',
-    vocabularyList: 'vocabularyList',
-    transcribedAudio: 'transcribedAudio',
-    book: 'book',
-    photograph: 'photograph',
-    spatialFeature: 'spatialFeature',
-    bibliographicReference: 'bibliographicReference',
-    song: 'song',
-} as const;
-
-export type ResourceType = ValueType<typeof resourceTypes>;
+export enum ResourceType {
+    term = 'term',
+    vocabularyList = 'vocabularyList',
+    transcribedAudio = 'transcribedAudio',
+    book = 'book',
+    photograph = 'photograph',
+    spatialFeature = 'spatialFeature',
+    bibliographicReference = 'bibliographicReference',
+    song = 'song',
+}
 
 export const isResourceType = (input: unknown): input is ResourceType =>
-    Object.values(resourceTypes).includes(input as ResourceType);
+    Object.values(ResourceType).includes(input as ResourceType);
 
 // We should use this for type inference a few places.
 export type ResourceTypeToInstance = {

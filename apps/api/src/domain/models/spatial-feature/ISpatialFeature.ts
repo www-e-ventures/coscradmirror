@@ -1,9 +1,9 @@
-import { resourceTypes } from '../../types/resourceTypes';
+import { ResourceType } from '../../types/ResourceType';
 import { Resource } from '../resource.entity';
 import { IGeometricFeature } from './GeometricFeature';
 
 export interface ISpatialFeature extends Resource {
-    type: typeof resourceTypes.spatialFeature;
+    type: typeof ResourceType.spatialFeature;
 
     geometry: IGeometricFeature;
 }

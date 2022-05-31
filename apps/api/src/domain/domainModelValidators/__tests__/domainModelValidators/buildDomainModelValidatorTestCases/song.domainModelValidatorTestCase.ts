@@ -2,19 +2,19 @@ import { InternalError } from '../../../../../lib/errors/InternalError';
 import { ContributorAndRole } from '../../../../models/song/ContributorAndRole';
 import { Song } from '../../../../models/song/song.entity';
 import { EntityId } from '../../../../types/ResourceId';
-import { resourceTypes } from '../../../../types/resourceTypes';
+import { ResourceType } from '../../../../types/ResourceType';
 import InvalidEntityDTOError from '../../../errors/InvalidEntityDTOError';
 import songValidator from '../../../songValidator';
 import { DomainModelValidatorTestCase } from '../../types/DomainModelValidatorTestCase';
 import getValidEntityInstaceForTest from '../utilities/getValidEntityInstaceForTest';
 
-const validDTO = getValidEntityInstaceForTest(resourceTypes.song).toDTO();
+const validDTO = getValidEntityInstaceForTest(ResourceType.song).toDTO();
 
 const buildTopLevelError = (id: EntityId, innerErrors: InternalError[]) =>
-    new InvalidEntityDTOError(resourceTypes.song, id, innerErrors);
+    new InvalidEntityDTOError(ResourceType.song, id, innerErrors);
 
 export const buildSongTestCase = (): DomainModelValidatorTestCase<Song> => ({
-    resourceType: resourceTypes.song,
+    resourceType: ResourceType.song,
     validator: songValidator,
     validCases: [
         {

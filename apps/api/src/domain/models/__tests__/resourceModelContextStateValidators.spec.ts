@@ -1,6 +1,6 @@
 import { InternalError } from '../../../lib/errors/InternalError';
 import { Valid } from '../../domainModelValidators/Valid';
-import { ResourceType, resourceTypes } from '../../types/resourceTypes';
+import { ResourceType } from '../../types/ResourceType';
 import isContextAllowedForGivenResourceType from '../allowedContexts/isContextAllowedForGivenResourceType';
 import { EdgeConnectionContext } from '../context/context.entity';
 import { EdgeConnectionContextType } from '../context/types/EdgeConnectionContextType';
@@ -51,7 +51,7 @@ describe(`resource model context state validators`, () => {
                 }) => resourceType === testCaseResourceType && contextType === testCaseContextType
             );
 
-    const allResourceTypeContextTypeCombos = Object.keys(resourceTypes).flatMap(
+    const allResourceTypeContextTypeCombos = Object.keys(ResourceType).flatMap(
         (resourceType: ResourceType) =>
             Object.keys(EdgeConnectionContextType).map(
                 (

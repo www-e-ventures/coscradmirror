@@ -1,11 +1,11 @@
-import { resourceTypes } from '../../../types/resourceTypes';
+import { ResourceType } from '../../../types/ResourceType';
 import { Valid } from '../../Valid';
 import buildDomainModelValidatorTestCases from './buildDomainModelValidatorTestCases';
 
 const testCases = buildDomainModelValidatorTestCases();
 
 describe('Domain Model Validators', () => {
-    Object.values(resourceTypes).forEach((resourceType) => {
+    Object.values(ResourceType).forEach((resourceType) => {
         describe(`An entity of type ${resourceType}`, () => {
             it('should have a domain model validator test case', () => {
                 const testCaseSearchResult = testCases.find(

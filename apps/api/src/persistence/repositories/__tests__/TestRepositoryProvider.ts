@@ -1,10 +1,6 @@
 import { Category } from '../../../domain/models/categories/entities/category.entity';
 import { Resource } from '../../../domain/models/resource.entity';
-import {
-    InMemorySnapshotOfResources,
-    ResourceType,
-    resourceTypes,
-} from '../../../domain/types/resourceTypes';
+import { InMemorySnapshotOfResources, ResourceType } from '../../../domain/types/ResourceType';
 import { DatabaseProvider } from '../../database/database.provider';
 import { getArangoCollectionIDFromResourceType } from '../../database/getArangoCollectionIDFromResourceType';
 import {
@@ -86,7 +82,7 @@ export default class TestRepositoryProvider extends RepositoryProvider {
      * Deletes all entity data (i.e. empties every entity collection);
      */
     private async deleteAllEntityData(): Promise<void> {
-        const deleteAllDataPromises = Object.values(resourceTypes)
+        const deleteAllDataPromises = Object.values(ResourceType)
             .map((ResourceType: ResourceType) => this.deleteAllResourcesOfGivenType(ResourceType))
             .concat(this.databaseProvider.getDBInstance().deleteAll(tagCollectionID))
             .concat(this.databaseProvider.getDBInstance().deleteAll(categoryCollectionID));

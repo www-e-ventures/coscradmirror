@@ -2,19 +2,19 @@ import { isDeepStrictEqual } from 'util';
 import { InternalError } from '../../../../lib/errors/InternalError';
 import { DeepPartial } from '../../../../types/DeepPartial';
 import { Valid } from '../../../domainModelValidators/Valid';
-import { ResourceOrNoteCompositeIdentifier } from '../../../models/categories/types/ResourceOrNoteCompositeIdentifier';
-import { noteType } from '../../../models/categories/types/ResourceTypeOrNoteType';
-import { InMemorySnapshot } from '../../../types/resourceTypes';
+import { CategorizableCompositeIdentifier } from '../../../models/categories/types/ResourceOrNoteCompositeIdentifier';
+import { AggregateType } from '../../../types/AggregateType';
+import { InMemorySnapshot } from '../../../types/ResourceType';
 
-type ErrorFactory = (invalidReferences: ResourceOrNoteCompositeIdentifier[]) => InternalError;
+type ErrorFactory = (invalidReferences: CategorizableCompositeIdentifier[]) => InternalError;
 
 export default (
     { resources, connections }: DeepPartial<InMemorySnapshot>,
-    modelReferences: ResourceOrNoteCompositeIdentifier[],
+    modelReferences: CategorizableCompositeIdentifier[],
     buildError: ErrorFactory
 ): Valid | InternalError => {
     const connectionCompositeIdsInSnapshot = (connections || []).map(({ id }) => ({
-        type: noteType,
+        type: AggregateType.note,
         id,
     }));
 

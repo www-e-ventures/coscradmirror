@@ -1,5 +1,5 @@
 import { InternalError } from '../../../lib/errors/InternalError';
-import { ResourceType } from '../../types/resourceTypes';
+import { ResourceType } from '../../types/ResourceType';
 
 export default class InvalidPublicationStatusError extends InternalError {
     constructor(resourceType?: ResourceType) {

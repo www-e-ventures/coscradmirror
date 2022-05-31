@@ -11,7 +11,7 @@ import { ICategoryRepositoryProvider } from '../../domain/repositories/interface
 import { IEdgeConnectionRepositoryProvider } from '../../domain/repositories/interfaces/IEdgeConnectionRepositoryProvider';
 import { ITagRepositoryProvider } from '../../domain/repositories/interfaces/ITagRepositoryProvider';
 import { IRepositoryProvider } from '../../domain/repositories/interfaces/repository-provider';
-import { ResourceType } from '../../domain/types/resourceTypes';
+import { ResourceType } from '../../domain/types/ResourceType';
 import { DatabaseProvider } from '../database/database.provider';
 import { getArangoCollectionIDFromResourceType } from '../database/getArangoCollectionIDFromResourceType';
 import { edgeConnectionCollectionID, tagCollectionID } from '../database/types/ArangoCollectionId';

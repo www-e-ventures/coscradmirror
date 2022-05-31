@@ -1,4 +1,4 @@
-import { resourceTypes } from '../../domain/types/resourceTypes';
+import { ResourceType } from '../../domain/types/ResourceType';
 import { getArangoCollectionIDFromResourceType } from './getArangoCollectionIDFromResourceType';
 import { getAllArangoResourceCollectionIDs } from './types/ArangoCollectionId';
 
@@ -6,7 +6,7 @@ describe('getArangoCollectionIDFromResourceType', () => {
     const allCollectionIDs = getAllArangoResourceCollectionIDs();
 
     describe('every resource type', () => {
-        Object.values(resourceTypes).forEach((resourceType) =>
+        Object.values(ResourceType).forEach((resourceType) =>
             describe(resourceType, () => {
                 it('should have a corresponding collection ID', () => {
                     const collectionID = getArangoCollectionIDFromResourceType(resourceType);
@@ -18,7 +18,7 @@ describe('getArangoCollectionIDFromResourceType', () => {
     });
 
     describe('every collection type', () => {
-        const allCollectionsReferencedBySomeEntity = Object.values(resourceTypes).map(
+        const allCollectionsReferencedBySomeEntity = Object.values(ResourceType).map(
             getArangoCollectionIDFromResourceType
         );
 

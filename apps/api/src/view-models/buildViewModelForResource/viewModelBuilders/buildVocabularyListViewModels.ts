@@ -1,7 +1,7 @@
 import { Term } from '../../../domain/models/term/entities/term.entity';
 import { VocabularyList } from '../../../domain/models/vocabulary-list/entities/vocabulary-list.entity';
 import IsPublished from '../../../domain/repositories/specifications/isPublished';
-import { resourceTypes } from '../../../domain/types/resourceTypes';
+import { ResourceType } from '../../../domain/types/ResourceType';
 import { isInternalError } from '../../../lib/errors/InternalError';
 import { VocabularyListViewModel } from '../viewModels';
 import { ViewModelBuilderDependencies } from './types/ViewModelBuilderDependencies';
@@ -25,11 +25,11 @@ export default async (
     const isPublishedSpecification = shouldReturnUnpublishedEntities ? null : new IsPublished(true);
 
     const vocabularyListRepository = repositoryProvider.forResource<VocabularyList>(
-        resourceTypes.vocabularyList
+        ResourceType.vocabularyList
     );
 
     // We need to join the terms by id
-    const termRepository = repositoryProvider.forResource<Term>(resourceTypes.term);
+    const termRepository = repositoryProvider.forResource<Term>(ResourceType.term);
 
     const allTerms = await termRepository.fetchMany(isPublishedSpecification).then((allTerms) =>
         // We filter out invalid DTOs in case they occur

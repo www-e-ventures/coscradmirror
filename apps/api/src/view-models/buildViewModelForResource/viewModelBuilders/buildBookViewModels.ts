@@ -1,6 +1,6 @@
 import { Book } from '../../../domain/models/book/entities/book.entity';
 import IsPublished from '../../../domain/repositories/specifications/isPublished';
-import { resourceTypes } from '../../../domain/types/resourceTypes';
+import { ResourceType } from '../../../domain/types/ResourceType';
 import { isInternalError } from '../../../lib/errors/InternalError';
 import { BookViewModel } from '../viewModels/book.view-model';
 import { ViewModelBuilderDependencies } from './types/ViewModelBuilderDependencies';
@@ -22,7 +22,7 @@ export default async (
 
     const isPublishedSpecification = shouldReturnUnpublishedEntities ? null : new IsPublished(true);
 
-    const bookRepository = repositoryProvider.forResource<Book>(resourceTypes.book);
+    const bookRepository = repositoryProvider.forResource<Book>(ResourceType.book);
 
     const searchResult = await bookRepository.fetchMany(isPublishedSpecification);
 

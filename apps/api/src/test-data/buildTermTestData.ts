@@ -1,5 +1,5 @@
 import { Term } from '../domain/models/term/entities/term.entity';
-import { resourceTypes } from '../domain/types/resourceTypes';
+import { ResourceType } from '../domain/types/ResourceType';
 
 /**
  * **note** When adding new test data \ modifying existing test data, be sure to
@@ -28,4 +28,4 @@ export default (): Term[] =>
             id: '3',
             published: false,
         },
-    ].map((dto) => new Term({ ...dto, type: resourceTypes.term }));
+    ].map((dto) => new Term({ ...dto, type: ResourceType.term }));
