@@ -13,7 +13,7 @@ import { Song } from '../models/song/song.entity';
 import { Term } from '../models/term/entities/term.entity';
 import { TranscribedAudio } from '../models/transcribed-audio/entities/transcribed-audio.entity';
 import { VocabularyList } from '../models/vocabulary-list/entities/vocabulary-list.entity';
-import { ResourceType, resourceTypes } from '../types/resourceTypes';
+import { ResourceType } from '../types/ResourceType';
 import buildBibliographicReferenceFactory from './complexFactories/buildBibliographicReferenceFactory';
 import buildSpatialFeatureFactory from './complexFactories/buildSpatialFeatureFactory';
 import buildInstanceFactory from './utilities/buildInstanceFactory';
@@ -27,39 +27,39 @@ export default <TResource extends Resource>(
     resourceType: ResourceType
 ): InstanceFactory<TResource> => {
     switch (resourceType) {
-        case resourceTypes.term:
+        case ResourceType.term:
             // @ts-expect-error TODO fix this tricky type error
             return buildInstanceFactory<Term>(termValidator, Term);
 
-        case resourceTypes.vocabularyList:
+        case ResourceType.vocabularyList:
             // @ts-expect-error TODO fix this tricky type error
             return buildInstanceFactory<VocabularyList>(vocabularyListValidator, VocabularyList);
 
-        case resourceTypes.transcribedAudio:
+        case ResourceType.transcribedAudio:
             // @ts-expect-error TODO fix this tricky type error
             return buildInstanceFactory<TranscribedAudio>(
                 transcribedAudioValidator,
                 TranscribedAudio
             );
 
-        case resourceTypes.book:
+        case ResourceType.book:
             // @ts-expect-error TODO fix this tricky type error
             return buildInstanceFactory<Book>(bookValidator, Book);
 
-        case resourceTypes.photograph:
+        case ResourceType.photograph:
             // @ts-expect-error TODO fix this tricky type error
             return buildInstanceFactory<Photograph>(photographValidator, Photograph);
 
-        case resourceTypes.spatialFeature:
+        case ResourceType.spatialFeature:
             // @ts-expect-error TODO fix this tricky type error
             return buildSpatialFeatureFactory();
 
-        case resourceTypes.bibliographicReference:
+        case ResourceType.bibliographicReference:
             // @ts-expect-error TODO fix this tricky type error
 
             return buildBibliographicReferenceFactory();
 
-        case resourceTypes.song:
+        case ResourceType.song:
             // @ts-expect-error TODO fix this tricky type error
             return buildInstanceFactory<Song>(songValidator, Song);
 

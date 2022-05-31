@@ -1,6 +1,6 @@
 import { Term } from '../../../domain/models/term/entities/term.entity';
 import IsPublished from '../../../domain/repositories/specifications/isPublished';
-import { resourceTypes } from '../../../domain/types/resourceTypes';
+import { ResourceType } from '../../../domain/types/ResourceType';
 import { isInternalError } from '../../../lib/errors/InternalError';
 import { TermViewModel } from '../viewModels';
 import { ViewModelBuilderDependencies } from './types/ViewModelBuilderDependencies';
@@ -22,7 +22,7 @@ export default async (
 
     const isPublishedSpecification = shouldReturnUnpublishedEntities ? null : new IsPublished(true);
 
-    const termRepository = repositoryProvider.forResource<Term>(resourceTypes.term);
+    const termRepository = repositoryProvider.forResource<Term>(ResourceType.term);
 
     const searchResult = await termRepository.fetchMany(isPublishedSpecification);
 

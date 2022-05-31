@@ -1,5 +1,5 @@
 import { TranscribedAudio } from '../../../domain/models/transcribed-audio/entities/transcribed-audio.entity';
-import { resourceTypes } from '../../../domain/types/resourceTypes';
+import { ResourceType } from '../../../domain/types/ResourceType';
 import { isInternalError } from '../../../lib/errors/InternalError';
 import { TranscribedAudioViewModel } from '../viewModels/transcribed-audio/transcribed-audio.view-model';
 import { ViewModelBuilderDependencies } from './types/ViewModelBuilderDependencies';
@@ -19,7 +19,7 @@ export default async ({
     configService,
 }: ViewModelBuilderDependencies): Promise<TranscribedAudioViewModel[]> => {
     const repository = repositoryProvider.forResource<TranscribedAudio>(
-        resourceTypes.transcribedAudio
+        ResourceType.transcribedAudio
     );
 
     const baseAudioURL = configService.get<string>('BASE_DIGITAL_ASSET_URL');

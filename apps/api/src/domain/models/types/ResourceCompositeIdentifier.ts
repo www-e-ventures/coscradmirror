@@ -1,5 +1,5 @@
 import { EntityId, isResourceId } from '../../types/ResourceId';
-import { isResourceType, ResourceType } from '../../types/resourceTypes';
+import { isResourceType, ResourceType } from '../../types/ResourceType';
 import { isNullOrUndefined } from '../../utilities/validation/is-null-or-undefined';
 
 /**

@@ -1,4 +1,4 @@
-import { ResourceOrNoteCompositeIdentifier } from '../../../../domain/models/categories/types/ResourceOrNoteCompositeIdentifier';
+import { CategorizableCompositeIdentifier } from '../../../../domain/models/categories/types/ResourceOrNoteCompositeIdentifier';
 import { ViewModelId } from '../types/ViewModelId';
 
 export interface ICategoryTree {
@@ -6,7 +6,7 @@ export interface ICategoryTree {
 
     label: string;
 
-    members: ResourceOrNoteCompositeIdentifier[];
+    members: CategorizableCompositeIdentifier[];
 
     children: ICategoryTree[];
 }

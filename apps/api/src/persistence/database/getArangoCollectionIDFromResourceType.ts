@@ -1,4 +1,4 @@
-import { isResourceType, ResourceType } from '../../domain/types/resourceTypes';
+import { isResourceType, ResourceType } from '../../domain/types/ResourceType';
 import { ArangoResourceCollectionID } from './types/ArangoCollectionId';
 
 const resourceTypeToArangoCollectionID: {

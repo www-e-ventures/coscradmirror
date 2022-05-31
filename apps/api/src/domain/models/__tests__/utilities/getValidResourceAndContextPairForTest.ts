@@ -2,7 +2,7 @@ import { InternalError } from '../../../../lib/errors/InternalError';
 import buildTestData from '../../../../test-data/buildTestData';
 import formatResourceCompositeIdentifier from '../../../../view-models/presentation/formatResourceCompositeIdentifier';
 import { ContextTypeToInstance } from '../../../models/context/types/ContextTypeToInstance';
-import { ResourceType, ResourceTypeToInstance } from '../../../types/resourceTypes';
+import { ResourceType, ResourceTypeToInstance } from '../../../types/ResourceType';
 import { isNullOrUndefined } from '../../../utilities/validation/is-null-or-undefined';
 import { EdgeConnectionContextType } from '../../context/types/EdgeConnectionContextType';
 import { Resource } from '../../resource.entity';

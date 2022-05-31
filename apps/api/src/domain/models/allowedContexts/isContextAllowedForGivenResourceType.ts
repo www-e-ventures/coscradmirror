@@ -1,16 +1,16 @@
 import cloneToPlainObject from '../../../lib/utilities/cloneToPlainObject';
-import { ResourceType, resourceTypes } from '../../types/resourceTypes';
+import { ResourceType } from '../../types/ResourceType';
 import { isNullOrUndefined } from '../../utilities/validation/is-null-or-undefined';
 import { EdgeConnectionContextType } from '../context/types/EdgeConnectionContextType';
 
 const resourceTypeToAllowedContextTypes = {
-    [resourceTypes.book]: [EdgeConnectionContextType.general, EdgeConnectionContextType.pageRange],
-    [resourceTypes.photograph]: [
+    [ResourceType.book]: [EdgeConnectionContextType.general, EdgeConnectionContextType.pageRange],
+    [ResourceType.photograph]: [
         EdgeConnectionContextType.general,
         EdgeConnectionContextType.point2D,
         EdgeConnectionContextType.freeMultiline,
     ],
-    [resourceTypes.spatialFeature]: [
+    [ResourceType.spatialFeature]: [
         EdgeConnectionContextType.general,
         /**
          * TODO [https://www.pivotaltracker.com/story/show/181978898]
@@ -20,17 +20,17 @@ const resourceTypeToAllowedContextTypes = {
         // EdgeConnectionContextType.point2D,
         // EdgeConnectionContextType.freeMultiline,
     ],
-    [resourceTypes.term]: [EdgeConnectionContextType.general, EdgeConnectionContextType.textField],
-    [resourceTypes.transcribedAudio]: [
+    [ResourceType.term]: [EdgeConnectionContextType.general, EdgeConnectionContextType.textField],
+    [ResourceType.transcribedAudio]: [
         EdgeConnectionContextType.general,
         EdgeConnectionContextType.timeRange,
     ],
-    [resourceTypes.vocabularyList]: [
+    [ResourceType.vocabularyList]: [
         EdgeConnectionContextType.general,
         EdgeConnectionContextType.textField,
     ],
-    [resourceTypes.bibliographicReference]: [EdgeConnectionContextType.general],
-    [resourceTypes.song]: [EdgeConnectionContextType.general, EdgeConnectionContextType.timeRange],
+    [ResourceType.bibliographicReference]: [EdgeConnectionContextType.general],
+    [ResourceType.song]: [EdgeConnectionContextType.general, EdgeConnectionContextType.timeRange],
 };
 
 export const getResourceTypesThatOnlySupportGeneralContext = (): ResourceType[] =>

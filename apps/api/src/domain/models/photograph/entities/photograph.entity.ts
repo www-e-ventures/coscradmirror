@@ -6,7 +6,7 @@ import formatPosition2D from '../../../../view-models/presentation/formatPositio
 import FreeMultilineContextOutOfBoundsError from '../../../domainModelValidators/errors/context/invalidContextStateErrors/freeMultilineContext/FreeMultilineContextOutOfBoundsError';
 import PointContextOutOfBoundsError from '../../../domainModelValidators/errors/context/invalidContextStateErrors/pointContext/PointContextOutOfBoundsError';
 import { Valid } from '../../../domainModelValidators/Valid';
-import { resourceTypes } from '../../../types/resourceTypes';
+import { ResourceType } from '../../../types/ResourceType';
 import { FreeMultilineContext } from '../../context/free-multiline-context/free-multiline-context.entity';
 import { PointContext } from '../../context/point-context/point-context.entity';
 import { Boundable2D } from '../../interfaces/Boundable2D';
@@ -15,7 +15,7 @@ import { Position2D } from '../../spatial-feature/types/Coordinates/Position2D';
 import PhotographDimensions from './PhotographDimensions';
 
 export class Photograph extends Resource implements Boundable2D {
-    readonly type = resourceTypes.photograph;
+    readonly type = ResourceType.photograph;
 
     readonly filename: string;
 
@@ -26,7 +26,7 @@ export class Photograph extends Resource implements Boundable2D {
     readonly dimensions: PhotographDimensions;
 
     constructor(dto: DTO<Photograph>) {
-        super({ ...dto, type: resourceTypes.photograph });
+        super({ ...dto, type: ResourceType.photograph });
 
         const { filename, photographer, dimensions: dimensionsDTO } = dto;
 

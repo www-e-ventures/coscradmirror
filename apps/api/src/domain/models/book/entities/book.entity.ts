@@ -2,14 +2,14 @@ import { InternalError } from '../../../../lib/errors/InternalError';
 import { DTO } from '../../../../types/DTO';
 import PageRangeContextHasSuperfluousPageIdentifiersError from '../../../domainModelValidators/errors/context/invalidContextStateErrors/pageRangeContext/PageRangeContextHasSuperfluousPageIdentifiersError';
 import { Valid } from '../../../domainModelValidators/Valid';
-import { resourceTypes } from '../../../types/resourceTypes';
+import { ResourceType } from '../../../types/ResourceType';
 import { isNullOrUndefined } from '../../../utilities/validation/is-null-or-undefined';
 import { PageRangeContext } from '../../context/page-range-context/page-range.context.entity';
 import { Resource } from '../../resource.entity';
 import BookPage from './BookPage';
 
 export class Book extends Resource {
-    readonly type = resourceTypes.book;
+    readonly type = ResourceType.book;
 
     readonly title: string;
 
@@ -24,7 +24,7 @@ export class Book extends Resource {
     pages: BookPage[];
 
     constructor(dto: DTO<Book>) {
-        super({ ...dto, type: resourceTypes.book });
+        super({ ...dto, type: ResourceType.book });
 
         const { title, subtitle, author, publicationDate, pages: pageDTOs } = dto;
 

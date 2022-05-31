@@ -1,5 +1,5 @@
 import { DTO } from '../../../../types/DTO';
-import { resourceTypes } from '../../../types/resourceTypes';
+import { ResourceType } from '../../../types/ResourceType';
 import { isNullOrUndefined } from '../../../utilities/validation/is-null-or-undefined';
 import { Resource } from '../../resource.entity';
 import { IBibliographicReference } from '../interfaces/IBibliographicReference';
@@ -9,12 +9,12 @@ export class JournalArticleBibliographicReference
     extends Resource
     implements IBibliographicReference<JournalArticleBibliographicReferenceData>
 {
-    readonly type = resourceTypes.bibliographicReference;
+    readonly type = ResourceType.bibliographicReference;
 
     readonly data: JournalArticleBibliographicReferenceData;
 
     constructor(dto: DTO<JournalArticleBibliographicReference>) {
-        super({ ...dto, type: resourceTypes.bibliographicReference });
+        super({ ...dto, type: ResourceType.bibliographicReference });
 
         if (isNullOrUndefined(dto)) return;
 

@@ -1,10 +1,10 @@
 import { TranscribedAudio } from '../domain/models/transcribed-audio/entities/transcribed-audio.entity';
-import { resourceTypes } from '../domain/types/resourceTypes';
+import { ResourceType } from '../domain/types/ResourceType';
 import { DTO } from '../types/DTO';
 
 const dto: DTO<TranscribedAudio> = {
     id: '110',
-    type: resourceTypes.transcribedAudio,
+    type: ResourceType.transcribedAudio,
     audioFilename: '123.mp3',
     startMilliseconds: 0,
     lengthMilliseconds: 20000,

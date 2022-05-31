@@ -1,10 +1,10 @@
-import { resourceTypes } from '../../types/resourceTypes';
+import { ResourceType } from '../../types/ResourceType';
 import { EdgeConnectionContextType } from '../context/types/EdgeConnectionContextType';
 import { getAllowedContextsForModel } from './isContextAllowedForGivenResourceType';
 
 describe('getAllowedContextsForModel', () => {
     // Loop over every `ResourceType`
-    Object.values(resourceTypes).forEach((resourceType) =>
+    Object.values(ResourceType).forEach((resourceType) =>
         describe(`resource type: ${resourceType}`, () => {
             const allowedContexts = getAllowedContextsForModel(resourceType);
 
@@ -38,7 +38,7 @@ describe('getAllowedContextsForModel', () => {
     Object.values(EdgeConnectionContextType).forEach((contextType) =>
         describe(`Edge connection context type: ${contextType}`, () => {
             it(`is registered as the allowed context for at least one resource type`, () => {
-                const isContextTypeAllowedForSomeResourceType = Object.values(resourceTypes).some(
+                const isContextTypeAllowedForSomeResourceType = Object.values(ResourceType).some(
                     (resourceType) => getAllowedContextsForModel(resourceType).includes(contextType)
                 );
 

@@ -1,15 +1,15 @@
 import { TranscribedAudio } from '../../../../models/transcribed-audio/entities/transcribed-audio.entity';
-import { resourceTypes } from '../../../../types/resourceTypes';
+import { ResourceType } from '../../../../types/ResourceType';
 import NullOrUndefinedResourceDTOError from '../../../errors/NullOrUndefinedResourceDTOError';
 import transcribedAudioValidator from '../../../transcribedAudioValidator';
 import { DomainModelValidatorTestCase } from '../../types/DomainModelValidatorTestCase';
 import getValidEntityInstaceForTest from '../utilities/getValidEntityInstaceForTest';
 
-const validDTO = getValidEntityInstaceForTest(resourceTypes.transcribedAudio).toDTO();
+const validDTO = getValidEntityInstaceForTest(ResourceType.transcribedAudio).toDTO();
 
 export const buildTranscribedAudioTestCase =
     (): DomainModelValidatorTestCase<TranscribedAudio> => ({
-        resourceType: resourceTypes.transcribedAudio,
+        resourceType: ResourceType.transcribedAudio,
         validator: transcribedAudioValidator,
         validCases: [
             {
@@ -20,7 +20,7 @@ export const buildTranscribedAudioTestCase =
             {
                 description: 'the dto is null',
                 invalidDTO: null,
-                expectedError: new NullOrUndefinedResourceDTOError(resourceTypes.transcribedAudio),
+                expectedError: new NullOrUndefinedResourceDTOError(ResourceType.transcribedAudio),
             },
         ],
     });

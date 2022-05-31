@@ -1,6 +1,6 @@
 import { InternalError } from '../../../../lib/errors/InternalError';
 import { DTO } from '../../../../types/DTO';
-import { ResourceType } from '../../../types/resourceTypes';
+import { ResourceType } from '../../../types/ResourceType';
 import { DomainModelValidator } from '../../types/DomainModelValidator';
 
 export type DomainModelValidatorInvalidTestCase<TEntity> = {

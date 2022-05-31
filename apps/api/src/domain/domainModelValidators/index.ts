@@ -1,5 +1,5 @@
 import { InternalError } from '../../lib/errors/InternalError';
-import { ResourceType, resourceTypes } from '../types/resourceTypes';
+import { ResourceType } from '../types/ResourceType';
 import bibliographicReferenceValidator from './bibliographicReferenceValidator';
 import bookValidator from './bookValidator';
 import photographValidator from './photographValidator';
@@ -13,28 +13,28 @@ import vocabularyListValidator from './vocabularyListValidator';
 // TODO should we put these on the classes and use polymorphism?
 export const getValidatorForEntity = (resourceType: ResourceType): DomainModelValidator => {
     switch (resourceType) {
-        case resourceTypes.term:
+        case ResourceType.term:
             return termValidator;
 
-        case resourceTypes.vocabularyList:
+        case ResourceType.vocabularyList:
             return vocabularyListValidator;
 
-        case resourceTypes.transcribedAudio:
+        case ResourceType.transcribedAudio:
             return transcribedAudioValidator;
 
-        case resourceTypes.book:
+        case ResourceType.book:
             return bookValidator;
 
-        case resourceTypes.photograph:
+        case ResourceType.photograph:
             return photographValidator;
 
-        case resourceTypes.spatialFeature:
+        case ResourceType.spatialFeature:
             return spatialFeatureValidator;
 
-        case resourceTypes.bibliographicReference:
+        case ResourceType.bibliographicReference:
             return bibliographicReferenceValidator;
 
-        case resourceTypes.song:
+        case ResourceType.song:
             return songValidator;
 
         default:

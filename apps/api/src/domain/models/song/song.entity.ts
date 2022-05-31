@@ -8,7 +8,7 @@ import {
 import { InternalError } from '../../../lib/errors/InternalError';
 import { DTO } from '../../../types/DTO';
 import { Valid } from '../../domainModelValidators/Valid';
-import { resourceTypes } from '../../types/resourceTypes';
+import { ResourceType } from '../../types/ResourceType';
 import { TimeRangeContext } from '../context/time-range-context/time-range-context.entity';
 import { ITimeBoundable } from '../interfaces/ITimeBoundable';
 import { Resource } from '../resource.entity';
@@ -16,7 +16,7 @@ import validateTimeRangeContextForModel from '../shared/contextValidators/valida
 import { ContributorAndRole } from './ContributorAndRole';
 
 export class Song extends Resource implements ITimeBoundable {
-    readonly type = resourceTypes.song;
+    readonly type = ResourceType.song;
 
     @IsOptional()
     @IsStringWithNonzeroLength()
@@ -44,7 +44,7 @@ export class Song extends Resource implements ITimeBoundable {
     readonly startMilliseconds: number;
 
     constructor(dto: DTO<Song>) {
-        super({ ...dto, type: resourceTypes.song });
+        super({ ...dto, type: ResourceType.song });
 
         if (!dto) return;
 

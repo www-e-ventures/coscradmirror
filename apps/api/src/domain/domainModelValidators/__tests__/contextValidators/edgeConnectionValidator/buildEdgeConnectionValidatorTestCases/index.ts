@@ -10,7 +10,7 @@ import {
 import { PageRangeContext } from '../../../../../models/context/page-range-context/page-range.context.entity';
 import { TimeRangeContext } from '../../../../../models/context/time-range-context/time-range-context.entity';
 import { EdgeConnectionContextType } from '../../../../../models/context/types/EdgeConnectionContextType';
-import { resourceTypes } from '../../../../../types/resourceTypes';
+import { ResourceType } from '../../../../../types/ResourceType';
 import BothMembersInEdgeConnectionHaveSameRoleError from '../../../../errors/context/edgeConnections/BothMembersInEdgeConnectionHaveSameRoleError';
 import ContextTypeIsNotAllowedForGivenResourceTypeError from '../../../../errors/context/edgeConnections/ContextTypeIsNotAllowedForGivenResourceTypeError';
 import InvalidEdgeConnectionDTOError from '../../../../errors/context/edgeConnections/InvalidEdgeConnectionDTOError';
@@ -31,7 +31,7 @@ const buildValidBookEdgeConnectionMember = (
     role: EdgeConnectionMemberRole
 ): EdgeConnectionMember<PageRangeContext> => ({
     compositeIdentifier: {
-        type: resourceTypes.book,
+        type: ResourceType.book,
         id: '1123',
     },
     role,
@@ -50,7 +50,7 @@ const buildValidTranscribedAudioConnectionMember = (
     role: EdgeConnectionMemberRole
 ): EdgeConnectionMember<TimeRangeContext> => ({
     compositeIdentifier: {
-        type: resourceTypes.transcribedAudio,
+        type: ResourceType.transcribedAudio,
         id: '15',
     },
     role,
@@ -248,7 +248,7 @@ export default (): EdgeConnectionValidatorTestCase[] => [
                                 },
                             }),
                             compositeIdentifier: {
-                                type: resourceTypes.book,
+                                type: ResourceType.book,
                                 id: '345',
                             },
                         },
@@ -258,7 +258,7 @@ export default (): EdgeConnectionValidatorTestCase[] => [
                 expectedError: buildTopLevelError([
                     new ContextTypeIsNotAllowedForGivenResourceTypeError(
                         EdgeConnectionContextType.timeRange,
-                        resourceTypes.book
+                        ResourceType.book
                     ),
                 ]),
             },

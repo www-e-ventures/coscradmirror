@@ -1,5 +1,5 @@
 import { Book } from '../domain/models/book/entities/book.entity';
-import { resourceTypes } from '../domain/types/resourceTypes';
+import { ResourceType } from '../domain/types/ResourceType';
 
 const dtos = [
     {
@@ -37,9 +37,12 @@ const dtos = [
         // The publication status should not be true if there are no pages
         published: false,
     },
-].map((dto) => ({
-    ...dto,
-    type: resourceTypes.book,
-}));
+].map(
+    (dto) =>
+        ({
+            ...dto,
+            type: ResourceType.book,
+        } as const)
+);
 
 export default (): Book[] => dtos.map((dto) => new Book(dto));

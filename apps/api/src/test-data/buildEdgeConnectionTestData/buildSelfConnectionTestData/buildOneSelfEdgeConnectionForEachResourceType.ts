@@ -10,7 +10,7 @@ import { PointContext } from '../../../domain/models/context/point-context/point
 import { TextFieldContext } from '../../../domain/models/context/text-field-context/text-field-context.entity';
 import { TimeRangeContext } from '../../../domain/models/context/time-range-context/time-range-context.entity';
 import { EdgeConnectionContextType } from '../../../domain/models/context/types/EdgeConnectionContextType';
-import { resourceTypes } from '../../../domain/types/resourceTypes';
+import { ResourceType } from '../../../domain/types/ResourceType';
 import { DTO } from '../../../types/DTO';
 
 const role = EdgeConnectionMemberRole.self;
@@ -23,7 +23,7 @@ const edgeConnectionDTOs: Omit<DTO<EdgeConnection>, 'type' | 'id'>[] = [
                 role,
                 compositeIdentifier: {
                     id: '2',
-                    type: resourceTypes.term,
+                    type: ResourceType.term,
                 },
                 context: new TextFieldContext({
                     type: EdgeConnectionContextType.textField,
@@ -40,7 +40,7 @@ const edgeConnectionDTOs: Omit<DTO<EdgeConnection>, 'type' | 'id'>[] = [
                 role,
                 compositeIdentifier: {
                     id: '24',
-                    type: resourceTypes.book,
+                    type: ResourceType.book,
                 },
                 context: new PageRangeContext({
                     type: EdgeConnectionContextType.pageRange,
@@ -56,7 +56,7 @@ const edgeConnectionDTOs: Omit<DTO<EdgeConnection>, 'type' | 'id'>[] = [
                 role,
                 compositeIdentifier: {
                     id: '2',
-                    type: resourceTypes.vocabularyList,
+                    type: ResourceType.vocabularyList,
                 },
                 context: new TextFieldContext({
                     type: EdgeConnectionContextType.textField,
@@ -73,7 +73,7 @@ const edgeConnectionDTOs: Omit<DTO<EdgeConnection>, 'type' | 'id'>[] = [
                 role,
                 compositeIdentifier: {
                     id: '300',
-                    type: resourceTypes.spatialFeature,
+                    type: ResourceType.spatialFeature,
                 },
                 context: new GeneralContext(),
                 // context: new PointContext({ point: [2.0, 5.0] }).toDTO(),
@@ -87,7 +87,7 @@ const edgeConnectionDTOs: Omit<DTO<EdgeConnection>, 'type' | 'id'>[] = [
                 role,
                 compositeIdentifier: {
                     id: '110',
-                    type: resourceTypes.transcribedAudio,
+                    type: ResourceType.transcribedAudio,
                 },
                 context: new TimeRangeContext({
                     type: EdgeConnectionContextType.timeRange,
@@ -106,7 +106,7 @@ const edgeConnectionDTOs: Omit<DTO<EdgeConnection>, 'type' | 'id'>[] = [
                 role,
                 compositeIdentifier: {
                     id: '2',
-                    type: resourceTypes.photograph,
+                    type: ResourceType.photograph,
                 },
                 context: new FreeMultilineContext({
                     type: EdgeConnectionContextType.freeMultiline,
@@ -129,7 +129,7 @@ const edgeConnectionDTOs: Omit<DTO<EdgeConnection>, 'type' | 'id'>[] = [
                 role,
                 compositeIdentifier: {
                     id: '2',
-                    type: resourceTypes.photograph,
+                    type: ResourceType.photograph,
                 },
                 context: new PointContext({
                     type: EdgeConnectionContextType.point2D,
@@ -145,7 +145,7 @@ const edgeConnectionDTOs: Omit<DTO<EdgeConnection>, 'type' | 'id'>[] = [
                 role,
                 compositeIdentifier: {
                     id: '24',
-                    type: resourceTypes.book,
+                    type: ResourceType.book,
                 },
                 context: new PageRangeContext({
                     type: EdgeConnectionContextType.pageRange,
@@ -161,7 +161,7 @@ const edgeConnectionDTOs: Omit<DTO<EdgeConnection>, 'type' | 'id'>[] = [
                 role,
                 compositeIdentifier: {
                     id: '1',
-                    type: resourceTypes.bibliographicReference,
+                    type: ResourceType.bibliographicReference,
                 },
                 context: new GeneralContext(),
             },
@@ -174,7 +174,7 @@ const edgeConnectionDTOs: Omit<DTO<EdgeConnection>, 'type' | 'id'>[] = [
                 role,
                 compositeIdentifier: {
                     id: '1',
-                    type: resourceTypes.song,
+                    type: ResourceType.song,
                 },
                 context: new TimeRangeContext({
                     timeRange: {

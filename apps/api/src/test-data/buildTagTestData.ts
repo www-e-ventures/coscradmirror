@@ -1,6 +1,5 @@
-import { noteType } from '../domain/models/categories/types/ResourceTypeOrNoteType';
 import { Tag } from '../domain/models/tag/tag.entity';
-import { resourceTypes } from '../domain/types/resourceTypes';
+import { CategorizableType } from '../domain/types/CategorizableType';
 import { DTO } from '../types/DTO';
 
 const allTagsDTOs: DTO<Tag>[] = [
@@ -9,35 +8,35 @@ const allTagsDTOs: DTO<Tag>[] = [
         label: 'plants',
         members: [
             {
-                type: resourceTypes.term,
+                type: CategorizableType.term,
                 id: '1',
             },
             {
-                type: resourceTypes.book,
+                type: CategorizableType.book,
                 id: '23',
             },
             {
-                type: resourceTypes.book,
+                type: CategorizableType.book,
                 id: '24',
             },
             {
-                type: resourceTypes.vocabularyList,
+                type: CategorizableType.vocabularyList,
                 id: '1',
             },
             {
-                type: resourceTypes.spatialFeature,
+                type: CategorizableType.spatialFeature,
                 id: '100',
             },
             {
-                type: noteType,
+                type: CategorizableType.note,
                 id: '2005',
             },
             {
-                type: noteType,
+                type: CategorizableType.note,
                 id: '9',
             },
             {
-                type: noteType,
+                type: CategorizableType.note,
                 id: '11',
             },
         ],
@@ -47,27 +46,27 @@ const allTagsDTOs: DTO<Tag>[] = [
         label: 'animals',
         members: [
             {
-                type: resourceTypes.term,
+                type: CategorizableType.term,
                 id: '2',
             },
             {
-                type: resourceTypes.term,
+                type: CategorizableType.term,
                 id: '3',
             },
             {
-                type: resourceTypes.spatialFeature,
+                type: CategorizableType.spatialFeature,
                 id: '102',
             },
             {
-                type: noteType,
+                type: CategorizableType.note,
                 id: '2004',
             },
             {
-                type: noteType,
+                type: CategorizableType.note,
                 id: '7',
             },
             {
-                type: resourceTypes.bibliographicReference,
+                type: CategorizableType.bibliographicReference,
                 id: '1',
             },
         ],
@@ -77,19 +76,19 @@ const allTagsDTOs: DTO<Tag>[] = [
         label: 'placenames',
         members: [
             {
-                type: resourceTypes.photograph,
+                type: CategorizableType.photograph,
                 id: '0',
             },
             {
-                type: resourceTypes.transcribedAudio,
+                type: CategorizableType.transcribedAudio,
                 id: '110',
             },
             {
-                type: noteType,
+                type: CategorizableType.note,
                 id: '2003',
             },
             {
-                type: noteType,
+                type: CategorizableType.note,
                 id: '5',
             },
         ],
@@ -99,15 +98,15 @@ const allTagsDTOs: DTO<Tag>[] = [
         label: 'songs',
         members: [
             {
-                type: resourceTypes.photograph,
+                type: CategorizableType.photograph,
                 id: '1',
             },
             {
-                type: noteType,
+                type: CategorizableType.note,
                 id: '2002',
             },
             {
-                type: noteType,
+                type: CategorizableType.note,
                 id: '3',
             },
         ],
@@ -117,19 +116,19 @@ const allTagsDTOs: DTO<Tag>[] = [
         label: 'legends',
         members: [
             {
-                type: resourceTypes.vocabularyList,
+                type: CategorizableType.vocabularyList,
                 id: '2',
             },
             {
-                type: resourceTypes.spatialFeature,
+                type: CategorizableType.spatialFeature,
                 id: '101',
             },
             {
-                type: noteType,
+                type: CategorizableType.note,
                 id: '2001',
             },
             {
-                type: noteType,
+                type: CategorizableType.note,
                 id: '1',
             },
         ],

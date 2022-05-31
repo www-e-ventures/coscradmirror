@@ -2,7 +2,7 @@ import { INestApplication } from '@nestjs/common';
 import setUpIntegrationTest from '../../app/controllers/__tests__/setUpIntegrationTest';
 import getInstanceFactoryForEntity from '../../domain/factories/getInstanceFactoryForEntity';
 import { Resource } from '../../domain/models/resource.entity';
-import { resourceTypes } from '../../domain/types/resourceTypes';
+import { ResourceType } from '../../domain/types/ResourceType';
 import { InternalError, isInternalError } from '../../lib/errors/InternalError';
 import { NotFound } from '../../lib/types/not-found';
 import buildTestData from '../../test-data/buildTestData';
@@ -30,7 +30,7 @@ describe('Repository provider > repositoryForEntity', () => {
         await app.close();
     });
 
-    Object.values(resourceTypes).forEach((resourceType) => {
+    Object.values(ResourceType).forEach((resourceType) => {
         describe(`Repository for entity of type ${resourceType}`, () => {
             beforeEach(async () => {
                 await testRepositoryProvider.addEntitiesOfManyTypes(testData);
