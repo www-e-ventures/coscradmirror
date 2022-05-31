@@ -1,7 +1,7 @@
 import EmptyTargetForTextFieldContextError from '../../../domainModelValidators/errors/context/invalidContextStateErrors/textFieldContext/EmptyTargetForTextFieldContextError';
 import InconsistentCharRangeError from '../../../domainModelValidators/errors/context/invalidContextStateErrors/textFieldContext/InconsistentCharRangeError';
 import InconsistentTimeRangeError from '../../../domainModelValidators/errors/context/invalidContextStateErrors/timeRangeContext/InconsistentTimeRangeError';
-import { resourceTypes } from '../../../types/resourceTypes';
+import { ResourceType } from '../../../types/ResourceType';
 import { TextFieldContext } from '../../context/text-field-context/text-field-context.entity';
 import { TimeRangeContext } from '../../context/time-range-context/time-range-context.entity';
 import { EdgeConnectionContextType } from '../../context/types/EdgeConnectionContextType';
@@ -12,9 +12,9 @@ import {
 import buildAllInconsistentContextTypeTestCases from '../utilities/buildAllInconsistentContextTypeTestCases';
 import buildAllValidTestCasesForResource from '../utilities/buildAllValidTestCasesForResource';
 
-const validCases = buildAllValidTestCasesForResource(resourceTypes.mediaItem);
+const validCases = buildAllValidTestCasesForResource(ResourceType.mediaItem);
 const inconsistentContextTypeTestCases = buildAllInconsistentContextTypeTestCases(
-    resourceTypes.mediaItem
+    ResourceType.mediaItem
 );
 const validMediaItem = validCases[0].resource;
 

@@ -6,7 +6,7 @@ import {
 import { TextFieldContext } from '../../../domain/models/context/text-field-context/text-field-context.entity';
 import { TimeRangeContext } from '../../../domain/models/context/time-range-context/time-range-context.entity';
 import { EdgeConnectionContextType } from '../../../domain/models/context/types/EdgeConnectionContextType';
-import { resourceTypes } from '../../../domain/types/resourceTypes';
+import { ResourceType } from '../../../domain/types/ResourceType';
 import { DTO } from '../../../types/DTO';
 
 // type is the same for all, use map to mix this in below
@@ -18,7 +18,7 @@ const dtosWithoutTypeProperty: DTO<Omit<EdgeConnection, 'type'>>[] = [
             {
                 role: EdgeConnectionMemberRole.from,
                 compositeIdentifier: {
-                    type: resourceTypes.mediaItem,
+                    type: ResourceType.mediaItem,
                     id: '1',
                 },
                 context: new TimeRangeContext({
@@ -32,7 +32,7 @@ const dtosWithoutTypeProperty: DTO<Omit<EdgeConnection, 'type'>>[] = [
             {
                 role: EdgeConnectionMemberRole.to,
                 compositeIdentifier: {
-                    type: resourceTypes.term,
+                    type: ResourceType.term,
                     id: '2',
                 },
                 context: new TextFieldContext({

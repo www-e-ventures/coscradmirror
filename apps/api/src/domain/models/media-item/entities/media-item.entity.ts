@@ -9,7 +9,7 @@ import {
 import { InternalError } from '../../../../lib/errors/InternalError';
 import { DTO } from '../../../../types/DTO';
 import { Valid } from '../../../domainModelValidators/Valid';
-import { resourceTypes } from '../../../types/resourceTypes';
+import { ResourceType } from '../../../types/ResourceType';
 import { TextFieldContext } from '../../context/text-field-context/text-field-context.entity';
 import { TimeRangeContext } from '../../context/time-range-context/time-range-context.entity';
 import { ITimeBoundable } from '../../interfaces/ITimeBoundable';
@@ -20,8 +20,8 @@ import { ContributorAndRole } from '../../song/ContributorAndRole';
 import { MIMEType } from '../types/MIMEType';
 
 export class MediaItem extends Resource implements ITimeBoundable {
-    @IsStrictlyEqualTo(resourceTypes.mediaItem)
-    readonly type = resourceTypes.mediaItem;
+    @IsStrictlyEqualTo(ResourceType.mediaItem)
+    readonly type = ResourceType.mediaItem;
 
     @IsStringWithNonzeroLength()
     readonly title?: string;
