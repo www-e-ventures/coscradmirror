@@ -65,7 +65,7 @@ export default <TResource extends Resource>(
             // @ts-expect-error TODO fix this tricky type error
             return buildInstanceFactory<Song>(songValidator, Song);
 
-        case resourceTypes.mediaItem:
+        case ResourceType.mediaItem:
             // @ts-expect-error TODO fix this tricky type error
             return buildInstanceFactory<MediaItem>(mediaItemValidator, MediaItem);
 

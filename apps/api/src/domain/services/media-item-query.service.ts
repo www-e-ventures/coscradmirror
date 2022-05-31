@@ -15,7 +15,7 @@ import { Tag } from '../models/tag/tag.entity';
 import { ISpecification } from '../repositories/interfaces/ISpecification';
 import IsPublished from '../repositories/specifications/isPublished';
 import { isResourceId } from '../types/ResourceId';
-import { resourceTypes } from '../types/resourceTypes';
+import { ResourceType } from '../types/ResourceType';
 
 type GeneralQueryOptions = ViewModelBuilderOptions;
 
@@ -37,7 +37,7 @@ export class MediaItemQueryService {
         };
 
         const searchResult = await this.repositoryProvider
-            .forResource<MediaItem>(resourceTypes.mediaItem)
+            .forResource<MediaItem>(ResourceType.mediaItem)
             .fetchById(id);
 
         if (isInternalError(searchResult)) {
@@ -61,7 +61,7 @@ export class MediaItemQueryService {
         specification: ISpecification<MediaItem> = new IsPublished(true)
     ): Promise<MediaItemViewModel[]> {
         const searchResult = await this.repositoryProvider
-            .forResource<MediaItem>(resourceTypes.mediaItem)
+            .forResource<MediaItem>(ResourceType.mediaItem)
             .fetchMany(specification);
 
         const validModels = searchResult.filter(
@@ -99,7 +99,7 @@ export class MediaItemQueryService {
         const allTags = result as Tag[];
 
         const mixinTags = (viewModel: MediaItemViewModel) =>
-            mixTagsIntoViewModel<MediaItemViewModel>(viewModel, allTags, resourceTypes.mediaItem);
+            mixTagsIntoViewModel<MediaItemViewModel>(viewModel, allTags, ResourceType.mediaItem);
 
         return Array.isArray(viewModelOrViewModels)
             ? viewModelOrViewModels.map(mixinTags)

@@ -1,5 +1,6 @@
 import { Tag } from '../domain/models/tag/tag.entity';
 import { CategorizableType } from '../domain/types/CategorizableType';
+import { ResourceType } from '../domain/types/ResourceType';
 import { DTO } from '../types/DTO';
 
 const allTagsDTOs: DTO<Tag>[] = [
@@ -132,7 +133,7 @@ const allTagsDTOs: DTO<Tag>[] = [
                 id: '1',
             },
             {
-                type: resourceTypes.mediaItem,
+                type: ResourceType.mediaItem,
                 id: '1',
             },
         ],

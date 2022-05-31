@@ -50,7 +50,7 @@ const resourceDescriptions: ResourceDescription[] = [
         description: 'A song includes lyrics and url link to audio recording.',
     },
     {
-        resourceType: resourceTypes.mediaItem,
+        resourceType: ResourceType.mediaItem,
         description: 'A media item includes a link to and data for an audio or video recording',
     },
 ];

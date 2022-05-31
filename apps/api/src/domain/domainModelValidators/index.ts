@@ -38,7 +38,7 @@ export const getValidatorForEntity = (resourceType: ResourceType): DomainModelVa
         case ResourceType.song:
             return songValidator;
 
-        case resourceTypes.mediaItem:
+        case ResourceType.mediaItem:
             return mediaItemValidator;
 
         default:

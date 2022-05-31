@@ -2,7 +2,7 @@ import { isStringWithNonzeroLength } from '@coscrad/validation';
 import { InternalError } from '../../lib/errors/InternalError';
 import { MediaItem } from '../models/media-item/entities/media-item.entity';
 import { EntityId } from '../types/ResourceId';
-import { resourceTypes } from '../types/resourceTypes';
+import { ResourceType } from '../types/ResourceType';
 import { isNullOrUndefined } from '../utilities/validation/is-null-or-undefined';
 import InvalidEntityDTOError from './errors/InvalidEntityDTOError';
 import MediaItemHasNoTitleInAnyLanguageError from './errors/mediaItem/MediaItemHasNoTitleInAnyLanguageError';
@@ -12,10 +12,10 @@ import validateSimpleInvariants from './utilities/validateSimpleInvariants';
 import { Valid } from './Valid';
 
 const buildTopLevelError = (id: EntityId, innerErrors: InternalError[]): InternalError =>
-    new InvalidEntityDTOError(resourceTypes.mediaItem, id, innerErrors);
+    new InvalidEntityDTOError(ResourceType.mediaItem, id, innerErrors);
 
 const mediaItemValidator: DomainModelValidator = (dto: unknown) => {
-    if (isNullOrUndefined(dto)) return new NullOrUndefinedResourceDTOError(resourceTypes.mediaItem);
+    if (isNullOrUndefined(dto)) return new NullOrUndefinedResourceDTOError(ResourceType.mediaItem);
 
     const { id, title, titleEnglish } = dto as MediaItem;
 

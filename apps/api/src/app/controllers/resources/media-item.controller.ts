@@ -1,18 +1,20 @@
-import { Controller, Get, Param, Res } from '@nestjs/common';
+import { Controller, Get, Param, Res, UseFilters } from '@nestjs/common';
 import { ApiOkResponse, ApiParam, ApiTags } from '@nestjs/swagger';
 import { MediaItemQueryService } from '../../../domain/services/media-item-query.service';
-import { resourceTypes } from '../../../domain/types/resourceTypes';
+import { ResourceType } from '../../../domain/types/ResourceType';
 import { isInternalError } from '../../../lib/errors/InternalError';
 import { isNotFound } from '../../../lib/types/not-found';
 import { MediaItemViewModel } from '../../../view-models/buildViewModelForResource/viewModels/media-item.view-model';
 import httpStatusCodes from '../../constants/httpStatusCodes';
+import { InternalErrorFilter } from '../exception-handling/exception-filters/internal-error.filter';
 import { buildByIdApiParamMetadata, RESOURCES_ROUTE_PREFIX } from '../resourceViewModel.controller';
 import buildViewModelPathForResourceType from '../utilities/buildViewModelPathForResourceType';
 
 @ApiTags(RESOURCES_ROUTE_PREFIX)
 @Controller(
-    `${RESOURCES_ROUTE_PREFIX}/${buildViewModelPathForResourceType(resourceTypes.mediaItem)}`
+    `${RESOURCES_ROUTE_PREFIX}/${buildViewModelPathForResourceType(ResourceType.mediaItem)}`
 )
+@UseFilters(new InternalErrorFilter())
 export class MediaItemController {
     constructor(private mediaItemQueryService: MediaItemQueryService) {}
     @ApiParam(buildByIdApiParamMetadata())

@@ -193,7 +193,7 @@ const edgeConnectionDTOs: Omit<DTO<EdgeConnection>, 'type' | 'id'>[] = [
                 role,
                 compositeIdentifier: {
                     id: '1',
-                    type: resourceTypes.mediaItem,
+                    type: ResourceType.mediaItem,
                 },
                 context: new TextFieldContext({
                     target: 'title',
@@ -210,7 +210,7 @@ const edgeConnectionDTOs: Omit<DTO<EdgeConnection>, 'type' | 'id'>[] = [
                 role,
                 compositeIdentifier: {
                     id: '1',
-                    type: resourceTypes.mediaItem,
+                    type: ResourceType.mediaItem,
                 },
                 context: new TimeRangeContext({
                     type: EdgeConnectionContextType.timeRange,
