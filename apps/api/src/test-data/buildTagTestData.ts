@@ -1,6 +1,6 @@
 import { noteType } from '../domain/models/categories/types/ResourceTypeOrNoteType';
 import { Tag } from '../domain/models/tag/tag.entity';
-import { resourceTypes } from '../domain/types/resourceTypes';
+import { ResourceType } from '../domain/types/ResourceType';
 import { DTO } from '../types/DTO';
 
 const allTagsDTOs: DTO<Tag>[] = [
@@ -9,23 +9,23 @@ const allTagsDTOs: DTO<Tag>[] = [
         label: 'plants',
         members: [
             {
-                type: resourceTypes.term,
+                type: ResourceType.term,
                 id: '1',
             },
             {
-                type: resourceTypes.book,
+                type: ResourceType.book,
                 id: '23',
             },
             {
-                type: resourceTypes.book,
+                type: ResourceType.book,
                 id: '24',
             },
             {
-                type: resourceTypes.vocabularyList,
+                type: ResourceType.vocabularyList,
                 id: '1',
             },
             {
-                type: resourceTypes.spatialFeature,
+                type: ResourceType.spatialFeature,
                 id: '100',
             },
             {
@@ -47,15 +47,15 @@ const allTagsDTOs: DTO<Tag>[] = [
         label: 'animals',
         members: [
             {
-                type: resourceTypes.term,
+                type: ResourceType.term,
                 id: '2',
             },
             {
-                type: resourceTypes.term,
+                type: ResourceType.term,
                 id: '3',
             },
             {
-                type: resourceTypes.spatialFeature,
+                type: ResourceType.spatialFeature,
                 id: '102',
             },
             {
@@ -67,7 +67,7 @@ const allTagsDTOs: DTO<Tag>[] = [
                 id: '7',
             },
             {
-                type: resourceTypes.bibliographicReference,
+                type: ResourceType.bibliographicReference,
                 id: '1',
             },
         ],
@@ -77,11 +77,11 @@ const allTagsDTOs: DTO<Tag>[] = [
         label: 'placenames',
         members: [
             {
-                type: resourceTypes.photograph,
+                type: ResourceType.photograph,
                 id: '0',
             },
             {
-                type: resourceTypes.transcribedAudio,
+                type: ResourceType.transcribedAudio,
                 id: '110',
             },
             {
@@ -99,7 +99,7 @@ const allTagsDTOs: DTO<Tag>[] = [
         label: 'songs',
         members: [
             {
-                type: resourceTypes.photograph,
+                type: ResourceType.photograph,
                 id: '1',
             },
             {
@@ -117,11 +117,11 @@ const allTagsDTOs: DTO<Tag>[] = [
         label: 'legends',
         members: [
             {
-                type: resourceTypes.vocabularyList,
+                type: ResourceType.vocabularyList,
                 id: '2',
             },
             {
-                type: resourceTypes.spatialFeature,
+                type: ResourceType.spatialFeature,
                 id: '101',
             },
             {

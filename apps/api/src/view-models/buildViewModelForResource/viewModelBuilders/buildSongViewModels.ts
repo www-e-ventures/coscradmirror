@@ -1,6 +1,6 @@
 import { Song } from '../../../domain/models/song/song.entity';
 import IsPublished from '../../../domain/repositories/specifications/isPublished';
-import { resourceTypes } from '../../../domain/types/resourceTypes';
+import { ResourceType } from '../../../domain/types/ResourceType';
 import { isInternalError } from '../../../lib/errors/InternalError';
 import { SongViewModel } from '../viewModels/song.view-model';
 import { ViewModelBuilderDependencies } from './types/ViewModelBuilderDependencies';
@@ -22,7 +22,7 @@ export default async (
 
     const isPublishedSpecification = shouldReturnUnpublishedEntities ? null : new IsPublished(true);
 
-    const songRepository = repositoryProvider.forResource<Song>(resourceTypes.song);
+    const songRepository = repositoryProvider.forResource<Song>(ResourceType.song);
 
     const searchResult = await songRepository.fetchMany(isPublishedSpecification);
 

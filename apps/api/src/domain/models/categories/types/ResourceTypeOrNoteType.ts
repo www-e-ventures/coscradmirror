@@ -1,4 +1,4 @@
-import { isResourceType, ResourceType } from '../../../types/resourceTypes';
+import { isResourceType, ResourceType } from '../../../types/ResourceType';
 
 export const noteType = 'note';
 

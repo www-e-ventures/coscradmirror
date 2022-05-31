@@ -7,7 +7,7 @@ import {
 import { PageRangeContext } from '../../../domain/models/context/page-range-context/page-range.context.entity';
 import { TimeRangeContext } from '../../../domain/models/context/time-range-context/time-range-context.entity';
 import { EdgeConnectionContextType } from '../../../domain/models/context/types/EdgeConnectionContextType';
-import { resourceTypes } from '../../../domain/types/resourceTypes';
+import { ResourceType } from '../../../domain/types/ResourceType';
 import { DTO } from '../../../types/DTO';
 import { ArangoEdgeDocument } from '../types/ArangoEdgeDocument';
 import mapEdgeConnectionDTOToArangoEdgeDocument from './mapEdgeConnectionDTOToArangoEdgeDocument';
@@ -27,7 +27,7 @@ const selfEdgeConnection = {
             role: EdgeConnectionMemberRole.self,
             compositeIdentifier: {
                 id: '24',
-                type: resourceTypes.book,
+                type: ResourceType.book,
             },
             context: new PageRangeContext({
                 type: EdgeConnectionContextType.pageRange,
@@ -46,7 +46,7 @@ const buildValidBookEdgeConnectionMember = (
     role: EdgeConnectionMemberRole
 ): EdgeConnectionMember<PageRangeContext> => ({
     compositeIdentifier: {
-        type: resourceTypes.book,
+        type: ResourceType.book,
         id: '1123',
     },
     role,
@@ -66,7 +66,7 @@ const buildValidTranscribedAudioConnectionMember = (
     role: EdgeConnectionMemberRole
 ): EdgeConnectionMember<TimeRangeContext> => ({
     compositeIdentifier: {
-        type: resourceTypes.transcribedAudio,
+        type: ResourceType.transcribedAudio,
         id: '15',
     },
     role,

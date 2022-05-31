@@ -1,5 +1,5 @@
 import { DTO } from '../../../types/DTO';
-import { resourceTypes } from '../../types/resourceTypes';
+import { ResourceType } from '../../types/ResourceType';
 import { Resource } from '../resource.entity';
 import { IGeometricFeature } from './GeometricFeature';
 import { ISpatialFeature } from './ISpatialFeature';
@@ -7,12 +7,12 @@ import { PolygonCoordinates } from './types/Coordinates/PolygonCoordinates';
 import { GeometricFeatureType } from './types/GeometricFeatureType';
 
 export class Polygon extends Resource implements ISpatialFeature {
-    readonly type = resourceTypes.spatialFeature;
+    readonly type = ResourceType.spatialFeature;
 
     readonly geometry: IGeometricFeature<typeof GeometricFeatureType.polygon, PolygonCoordinates>;
 
     constructor(dto: DTO<Polygon>) {
-        super({ ...dto, type: resourceTypes.spatialFeature });
+        super({ ...dto, type: ResourceType.spatialFeature });
 
         const { geometry: geometryDTO } = dto;
 

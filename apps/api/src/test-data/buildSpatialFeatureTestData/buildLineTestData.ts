@@ -1,11 +1,11 @@
 import { Line } from '../../domain/models/spatial-feature/line.entity';
 import { GeometricFeatureType } from '../../domain/models/spatial-feature/types/GeometricFeatureType';
-import { resourceTypes } from '../../domain/types/resourceTypes';
+import { ResourceType } from '../../domain/types/ResourceType';
 import { DTO } from '../../types/DTO';
 
 const dtos: DTO<Line>[] = [
     {
-        type: resourceTypes.spatialFeature,
+        type: ResourceType.spatialFeature,
         published: true,
         id: '1',
         geometry: {

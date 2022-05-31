@@ -2,7 +2,7 @@ import { InternalError } from '../../../../lib/errors/InternalError';
 import { DTO } from '../../../../types/DTO';
 import { Category } from '../../../models/categories/entities/category.entity';
 import { noteType } from '../../../models/categories/types/ResourceTypeOrNoteType';
-import { resourceTypes } from '../../../types/resourceTypes';
+import { ResourceType } from '../../../types/ResourceType';
 import categoryValidator from '../../categoryValidator';
 import InvalidCategoryDTOError from '../../errors/category/InvalidCategoryDTOError';
 import InvalidCategoryMemberReferenceError from '../../errors/category/InvalidCategoryMemberReferenceError';
@@ -28,7 +28,7 @@ const validDTO: DTO<Category> = {
             id: '55',
         },
         {
-            type: resourceTypes.book,
+            type: ResourceType.book,
             id: '123',
         },
     ],

@@ -8,7 +8,7 @@ import {
 } from '../../domain/models/context/edge-connection.entity';
 import { Tag } from '../../domain/models/tag/tag.entity';
 import { isResourceId } from '../../domain/types/ResourceId';
-import { isResourceType, ResourceType, resourceTypes } from '../../domain/types/resourceTypes';
+import { isResourceType, ResourceType } from '../../domain/types/ResourceType';
 import { InternalError, isInternalError } from '../../lib/errors/InternalError';
 import cloneToPlainObject from '../../lib/utilities/cloneToPlainObject';
 import { RepositoryProvider } from '../../persistence/repositories/repository.provider';
@@ -52,7 +52,7 @@ export class EdgeConnectionController {
 
     @ApiQuery({
         name: 'type',
-        enum: Object.values(resourceTypes),
+        enum: Object.values(ResourceType),
     })
     @Get('selfNotes')
     async fetchResourceSelfConnections(
@@ -94,7 +94,7 @@ export class EdgeConnectionController {
 
     @ApiQuery({
         name: 'type',
-        enum: Object.values(resourceTypes),
+        enum: Object.values(ResourceType),
     })
     @Get('forResource')
     async fetchConnectionsForResource(

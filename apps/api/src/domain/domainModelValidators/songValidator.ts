@@ -3,7 +3,7 @@ import { InternalError } from '../../lib/errors/InternalError';
 import { DTO } from '../../types/DTO';
 import { Song } from '../models/song/song.entity';
 import { EntityId } from '../types/ResourceId';
-import { resourceTypes } from '../types/resourceTypes';
+import { ResourceType } from '../types/ResourceType';
 import { isNullOrUndefined } from '../utilities/validation/is-null-or-undefined';
 import InvalidEntityDTOError from './errors/InvalidEntityDTOError';
 import NullOrUndefinedResourceDTOError from './errors/NullOrUndefinedResourceDTOError';
@@ -12,10 +12,10 @@ import validateSimpleInvariants from './utilities/validateSimpleInvariants';
 import { Valid } from './Valid';
 
 const buildTopLevelError = (id: EntityId, innerErrors: InternalError[]) =>
-    new InvalidEntityDTOError(resourceTypes.song, id, innerErrors);
+    new InvalidEntityDTOError(ResourceType.song, id, innerErrors);
 
 const songValidator: DomainModelValidator = (dto: unknown): Valid | InternalError => {
-    if (isNullOrUndefined(dto)) return new NullOrUndefinedResourceDTOError(resourceTypes.song);
+    if (isNullOrUndefined(dto)) return new NullOrUndefinedResourceDTOError(ResourceType.song);
 
     const allErrors: InternalError[] = [];
 

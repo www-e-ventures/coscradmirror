@@ -3,7 +3,7 @@ import BibliographicReferenceCreator from '../../../../../models/bibliographic-r
 import { JournalArticleBibliographicReference } from '../../../../../models/bibliographic-reference/entities/journal-article-bibliographic-reference.entity';
 import { BibliographicReferenceType } from '../../../../../models/bibliographic-reference/types/BibliographicReferenceType';
 import { EntityId } from '../../../../../types/ResourceId';
-import { resourceTypes } from '../../../../../types/resourceTypes';
+import { ResourceType } from '../../../../../types/ResourceType';
 import InvalidEntityDTOError from '../../../../errors/InvalidEntityDTOError';
 import { DomainModelValidatorInvalidTestCase } from '../../../types/DomainModelValidatorTestCase';
 import getValidBibliographicReferenceInstanceForTest from '../utils/getValidBibliographicReferenceInstanceForTest';
@@ -13,7 +13,7 @@ const validDto = getValidBibliographicReferenceInstanceForTest(
 );
 
 const buildTopLevelError = (id: EntityId, innerErrors: InternalError[]): InternalError =>
-    new InvalidEntityDTOError(resourceTypes.bibliographicReference, id, innerErrors);
+    new InvalidEntityDTOError(ResourceType.bibliographicReference, id, innerErrors);
 
 export const buildJournalArticleBibliographicReferenceTestCases =
     (): DomainModelValidatorInvalidTestCase<JournalArticleBibliographicReference>[] => [

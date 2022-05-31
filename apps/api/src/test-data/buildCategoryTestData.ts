@@ -1,6 +1,6 @@
 import { Category } from '../domain/models/categories/entities/category.entity';
 import { noteType } from '../domain/models/categories/types/ResourceTypeOrNoteType';
-import { resourceTypes } from '../domain/types/resourceTypes';
+import { ResourceType } from '../domain/types/ResourceType';
 
 export default (): Category[] =>
     [
@@ -15,7 +15,7 @@ export default (): Category[] =>
             label: 'animals',
             members: [
                 {
-                    type: resourceTypes.vocabularyList,
+                    type: ResourceType.vocabularyList,
                     id: '1',
                 },
             ],
@@ -26,11 +26,11 @@ export default (): Category[] =>
             label: 'mammals',
             members: [
                 {
-                    type: resourceTypes.term,
+                    type: ResourceType.term,
                     id: '1',
                 },
                 {
-                    type: resourceTypes.book,
+                    type: ResourceType.book,
                     id: '23',
                 },
             ],
@@ -47,7 +47,7 @@ export default (): Category[] =>
             label: 'canines',
             members: [
                 {
-                    type: resourceTypes.term,
+                    type: ResourceType.term,
                     id: '2',
                 },
             ],
@@ -70,11 +70,11 @@ export default (): Category[] =>
             label: 'domestic cats',
             members: [
                 {
-                    type: resourceTypes.vocabularyList,
+                    type: ResourceType.vocabularyList,
                     id: '2',
                 },
                 {
-                    type: resourceTypes.photograph,
+                    type: ResourceType.photograph,
                     id: '0',
                 },
             ],
@@ -85,7 +85,7 @@ export default (): Category[] =>
             label: 'wolves',
             members: [
                 {
-                    type: resourceTypes.spatialFeature,
+                    type: ResourceType.spatialFeature,
                     id: '101',
                 },
             ],
@@ -96,15 +96,15 @@ export default (): Category[] =>
             label: 'songs',
             members: [
                 {
-                    type: resourceTypes.term,
+                    type: ResourceType.term,
                     id: '3',
                 },
                 {
-                    type: resourceTypes.spatialFeature,
+                    type: ResourceType.spatialFeature,
                     id: '102',
                 },
                 {
-                    type: resourceTypes.bibliographicReference,
+                    type: ResourceType.bibliographicReference,
                     id: '1',
                 },
             ],
@@ -115,7 +115,7 @@ export default (): Category[] =>
             label: 'domestic dogs',
             members: [
                 {
-                    type: resourceTypes.photograph,
+                    type: ResourceType.photograph,
                     id: '1',
                 },
             ],
@@ -126,7 +126,7 @@ export default (): Category[] =>
             label: 'rodents',
             members: [
                 {
-                    type: resourceTypes.book,
+                    type: ResourceType.book,
                     id: '24',
                 },
             ],
@@ -155,7 +155,7 @@ export default (): Category[] =>
             label: 'tools',
             members: [
                 {
-                    type: resourceTypes.transcribedAudio,
+                    type: ResourceType.transcribedAudio,
                     id: '110',
                 },
             ],

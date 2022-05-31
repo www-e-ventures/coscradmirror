@@ -1,6 +1,6 @@
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { resourceTypes } from '../../../domain/types/resourceTypes';
+import { ResourceType } from '../../../domain/types/ResourceType';
 import { ArangoConnectionProvider } from '../../../persistence/database/arango-connection.provider';
 import generateRandomTestDatabaseName from '../../../persistence/repositories/__tests__/generateRandomTestDatabaseName';
 import { ResourceDescriptionAndLink } from '../../../view-models/resourceDescriptions/buildAllResourceDescriptions';
@@ -32,7 +32,7 @@ describe('GET /resources', () => {
         const body = result.body as ResourceDescriptionAndLink[];
 
         // TODO [optimization]: avoid loop within loop here
-        const isThereAnEntryForEveryResourceType = Object.values(resourceTypes).every(
+        const isThereAnEntryForEveryResourceType = Object.values(ResourceType).every(
             (resourceType) =>
                 body.some(
                     ({ resourceType: responseResourceType }) =>

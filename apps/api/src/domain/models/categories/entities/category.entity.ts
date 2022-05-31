@@ -6,7 +6,7 @@ import { Valid } from '../../../domainModelValidators/Valid';
 import { HasEntityIdAndLabel } from '../../../interfaces/HasEntityIdAndLabel';
 import { ValidatesExternalState } from '../../../interfaces/ValidatesExternalState';
 import { EntityId } from '../../../types/ResourceId';
-import { InMemorySnapshot } from '../../../types/resourceTypes';
+import { InMemorySnapshot } from '../../../types/ResourceType';
 import validateEntityReferencesAgainstExternalState from '../../../utilities/validation/validateEntityReferencesAgainstExternalState';
 import BaseDomainModel from '../../BaseDomainModel';
 import ChildCategoryDoesNotExistError from '../errors/ChildCategoryDoesNotExistError';

@@ -1,5 +1,5 @@
 import InconsistentTimeRangeError from '../../../domainModelValidators/errors/context/invalidContextStateErrors/timeRangeContext/InconsistentTimeRangeError';
-import { resourceTypes } from '../../../types/resourceTypes';
+import { ResourceType } from '../../../types/ResourceType';
 import {
     TimeRangeContext,
     TimeRangeWithoutData,
@@ -9,7 +9,7 @@ import { ResourceModelContextStateValidatorInvalidTestCase } from '../resourceMo
 import buildAllInvalidTestCasesForResource from '../utilities/buildAllInconsistentContextTypeTestCases';
 import buildAllValidTestCasesForResource from '../utilities/buildAllValidTestCasesForResource';
 
-const validCases = buildAllValidTestCasesForResource(resourceTypes.transcribedAudio);
+const validCases = buildAllValidTestCasesForResource(ResourceType.transcribedAudio);
 
 const validAudioStartPoint = 100;
 
@@ -28,7 +28,7 @@ const timeRangeWithInvalidInPoint: TimeRangeWithoutData = {
 };
 
 const invalidCases: ResourceModelContextStateValidatorInvalidTestCase[] = [
-    ...buildAllInvalidTestCasesForResource(resourceTypes.transcribedAudio),
+    ...buildAllInvalidTestCasesForResource(ResourceType.transcribedAudio),
     {
         description: `the out point of the time range context is too big`,
         resource: validTranscribedAudio,

@@ -1,7 +1,7 @@
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { Resource } from '../../../domain/models/resource.entity';
-import { InMemorySnapshotOfResources, resourceTypes } from '../../../domain/types/resourceTypes';
+import { InMemorySnapshotOfResources, ResourceType } from '../../../domain/types/ResourceType';
 import { ArangoConnectionProvider } from '../../../persistence/database/arango-connection.provider';
 import generateRandomTestDatabaseName from '../../../persistence/repositories/__tests__/generateRandomTestDatabaseName';
 import TestRepositoryProvider from '../../../persistence/repositories/__tests__/TestRepositoryProvider';
@@ -44,7 +44,7 @@ describe('When fetching multiple resources', () => {
         }));
     });
 
-    Object.values(resourceTypes).forEach((ResourceType) => {
+    Object.values(ResourceType).forEach((ResourceType) => {
         const endpointUnderTest = `/${buildViewModelPathForResourceType(ResourceType)}`;
 
         describe(`GET ${endpointUnderTest}`, () => {

@@ -1,14 +1,14 @@
 import { InternalError } from '../../../../lib/errors/InternalError';
 import { DTO } from '../../../../types/DTO';
 import { Valid } from '../../../domainModelValidators/Valid';
-import { resourceTypes } from '../../../types/resourceTypes';
+import { ResourceType } from '../../../types/ResourceType';
 import { TimeRangeContext } from '../../context/time-range-context/time-range-context.entity';
 import { Resource } from '../../resource.entity';
 import validateTimeRangeContextForModel from '../../shared/contextValidators/validateTimeRangeContextForModel';
 import { Transcript } from './Transcript';
 
 export class TranscribedAudio extends Resource {
-    readonly type = resourceTypes.transcribedAudio;
+    readonly type = ResourceType.transcribedAudio;
 
     readonly audioFilename: string;
 
@@ -20,7 +20,7 @@ export class TranscribedAudio extends Resource {
     readonly transcript: Transcript;
 
     constructor(dto: DTO<TranscribedAudio>) {
-        super({ ...dto, type: resourceTypes.transcribedAudio });
+        super({ ...dto, type: ResourceType.transcribedAudio });
 
         const {
             audioFilename,

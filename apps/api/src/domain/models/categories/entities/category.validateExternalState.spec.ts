@@ -3,7 +3,7 @@ import buildTestData from '../../../../test-data/buildTestData';
 import { DeepPartial } from '../../../../types/DeepPartial';
 import { Valid } from '../../../domainModelValidators/Valid';
 import { HasEntityIdAndLabel } from '../../../interfaces/HasEntityIdAndLabel';
-import { InMemorySnapshot, resourceTypes } from '../../../types/resourceTypes';
+import { InMemorySnapshot, ResourceType } from '../../../types/ResourceType';
 import { Term } from '../../term/entities/term.entity';
 import ChildCategoryDoesNotExistError from '../errors/ChildCategoryDoesNotExistError';
 import InvalidExternalReferenceInCategoryError from '../errors/InvalidExternalReferenceInCategoryError';
@@ -23,7 +23,7 @@ const validCategory = new Category({
     label: 'mammals',
     members: [
         {
-            type: resourceTypes.book,
+            type: ResourceType.book,
             id: '44',
         },
         {

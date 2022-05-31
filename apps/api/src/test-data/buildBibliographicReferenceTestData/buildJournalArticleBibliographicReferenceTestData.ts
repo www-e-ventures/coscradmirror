@@ -2,12 +2,12 @@ import { JournalArticleBibliographicReference } from '../../domain/models/biblio
 import { IBibliographicReference } from '../../domain/models/bibliographic-reference/interfaces/IBibliographicReference';
 import { BibliographicReferenceType } from '../../domain/models/bibliographic-reference/types/BibliographicReferenceType';
 import { CreatorType } from '../../domain/models/bibliographic-reference/types/CreatorType';
-import { resourceTypes } from '../../domain/types/resourceTypes';
+import { ResourceType } from '../../domain/types/ResourceType';
 import { DTO } from '../../types/DTO';
 
 const dtos: DTO<JournalArticleBibliographicReference>[] = [
     {
-        type: resourceTypes.bibliographicReference,
+        type: ResourceType.bibliographicReference,
         data: {
             type: BibliographicReferenceType.journalArticle,
             title: 'Report on the Cariboo Chilcotin Justice inquiry',

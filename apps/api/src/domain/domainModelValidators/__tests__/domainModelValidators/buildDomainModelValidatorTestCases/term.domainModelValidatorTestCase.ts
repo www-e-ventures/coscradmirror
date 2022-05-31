@@ -2,14 +2,14 @@ import { EntityId } from '../../../../../domain/types/ResourceId';
 import { InternalError } from '../../../../../lib/errors/InternalError';
 import { DTO } from '../../../../../types/DTO';
 import { Term } from '../../../../models/term/entities/term.entity';
-import { resourceTypes } from '../../../../types/resourceTypes';
+import { ResourceType } from '../../../../types/ResourceType';
 import InvalidTermDTOError from '../../../errors/term/InvalidTermDTOError';
 import TermHasNoTextInAnyLanguageError from '../../../errors/term/TermHasNoTextInAnyLanguageError';
 import termValidator from '../../../termValidator';
 import { DomainModelValidatorTestCase } from '../../types/DomainModelValidatorTestCase';
 
 const validDTO: DTO<Term> = {
-    type: resourceTypes.term,
+    type: ResourceType.term,
     term: 'test term in language',
     termEnglish: 'test term in english',
     id: '123',
@@ -21,7 +21,7 @@ const buildTopLevelError = (termID: EntityId, innerErrors: InternalError[]): Int
     new InvalidTermDTOError(termID, innerErrors);
 
 export const buildTermTestCase = (): DomainModelValidatorTestCase<Term> => ({
-    resourceType: resourceTypes.term,
+    resourceType: ResourceType.term,
     validator: termValidator,
     validCases: [
         {

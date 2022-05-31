@@ -1,7 +1,7 @@
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { Resource } from '../../../domain/models/resource.entity';
-import { InMemorySnapshotOfResources, resourceTypes } from '../../../domain/types/resourceTypes';
+import { InMemorySnapshotOfResources, ResourceType } from '../../../domain/types/ResourceType';
 import { isInternalError } from '../../../lib/errors/InternalError';
 import { ArangoConnectionProvider } from '../../../persistence/database/arango-connection.provider';
 import generateRandomTestDatabaseName from '../../../persistence/repositories/__tests__/generateRandomTestDatabaseName';
@@ -45,7 +45,7 @@ describe('GET /resources (fetch view models)', () => {
         }));
     });
 
-    Object.values(resourceTypes).forEach((resourceType) => {
+    Object.values(ResourceType).forEach((resourceType) => {
         const endpointUnderTest = `/${buildViewModelPathForRe(resourceType)}`;
 
         const buildFullPathFromId = (id: string): string => `${endpointUnderTest}/${id}`;

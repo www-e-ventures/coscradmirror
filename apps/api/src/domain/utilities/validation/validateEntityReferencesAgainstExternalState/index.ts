@@ -4,7 +4,7 @@ import { DeepPartial } from '../../../../types/DeepPartial';
 import { Valid } from '../../../domainModelValidators/Valid';
 import { ResourceOrNoteCompositeIdentifier } from '../../../models/categories/types/ResourceOrNoteCompositeIdentifier';
 import { noteType } from '../../../models/categories/types/ResourceTypeOrNoteType';
-import { InMemorySnapshot } from '../../../types/resourceTypes';
+import { InMemorySnapshot } from '../../../types/ResourceType';
 
 type ErrorFactory = (invalidReferences: ResourceOrNoteCompositeIdentifier[]) => InternalError;
 

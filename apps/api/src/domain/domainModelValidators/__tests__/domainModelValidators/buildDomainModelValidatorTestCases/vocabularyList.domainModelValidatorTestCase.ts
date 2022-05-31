@@ -1,6 +1,6 @@
 import { InternalError } from '../../../../../lib/errors/InternalError';
 import { VocabularyList } from '../../../../models/vocabulary-list/entities/vocabulary-list.entity';
-import { resourceTypes } from '../../../../types/resourceTypes';
+import { ResourceType } from '../../../../types/ResourceType';
 import InvalidVocabularyListDTOError from '../../../errors/vocabularyList/InvalidVocabularyListDTOError';
 import VocabularyListHasNoEntriesError from '../../../errors/vocabularyList/VocabularyListHasNoEntriesError';
 import VocabularyListHasNoNameInAnyLanguageError from '../../../errors/vocabularyList/VocabularyListHasNoNameInAnyLanguageError';
@@ -8,15 +8,15 @@ import vocabularyListValidator from '../../../vocabularyListValidator';
 import { DomainModelValidatorTestCase } from '../../types/DomainModelValidatorTestCase';
 import getValidEntityInstaceForTest from '../utilities/getValidEntityInstaceForTest';
 
-const validVocabularyListDTO = getValidEntityInstaceForTest(resourceTypes.vocabularyList).toDTO();
+const validVocabularyListDTO = getValidEntityInstaceForTest(ResourceType.vocabularyList).toDTO();
 
 export const buildVocabularyListTestCase = (): DomainModelValidatorTestCase<VocabularyList> => ({
-    resourceType: resourceTypes.vocabularyList,
+    resourceType: ResourceType.vocabularyList,
     validator: vocabularyListValidator,
     validCases: [
         {
             dto: {
-                type: resourceTypes.vocabularyList,
+                type: ResourceType.vocabularyList,
                 variables: [],
                 name: 'vlist name in language',
                 nameEnglish: 'vlist name in English',

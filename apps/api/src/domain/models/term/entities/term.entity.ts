@@ -3,14 +3,14 @@ import { InternalError } from '../../../../lib/errors/InternalError';
 import { DTO } from '../../../../types/DTO';
 import { Valid } from '../../../domainModelValidators/Valid';
 import { EntityId } from '../../../types/ResourceId';
-import { ResourceType, resourceTypes } from '../../../types/resourceTypes';
+import { ResourceType } from '../../../types/ResourceType';
 import { isNullOrUndefined } from '../../../utilities/validation/is-null-or-undefined';
 import { TextFieldContext } from '../../context/text-field-context/text-field-context.entity';
 import { Resource } from '../../resource.entity';
 import validateTextFieldContextForModel from '../../shared/contextValidators/validateTextFieldContextForModel';
 
 export class Term extends Resource {
-    readonly type: ResourceType = resourceTypes.term;
+    readonly type: ResourceType = ResourceType.term;
 
     @IsOptional()
     @IsStringWithNonzeroLength()
@@ -35,7 +35,7 @@ export class Term extends Resource {
 
     // The constructor should only be called after validating the input DTO
     constructor(dto: DTO<Term>) {
-        super({ ...dto, type: resourceTypes.term });
+        super({ ...dto, type: ResourceType.term });
 
         // This should only happen in the validation context
         if (isNullOrUndefined(dto)) return;

@@ -1,6 +1,6 @@
 import DisallowedContextTypeForResourceError from '../../../domainModelValidators/errors/context/invalidContextStateErrors/DisallowedContextTypeForResourceError';
 import getValidEntityInstanceForTest from '../../../domainModelValidators/__tests__/domainModelValidators/utilities/getValidEntityInstaceForTest';
-import { ResourceType, ResourceTypeToInstance } from '../../../types/resourceTypes';
+import { ResourceType, ResourceTypeToInstance } from '../../../types/ResourceType';
 import isContextAllowedForGivenResourceType from '../../allowedContexts/isContextAllowedForGivenResourceType';
 import { EdgeConnectionContextType } from '../../context/types/EdgeConnectionContextType';
 import { ResourceModelContextStateValidatorInvalidTestCase } from '../resourceModelContextStateValidators.spec';

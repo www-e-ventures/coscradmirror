@@ -3,7 +3,7 @@ import * as request from 'supertest';
 import { isDeepStrictEqual } from 'util';
 import { EdgeConnectionType } from '../../../domain/models/context/edge-connection.entity';
 import { isResourceCompositeIdentifier } from '../../../domain/models/types/ResourceCompositeIdentifier';
-import { resourceTypes } from '../../../domain/types/resourceTypes';
+import { ResourceType } from '../../../domain/types/ResourceType';
 import { InternalError } from '../../../lib/errors/InternalError';
 import generateRandomTestDatabaseName from '../../../persistence/repositories/__tests__/generateRandomTestDatabaseName';
 import TestRepositoryProvider from '../../../persistence/repositories/__tests__/TestRepositoryProvider';
@@ -70,7 +70,7 @@ describe('When querying for edge connections', () => {
 
     describe(`GET /connections/selfNotes`, () => {
         describe(`when the resource composite id is valid`, () => {
-            Object.values(resourceTypes).forEach((resourceType) =>
+            Object.values(ResourceType).forEach((resourceType) =>
                 describe(`for a resource of type: ${resourceType}`, () => {
                     it(`should return the expected result`, async () => {
                         await testRepositoryProvider
@@ -133,7 +133,7 @@ describe('When querying for edge connections', () => {
                     .get('/connections/selfNotes')
                     .query({
                         id: { num: 8900 },
-                        type: resourceTypes.photograph,
+                        type: ResourceType.photograph,
                     })
                     .expect(httpStatusCodes.badRequest);
             });
@@ -159,7 +159,7 @@ describe('When querying for edge connections', () => {
                     .get('/connections/forResource')
                     .query({
                         id: { num: 8900 },
-                        type: resourceTypes.photograph,
+                        type: ResourceType.photograph,
                     })
                     .expect(httpStatusCodes.badRequest);
             });
@@ -178,7 +178,7 @@ describe('When querying for edge connections', () => {
         });
 
         describe(`when the composite id for the resource is valid`, () => {
-            Object.values(resourceTypes).forEach((resourceType) =>
+            Object.values(ResourceType).forEach((resourceType) =>
                 describe(`for a resource of type: ${resourceType}`, () => {
                     it(`should return the expected result`, async () => {
                         await testRepositoryProvider

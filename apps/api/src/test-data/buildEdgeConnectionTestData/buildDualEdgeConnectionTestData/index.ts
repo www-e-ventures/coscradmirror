@@ -6,7 +6,7 @@ import {
     EdgeConnectionType,
 } from '../../../domain/models/context/edge-connection.entity';
 import { EdgeConnectionContextType } from '../../../domain/models/context/types/EdgeConnectionContextType';
-import { resourceTypes } from '../../../domain/types/resourceTypes';
+import { ResourceType } from '../../../domain/types/ResourceType';
 import { InternalError } from '../../../lib/errors/InternalError';
 import formatResourceCompositeIdentifier from '../../../view-models/presentation/formatResourceCompositeIdentifier';
 import buildOneSelfEdgeConnectionForEachResourceType from '../buildSelfConnectionTestData/buildOneSelfEdgeConnectionForEachResourceType';
@@ -48,7 +48,7 @@ const generateComprehensiveDualEdgeConnectionTestData = (
                 ) || member.context.type !== EdgeConnectionContextType.general
         );
 
-    const oneToMemberOfEachResourceType = Object.values(resourceTypes).reduce(
+    const oneToMemberOfEachResourceType = Object.values(ResourceType).reduce(
         (allToMembers: EdgeConnectionMember[], resourceType) => {
             const firstSelfMemberOfGivenType = validSelfMembers.find(
                 ({ compositeIdentifier: { type } }) => type === resourceType

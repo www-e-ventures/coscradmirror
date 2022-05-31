@@ -11,7 +11,7 @@ import { Term } from '../../domain/models/term/entities/term.entity';
 import { TranscribedAudio } from '../../domain/models/transcribed-audio/entities/transcribed-audio.entity';
 import { VocabularyList } from '../../domain/models/vocabulary-list/entities/vocabulary-list.entity';
 import { isResourceId } from '../../domain/types/ResourceId';
-import { ResourceType, resourceTypes } from '../../domain/types/resourceTypes';
+import { ResourceType } from '../../domain/types/ResourceType';
 import { isInternalError } from '../../lib/errors/InternalError';
 import { isNotFound } from '../../lib/types/not-found';
 import cloneToPlainObject from '../../lib/utilities/cloneToPlainObject';
@@ -69,7 +69,7 @@ export class ResourceViewModelController {
 
     /* ********** TERMS ********** */
     @ApiOkResponse({ type: TermViewModel, isArray: true })
-    @Get(buildViewModelPathForResourceType(resourceTypes.term))
+    @Get(buildViewModelPathForResourceType(ResourceType.term))
     async fetchTerms(@Res() res) {
         const allTermViewModels = await buildTermViewModels({
             repositoryProvider: this.repositoryProvider,
@@ -81,12 +81,12 @@ export class ResourceViewModelController {
                 error: JSON.stringify(allTermViewModels),
             });
 
-        return await this.mixinTheTagsAndSend(res, allTermViewModels, resourceTypes.term);
+        return await this.mixinTheTagsAndSend(res, allTermViewModels, ResourceType.term);
     }
 
     @ApiParam(buildByIdApiParamMetadata())
     @ApiOkResponse({ type: TermViewModel })
-    @Get(`${buildViewModelPathForResourceType(resourceTypes.term)}/:id`)
+    @Get(`${buildViewModelPathForResourceType(ResourceType.term)}/:id`)
     async fetchTermById(@Res() res, @Param() params: unknown) {
         const { id } = params as HasViewModelId;
 
@@ -96,7 +96,7 @@ export class ResourceViewModelController {
             });
 
         const searchResult = await this.repositoryProvider
-            .forResource<Term>(resourceTypes.term)
+            .forResource<Term>(ResourceType.term)
             .fetchById(id);
 
         if (isInternalError(searchResult))
@@ -113,12 +113,12 @@ export class ResourceViewModelController {
             this.configService.get<string>('BASE_DIGITAL_ASSET_URL')
         );
 
-        return this.mixinTheTagsAndSend(res, termViewModel, resourceTypes.term);
+        return this.mixinTheTagsAndSend(res, termViewModel, ResourceType.term);
     }
 
     /* ********** VOCABULARY LISTS ********** */
     @ApiOkResponse({ type: VocabularyListViewModel, isArray: true })
-    @Get(buildViewModelPathForResourceType(resourceTypes.vocabularyList))
+    @Get(buildViewModelPathForResourceType(ResourceType.vocabularyList))
     async fetchVocabularyLists(@Res() res) {
         const allViewModels = await buildVocabularyListViewModels({
             repositoryProvider: this.repositoryProvider,
@@ -130,12 +130,12 @@ export class ResourceViewModelController {
                 error: JSON.stringify(allViewModels),
             });
 
-        return await this.mixinTheTagsAndSend(res, allViewModels, resourceTypes.vocabularyList);
+        return await this.mixinTheTagsAndSend(res, allViewModels, ResourceType.vocabularyList);
     }
 
     @ApiParam(buildByIdApiParamMetadata())
     @ApiOkResponse({ type: VocabularyListViewModel })
-    @Get(`${buildViewModelPathForResourceType(resourceTypes.vocabularyList)}/:id`)
+    @Get(`${buildViewModelPathForResourceType(ResourceType.vocabularyList)}/:id`)
     async fetchVocabularyListById(@Res() res, @Param() params: unknown) {
         const { id } = params as HasViewModelId;
 
@@ -148,10 +148,10 @@ export class ResourceViewModelController {
 
         const [vocabularyListSearchResult, allTerms] = await Promise.all([
             this.repositoryProvider
-                .forResource<VocabularyList>(resourceTypes.vocabularyList)
+                .forResource<VocabularyList>(ResourceType.vocabularyList)
                 .fetchById(id),
             this.repositoryProvider
-                .forResource<Term>(resourceTypes.term)
+                .forResource<Term>(ResourceType.term)
                 .fetchMany()
                 .then((allResults) =>
                     allResults.filter((result): result is Term => !isInternalError(result))
@@ -176,12 +176,12 @@ export class ResourceViewModelController {
             this.configService.get<string>('BASE_DIGITAL_ASSET_URL')
         );
 
-        return this.mixinTheTagsAndSend(res, viewModel, resourceTypes.vocabularyList);
+        return this.mixinTheTagsAndSend(res, viewModel, ResourceType.vocabularyList);
     }
 
     /* ********** TRANSCRIBED AUDIO ********** */
     @ApiOkResponse({ type: TranscribedAudioViewModel, isArray: true })
-    @Get(buildViewModelPathForResourceType(resourceTypes.transcribedAudio))
+    @Get(buildViewModelPathForResourceType(ResourceType.transcribedAudio))
     async fetchAudioViewModelsWithTranscripts(@Res() res) {
         const allViewModels = await buildTranscribedAudioViewModels({
             repositoryProvider: this.repositoryProvider,
@@ -193,12 +193,12 @@ export class ResourceViewModelController {
                 error: JSON.stringify(allViewModels),
             });
 
-        return await this.mixinTheTagsAndSend(res, allViewModels, resourceTypes.transcribedAudio);
+        return await this.mixinTheTagsAndSend(res, allViewModels, ResourceType.transcribedAudio);
     }
 
     @ApiParam(buildByIdApiParamMetadata())
     @ApiOkResponse({ type: TagViewModel })
-    @Get(`${buildViewModelPathForResourceType(resourceTypes.transcribedAudio)}/:id`)
+    @Get(`${buildViewModelPathForResourceType(ResourceType.transcribedAudio)}/:id`)
     async fetchTranscribedAudioById(@Res() res, @Param() params: unknown) {
         const { id } = params as HasViewModelId;
 
@@ -208,7 +208,7 @@ export class ResourceViewModelController {
             });
 
         const searchResult = await this.repositoryProvider
-            .forResource<TranscribedAudio>(resourceTypes.transcribedAudio)
+            .forResource<TranscribedAudio>(ResourceType.transcribedAudio)
             .fetchById(id);
 
         if (isInternalError(searchResult))
@@ -225,12 +225,12 @@ export class ResourceViewModelController {
             this.configService.get<string>('BASE_DIGITAL_ASSET_URL')
         );
 
-        return await this.mixinTheTagsAndSend(res, viewModel, resourceTypes.transcribedAudio);
+        return await this.mixinTheTagsAndSend(res, viewModel, ResourceType.transcribedAudio);
     }
 
     /* ********** BOOKS ********** */
     @ApiOkResponse({ type: BookViewModel, isArray: true })
-    @Get(buildViewModelPathForResourceType(resourceTypes.book))
+    @Get(buildViewModelPathForResourceType(ResourceType.book))
     async fetchBooks(@Res() res) {
         const allViewModels = await buildBookViewModels({
             repositoryProvider: this.repositoryProvider,
@@ -242,12 +242,12 @@ export class ResourceViewModelController {
                 error: JSON.stringify(allViewModels),
             });
 
-        return await this.mixinTheTagsAndSend(res, allViewModels, resourceTypes.book);
+        return await this.mixinTheTagsAndSend(res, allViewModels, ResourceType.book);
     }
 
     @ApiParam(buildByIdApiParamMetadata())
     @ApiOkResponse({ type: BookViewModel })
-    @Get(`${buildViewModelPathForResourceType(resourceTypes.book)}/:id`)
+    @Get(`${buildViewModelPathForResourceType(ResourceType.book)}/:id`)
     async fetchBookById(@Res() res, @Param() params: unknown) {
         const { id } = params as HasViewModelId;
 
@@ -257,7 +257,7 @@ export class ResourceViewModelController {
             });
 
         const searchResult = await this.repositoryProvider
-            .forResource<Book>(resourceTypes.book)
+            .forResource<Book>(ResourceType.book)
             .fetchById(id);
 
         if (isInternalError(searchResult))
@@ -271,12 +271,12 @@ export class ResourceViewModelController {
 
         const viewModel = new BookViewModel(searchResult);
 
-        return await this.mixinTheTagsAndSend(res, viewModel, resourceTypes.book);
+        return await this.mixinTheTagsAndSend(res, viewModel, ResourceType.book);
     }
 
     /* ********** PHOTOGRAPHS   ********** */
     @ApiOkResponse({ type: PhotographViewModel, isArray: true })
-    @Get(buildViewModelPathForResourceType(resourceTypes.photograph))
+    @Get(buildViewModelPathForResourceType(ResourceType.photograph))
     async fetchPhotographs(@Res() res) {
         const allViewModels = await buildPhotographViewModels({
             repositoryProvider: this.repositoryProvider,
@@ -288,12 +288,12 @@ export class ResourceViewModelController {
                 error: JSON.stringify(allViewModels),
             });
 
-        return await this.mixinTheTagsAndSend(res, allViewModels, resourceTypes.photograph);
+        return await this.mixinTheTagsAndSend(res, allViewModels, ResourceType.photograph);
     }
 
     @ApiParam(buildByIdApiParamMetadata())
     @ApiOkResponse({ type: PhotographViewModel })
-    @Get(`${buildViewModelPathForResourceType(resourceTypes.photograph)}/:id`)
+    @Get(`${buildViewModelPathForResourceType(ResourceType.photograph)}/:id`)
     async fetchPhotographById(@Res() res, @Param() params: unknown) {
         const { id } = params as HasViewModelId;
 
@@ -303,7 +303,7 @@ export class ResourceViewModelController {
             });
 
         const searchResult = await this.repositoryProvider
-            .forResource<Photograph>(resourceTypes.photograph)
+            .forResource<Photograph>(ResourceType.photograph)
             .fetchById(id);
 
         if (isInternalError(searchResult))
@@ -320,12 +320,12 @@ export class ResourceViewModelController {
             this.configService.get<string>('BASE_DIGITAL_ASSET_URL')
         );
 
-        return await this.mixinTheTagsAndSend(res, viewModel, resourceTypes.photograph);
+        return await this.mixinTheTagsAndSend(res, viewModel, ResourceType.photograph);
     }
 
     /* ********** SPATIAL FEATURE   ********** */
     @ApiOkResponse({ type: SpatialFeatureViewModel, isArray: true })
-    @Get(buildViewModelPathForResourceType(resourceTypes.spatialFeature))
+    @Get(buildViewModelPathForResourceType(ResourceType.spatialFeature))
     async fetchSpatialFeatures(@Res() res) {
         const allViewModels = await buildSpatialFeatureViewModels({
             repositoryProvider: this.repositoryProvider,
@@ -337,12 +337,12 @@ export class ResourceViewModelController {
                 error: JSON.stringify(allViewModels),
             });
 
-        return await this.mixinTheTagsAndSend(res, allViewModels, resourceTypes.spatialFeature);
+        return await this.mixinTheTagsAndSend(res, allViewModels, ResourceType.spatialFeature);
     }
 
     @ApiParam(buildByIdApiParamMetadata())
     @ApiOkResponse({ type: SpatialFeatureViewModel })
-    @Get(`${buildViewModelPathForResourceType(resourceTypes.spatialFeature)}/:id`)
+    @Get(`${buildViewModelPathForResourceType(ResourceType.spatialFeature)}/:id`)
     async fetchSpatialFeatureById(@Res() res, @Param() params: unknown) {
         const { id } = params as HasViewModelId;
 
@@ -352,7 +352,7 @@ export class ResourceViewModelController {
             });
 
         const searchResult = await this.repositoryProvider
-            .forResource<ISpatialFeature>(resourceTypes.spatialFeature)
+            .forResource<ISpatialFeature>(ResourceType.spatialFeature)
             .fetchById(id);
 
         if (isInternalError(searchResult))
@@ -366,12 +366,12 @@ export class ResourceViewModelController {
 
         const viewModel = new SpatialFeatureViewModel(searchResult);
 
-        return await this.mixinTheTagsAndSend(res, viewModel, resourceTypes.spatialFeature);
+        return await this.mixinTheTagsAndSend(res, viewModel, ResourceType.spatialFeature);
     }
 
     /* ********** BIBLIOGRAPHIC REFERENCE  ********** */
     @ApiOkResponse({ type: BibliographicReferenceViewModel, isArray: true })
-    @Get(buildViewModelPathForResourceType(resourceTypes.bibliographicReference))
+    @Get(buildViewModelPathForResourceType(ResourceType.bibliographicReference))
     async fetchBibliographicReferences(@Res() res) {
         const allViewModels = await buildBibliographicReferenceViewModels({
             repositoryProvider: this.repositoryProvider,
@@ -386,13 +386,13 @@ export class ResourceViewModelController {
         return await this.mixinTheTagsAndSend(
             res,
             allViewModels,
-            resourceTypes.bibliographicReference
+            ResourceType.bibliographicReference
         );
     }
 
     @ApiParam(buildByIdApiParamMetadata())
     @ApiOkResponse({ type: BibliographicReferenceViewModel })
-    @Get(`${buildViewModelPathForResourceType(resourceTypes.bibliographicReference)}/:id`)
+    @Get(`${buildViewModelPathForResourceType(ResourceType.bibliographicReference)}/:id`)
     async fetchBibliographicReferenceById(@Res() res, @Param() params: unknown) {
         const { id } = params as HasViewModelId;
 
@@ -402,7 +402,7 @@ export class ResourceViewModelController {
             });
 
         const searchResult = await this.repositoryProvider
-            .forResource<IBibliographicReference>(resourceTypes.bibliographicReference)
+            .forResource<IBibliographicReference>(ResourceType.bibliographicReference)
             .fetchById(id);
 
         if (isInternalError(searchResult))
@@ -416,24 +416,24 @@ export class ResourceViewModelController {
 
         const viewModel = new BibliographicReferenceViewModel(searchResult);
 
-        return await this.mixinTheTagsAndSend(res, viewModel, resourceTypes.bibliographicReference);
+        return await this.mixinTheTagsAndSend(res, viewModel, ResourceType.bibliographicReference);
     }
 
     /* ********** SONGS ********** */
     @ApiOkResponse({ type: SongViewModel, isArray: true })
-    @Get(buildViewModelPathForResourceType(resourceTypes.song))
+    @Get(buildViewModelPathForResourceType(ResourceType.song))
     async fetchSongs(@Res() res) {
         const allViewModels = await buildSongViewModels({
             repositoryProvider: this.repositoryProvider,
             configService: this.configService,
         });
 
-        await this.mixinTheTagsAndSend(res, allViewModels, resourceTypes.song);
+        await this.mixinTheTagsAndSend(res, allViewModels, ResourceType.song);
     }
 
     @ApiParam(buildByIdApiParamMetadata())
     @ApiOkResponse({ type: SongViewModel })
-    @Get(`${buildViewModelPathForResourceType(resourceTypes.song)}/:id`)
+    @Get(`${buildViewModelPathForResourceType(ResourceType.song)}/:id`)
     async fetchSongById(@Res() res, @Param() params: unknown) {
         const { id } = params as HasViewModelId;
 
@@ -443,7 +443,7 @@ export class ResourceViewModelController {
             });
 
         const searchResult = await this.repositoryProvider
-            .forResource<Song>(resourceTypes.song)
+            .forResource<Song>(ResourceType.song)
             .fetchById(id);
 
         if (isInternalError(searchResult))
@@ -457,7 +457,7 @@ export class ResourceViewModelController {
 
         const viewModel = new SongViewModel(searchResult);
 
-        await this.mixinTheTagsAndSend(res, viewModel, resourceTypes.song);
+        await this.mixinTheTagsAndSend(res, viewModel, ResourceType.song);
     }
 
     /**

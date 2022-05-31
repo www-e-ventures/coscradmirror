@@ -1,5 +1,5 @@
 import { Photograph } from '../domain/models/photograph/entities/photograph.entity';
-import { resourceTypes } from '../domain/types/resourceTypes';
+import { ResourceType } from '../domain/types/ResourceType';
 
 const dtos = [
     {
@@ -35,6 +35,6 @@ export default (): Photograph[] =>
                 ...dto,
                 id: `${index}`,
                 published: true,
-                type: resourceTypes.photograph,
+                type: ResourceType.photograph,
             })
     );

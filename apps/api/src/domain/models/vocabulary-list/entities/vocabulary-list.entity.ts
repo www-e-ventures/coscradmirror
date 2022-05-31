@@ -1,7 +1,7 @@
 import { InternalError } from '../../../../lib/errors/InternalError';
 import { DTO } from '../../../../types/DTO';
 import { Valid } from '../../../domainModelValidators/Valid';
-import { resourceTypes } from '../../../types/resourceTypes';
+import { ResourceType } from '../../../types/ResourceType';
 import { TextFieldContext } from '../../context/text-field-context/text-field-context.entity';
 import { Resource } from '../../resource.entity';
 import validateTextFieldContextForModel from '../../shared/contextValidators/validateTextFieldContextForModel';
@@ -9,7 +9,7 @@ import { VocabularyListEntry } from '../vocabulary-list-entry';
 import { VocabularyListVariable } from './vocabulary-list-variable.entity';
 
 export class VocabularyList extends Resource {
-    readonly type = resourceTypes.vocabularyList;
+    readonly type = ResourceType.vocabularyList;
 
     readonly name?: string;
 
@@ -20,7 +20,7 @@ export class VocabularyList extends Resource {
     readonly variables: VocabularyListVariable[];
 
     constructor(dto: DTO<VocabularyList>) {
-        super({ ...dto, type: resourceTypes.vocabularyList });
+        super({ ...dto, type: ResourceType.vocabularyList });
 
         const { name, nameEnglish, entries, variables } = dto;
 

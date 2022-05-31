@@ -2,11 +2,10 @@ import { IGeometricFeature } from '../../domain/models/spatial-feature/Geometric
 import { Polygon } from '../../domain/models/spatial-feature/polygon.entity';
 import { PolygonCoordinates } from '../../domain/models/spatial-feature/types/Coordinates/PolygonCoordinates';
 import { GeometricFeatureType } from '../../domain/models/spatial-feature/types/GeometricFeatureType';
-import { resourceTypes } from '../../domain/types/resourceTypes';
+import { ResourceType } from '../../domain/types/ResourceType';
 
 const dtos = [
     {
-        type: resourceTypes.spatialFeature,
         geometry: {
             type: GeometricFeatureType.polygon,
             coordinates: [
@@ -24,4 +23,12 @@ const dtos = [
 ];
 
 export default (): Polygon[] =>
-    dtos.map((dto, index) => new Polygon({ ...dto, id: `${index + 300}`, published: true }));
+    dtos.map(
+        (dto, index) =>
+            new Polygon({
+                ...dto,
+                type: ResourceType.spatialFeature,
+                id: `${index + 300}`,
+                published: true,
+            })
+    );

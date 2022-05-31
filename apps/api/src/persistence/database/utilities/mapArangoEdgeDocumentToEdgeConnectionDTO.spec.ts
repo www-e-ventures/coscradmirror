@@ -7,7 +7,7 @@ import {
 import { GeneralContext } from '../../../domain/models/context/general-context/general-context.entity';
 import { TimeRangeContext } from '../../../domain/models/context/time-range-context/time-range-context.entity';
 import { EdgeConnectionContextType } from '../../../domain/models/context/types/EdgeConnectionContextType';
-import { resourceTypes } from '../../../domain/types/resourceTypes';
+import { ResourceType } from '../../../domain/types/ResourceType';
 import { DTO } from '../../../types/DTO';
 import { ArangoEdgeDocument } from '../types/ArangoEdgeDocument';
 import mapArangoEdgeDocumentToEdgeConnectionDTO from './mapArangoEdgeDocumentToEdgeConnectionDTO';
@@ -51,7 +51,7 @@ const selfEdgeConnection = {
             role: EdgeConnectionMemberRole.self,
             compositeIdentifier: {
                 id: '55',
-                type: resourceTypes.transcribedAudio,
+                type: ResourceType.transcribedAudio,
             },
             context: timeRangeContext,
         },
@@ -85,7 +85,7 @@ const dualEdgeConnection: DTO<EdgeConnection> = {
             role: EdgeConnectionMemberRole.from,
             compositeIdentifier: {
                 id: '55',
-                type: resourceTypes.transcribedAudio,
+                type: ResourceType.transcribedAudio,
             },
             context: timeRangeContext,
         },
@@ -93,7 +93,7 @@ const dualEdgeConnection: DTO<EdgeConnection> = {
             role: EdgeConnectionMemberRole.to,
             compositeIdentifier: {
                 id: '11',
-                type: resourceTypes.book,
+                type: ResourceType.book,
             },
             context: generalContext,
         },
