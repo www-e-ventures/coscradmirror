@@ -1,8 +1,7 @@
 import { InternalError } from '../../../../lib/errors/InternalError';
 import { DTO } from '../../../../types/DTO';
 import { Category } from '../../../models/categories/entities/category.entity';
-import { noteType } from '../../../models/categories/types/ResourceTypeOrNoteType';
-import { ResourceType } from '../../../types/ResourceType';
+import { CategorizableType } from '../../../types/CategorizableType';
 import categoryValidator from '../../categoryValidator';
 import InvalidCategoryDTOError from '../../errors/category/InvalidCategoryDTOError';
 import InvalidCategoryMemberReferenceError from '../../errors/category/InvalidCategoryMemberReferenceError';
@@ -24,11 +23,11 @@ const validDTO: DTO<Category> = {
     label: 'props',
     members: [
         {
-            type: noteType,
+            type: CategorizableType.note,
             id: '55',
         },
         {
-            type: ResourceType.book,
+            type: CategorizableType.book,
             id: '123',
         },
     ],

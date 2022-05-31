@@ -1,13 +1,13 @@
 import { isDeepStrictEqual } from 'util';
-import { ResourceTypeOrNoteType } from '../../../domain/models/categories/types/ResourceTypeOrNoteType';
 import { Tag } from '../../../domain/models/tag/tag.entity';
+import { CategorizableType } from '../../../domain/types/CategorizableType';
 import { TagViewModel } from '../../../view-models/buildViewModelForResource/viewModels';
 import { BaseViewModel } from '../../../view-models/buildViewModelForResource/viewModels/base.view-model';
 
 export default (
     viewModel: BaseViewModel,
     allTags: Tag[],
-    type: ResourceTypeOrNoteType
+    type: CategorizableType
 ): BaseViewModel & { tags: TagViewModel[] } => {
     const tagsForThisModel = allTags
         .filter(({ members }) =>

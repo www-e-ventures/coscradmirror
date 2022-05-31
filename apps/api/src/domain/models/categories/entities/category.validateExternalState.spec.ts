@@ -3,12 +3,12 @@ import buildTestData from '../../../../test-data/buildTestData';
 import { DeepPartial } from '../../../../types/DeepPartial';
 import { Valid } from '../../../domainModelValidators/Valid';
 import { HasEntityIdAndLabel } from '../../../interfaces/HasEntityIdAndLabel';
-import { InMemorySnapshot, ResourceType } from '../../../types/ResourceType';
+import { CategorizableType } from '../../../types/CategorizableType';
+import { InMemorySnapshot } from '../../../types/ResourceType';
 import { Term } from '../../term/entities/term.entity';
 import ChildCategoryDoesNotExistError from '../errors/ChildCategoryDoesNotExistError';
 import InvalidExternalReferenceInCategoryError from '../errors/InvalidExternalReferenceInCategoryError';
 import InvalidExternalStateForCategoryError from '../errors/InvalidExternalStateForCategoryError';
-import { noteType } from '../types/ResourceTypeOrNoteType';
 import { Category } from './category.entity';
 
 const buildTopLevelError = (idAndLabel: HasEntityIdAndLabel, innerErrors) =>
@@ -23,11 +23,11 @@ const validCategory = new Category({
     label: 'mammals',
     members: [
         {
-            type: ResourceType.book,
+            type: CategorizableType.book,
             id: '44',
         },
         {
-            type: noteType,
+            type: CategorizableType.note,
             id: '72',
         },
     ],
@@ -35,7 +35,7 @@ const validCategory = new Category({
 });
 
 const missingNoteCompositeIdentifier = {
-    type: noteType,
+    type: CategorizableType.note,
     id: 'missing-note-id',
 } as const;
 

@@ -10,14 +10,14 @@ import { InMemorySnapshot } from '../../types/ResourceType';
 import validateEntityReferencesAgainstExternalState from '../../utilities/validation/validateEntityReferencesAgainstExternalState';
 import BaseDomainModel from '../BaseDomainModel';
 import InvalidExternalReferenceInCategoryError from '../categories/errors/InvalidExternalReferenceInCategoryError';
-import { ResourceOrNoteCompositeIdentifier } from '../categories/types/ResourceOrNoteCompositeIdentifier';
+import { CategorizableCompositeIdentifier } from '../categories/types/ResourceOrNoteCompositeIdentifier';
 
 export class Tag extends BaseDomainModel implements ValidatesExternalState, HasEntityIdAndLabel {
     id: EntityId;
 
     label: string;
 
-    members: ResourceOrNoteCompositeIdentifier[];
+    members: CategorizableCompositeIdentifier[];
 
     constructor({ id, label, members }: DTO<Tag>) {
         super();
@@ -34,7 +34,7 @@ export class Tag extends BaseDomainModel implements ValidatesExternalState, HasE
         return validateEntityReferencesAgainstExternalState(
             externalState,
             this.members,
-            (missing: ResourceOrNoteCompositeIdentifier[]) =>
+            (missing: CategorizableCompositeIdentifier[]) =>
                 new InvalidExternalReferenceInCategoryError(this, missing)
         );
     }

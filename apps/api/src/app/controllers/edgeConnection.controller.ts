@@ -1,12 +1,12 @@
 import { Controller, Get, Query, Res } from '@nestjs/common';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { isDeepStrictEqual } from 'util';
-import { noteType } from '../../domain/models/categories/types/ResourceTypeOrNoteType';
 import {
     EdgeConnection,
     EdgeConnectionType,
 } from '../../domain/models/context/edge-connection.entity';
 import { Tag } from '../../domain/models/tag/tag.entity';
+import { CategorizableType } from '../../domain/types/CategorizableType';
 import { isResourceId } from '../../domain/types/ResourceId';
 import { isResourceType, ResourceType } from '../../domain/types/ResourceType';
 import { InternalError, isInternalError } from '../../lib/errors/InternalError';
@@ -156,7 +156,7 @@ export class EdgeConnectionController {
         const allTags = result as Tag[];
 
         const mixinTags = (viewModel: NoteViewModel) =>
-            mixTagsIntoViewModel(viewModel, allTags, noteType);
+            mixTagsIntoViewModel(viewModel, allTags, CategorizableType.note);
 
         const viewModelOrViewModelsWithTags = Array.isArray(viewModelOrViewModels)
             ? viewModelOrViewModels.map(mixinTags)
