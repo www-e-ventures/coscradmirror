@@ -12,13 +12,15 @@ import stringIncludes from '../../utilities/matchers/stringIncludes';
 import MiniLoading from '../MiniLoading/mini-loading';
 import './VocabularyListIndex.module.css';
 
+type VocabularyListSummary = HasIdAndName & { nameEnglish: string };
+
 type ComponentState = {
-    vocabularyLists: HasIdAndName[];
+    vocabularyLists: VocabularyListSummary[];
     searchContext: 'name';
 };
 
 const determineSelectedVocabularyLists = (
-    vocabularyLists: HasIdAndName[],
+    vocabularyLists: VocabularyListSummary[],
     filters: Record<string, string>
 ) =>
     // @ts-ignore
@@ -56,6 +58,7 @@ export function VocabularyListIndex(props: VocabularyListIndexProps) {
     const rows: GridRowsProp = searchResults.selectedLists.map((vocabularyList) => ({
         id: vocabularyList.id,
         name: vocabularyList.name,
+        nameEnglish: vocabularyList.nameEnglish,
     }));
 
     const columns: GridColDef[] = [
@@ -73,9 +76,15 @@ export function VocabularyListIndex(props: VocabularyListIndexProps) {
         {
             field: 'name',
             headerName: 'Vocabulary List',
+            width: 160,
+            flex: 0,
+            resizable: true,
+        },
+        {
+            field: 'nameEnglish',
+            headerName: 'English',
             width: 150,
             flex: 1,
-            resizable: true,
         },
     ];
 
