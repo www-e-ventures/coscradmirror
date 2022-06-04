@@ -1,8 +1,8 @@
 import { ValueType } from '../../../lib/types/valueType';
 
 export const ArangoEdgeCollectionId = {
-    categoryEdgeCollectionID: 'categoryEdgeCollectionID',
-    edgeConnectionCollectionID: 'edgeConnectionCollectionID',
+    categoryEdgeCollectionID: 'category_edges',
+    edgeConnectionCollectionID: 'resource_edge_connections',
 } as const;
 
 export type ArangoEdgeCollectionId = ValueType<typeof ArangoEdgeCollectionId>;

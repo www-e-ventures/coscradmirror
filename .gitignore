@@ -43,3 +43,4 @@ Thumbs.db
 
 # data for data processing scripts
 /scripts/data-processing/data
+*.data.*
