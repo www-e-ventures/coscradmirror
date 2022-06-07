@@ -1,6 +1,6 @@
 import MenuBookTwoToneIcon from '@mui/icons-material/MenuBookTwoTone';
 import SearchIcon from '@mui/icons-material/Search';
-import { TextField, Typography } from '@mui/material';
+import { FormControlLabel, Switch, TextField, Typography } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { DataGrid, GridColDef, GridRenderCellParams, GridRowsProp } from '@mui/x-data-grid';
 import { motion } from 'framer-motion';
@@ -12,11 +12,27 @@ import stringIncludes from '../../utilities/matchers/stringIncludes';
 import MiniLoading from '../MiniLoading/mini-loading';
 import './VocabularyListIndex.module.css';
 
-type VocabularyListSummary = HasIdAndName & { nameEnglish: string };
+type SearchContext = 'name' | 'nameEnglish';
+
+type VocabularyListSummary = HasIdAndName;
 
 type ComponentState = {
     vocabularyLists: VocabularyListSummary[];
-    searchContext: 'name';
+    searchContext: SearchContext;
+    searchText: string;
+    selectedLists: VocabularyListSummary[];
+};
+
+const mapSwitchStateToSearchContext = (isChecked: boolean): SearchContext =>
+    isChecked ? 'nameEnglish' : 'name';
+
+const mapSearchContextToSwitchState = (searchContext: SearchContext): boolean =>
+    searchContext === 'nameEnglish';
+
+// TODO These labels need to come from settings \ config
+const searchContextToPlaceholder: Record<SearchContext, string> = {
+    name: 'Search Tŝilhqot’in',
+    nameEnglish: 'Search English',
 };
 
 const determineSelectedVocabularyLists = (
@@ -31,31 +47,38 @@ const getData = async (endpoint: string) => fetch(endpoint).then((response) => r
 /* eslint-disable-next-line */
 export interface VocabularyListIndexProps {}
 
-export function VocabularyListIndex(props: VocabularyListIndexProps) {
-    const [appState, setAppState] = useState<ComponentState>({
+export function VocabularyListIndex(props: VocabularyListIndexProps): JSX.Element {
+    const [componentState, setComponentState] = useState<ComponentState>({
         //  loading: false,
         vocabularyLists: [],
         searchContext: 'name',
-    });
-    const [searchResults, setSearchResults] = useState({
-        selectedLists: appState.vocabularyLists,
+        searchText: '',
+        selectedLists: [],
     });
 
     useEffect(() => {
-        setAppState({ vocabularyLists: [], searchContext: 'name' });
+        setComponentState({
+            vocabularyLists: [],
+            searchContext: 'name',
+            searchText: '',
+            selectedLists: [],
+        });
         const apiUrl = `http://104.225.142.106:3131/api/entities/vocabularyLists`;
         fetch(apiUrl, { mode: 'cors' })
             .then((res) => res.json())
             .then((vocabularyLists) => {
-                setAppState({ ...appState, vocabularyLists: vocabularyLists });
-                setSearchResults({ selectedLists: vocabularyLists });
+                setComponentState({
+                    ...componentState,
+                    vocabularyLists: vocabularyLists,
+                    selectedLists: vocabularyLists,
+                });
             })
             .catch((rej) => console.log(rej));
-    }, [setAppState]);
+    }, [setComponentState]);
 
     // if (!appState.vocabularyLists || appState.vocabularyLists === []) return <Loading />
 
-    const rows: GridRowsProp = searchResults.selectedLists.map((vocabularyList) => ({
+    const rows: GridRowsProp = componentState.selectedLists.map((vocabularyList) => ({
         id: vocabularyList.id,
         name: vocabularyList.name,
         nameEnglish: vocabularyList.nameEnglish,
@@ -88,27 +111,48 @@ export function VocabularyListIndex(props: VocabularyListIndexProps) {
         },
     ];
 
-    const search = (
-        <div className="searchVocabulary">
-            <TextField
-                placeholder="Search Vocabulary Lists"
-                className="searchBars"
-                onChange={(event) =>
-                    setSearchResults({
-                        selectedLists: event.target.value
-                            ? determineSelectedVocabularyLists(appState.vocabularyLists, {
-                                  [appState.searchContext]: event.target.value,
-                              })
-                            : appState.vocabularyLists,
-                    })
-                }
-                InputProps={{
-                    sx: { borderRadius: '24px' },
-                    endAdornment: <SearchIcon className="searchIcon" />,
-                }}
-            />
-        </div>
+    const handleSearchTextChange = (
+        event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
+        setComponentState({
+            ...componentState,
+            searchText: event.target.value,
+            selectedLists: event.target.value
+                ? determineSelectedVocabularyLists(componentState.vocabularyLists, {
+                      [componentState.searchContext]: event.target.value,
+                  })
+                : componentState.vocabularyLists,
+        });
+    };
+
+    const buildSearchElement = (placeholderText: string): JSX.Element => (
+        <TextField
+            value={componentState.searchText}
+            placeholder={placeholderText}
+            onChange={(event) => handleSearchTextChange(event)}
+            InputProps={{
+                className: 'searchProps',
+                endAdornment: <SearchIcon className="searchIcon" />,
+            }}
+        />
     );
+
+    // SWITCHCOMPONENT
+
+    const handleSwitchStateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const newSearchContext = mapSwitchStateToSearchContext(event.target.checked);
+
+        setComponentState({
+            ...componentState,
+            searchContext: newSearchContext,
+            vocabularyLists: componentState.searchText
+                ? determineSelectedVocabularyLists(componentState.vocabularyLists, {
+                      [newSearchContext]: componentState.searchText,
+                  })
+                : componentState.vocabularyLists,
+        });
+    };
+
     return (
         <ThemeProvider theme={theme}>
             <motion.div
@@ -118,11 +162,31 @@ export function VocabularyListIndex(props: VocabularyListIndexProps) {
                 transition={{ duration: 0.6 }}
             >
                 <div className="console">
-                    <section>
+                    <section className="section">
                         <h1 className="header">
                             Vocabulary Lists <MenuBookTwoToneIcon className="headerIcon" />
                         </h1>
-                        {search}
+
+                        <div>
+                            {buildSearchElement(
+                                searchContextToPlaceholder[componentState.searchContext]
+                            )}
+                        </div>
+
+                        <FormControlLabel
+                            control={
+                                <Switch
+                                    checked={mapSearchContextToSwitchState(
+                                        componentState.searchContext
+                                    )}
+                                    onChange={(e) => {
+                                        handleSwitchStateChange(e);
+                                    }}
+                                    inputProps={{ 'aria-label': 'controlled' }}
+                                />
+                            }
+                            label={"Tŝilhqot'in / English"}
+                        />
                     </section>
                     <Typography>
                         <DataGrid
