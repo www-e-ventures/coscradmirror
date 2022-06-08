@@ -5,7 +5,7 @@
                 "type": "term",
                 "_key": "1",
                 "published": true,
-                "events": [],
+                "eventHistory": [],
                 "term": "Chil-term-1",
                 "termEnglish": "Engl-term-1",
                 "contributorId": "John Doe"
@@ -14,7 +14,7 @@
                 "type": "term",
                 "_key": "2",
                 "published": true,
-                "events": [],
+                "eventHistory": [],
                 "term": "Chil-term-2",
                 "termEnglish": "Engl-term-2",
                 "contributorId": "John Doe"
@@ -23,7 +23,7 @@
                 "type": "term",
                 "_key": "3",
                 "published": false,
-                "events": [],
+                "eventHistory": [],
                 "term": "Chil-term-no-english",
                 "contributorId": "Jane Deer"
             }
@@ -33,7 +33,7 @@
                 "type": "vocabularyList",
                 "_key": "1",
                 "published": false,
-                "events": [],
+                "eventHistory": [],
                 "name": "test VL 1 chil",
                 "nameEnglish": "test VL 1 engl",
                 "entries": [
@@ -71,7 +71,7 @@
                 "type": "vocabularyList",
                 "_key": "2",
                 "published": true,
-                "events": [],
+                "eventHistory": [],
                 "name": "test VL 2 CHIL- no engl name",
                 "entries": [
                     {
@@ -89,7 +89,7 @@
                 "type": "transcribedAudio",
                 "_key": "110",
                 "published": true,
-                "events": [],
+                "eventHistory": [],
                 "audioFilename": "123.mp3",
                 "lengthMilliseconds": 20000,
                 "startMilliseconds": 0,
@@ -114,7 +114,7 @@
                 "type": "book",
                 "_key": "23",
                 "published": true,
-                "events": [],
+                "eventHistory": [],
                 "title": "Three Little Pigs",
                 "subtitle": "The wolf's revenge",
                 "author": "John Doeburg",
@@ -136,7 +136,7 @@
                 "type": "book",
                 "_key": "24",
                 "published": false,
-                "events": [],
+                "eventHistory": [],
                 "title": "An Adventure Story",
                 "author": "Jane Donnaldson",
                 "publicationDate": "2011",
@@ -154,7 +154,7 @@
                 "type": "photograph",
                 "_key": "0",
                 "published": true,
-                "events": [],
+                "eventHistory": [],
                 "filename": "cat",
                 "photographer": "Susie McRealart",
                 "dimensions": {
@@ -166,7 +166,7 @@
                 "type": "photograph",
                 "_key": "1",
                 "published": true,
-                "events": [],
+                "eventHistory": [],
                 "filename": "dog",
                 "photographer": "Robert McRealart",
                 "dimensions": {
@@ -178,7 +178,7 @@
                 "type": "photograph",
                 "_key": "2",
                 "published": true,
-                "events": [],
+                "eventHistory": [],
                 "filename": "wildflower",
                 "photographer": "Kenny Tree-Huggens",
                 "dimensions": {
@@ -192,7 +192,7 @@
                 "type": "spatialFeature",
                 "_key": "100",
                 "published": true,
-                "events": [],
+                "eventHistory": [],
                 "geometry": {
                     "type": "Point",
                     "coordinates": [
@@ -205,7 +205,7 @@
                 "type": "spatialFeature",
                 "_key": "101",
                 "published": true,
-                "events": [],
+                "eventHistory": [],
                 "geometry": {
                     "type": "Point",
                     "coordinates": [
@@ -218,7 +218,7 @@
                 "type": "spatialFeature",
                 "_key": "102",
                 "published": true,
-                "events": [],
+                "eventHistory": [],
                 "geometry": {
                     "type": "Point",
                     "coordinates": [
@@ -231,7 +231,7 @@
                 "type": "spatialFeature",
                 "_key": "1",
                 "published": true,
-                "events": [],
+                "eventHistory": [],
                 "geometry": {
                     "type": "LineString",
                     "coordinates": [
@@ -258,7 +258,7 @@
                 "type": "spatialFeature",
                 "_key": "300",
                 "published": true,
-                "events": [],
+                "eventHistory": [],
                 "geometry": {
                     "type": "Polygon",
                     "coordinates": [
@@ -293,7 +293,7 @@
                 "type": "bibliographicReference",
                 "_key": "1",
                 "published": true,
-                "events": [],
+                "eventHistory": [],
                 "data": {
                     "type": "book",
                     "title": "A Day in the Life",
@@ -316,7 +316,7 @@
                 "type": "bibliographicReference",
                 "_key": "23",
                 "published": true,
-                "events": [],
+                "eventHistory": [],
                 "data": {
                     "type": "journalArticle",
                     "title": "Report on the Cariboo Chilcotin Justice inquiry",
@@ -341,7 +341,7 @@
                 "type": "song",
                 "_key": "1",
                 "published": true,
-                "events": [],
+                "eventHistory": [],
                 "title": "Song title in language",
                 "titleEnglish": "Mary had a little lamb",
                 "contributorAndRoles": [
@@ -361,7 +361,7 @@
                 "type": "mediaItem",
                 "_key": "1",
                 "published": true,
-                "events": [],
+                "eventHistory": [],
                 "title": "episode title (in language)",
                 "titleEnglish": "Metal Mondays episode 1",
                 "contributorAndRoles": [
