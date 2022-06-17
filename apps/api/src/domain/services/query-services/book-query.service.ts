@@ -1,3 +1,4 @@
+import { Inject } from '@nestjs/common';
 import {
     CommandInfo,
     CommandInfoService,
@@ -9,7 +10,10 @@ import { ResourceType } from '../../types/ResourceType';
 import { BaseQueryService } from './base-query.service';
 
 export class BookQueryService extends BaseQueryService<Book, BookViewModel> {
-    constructor(repositoryProvider: RepositoryProvider, commandInfoService: CommandInfoService) {
+    constructor(
+        @Inject(RepositoryProvider) repositoryProvider: RepositoryProvider,
+        @Inject(CommandInfoService) commandInfoService: CommandInfoService
+    ) {
         super(ResourceType.book, repositoryProvider, commandInfoService);
     }
 

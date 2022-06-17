@@ -15,8 +15,10 @@ import { CommandInfoService } from './controllers/command/services/command-info-
 import { EdgeConnectionController } from './controllers/edgeConnection.controller';
 import { ResourceDescriptionController } from './controllers/resources/resource-description.controller';
 import { TagController } from './controllers/tag.controller';
+import { BibliographicReferenceModule } from './domain-modules/bibliographic-reference.module';
 import { BookModule } from './domain-modules/book.module';
 import { MediaItemModule } from './domain-modules/media-item.module';
+import { PhotographModule } from './domain-modules/photograph.module';
 import { SongModule } from './domain-modules/song.module';
 import { SpatialFeatureModule } from './domain-modules/spatial-feature.module';
 import { TermModule } from './domain-modules/term.module';
@@ -40,6 +42,8 @@ import { VocabularyListModule } from './domain-modules/vocabulary-list.module';
         VocabularyListModule,
         BookModule,
         TranscribedAudioModule,
+        PhotographModule,
+        BibliographicReferenceModule,
         SpatialFeatureModule,
         CommandModule,
     ],
