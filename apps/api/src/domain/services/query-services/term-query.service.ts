@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import {
     CommandInfo,
@@ -13,8 +13,8 @@ import { BaseQueryService } from './base-query.service';
 @Injectable()
 export class TermQueryService extends BaseQueryService<Term, TermViewModel> {
     constructor(
-        repositoryProvider: RepositoryProvider,
-        commandInfoService: CommandInfoService,
+        @Inject(RepositoryProvider) repositoryProvider: RepositoryProvider,
+        @Inject(CommandInfoService) commandInfoService: CommandInfoService,
         private readonly configService: ConfigService
     ) {
         super(ResourceType.term, repositoryProvider, commandInfoService);

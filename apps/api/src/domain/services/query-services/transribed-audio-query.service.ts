@@ -1,3 +1,4 @@
+import { Inject } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import {
     CommandInfo,
@@ -14,8 +15,8 @@ export class TranscribedAudioQueryService extends BaseQueryService<
     TranscribedAudioViewModel
 > {
     constructor(
-        repositoryProvider: RepositoryProvider,
-        commandInfoService: CommandInfoService,
+        @Inject(RepositoryProvider) repositoryProvider: RepositoryProvider,
+        @Inject(CommandInfoService) commandInfoService: CommandInfoService,
         private readonly configService: ConfigService
     ) {
         super(ResourceType.transcribedAudio, repositoryProvider, commandInfoService);

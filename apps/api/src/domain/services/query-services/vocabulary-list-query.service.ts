@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import {
     CommandInfo,
@@ -21,8 +21,8 @@ export class VocabularyListQueryService extends BaseQueryService<
     VocabularyListViewModel
 > {
     constructor(
-        repositoryProvider: RepositoryProvider,
-        commandInfoService: CommandInfoService,
+        @Inject(RepositoryProvider) repositoryProvider: RepositoryProvider,
+        @Inject(CommandInfoService) commandInfoService: CommandInfoService,
         private readonly configService: ConfigService
     ) {
         super(ResourceType.vocabularyList, repositoryProvider, commandInfoService);

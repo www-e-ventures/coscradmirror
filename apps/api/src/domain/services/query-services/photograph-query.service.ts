@@ -1,3 +1,4 @@
+import { Inject } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import {
     CommandInfo,
@@ -11,8 +12,8 @@ import { BaseQueryService } from './base-query.service';
 
 export class PhotographQueryService extends BaseQueryService<Photograph, PhotographViewModel> {
     constructor(
-        repositoryProvider: RepositoryProvider,
-        commandInfoService: CommandInfoService,
+        @Inject(RepositoryProvider) repositoryProvider: RepositoryProvider,
+        @Inject(CommandInfoService) commandInfoService: CommandInfoService,
         private readonly configService: ConfigService
     ) {
         super(ResourceType.photograph, repositoryProvider, commandInfoService);

@@ -1,3 +1,4 @@
+import { Inject } from '@nestjs/common';
 import {
     CommandInfo,
     CommandInfoService,
@@ -15,7 +16,10 @@ export class SpatialFeatureQueryService extends BaseQueryService<
     ISpatialFeature,
     SpatialFeatureViewModel
 > {
-    constructor(repositoryProvider: RepositoryProvider, commandInfoService: CommandInfoService) {
+    constructor(
+        @Inject(RepositoryProvider) repositoryProvider: RepositoryProvider,
+        @Inject(CommandInfoService) commandInfoService: CommandInfoService
+    ) {
         super(ResourceType.spatialFeature, repositoryProvider, commandInfoService);
     }
 

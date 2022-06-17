@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import {
     CommandInfo,
     CommandInfoService,
@@ -11,7 +11,10 @@ import { BaseQueryService } from './base-query.service';
 
 @Injectable()
 export class SongQueryService extends BaseQueryService<Song, SongViewModel> {
-    constructor(repositoryProvider: RepositoryProvider, commandInfoService: CommandInfoService) {
+    constructor(
+        @Inject(RepositoryProvider) repositoryProvider: RepositoryProvider,
+        @Inject(CommandInfoService) commandInfoService: CommandInfoService
+    ) {
         super(ResourceType.song, repositoryProvider, commandInfoService);
     }
 
