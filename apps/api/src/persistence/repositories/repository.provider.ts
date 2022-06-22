@@ -6,12 +6,11 @@ import buildInstanceFactory from '../../domain/factories/utilities/buildInstance
 import { EdgeConnection } from '../../domain/models/context/edge-connection.entity';
 import { Resource } from '../../domain/models/resource.entity';
 import { Tag } from '../../domain/models/tag/tag.entity';
-import { ICategoryRepository } from '../../domain/repositories/interfaces/ICategoryRepository';
-import { ICategoryRepositoryProvider } from '../../domain/repositories/interfaces/ICategoryRepositoryProvider';
-import { IEdgeConnectionRepositoryProvider } from '../../domain/repositories/interfaces/IEdgeConnectionRepositoryProvider';
-import { ITagRepositoryProvider } from '../../domain/repositories/interfaces/ITagRepositoryProvider';
-import { IRepositoryProvider } from '../../domain/repositories/interfaces/repository-provider';
+import { ICategoryRepository } from '../../domain/repositories/interfaces/category-repository.interface';
+import { IRepositoryProvider } from '../../domain/repositories/interfaces/repository-provider.interface';
+import { AggregateId } from '../../domain/types/AggregateId';
 import { ResourceType } from '../../domain/types/ResourceType';
+import { IIdRepository } from '../../lib/id-generation/interfaces/id-repository.interface';
 import { ArangoCollectionId } from '../database/collection-references/ArangoCollectionId';
 import { getArangoCollectionIDFromResourceType } from '../database/collection-references/getArangoCollectionIDFromResourceType';
 import { DatabaseProvider } from '../database/database.provider';
@@ -19,17 +18,12 @@ import mapArangoEdgeDocumentToEdgeConnectionDTO from '../database/utilities/mapA
 import mapDatabaseDTOToEntityDTO from '../database/utilities/mapDatabaseDTOToEntityDTO';
 import mapEdgeConnectionDTOToArangoEdgeDocument from '../database/utilities/mapEdgeConnectionDTOToArangoEdgeDocument';
 import mapEntityDTOToDatabaseDTO from '../database/utilities/mapEntityDTOToDatabaseDTO';
+import { ArangoIdRepository } from './arango-id-repository';
 import ArangoCategoryRepository from './ArangoCategoryRepository';
 import { RepositoryForEntity } from './repository-for-entity';
 
 @Injectable()
-export class RepositoryProvider
-    implements
-        IRepositoryProvider,
-        IEdgeConnectionRepositoryProvider,
-        ITagRepositoryProvider,
-        ICategoryRepositoryProvider
-{
+export class RepositoryProvider implements IRepositoryProvider {
     constructor(protected databaseProvider: DatabaseProvider) {}
 
     getEdgeConnectionRepository() {
@@ -54,6 +48,10 @@ export class RepositoryProvider
 
     getCategoryRepository(): ICategoryRepository {
         return new ArangoCategoryRepository(this.databaseProvider);
+    }
+
+    getIdRepository(): IIdRepository<AggregateId> {
+        return new ArangoIdRepository(this.databaseProvider);
     }
 
     forResource<TResource extends Resource>(resourceType: ResourceType) {
