@@ -2,8 +2,8 @@ import { Database } from 'arangojs';
 import { aql, AqlQuery } from 'arangojs/aql';
 import { isArangoDatabase } from 'arangojs/database';
 import { Environment } from '../../app/config/constants/Environment';
-import { ISpecification } from '../../domain/repositories/interfaces/ISpecification';
 import { QueryOperator } from '../../domain/repositories/interfaces/QueryOperator';
+import { ISpecification } from '../../domain/repositories/interfaces/specification.interface';
 import { isAggregateId } from '../../domain/types/AggregateId';
 import { HasAggregateId } from '../../domain/types/HasAggregateId';
 import { InternalError } from '../../lib/errors/InternalError';
@@ -200,14 +200,31 @@ export class ArangoDatabase {
         `;
 
         const bindVars = {
-            updatedDto,
+            updatedDto: {
+                /**
+                 * An update query in arango must include enough information
+                 * to uniquely identify the document to update.
+                 *
+                 * Further note that we are merging the `updatedDTO` with the
+                 * existing document in case there is information that is persisted
+                 * but not populated on the model (e.g. event history, metadata).
+                 */
+                _key: key,
+                ...updatedDto,
+            },
             '@collectionName': collectionName,
         };
 
-        await this.#db.query({
-            query,
-            bindVars,
-        });
+        await this.#db
+            .query({
+                query,
+                bindVars,
+            })
+            .catch((err) => {
+                throw new InternalError(
+                    `Failed to update dto: ${updatedDto} in ${collectionName}. \n Arango errors: ${err}`
+                );
+            });
     };
 
     // TODO Add Soft Delete

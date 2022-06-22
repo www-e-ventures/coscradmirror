@@ -1,12 +1,13 @@
 import { InstanceFactory } from '../../domain/factories/getInstanceFactoryForEntity';
 import BaseDomainModel from '../../domain/models/BaseDomainModel';
-import { ISpecification } from '../../domain/repositories/interfaces/ISpecification';
-import { IRepositoryForEntity } from '../../domain/repositories/interfaces/repository-for-entity';
+import { IRepositoryForEntity } from '../../domain/repositories/interfaces/repository-for-entity.interface';
+import { ISpecification } from '../../domain/repositories/interfaces/specification.interface';
 import { AggregateId } from '../../domain/types/AggregateId';
 import { HasAggregateId } from '../../domain/types/HasAggregateId';
 import { InternalError } from '../../lib/errors/InternalError';
 import { Maybe } from '../../lib/types/maybe';
 import { isNotFound, NotFound } from '../../lib/types/not-found';
+import { DeepPartial } from '../../types/DeepPartial';
 import { DTO } from '../../types/DTO';
 import { ResultOrError } from '../../types/ResultOrError';
 import { ArangoDatabaseForCollection } from '../database/arango-database-for-collection';
@@ -97,9 +98,21 @@ export class RepositoryForEntity<TEntity extends HasAggregateId & BaseDomainMode
             });
     }
 
+    /**
+     *
+     * @param updatedEntity the complete updated intance
+     *
+     * Note that we always have a complete updated instance because we must check
+     * invariant validation rules and state transition rules before updating. We
+     * do not expose to the client the ability to merge updates to the database
+     * directly.
+     */
     async update(updatedEntity: TEntity) {
         const updatedDTO = this.#mapEntityDTOToDocument(updatedEntity.toDTO());
 
-        return this.#arangoDatabaseForEntitysCollection.update(updatedEntity.id, updatedDTO);
+        return this.#arangoDatabaseForEntitysCollection.update(
+            updatedEntity.id,
+            updatedDTO as DeepPartial<DatabaseDocument<TEntity>>
+        );
     }
 }

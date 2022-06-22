@@ -1,8 +1,9 @@
 import { isArangoDatabase } from 'arangojs/database';
-import { ISpecification } from '../../domain/repositories/interfaces/ISpecification';
+import { ISpecification } from '../../domain/repositories/interfaces/specification.interface';
 import { AggregateId } from '../../domain/types/AggregateId';
 import { HasAggregateId } from '../../domain/types/HasAggregateId';
 import { Maybe } from '../../lib/types/maybe';
+import { DeepPartial } from '../../types/DeepPartial';
 import { ArangoDatabase } from './arango-database';
 import { ArangoCollectionId } from './collection-references/ArangoCollectionId';
 import { DatabaseDocument } from './utilities/mapEntityDTOToDatabaseDTO';
@@ -55,7 +56,7 @@ export class ArangoDatabaseForCollection<TEntity extends HasAggregateId> {
         return this.#arangoDatabase.createMany(DatabaseDocuments, this.#collectionID);
     }
 
-    update(id: AggregateId, updateDTO: DatabaseDocument<TEntity>) {
+    update(id: AggregateId, updateDTO: DeepPartial<DatabaseDocument<TEntity>>) {
         return this.#arangoDatabase.update(id, updateDTO, this.#collectionID);
     }
 }
