@@ -42,6 +42,10 @@ Object {
         "label": "mp3",
         "value": "audio/mpeg",
       },
+      Object {
+        "label": "mp4",
+        "value": "video/mp4",
+      },
     ],
     "type": "Enum",
   },
