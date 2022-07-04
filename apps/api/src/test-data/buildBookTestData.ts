@@ -34,6 +34,20 @@ const dtos = [
                 translation: 'blahas',
             },
         ],
+        published: true,
+    },
+    {
+        id: '25',
+        title: 'An Adventure Story II',
+        author: 'Jane Donnaldson',
+        publicationDate: '2012',
+        pages: [
+            {
+                identifier: 'ix',
+                text: 'blah blah blah',
+                translation: 'blahas',
+            },
+        ],
         // The publication status should not be true if there are no pages
         published: false,
     },

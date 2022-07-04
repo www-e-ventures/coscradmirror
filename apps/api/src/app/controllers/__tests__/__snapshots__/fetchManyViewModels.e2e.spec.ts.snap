@@ -157,6 +157,16 @@ Object {
         "title": "An Adventure Story",
       },
     },
+    Object {
+      "actions": Array [],
+      "data": Object {
+        "author": "Jane Donnaldson",
+        "id": "25",
+        "publicationDate": "2012",
+        "tags": Array [],
+        "title": "An Adventure Story II",
+      },
+    },
   ],
 }
 `;
@@ -194,6 +204,16 @@ Object {
           },
         ],
         "title": "An Adventure Story",
+      },
+    },
+    Object {
+      "actions": Array [],
+      "data": Object {
+        "author": "Jane Donnaldson",
+        "id": "25",
+        "publicationDate": "2012",
+        "tags": Array [],
+        "title": "An Adventure Story II",
       },
     },
   ],
