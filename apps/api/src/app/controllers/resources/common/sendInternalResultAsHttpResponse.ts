@@ -23,10 +23,13 @@ const getStatusCodeForResult = <T>(result: ResultOrError<Maybe<T>>): HttpStatusC
 const getBodyForResult = <T>(result: ResultOrError<Maybe<T>>) => {
     if (isNotFound(result)) return undefined;
 
-    if (isInternalError(result))
+    if (isInternalError(result)) {
+        const error = result.toString();
+
         return {
-            error: result.toString(),
+            error,
         };
+    }
 
     // TODO convert instances to plain objects here
     return result;

@@ -3,6 +3,18 @@ export const isError = (input: unknown): input is Error => input instanceof Erro
 export const isInternalError = (input: unknown): input is InternalError =>
     input instanceof InternalError;
 
+const buildMessageForInnerErrors = (innerErrors?: InternalError[]): string => {
+    if (!Array.isArray(innerErrors) || innerErrors.length === 0) return '';
+
+    return innerErrors.reduce(
+        (acc, innerError) =>
+            acc
+                .concat(innerError.message)
+                .concat(buildMessageForInnerErrors(innerError.innerErrors)),
+        ''
+    );
+};
+
 export class InternalError extends Error {
     innerErrors: InternalError[] = [];
 
@@ -25,18 +37,8 @@ export class InternalError extends Error {
         return [
             this.message,
             this.innerErrors.length > 0
-                ? `Inner Errors: ${this.#buildMessageForInnerErrors()}`
+                ? `Inner Errors: ${buildMessageForInnerErrors(this.innerErrors)}`
                 : '',
         ].join('\n');
-    }
-
-    #buildMessageForInnerErrors(): string {
-        return this.innerErrors.reduce(
-            (message, innerError) =>
-                message + innerError.innerErrors
-                    ? innerError.innerErrors.toString()
-                    : innerError.message,
-            ''
-        );
     }
 }
