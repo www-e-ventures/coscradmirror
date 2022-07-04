@@ -135,11 +135,27 @@
             {
                 "type": "book",
                 "_key": "24",
-                "published": false,
+                "published": true,
                 "eventHistory": [],
                 "title": "An Adventure Story",
                 "author": "Jane Donnaldson",
                 "publicationDate": "2011",
+                "pages": [
+                    {
+                        "identifier": "ix",
+                        "text": "blah blah blah",
+                        "translation": "blahas"
+                    }
+                ]
+            },
+            {
+                "type": "book",
+                "_key": "25",
+                "published": false,
+                "eventHistory": [],
+                "title": "An Adventure Story II",
+                "author": "Jane Donnaldson",
+                "publicationDate": "2012",
                 "pages": [
                     {
                         "identifier": "ix",
