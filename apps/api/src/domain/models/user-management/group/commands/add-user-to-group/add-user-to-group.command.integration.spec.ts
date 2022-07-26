@@ -14,10 +14,13 @@ import AggregateNotFoundError from '../../../../shared/common-command-errors/Agg
 import { assertCommandError } from '../../../../__tests__/command-helpers/assert-command-error';
 import { assertCommandFailsDueToTypeError } from '../../../../__tests__/command-helpers/assert-command-payload-type-error';
 import { assertCommandSuccess } from '../../../../__tests__/command-helpers/assert-command-success';
+import { assertEventRecordPersisted } from '../../../../__tests__/command-helpers/assert-event-record-persisted';
 import { assertExternalStateError } from '../../../../__tests__/command-helpers/assert-external-state-error';
 import { DummyCommandFSAFactory } from '../../../../__tests__/command-helpers/dummy-command-fsa-factory';
 import { generateCommandFuzzTestCases } from '../../../../__tests__/command-helpers/generate-command-fuzz-test-cases';
 import { CommandAssertionDependencies } from '../../../../__tests__/command-helpers/types/CommandAssertionDependencies';
+import { dummySystemUserId } from '../../../../__tests__/utilities/dummySystemUserId';
+import { CoscradUserGroup } from '../../entities/coscrad-user-group.entity';
 import { UserDoesNotExistError } from '../../errors/external-state-errors/UserDoesNotExistError';
 import { AddUserToGroup } from './add-user-to-group.command';
 import { AddUserToGroupCommandHandler } from './add-user-to-group.command-handler';
@@ -112,6 +115,7 @@ describe('AddUserToGroup', () => {
     describe('when the command is valid', () => {
         it('should succeed', async () => {
             await assertCommandSuccess(commandAssertionDependencies, {
+                systemUserId: dummySystemUserId,
                 buildValidCommandFSA,
                 initialState,
                 checkStateOnSuccess: async ({ groupId, userId }: AddUserToGroup) => {
@@ -128,6 +132,12 @@ describe('AddUserToGroup', () => {
                     const isUserInGroup = groupSearchResult.hasUser(userId);
 
                     expect(isUserInGroup).toBe(true);
+
+                    assertEventRecordPersisted(
+                        groupSearchResult as CoscradUserGroup,
+                        'USER_ADDED_TO_GROUP',
+                        dummySystemUserId
+                    );
                 },
             });
         });
@@ -137,6 +147,7 @@ describe('AddUserToGroup', () => {
         describe('when there is no user with the given userId', () => {
             it('should fail with the appropriate error', async () => {
                 await assertCommandError(commandAssertionDependencies, {
+                    systemUserId: dummySystemUserId,
                     buildCommandFSA: buildValidCommandFSA,
                     initialState: buildInMemorySnapshot({
                         users: [userAlreadyInGroup],
@@ -155,6 +166,7 @@ describe('AddUserToGroup', () => {
         describe('when there is no group with the given groupId', () => {
             it('should fail with the appropriate error', async () => {
                 await assertCommandError(commandAssertionDependencies, {
+                    systemUserId: dummySystemUserId,
                     buildCommandFSA: buildValidCommandFSA,
                     initialState: buildInMemorySnapshot({
                         users: [userToAdd, userAlreadyInGroup],
@@ -172,6 +184,7 @@ describe('AddUserToGroup', () => {
         describe('when the user is already in the group', () => {
             it('should fail with the appropriate error', async () => {
                 assertCommandError(commandAssertionDependencies, {
+                    systemUserId: dummySystemUserId,
                     buildCommandFSA: () =>
                         buildInvalidFSA(userAlreadyInGroup.id, { id: userAlreadyInGroup.id }),
                     initialState,
