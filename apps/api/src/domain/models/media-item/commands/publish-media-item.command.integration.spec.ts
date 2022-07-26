@@ -13,8 +13,10 @@ import AggregateNotFoundError from '../../shared/common-command-errors/Aggregate
 import CommandExecutionError from '../../shared/common-command-errors/CommandExecutionError';
 import { assertCommandError } from '../../__tests__/command-helpers/assert-command-error';
 import { assertCommandSuccess } from '../../__tests__/command-helpers/assert-command-success';
+import { assertEventRecordPersisted } from '../../__tests__/command-helpers/assert-event-record-persisted';
 import { CommandAssertionDependencies } from '../../__tests__/command-helpers/types/CommandAssertionDependencies';
 import buildDummyUuid from '../../__tests__/utilities/buildDummyUuid';
+import { dummySystemUserId } from '../../__tests__/utilities/dummySystemUserId';
 import { MediaItem } from '../entities/media-item.entity';
 import { PublishMediaItem } from './publish-media-item.command';
 import { PublishMediaItemCommandHandler } from './publish-media-item.command-handler';
@@ -93,6 +95,7 @@ describe('PublishMediaItem', () => {
             await assertCommandSuccess(assertionHelperDependencies, {
                 buildValidCommandFSA: () => validCommandFSA,
                 initialState,
+                systemUserId: dummySystemUserId,
                 checkStateOnSuccess: async () => {
                     const result = await testRepositoryProvider
                         .forResource(ResourceType.mediaItem)
@@ -108,10 +111,10 @@ describe('PublishMediaItem', () => {
 
                     expect(published).toBe(true);
 
-                    expect(
-                        updatedInstance.eventHistory.some(
-                            ({ type }) => type === 'MEDIA_ITEM_CREATED'
-                        )
+                    assertEventRecordPersisted(
+                        updatedInstance,
+                        'MEDIA_ITEM_PUBLISHED',
+                        dummySystemUserId
                     );
                 },
             });
@@ -122,6 +125,7 @@ describe('PublishMediaItem', () => {
         describe('when the id is missing', () => {
             it('should fail', async () => {
                 await assertCommandError(assertionHelperDependencies, {
+                    systemUserId: dummySystemUserId,
                     buildCommandFSA: () => ({
                         type: commandType,
                         payload: {},
@@ -137,6 +141,7 @@ describe('PublishMediaItem', () => {
         describe('when the id is a number', () => {
             it('should fail', async () => {
                 await assertCommandError(assertionHelperDependencies, {
+                    systemUserId: dummySystemUserId,
                     buildCommandFSA: () => buildInvalidCommandFSA(767),
                     initialState,
                     checkError: (error: InternalError) => {
@@ -149,6 +154,7 @@ describe('PublishMediaItem', () => {
         describe('when the id is an array', () => {
             it('should fail', async () => {
                 await assertCommandError(assertionHelperDependencies, {
+                    systemUserId: dummySystemUserId,
                     buildCommandFSA: () => buildInvalidCommandFSA(['12', '123']),
                     initialState,
                     checkError: (error: InternalError) => {
@@ -163,6 +169,7 @@ describe('PublishMediaItem', () => {
         describe('when there is no media item with the given id', () => {
             it('should fail', async () => {
                 await assertCommandError(assertionHelperDependencies, {
+                    systemUserId: dummySystemUserId,
                     buildCommandFSA: () => validCommandFSA,
                     // We invalidate the command by invalidating the pre-existing state
                     initialState: buildInMemorySnapshot({}),

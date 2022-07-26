@@ -19,7 +19,9 @@ import CommandExecutionError from '../../shared/common-command-errors/CommandExe
 import InvalidCommandPayloadTypeError from '../../shared/common-command-errors/InvalidCommandPayloadTypeError';
 import { assertCreateCommandError } from '../../__tests__/command-helpers/assert-create-command-error';
 import { assertCreateCommandSuccess } from '../../__tests__/command-helpers/assert-create-command-success';
+import { assertEventRecordPersisted } from '../../__tests__/command-helpers/assert-event-record-persisted';
 import { CommandAssertionDependencies } from '../../__tests__/command-helpers/types/CommandAssertionDependencies';
+import { dummySystemUserId } from '../../__tests__/utilities/dummySystemUserId';
 import { Song } from '../song.entity';
 import { CreateSong } from './create-song.command';
 import { CreateSongCommandHandler } from './create-song.command-handler';
@@ -97,6 +99,7 @@ describe('CreateSong', () => {
             await assertCreateCommandSuccess(assertionHelperDependencies, {
                 buildValidCommandFSA,
                 initialState,
+                systemUserId: dummySystemUserId,
                 checkStateOnSuccess: async ({ id }: CreateSong) => {
                     const idStatus = await idManager.status(id);
 
@@ -111,6 +114,12 @@ describe('CreateSong', () => {
                     expect(songSearchResult).not.toBeInstanceOf(InternalError);
 
                     expect((songSearchResult as Song).id).toBe(id);
+
+                    assertEventRecordPersisted(
+                        songSearchResult as Song,
+                        'SONG_CREATED',
+                        dummySystemUserId
+                    );
                 },
             });
         });
@@ -122,6 +131,7 @@ describe('CreateSong', () => {
                 await assertCreateCommandError(assertionHelperDependencies, {
                     buildCommandFSA: (id: AggregateId) => buildInvalidFSA(id, { id: [99] }),
                     initialState,
+                    systemUserId: dummySystemUserId,
                     checkError: (error) => {
                         // TODO Check inner errors
                         expect(error).toBeInstanceOf(InvalidCommandPayloadTypeError);
@@ -144,6 +154,8 @@ describe('CreateSong', () => {
                         },
                     }),
                     initialState,
+                    systemUserId: dummySystemUserId,
+
                     checkError: (error) => assertCommandPayloadTypeError(error, 'contributions'),
                 });
             });
@@ -173,7 +185,9 @@ describe('CreateSong', () => {
                     })
                 );
 
-                const result = await commandHandlerService.execute(validCommandFSA);
+                const result = await commandHandlerService.execute(validCommandFSA, {
+                    userId: dummySystemUserId,
+                });
 
                 expect(result).toBeInstanceOf(InternalError);
             });
@@ -185,6 +199,7 @@ describe('CreateSong', () => {
             const bogusId = '4604b265-3fbd-4e1c-9603-66c43773aec0';
 
             await assertCreateCommandError(assertionHelperDependencies, {
+                systemUserId: dummySystemUserId,
                 buildCommandFSA: (_: AggregateId) => buildInvalidFSA(bogusId),
                 initialState,
                 // TODO Tighten up the error check
@@ -196,6 +211,7 @@ describe('CreateSong', () => {
         describe('when creating a song with no title in any language', () => {
             it('should return the expected error', async () => {
                 await assertCreateCommandError(assertionHelperDependencies, {
+                    systemUserId: dummySystemUserId,
                     buildCommandFSA: (id: AggregateId) =>
                         buildInvalidFSA(id, {
                             title: undefined,
