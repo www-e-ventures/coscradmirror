@@ -5,12 +5,12 @@ import {
     IsUrl,
     ValidateNested,
 } from '@coscrad/validation';
-import { DTO } from '../../../../types/DTO';
-import { isNullOrUndefined } from '../../../utilities/validation/is-null-or-undefined';
-import BaseDomainModel from '../../BaseDomainModel';
-import { IBibliographicReferenceData } from '../interfaces/IBibliographicReferenceData';
-import { BibliographicReferenceType } from '../types/BibliographicReferenceType';
-import BibliographicReferenceCreator from './BibliographicReferenceCreator';
+import { DTO } from '../../../../../types/DTO';
+import { isNullOrUndefined } from '../../../../utilities/validation/is-null-or-undefined';
+import BaseDomainModel from '../../../BaseDomainModel';
+import { IBibliographicReferenceData } from '../../interfaces/IBibliographicReferenceData';
+import { BibliographicReferenceType } from '../../types/BibliographicReferenceType';
+import BibliographicReferenceCreator from '../BibliographicReferenceCreator';
 
 export default class JournalArticleBibliographicReferenceData
     extends BaseDomainModel
