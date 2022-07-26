@@ -18,6 +18,7 @@ import { assertCommandSuccess } from '../../../../__tests__/command-helpers/asse
 import { generateCommandFuzzTestCases } from '../../../../__tests__/command-helpers/generate-command-fuzz-test-cases';
 import { CommandAssertionDependencies } from '../../../../__tests__/command-helpers/types/CommandAssertionDependencies';
 import buildDummyUuid from '../../../../__tests__/utilities/buildDummyUuid';
+import { dummySystemUserId } from '../../../../__tests__/utilities/dummySystemUserId';
 import { GrantUserRole } from './grant-user-role.command';
 import { GrantUserRoleCommandHandler } from './grant-user-role.command-handler';
 
@@ -107,6 +108,7 @@ describe('GrantUserRole', () => {
             describe(`when the role is: ${role}`, () => {
                 it('should succeed', async () => {
                     await assertCommandSuccess(commandAssertionDependencies, {
+                        systemUserId: dummySystemUserId,
                         buildValidCommandFSA: () => ({
                             type: commandType,
                             payload: {
@@ -131,6 +133,7 @@ describe('GrantUserRole', () => {
         describe('when there is no user with the given ID', () => {
             it('should fail', async () => {
                 await assertCommandError(commandAssertionDependencies, {
+                    systemUserId: dummySystemUserId,
                     buildCommandFSA: () => validCommandFSA,
                     initialState: buildEmptyInMemorySnapshot(),
                     checkError: (error: InternalError) => {
@@ -147,6 +150,7 @@ describe('GrantUserRole', () => {
         describe('when the user already has the given role', () => {
             it('should return the appropriate error', async () => {
                 await assertCommandError(commandAssertionDependencies, {
+                    systemUserId: dummySystemUserId,
                     buildCommandFSA: () => validCommandFSA,
                     initialState: buildInMemorySnapshot({
                         users: [
