@@ -1,12 +1,12 @@
-import { DTO } from '../../../../types/DTO';
-import { ResultOrError } from '../../../../types/ResultOrError';
-import InvalidEntityDTOError from '../../../domainModelValidators/errors/InvalidEntityDTOError';
-import validateSimpleInvariants from '../../../domainModelValidators/utilities/validateSimpleInvariants';
-import { Valid } from '../../../domainModelValidators/Valid';
-import { ResourceType } from '../../../types/ResourceType';
-import { isNullOrUndefined } from '../../../utilities/validation/is-null-or-undefined';
-import { Resource } from '../../resource.entity';
-import { IBibliographicReference } from '../interfaces/IBibliographicReference';
+import { DTO } from '../../../../../types/DTO';
+import { ResultOrError } from '../../../../../types/ResultOrError';
+import InvalidEntityDTOError from '../../../../domainModelValidators/errors/InvalidEntityDTOError';
+import validateSimpleInvariants from '../../../../domainModelValidators/utilities/validateSimpleInvariants';
+import { Valid } from '../../../../domainModelValidators/Valid';
+import { ResourceType } from '../../../../types/ResourceType';
+import { isNullOrUndefined } from '../../../../utilities/validation/is-null-or-undefined';
+import { Resource } from '../../../resource.entity';
+import { IBibliographicReference } from '../../interfaces/IBibliographicReference';
 import JournalArticleBibliographicReferenceData from './JournalArticleBibliographicReferenceData';
 
 export class JournalArticleBibliographicReference
