@@ -6,8 +6,8 @@ import { Valid } from '../../../domainModelValidators/Valid';
 import { ResourceType } from '../../../types/ResourceType';
 import { isNullOrUndefined } from '../../../utilities/validation/is-null-or-undefined';
 import { Resource } from '../../resource.entity';
-import { IBibliographicReference } from '../interfaces/IBibliographicReference';
-import JournalArticleBibliographicReferenceData from './JournalArticleBibliographicReferenceData';
+import { IBibliographicReference } from '../interfaces/bibliographic-reference.interface';
+import JournalArticleBibliographicReferenceData from './journal-article-bibliographic-reference-data.entity';
 
 export class JournalArticleBibliographicReference
     extends Resource

@@ -144,6 +144,18 @@
                         "id": "1"
                     }
                 ]
+            },
+            {
+                "type": "tag",
+                "_key": "6",
+                "eventHistory": [],
+                "label": "law",
+                "members": [
+                    {
+                        "type": "bibliographicReference",
+                        "id": "3"
+                    }
+                ]
             }
         ],
         "categories": [
@@ -785,6 +797,26 @@
                     "pages": "109-113,115-136,240",
                     "issn": "00052949",
                     "doi": "10.14288/bcs.v0i19.784"
+                }
+            },
+            {
+                "type": "bibliographicReference",
+                "_key": "3",
+                "eventHistory": [],
+                "published": true,
+                "queryAccessControlList": {
+                    "allowedUserIds": [],
+                    "allowedGroupIds": []
+                },
+                "data": {
+                    "type": "courtCase",
+                    "caseName": "2002-07-08_Tsilhqot'inTitleCase",
+                    "creators": [],
+                    "abstract": "William, June\n- Nemiah Valley\n- Qualifying as an expert in Tsilhqot'in written language",
+                    "dateDecided": "Recorded 2002-07-08",
+                    "court": "Supreme Court of British Columbia",
+                    "url": "https://www.myzoterolink.com/bogus-link-to-doc.php",
+                    "pages": "Pages 1-6"
                 }
             }
         ],

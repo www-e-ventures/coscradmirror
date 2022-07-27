@@ -7,8 +7,8 @@ import { Valid } from '../../../domainModelValidators/Valid';
 import { ResourceType } from '../../../types/ResourceType';
 import { isNullOrUndefined } from '../../../utilities/validation/is-null-or-undefined';
 import { Resource } from '../../resource.entity';
-import { IBibliographicReference } from '../interfaces/IBibliographicReference';
-import BookBibliographicReferenceData from './BookBibliographicReferenceData';
+import { IBibliographicReference } from '../interfaces/bibliographic-reference.interface';
+import BookBibliographicReferenceData from './book-bibliographic-reference-data.entity';
 
 @RegisterIndexScopedCommands([])
 export class BookBibliographicReference
