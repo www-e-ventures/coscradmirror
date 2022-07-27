@@ -3,6 +3,7 @@ import {
     EdgeConnectionMemberRole,
     EdgeConnectionType,
 } from '../../../domain/models/context/edge-connection.entity';
+import { GeneralContext } from '../../../domain/models/context/general-context/general-context.entity';
 import { PageRangeContext } from '../../../domain/models/context/page-range-context/page-range.context.entity';
 import { TimeRangeContext } from '../../../domain/models/context/time-range-context/time-range-context.entity';
 import { EdgeConnectionContextType } from '../../../domain/models/context/types/EdgeConnectionContextType';
@@ -39,6 +40,34 @@ const dtosWithoutTypeProperty: DTO<Omit<EdgeConnection, 'type' | 'connectionType
                 context: new PageRangeContext({
                     pageIdentifiers: ['ix'],
                     type: EdgeConnectionContextType.pageRange,
+                }),
+            },
+        ],
+    },
+    {
+        id: '3102',
+        note: 'court case talks about the same hunting spot as the transcribed audio item refers to',
+        members: [
+            {
+                role: EdgeConnectionMemberRole.to,
+                compositeIdentifier: {
+                    type: ResourceType.bibliographicReference,
+                    id: '3',
+                },
+                context: new GeneralContext(),
+            },
+            {
+                role: EdgeConnectionMemberRole.from,
+                compositeIdentifier: {
+                    type: ResourceType.transcribedAudio,
+                    id: '110',
+                },
+                context: new TimeRangeContext({
+                    type: EdgeConnectionContextType.timeRange,
+                    timeRange: {
+                        inPoint: 5000,
+                        outPoint: 7000,
+                    },
                 }),
             },
         ],

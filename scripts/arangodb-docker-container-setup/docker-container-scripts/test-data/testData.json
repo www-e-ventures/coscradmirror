@@ -1613,32 +1613,9 @@
             },
             {
                 "_to": "spatial_features/300",
-                "_from": "bibliographic_references/1",
-                "type": "note",
-                "_key": "2005",
-                "eventHistory": [],
-                "connectionType": "dual",
-                "members": [
-                    {
-                        "role": "to",
-                        "context": {
-                            "type": "general"
-                        }
-                    },
-                    {
-                        "role": "from",
-                        "context": {
-                            "type": "general"
-                        }
-                    }
-                ],
-                "note": "That is why spatialFeature/300 is related to bibliographicReference/1"
-            },
-            {
-                "_to": "bibliographic_references/1",
                 "_from": "songs/1",
                 "type": "note",
-                "_key": "2006",
+                "_key": "2005",
                 "eventHistory": [],
                 "connectionType": "dual",
                 "members": [
@@ -1659,13 +1636,13 @@
                         }
                     }
                 ],
-                "note": "That is why bibliographicReference/1 is related to song/1"
+                "note": "That is why spatialFeature/300 is related to song/1"
             },
             {
                 "_to": "songs/1",
                 "_from": "terms/2",
                 "type": "note",
-                "_key": "2007",
+                "_key": "2006",
                 "eventHistory": [],
                 "connectionType": "dual",
                 "members": [
@@ -1754,6 +1731,33 @@
                     }
                 ],
                 "note": "this selection from the media item portrays the events in the book"
+            },
+            {
+                "_to": "bibliographic_references/3",
+                "_from": "transcribed_audio/110",
+                "type": "note",
+                "_key": "3102",
+                "eventHistory": [],
+                "connectionType": "dual",
+                "members": [
+                    {
+                        "role": "to",
+                        "context": {
+                            "type": "general"
+                        }
+                    },
+                    {
+                        "role": "from",
+                        "context": {
+                            "type": "timeRange",
+                            "timeRange": {
+                                "inPoint": 5000,
+                                "outPoint": 7000
+                            }
+                        }
+                    }
+                ],
+                "note": "court case talks about the same hunting spot as the transcribed audio item refers to"
             }
         ]
     }
