@@ -1,6 +1,8 @@
 import { InternalError } from '../../../../../../lib/errors/InternalError';
-import BibliographicReferenceCreator from '../../../../../models/bibliographic-reference/entities/BibliographicReferenceCreator';
-import { JournalArticleBibliographicReference } from '../../../../../models/bibliographic-reference/entities/journal-article-bibliographic-reference.entity';
+import { DTO } from '../../../../../../types/DTO';
+import BibliographicReferenceCreator from '../../../../../models/bibliographic-reference/common/bibliographic-reference-creator.entity';
+import JournalArticleBibliographicReferenceData from '../../../../../models/bibliographic-reference/journal-article-bibliographic-reference/journal-article-bibliographic-reference-data.entity';
+import { JournalArticleBibliographicReference } from '../../../../../models/bibliographic-reference/journal-article-bibliographic-reference/journal-article-bibliographic-reference.entity';
 import { BibliographicReferenceType } from '../../../../../models/bibliographic-reference/types/BibliographicReferenceType';
 import { AggregateId } from '../../../../../types/AggregateId';
 import { ResourceType } from '../../../../../types/ResourceType';
@@ -24,7 +26,11 @@ export const buildJournalArticleBibliographicReferenceTestCases =
                 data: {
                     ...validDto.data,
                     title: '',
-                },
+                    /**
+                     * TODO[https://www.pivotaltracker.com/story/show/182823742]
+                     * We need to fix the return type of getValidBibliographicReferenceInstanceForTest
+                     */
+                } as DTO<JournalArticleBibliographicReferenceData>,
             },
             expectedError: buildTopLevelError(validDto.id, []),
         },
@@ -35,7 +41,7 @@ export const buildJournalArticleBibliographicReferenceTestCases =
                 data: {
                     ...validDto.data,
                     creators: [],
-                },
+                } as DTO<JournalArticleBibliographicReferenceData>,
             },
             expectedError: buildTopLevelError(validDto.id, []),
         },
@@ -46,7 +52,7 @@ export const buildJournalArticleBibliographicReferenceTestCases =
                 data: {
                     ...validDto.data,
                     creators: ['Jane Deer'] as unknown as BibliographicReferenceCreator[],
-                },
+                } as unknown as DTO<JournalArticleBibliographicReferenceData>,
             },
             expectedError: buildTopLevelError(validDto.id, []),
         },
@@ -57,7 +63,7 @@ export const buildJournalArticleBibliographicReferenceTestCases =
                 data: {
                     ...validDto.data,
                     abstract: '',
-                },
+                } as DTO<JournalArticleBibliographicReferenceData>,
             },
             expectedError: buildTopLevelError(validDto.id, []),
         },
@@ -68,7 +74,7 @@ export const buildJournalArticleBibliographicReferenceTestCases =
                 data: {
                     ...validDto.data,
                     issueDate: '',
-                },
+                } as DTO<JournalArticleBibliographicReferenceData>,
             },
             expectedError: buildTopLevelError(validDto.id, []),
         },
@@ -79,7 +85,7 @@ export const buildJournalArticleBibliographicReferenceTestCases =
                 data: {
                     ...validDto.data,
                     publicationTitle: '',
-                },
+                } as DTO<JournalArticleBibliographicReferenceData>,
             },
             expectedError: buildTopLevelError(validDto.id, []),
         },
@@ -90,7 +96,7 @@ export const buildJournalArticleBibliographicReferenceTestCases =
                 data: {
                     ...validDto.data,
                     url: '',
-                },
+                } as DTO<JournalArticleBibliographicReferenceData>,
             },
             expectedError: buildTopLevelError(validDto.id, []),
         },
@@ -101,7 +107,7 @@ export const buildJournalArticleBibliographicReferenceTestCases =
                 data: {
                     ...validDto.data,
                     pages: '',
-                },
+                } as DTO<JournalArticleBibliographicReferenceData>,
             },
             expectedError: buildTopLevelError(validDto.id, []),
         },
@@ -112,7 +118,7 @@ export const buildJournalArticleBibliographicReferenceTestCases =
                 data: {
                     ...validDto.data,
                     issn: '',
-                },
+                } as DTO<JournalArticleBibliographicReferenceData>,
             },
             expectedError: buildTopLevelError(validDto.id, []),
         },
@@ -123,7 +129,7 @@ export const buildJournalArticleBibliographicReferenceTestCases =
                 data: {
                     ...validDto.data,
                     doi: '',
-                },
+                } as DTO<JournalArticleBibliographicReferenceData>,
             },
             expectedError: buildTopLevelError(validDto.id, []),
         },
