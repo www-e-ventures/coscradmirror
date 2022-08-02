@@ -98,7 +98,8 @@ describe('buildTestData', () => {
         });
     });
 
-    describe('test data for edge connections', () => {
+    // TODO unskip this when adding the data
+    describe.skip('test data for edge connections', () => {
         it(`should have no duplicate IDs`, () => {
             const allIds = connectionTestData
                 .map((connection) => connection.id)
