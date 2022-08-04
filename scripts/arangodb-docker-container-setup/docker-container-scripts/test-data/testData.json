@@ -1737,6 +1737,29 @@
                 "note": "this media item mentions a word in the term"
             },
             {
+                "_from": "bibliographic_references/1",
+                "_to": "books/24",
+                "type": "note",
+                "_key": "3002",
+                "eventHistory": [],
+                "connectionType": "dual",
+                "members": [
+                    {
+                        "role": "from",
+                        "context": {
+                            "type": "identity"
+                        }
+                    },
+                    {
+                        "role": "to",
+                        "context": {
+                            "type": "identity"
+                        }
+                    }
+                ],
+                "note": "here is the digital version of the book!"
+            },
+            {
                 "_to": "media_items/1",
                 "_from": "books/24",
                 "type": "note",
@@ -1765,6 +1788,33 @@
                     }
                 ],
                 "note": "this selection from the media item portrays the events in the book"
+            },
+            {
+                "_to": "bibliographic_references/1",
+                "_from": "songs/1",
+                "type": "note",
+                "_key": "3102",
+                "eventHistory": [],
+                "connectionType": "dual",
+                "members": [
+                    {
+                        "role": "to",
+                        "context": {
+                            "type": "general"
+                        }
+                    },
+                    {
+                        "role": "from",
+                        "context": {
+                            "type": "timeRange",
+                            "timeRange": {
+                                "inPoint": 500,
+                                "outPoint": 778.4
+                            }
+                        }
+                    }
+                ],
+                "note": "this library book has the lyrics from the song, but we do not have access to the book"
             }
         ]
     }

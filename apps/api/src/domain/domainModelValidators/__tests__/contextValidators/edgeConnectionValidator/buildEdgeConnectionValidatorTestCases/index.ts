@@ -18,10 +18,10 @@ import ContextTypeIsNotAllowedForGivenResourceTypeError from '../../../../errors
 import InvalidEdgeConnectionDTOError from '../../../../errors/context/edgeConnections/InvalidEdgeConnectionDTOError';
 import InvalidEdgeConnectionMemberRolesError from '../../../../errors/context/edgeConnections/InvalidEdgeConnectionMemberRolesError';
 import InvalidNumberOfMembersInEdgeConnectionError from '../../../../errors/context/edgeConnections/InvalidNumberOfMembersInEdgeConnectionError';
-import IdentityConnectionDoesNotHaveTwoMembersError from '../../../../errors/context/IdentityConnectionDoesNotHaveTwoMembersError';
 import IncompatibleIdentityConnectionMembersError from '../../../../errors/context/IncompatibleIdentityConnectionMembersError';
 import InvalidEdgeConnectionContextModelError from '../../../../errors/context/InvalidEdgeConnectionContextModelError';
 import LonelyIdentityContextInEdgeconnectionError from '../../../../errors/context/LonelyIdentityContextInEdgeConnectionError';
+import SelfConnectionCannotUseIdentityContextError from '../../../../errors/context/SelfConnectionCannotUseIdentityContextError';
 import { EdgeConnectionValidatorTestCase } from '../types/EdgeConnectionValidatorTestCase';
 
 const buildTopLevelError = (innerErrors: InternalError[]): InternalError =>
@@ -341,7 +341,7 @@ export default (): EdgeConnectionValidatorTestCase[] => [
                     type: AggregateType.note,
                     connectionType: EdgeConnectionType.dual,
                     id: '123',
-                    note: 'my to member should be a bibliographic reference, but it is not!',
+                    note: 'my from member should be a bibliographic reference, but it is not!',
                     members: [
                         {
                             role: EdgeConnectionMemberRole.from,
@@ -361,7 +361,12 @@ export default (): EdgeConnectionValidatorTestCase[] => [
                         },
                     ],
                 },
-                expectedError: buildTopLevelError([new InternalError('Garbagey!')]),
+                expectedError: buildTopLevelError([
+                    new IncompatibleIdentityConnectionMembersError({
+                        fromType: ResourceType.book,
+                        toType: ResourceType.bibliographicReference,
+                    }),
+                ]),
             },
             {
                 description: 'when the members in an identity connection are not compatible',
@@ -419,7 +424,7 @@ export default (): EdgeConnectionValidatorTestCase[] => [
                     ],
                 },
                 expectedError: buildTopLevelError([
-                    new IdentityConnectionDoesNotHaveTwoMembersError(),
+                    new SelfConnectionCannotUseIdentityContextError(),
                 ]),
             },
         ],

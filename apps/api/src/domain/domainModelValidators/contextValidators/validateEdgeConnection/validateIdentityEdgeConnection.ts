@@ -6,10 +6,9 @@ import {
     EdgeConnectionMemberRole,
 } from '../../../models/context/edge-connection.entity';
 import { ResourceType } from '../../../types/ResourceType';
-import IdentityConnectionDoesNotHaveTwoMembersError from '../../errors/context/IdentityConnectionDoesNotHaveTwoMembersError';
-import IdentityConnectionToMemberNotABibliographicReferenceError from '../../errors/context/IdentityConnectionToMemberNotABibliographicReferenceError';
 import IncompatibleIdentityConnectionMembersError from '../../errors/context/IncompatibleIdentityConnectionMembersError';
 import LonelyIdentityContextInEdgeconnectionError from '../../errors/context/LonelyIdentityContextInEdgeConnectionError';
+import SelfConnectionCannotUseIdentityContextError from '../../errors/context/SelfConnectionCannotUseIdentityContextError';
 
 /***
  * This assumes that you have 2 members from a dual Edge Connection and you want
@@ -40,7 +39,7 @@ export const findMemberWithRole = (
  * can accept a resource with the `from` member's resource type as a target
  * digital representation.
  */
-const areIdentityMembersContextTypesConsistentWithRoles = (
+export const areIdentityMembersContextTypesConsistentWithRoles = (
     member1: EdgeConnectionMember,
     member2: EdgeConnectionMember
 ) => {
@@ -68,7 +67,7 @@ export const validateIdentityEdgeConnection = ({ members }: EdgeConnection): Int
     const allErrors: InternalError[] = [];
 
     if (members.length !== 2) {
-        return [new IdentityConnectionDoesNotHaveTwoMembersError()];
+        return [new SelfConnectionCannotUseIdentityContextError()];
     }
 
     // If one member uses the Identity Context, both members must
@@ -76,12 +75,11 @@ export const validateIdentityEdgeConnection = ({ members }: EdgeConnection): Int
         allErrors.push(new LonelyIdentityContextInEdgeconnectionError());
     }
 
-    const fromMember = findMemberWithRole(members[0], members[1], EdgeConnectionMemberRole.from);
-
-    if (fromMember.compositeIdentifier.type !== ResourceType.bibliographicReference) {
-        allErrors.push(new IdentityConnectionToMemberNotABibliographicReferenceError());
-    }
-
+    /**
+     * Note that this will also catch the case that the `to` member does not
+     * have an allowed `ReourceType`, independent of what the `from` member's
+     * `ResourceType` is.
+     */
     if (!areIdentityMembersContextTypesConsistentWithRoles(members[0], members[1])) {
         allErrors.push(
             new IncompatibleIdentityConnectionMembersError({
