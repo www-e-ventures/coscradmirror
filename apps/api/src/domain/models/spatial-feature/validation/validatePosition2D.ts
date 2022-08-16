@@ -1,5 +1,5 @@
-import { InternalError } from '../../../../../../lib/errors/InternalError';
-import { isValid, Valid } from '../../../../Valid';
+import { InternalError } from '../../../../lib/errors/InternalError';
+import { isValid, Valid } from '../../../domainModelValidators/Valid';
 import validateCoordinate from './validateCoordinate';
 
 export default (input: unknown): Valid | InternalError[] => {

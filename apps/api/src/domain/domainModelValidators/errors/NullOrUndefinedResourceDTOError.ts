@@ -1,11 +1,11 @@
 import { InternalError } from '../../../lib/errors/InternalError';
-import { ResourceType } from '../../types/ResourceType';
+import { AggregateType } from '../../types/AggregateType';
 
-export default class NullOrUndefinedResourceDTOError extends InternalError {
-    constructor(resourceType?: ResourceType) {
+export default class NullOrUndefinedAggregateDTOError extends InternalError {
+    constructor(aggregateType: AggregateType) {
         const message = [
             `A null or undefined DTO was provided`,
-            resourceType ? `for entity of type ${resourceType}` : ``,
+            aggregateType ? `for entity of type ${aggregateType}` : ``,
         ].join(' ');
 
         super(message);

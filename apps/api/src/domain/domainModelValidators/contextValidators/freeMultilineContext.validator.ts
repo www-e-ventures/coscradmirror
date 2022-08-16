@@ -1,13 +1,13 @@
 import { InternalError } from '../../../lib/errors/InternalError';
 import { FreeMultilineContext } from '../../models/context/free-multiline-context/free-multiline-context.entity';
 import { EdgeConnectionContextType } from '../../models/context/types/EdgeConnectionContextType';
+import validateAllCoordinatesInLinearStructure from '../../models/spatial-feature/validation/validateAllCoordinatesInLinearStructure';
 import { isNullOrUndefined } from '../../utilities/validation/is-null-or-undefined';
 import InvalidEdgeConnectionContextError from '../errors/context/InvalidEdgeConnectionContextError';
 import InvalidLineInFreeMultilineError from '../errors/context/InvalidLineInFreeMultilineError';
 import InvalidLineTypeError from '../errors/context/InvalidLineTypeError';
 import MissingLineContextError from '../errors/context/MissingLineContextError';
 import NullOrUndefinedEdgeConnectionContextDTOError from '../errors/context/NullOrUndefinedEdgeConnectionContextDTOError';
-import validateAllCoordinatesInLinearStructure from '../spatialFeatureValidator/geometricFeatureValidator/buildGeometricFeatureValidatorChain/utilities/validateAllCoordinatesInLinearStructure';
 import { isValid, Valid } from '../Valid';
 
 export const freeMultilineContextValidator = (input: unknown): Valid | InternalError => {

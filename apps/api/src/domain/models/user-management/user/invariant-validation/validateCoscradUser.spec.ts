@@ -1,6 +1,6 @@
 import NullOrUndefinedCoscradUserDTOError from '../../../../../domain/domainModelValidators/errors/user-management/NullOrUndefinedCoscradUserDTOError';
 import { DTO } from '../../../../../types/DTO';
-import InvalidCoscradUserDTOError from '../../../../domainModelValidators/errors/InvalidCoscradUserDTOError';
+import InvariantValidationError from '../../../../domainModelValidators/errors/InvariantValidationError';
 import { Valid } from '../../../../domainModelValidators/Valid';
 import { AggregateType } from '../../../../types/AggregateType';
 import assertTypeErrorsFromInvalidFuzz from '../../../__tests__/invariant-validation-helpers/assertTypeErrorsFromInvalidFuzz';
@@ -46,7 +46,7 @@ describe('validateCoscradUser', () => {
                 assertTypeErrorsFromInvalidFuzz(
                     CoscradUser,
                     validUserDto,
-                    InvalidCoscradUserDTOError
+                    InvariantValidationError
                 );
             });
         });

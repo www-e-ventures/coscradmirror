@@ -1,6 +1,6 @@
-import { InternalError } from '../../../../../../lib/errors/InternalError';
-import InvalidLineTypeError from '../../../../errors/context/InvalidLineTypeError';
-import { isValid, Valid } from '../../../../Valid';
+import { InternalError } from '../../../../lib/errors/InternalError';
+import InvalidLineTypeError from '../../../domainModelValidators/errors/context/InvalidLineTypeError';
+import { isValid, Valid } from '../../../domainModelValidators/Valid';
 import validatePosition2D from './validatePosition2D';
 
 export default (input: unknown): Valid | InternalError[] => {

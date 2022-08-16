@@ -1,14 +1,18 @@
+import InvalidGeometryTypeForSpatialFeatureError from '../../../../models/spatial-feature/errors/InvalidGeometryTypeForSpatialFeatureError';
 import { ISpatialFeature } from '../../../../models/spatial-feature/ISpatialFeature';
 import { GeometricFeatureType } from '../../../../models/spatial-feature/types/GeometricFeatureType';
 import { ResourceType } from '../../../../types/ResourceType';
-import InvalidResourceDTOError from '../../../errors/InvalidResourceDTOError';
-import NullOrUndefinedResourceDTOError from '../../../errors/NullOrUndefinedResourceDTOError';
-import spatialFeatureValidator from '../../../spatialFeatureValidator';
+import NullOrUndefinedAggregateDTOError from '../../../errors/NullOrUndefinedResourceDTOError';
 import { DomainModelValidatorTestCase } from '../../types/DomainModelValidatorTestCase';
 import { buildLineInvalidTestCases } from './spatialFeatureInvalidTestCases/line.invalid.domainModelValidatorTestCases';
 import { buildPointInvalidTestCases } from './spatialFeatureInvalidTestCases/point.invalid.domainModelValidatorTestCases';
 import { buildPolygonInvalidTestCases } from './spatialFeatureInvalidTestCases/polygon.invalid.domainModelValidatorTestCases';
+import buildInvariantValidationErrorFactoryFunction from './utils/buildInvariantValidationErrorFactoryFunction';
 import { getValidSpatialFeatureInstanceForTest } from './utils/getValidSpatialFeatureInstanceForTest';
+
+export const buildInvalidSpatialFeatureDtoError = buildInvariantValidationErrorFactoryFunction(
+    ResourceType.spatialFeature
+);
 
 // Build one valid case per `GeometricFeatureType`
 const validCases = Object.values(GeometricFeatureType).map((geometryType) => ({
@@ -24,13 +28,12 @@ const modelSpecificTestCases = [
 
 export const buildSpatialFeatureTestCase = (): DomainModelValidatorTestCase<ISpatialFeature> => ({
     resourceType: ResourceType.spatialFeature,
-    validator: spatialFeatureValidator,
     validCases,
     invalidCases: [
         {
             description: 'the dto is null',
             invalidDTO: null,
-            expectedError: new NullOrUndefinedResourceDTOError(ResourceType.spatialFeature),
+            expectedError: new NullOrUndefinedAggregateDTOError(ResourceType.spatialFeature),
         },
         {
             description: 'the dto has an invalid geometric spatial feature type',
@@ -41,10 +44,9 @@ export const buildSpatialFeatureTestCase = (): DomainModelValidatorTestCase<ISpa
                     type: 'BOGUS-GEOMETRIC-FEATURE-TYPE' as GeometricFeatureType,
                 },
             },
-            expectedError: new InvalidResourceDTOError(
-                ResourceType.spatialFeature,
-                validCases[0].dto.id
-            ),
+            expectedError: buildInvalidSpatialFeatureDtoError(validCases[0].dto.id, [
+                new InvalidGeometryTypeForSpatialFeatureError('BOGUS-GEOMETRIC-FEATURE-TYPE'),
+            ]),
         },
         ...modelSpecificTestCases,
     ],

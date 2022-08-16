@@ -1,7 +1,6 @@
 import { IBibliographicReference } from '../../../../models/bibliographic-reference/interfaces/bibliographic-reference.interface';
 import { BibliographicReferenceType } from '../../../../models/bibliographic-reference/types/BibliographicReferenceType';
 import { ResourceType } from '../../../../types/ResourceType';
-import bibliographicReferenceValidator from '../../../bibliographicReferenceValidator';
 import InvalidResourceDTOError from '../../../errors/InvalidResourceDTOError';
 import { DomainModelValidatorTestCase } from '../../types/DomainModelValidatorTestCase';
 import { buildBookBibliographicReferenceTestCases } from './bibliographicReferenceInvalidTestCases/bookBibliographicReference.domainModelValidatorTestCases';
@@ -21,7 +20,6 @@ const modelSpecificTestCases = [
 export const buildBibliographicReferenceTestCase =
     (): DomainModelValidatorTestCase<IBibliographicReference> => ({
         resourceType: ResourceType.bibliographicReference,
-        validator: bibliographicReferenceValidator,
         validCases,
         invalidCases: [
             {

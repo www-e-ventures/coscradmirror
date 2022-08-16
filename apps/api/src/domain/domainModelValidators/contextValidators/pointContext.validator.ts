@@ -1,12 +1,12 @@
 import { InternalError } from '../../../lib/errors/InternalError';
 import { PointContext } from '../../models/context/point-context/point-context.entity';
 import { EdgeConnectionContextType } from '../../models/context/types/EdgeConnectionContextType';
+import validatePosition2D from '../../models/spatial-feature/validation/validatePosition2D';
 import { isNullOrUndefined } from '../../utilities/validation/is-null-or-undefined';
 import InvalidEdgeConnectionContextError from '../errors/context/InvalidEdgeConnectionContextError';
 import InvalidPointTypeError from '../errors/context/InvalidPointTypeError';
 import NullOrUndefinedEdgeConnectionContextDTOError from '../errors/context/NullOrUndefinedEdgeConnectionContextDTOError';
 import PointNotSpecifiedError from '../errors/context/PointNotSpecifiedError';
-import validatePosition2D from '../spatialFeatureValidator/geometricFeatureValidator/buildGeometricFeatureValidatorChain/utilities/validatePosition2D';
 import { isValid, Valid } from '../Valid';
 
 export const pointContextValidator = (input: unknown): Valid | InternalError => {

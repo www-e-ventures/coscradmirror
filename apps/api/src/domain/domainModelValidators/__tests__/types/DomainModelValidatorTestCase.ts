@@ -1,7 +1,6 @@
 import { InternalError } from '../../../../lib/errors/InternalError';
 import { DTO } from '../../../../types/DTO';
 import { ResourceType } from '../../../types/ResourceType';
-import { DomainModelValidator } from '../../types/DomainModelValidator';
 
 export type DomainModelValidatorInvalidTestCase<TEntity> = {
     description?: string;
@@ -16,7 +15,6 @@ export type DomainModelValidatorInvalidTestCase<TEntity> = {
 
 export type DomainModelValidatorTestCase<TResource> = {
     resourceType: ResourceType; // TODO correlate this with TEntity
-    validator: DomainModelValidator;
     validCases: {
         description?: string;
         dto: DTO<TResource>;

@@ -1,17 +1,19 @@
 import { InternalError } from '../../../../../lib/errors/InternalError';
 import { Photograph } from '../../../../models/photograph/entities/photograph.entity';
 import { ResourceType } from '../../../../types/ResourceType';
-import InvalidResourceDTOError from '../../../errors/InvalidResourceDTOError';
-import NullOrUndefinedResourceDTOError from '../../../errors/NullOrUndefinedResourceDTOError';
-import photographValidator from '../../../photographValidator';
+import NullOrUndefinedAggregateDTOError from '../../../errors/NullOrUndefinedResourceDTOError';
 import { DomainModelValidatorTestCase } from '../../types/DomainModelValidatorTestCase';
 import getValidAggregateInstanceForTest from '../utilities/getValidAggregateInstanceForTest';
+import buildInvariantValidationErrorFactoryFunction from './utils/buildInvariantValidationErrorFactoryFunction';
 
-const validDTO = getValidAggregateInstanceForTest(ResourceType.photograph).toDTO();
+const resourceType = ResourceType.photograph;
+
+const validDTO = getValidAggregateInstanceForTest(resourceType).toDTO();
+
+const buildTopLevelError = buildInvariantValidationErrorFactoryFunction(resourceType);
 
 export const buildPhotographTestCase = (): DomainModelValidatorTestCase<Photograph> => ({
     resourceType: ResourceType.photograph,
-    validator: photographValidator,
     validCases: [
         {
             dto: validDTO,
@@ -21,7 +23,7 @@ export const buildPhotographTestCase = (): DomainModelValidatorTestCase<Photogra
         {
             description: 'the dto is null',
             invalidDTO: null,
-            expectedError: new NullOrUndefinedResourceDTOError(
+            expectedError: new NullOrUndefinedAggregateDTOError(
                 ResourceType.photograph
             ) as InternalError,
         },
@@ -32,7 +34,7 @@ export const buildPhotographTestCase = (): DomainModelValidatorTestCase<Photogra
                 photographer: undefined,
             },
             // TODO compare inner errors as well
-            expectedError: new InvalidResourceDTOError(ResourceType.photograph, validDTO.id),
+            expectedError: buildTopLevelError(validDTO.id, []),
         },
         {
             description: 'The photograph has a negative height',
@@ -44,7 +46,7 @@ export const buildPhotographTestCase = (): DomainModelValidatorTestCase<Photogra
                 },
             },
             // TODO compare inner errors as well
-            expectedError: new InvalidResourceDTOError(ResourceType.photograph, validDTO.id),
+            expectedError: buildTopLevelError(validDTO.id, []),
         },
         {
             description: 'The photograph has a negative width',
@@ -56,7 +58,7 @@ export const buildPhotographTestCase = (): DomainModelValidatorTestCase<Photogra
                 },
             },
             // TODO compare inner errors as well
-            expectedError: new InvalidResourceDTOError(ResourceType.photograph, validDTO.id),
+            expectedError: buildTopLevelError(validDTO.id, []),
         },
     ],
 });
