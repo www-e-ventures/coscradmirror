@@ -7,7 +7,7 @@ import InvalidEdgeConnectionContextError from '../errors/context/InvalidEdgeConn
 import InvalidPointTypeError from '../errors/context/InvalidPointTypeError';
 import NullOrUndefinedEdgeConnectionContextDTOError from '../errors/context/NullOrUndefinedEdgeConnectionContextDTOError';
 import PointNotSpecifiedError from '../errors/context/PointNotSpecifiedError';
-import { isValid, Valid } from '../Valid';
+import { Valid } from '../Valid';
 
 export const pointContextValidator = (input: unknown): Valid | InternalError => {
     if (isNullOrUndefined(input))
@@ -25,7 +25,7 @@ export const pointContextValidator = (input: unknown): Valid | InternalError => 
 
     const pointValidationResult = validatePosition2D(point);
 
-    if (!isValid(pointValidationResult))
+    if (pointValidationResult.length > 0)
         allErrors.push(new InvalidPointTypeError(pointValidationResult));
 
     return allErrors.length > 0

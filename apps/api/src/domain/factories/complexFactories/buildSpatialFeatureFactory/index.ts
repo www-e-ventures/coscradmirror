@@ -1,7 +1,7 @@
 import { InternalError, isInternalError } from '../../../../lib/errors/InternalError';
 import { DTO } from '../../../../types/DTO';
 import InvariantValidationError from '../../../domainModelValidators/errors/InvariantValidationError';
-import NullOrUndefinedAggregateDTOError from '../../../domainModelValidators/errors/NullOrUndefinedResourceDTOError';
+import NullOrUndefinedAggregateDTOError from '../../../domainModelValidators/errors/NullOrUndefinedAggregateDTOError';
 import { isValid } from '../../../domainModelValidators/Valid';
 import { ISpatialFeature } from '../../../models/spatial-feature/ISpatialFeature';
 import isGeometricFeatureType from '../../../models/spatial-feature/types/isGeometricFeatureType';
@@ -11,17 +11,17 @@ import { InstanceFactory } from '../../getInstanceFactoryForResource';
 import buildSpatialFeatureInstance from './buildSpatialFeatureInstance';
 
 const spatialDataFactory: InstanceFactory<ISpatialFeature> = (dto: unknown) => {
-    const type = ResourceType.spatialFeature;
+    const resourceType = ResourceType.spatialFeature;
 
     const test = dto as ISpatialFeature;
 
-    if (isNullOrUndefined(dto)) return new NullOrUndefinedAggregateDTOError(type);
+    if (isNullOrUndefined(dto)) return new NullOrUndefinedAggregateDTOError(resourceType);
 
     const { id } = test;
 
     if (!isGeometricFeatureType(test?.geometry?.type))
-        return new InvariantValidationError({ type, id }, [
-            new InternalError(`Invalid gemoetric feature type: ${type}`),
+        return new InvariantValidationError({ type: resourceType, id }, [
+            new InternalError(`Invalid gemoetric feature type: ${resourceType}`),
         ]);
 
     const instance = buildSpatialFeatureInstance(dto as DTO<ISpatialFeature>);

@@ -5,7 +5,7 @@ import { VocabularyList } from '../models/vocabulary-list/entities/vocabulary-li
 import { ResourceType } from '../types/ResourceType';
 import { isNullOrUndefined } from '../utilities/validation/is-null-or-undefined';
 import InvalidPublicationStatusError from './errors/InvalidPublicationStatusError';
-import NullOrUndefinedAggregateDTOError from './errors/NullOrUndefinedResourceDTOError';
+import NullOrUndefinedAggregateDTOError from './errors/NullOrUndefinedAggregateDTOError';
 import InvalidVocabularyListDTOError from './errors/vocabularyList/InvalidVocabularyListDTOError';
 import VocabularyListHasNoEntriesError from './errors/vocabularyList/VocabularyListHasNoEntriesError';
 import VocabularyListHasNoNameInAnyLanguageError from './errors/vocabularyList/VocabularyListHasNoNameInAnyLanguageError';

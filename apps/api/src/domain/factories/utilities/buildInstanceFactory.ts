@@ -1,6 +1,6 @@
 import { DomainModelCtor } from '../../../lib/types/DomainModelCtor';
 import { DTO } from '../../../types/DTO';
-import NullOrUndefinedAggregateDTOError from '../../domainModelValidators/errors/NullOrUndefinedResourceDTOError';
+import NullOrUndefinedAggregateDTOError from '../../domainModelValidators/errors/NullOrUndefinedAggregateDTOError';
 import { isValid } from '../../domainModelValidators/Valid';
 import { Aggregate } from '../../models/aggregate.entity';
 import { isNullOrUndefined } from '../../utilities/validation/is-null-or-undefined';

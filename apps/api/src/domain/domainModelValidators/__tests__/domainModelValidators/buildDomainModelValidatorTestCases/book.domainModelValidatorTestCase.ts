@@ -1,4 +1,3 @@
-import { Book } from '../../../../models/book/entities/book.entity';
 import { ResourceType } from '../../../../types/ResourceType';
 import { DomainModelValidatorTestCase } from '../../types/DomainModelValidatorTestCase';
 import getValidAggregateInstanceForTest from '../utilities/getValidAggregateInstanceForTest';
@@ -10,7 +9,7 @@ const validBookDTO = getValidAggregateInstanceForTest(resourceType).toDTO();
 
 const buildTopLevelError = buildInvariantValidationErrorFactoryFunction(resourceType);
 
-export const buildBookTestCase = (): DomainModelValidatorTestCase<Book> => ({
+export const buildBookTestCase = (): DomainModelValidatorTestCase<ResourceType.book> => ({
     resourceType: resourceType,
     validCases: [
         {
@@ -24,7 +23,7 @@ export const buildBookTestCase = (): DomainModelValidatorTestCase<Book> => ({
                 ...validBookDTO,
                 title: undefined,
             },
-            // TODO compare inner errors as well
+            // TODO [https://www.pivotaltracker.com/story/show/183014405] compare inner errors as well
             expectedError: buildTopLevelError(validBookDTO.id, []),
         },
         {

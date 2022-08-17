@@ -5,9 +5,13 @@ import buildDomainModelValidatorTestCases from './buildDomainModelValidatorTestC
 
 const testCases = buildDomainModelValidatorTestCases();
 
-describe('Domain Model Validators', () => {
+/**
+ * TODO [https://www.pivotaltracker.com/story/show/183014320]
+ * Make this test for all aggregates
+ */
+describe('Aggregate Factories', () => {
     Object.values(ResourceType).forEach((resourceType) => {
-        describe(`An entity of type ${resourceType}`, () => {
+        describe(`When building a resource of type ${resourceType}`, () => {
             it('should have a domain model validator test case', () => {
                 const testCaseSearchResult = testCases.find(
                     ({ resourceType: testCaseEntityType }) => testCaseEntityType === resourceType

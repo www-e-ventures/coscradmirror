@@ -16,7 +16,7 @@ export const buildPointInvalidTestCases = (): DomainModelValidatorInvalidTestCas
                 coordinates: [12, 'foo' as unknown as number],
             },
         },
-        // TODO check inner errors
+        // TODO [https://www.pivotaltracker.com/story/show/183014405] Check inner errors
         expectedError: buildInvalidSpatialFeatureDtoError(validPointDTO.id, []),
     },
 ];

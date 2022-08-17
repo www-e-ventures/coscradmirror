@@ -4,7 +4,7 @@ import { Term } from '../models/term/entities/term.entity';
 import { ResourceType } from '../types/ResourceType';
 import { isNullOrUndefined } from '../utilities/validation/is-null-or-undefined';
 import InvalidPublicationStatusError from './errors/InvalidPublicationStatusError';
-import NullOrUndefinedAggregateDTOError from './errors/NullOrUndefinedResourceDTOError';
+import NullOrUndefinedAggregateDTOError from './errors/NullOrUndefinedAggregateDTOError';
 import InvalidTermDTOError from './errors/term/InvalidTermDTOError';
 import TermHasNoTextInAnyLanguageError from './errors/term/TermHasNoTextInAnyLanguageError';
 import { DomainModelValidator } from './types/DomainModelValidator';

@@ -1,7 +1,6 @@
 import { RegisterIndexScopedCommands } from '../../../app/controllers/command/command-info/decorators/register-index-scoped-commands.decorator';
 import { InternalError } from '../../../lib/errors/InternalError';
 import { DTO } from '../../../types/DTO';
-import { isValid } from '../../domainModelValidators/Valid';
 import { AggregateCompositeIdentifier } from '../../types/AggregateCompositeIdentifier';
 import { ResourceType } from '../../types/ResourceType';
 import { Resource } from '../resource.entity';
@@ -35,15 +34,9 @@ export class Point extends Resource implements ISpatialFeature {
     }
 
     protected validateComplexInvariants(): InternalError[] {
-        const allErrors: InternalError[] = [];
-
         const { coordinates } = this.geometry;
 
-        const coordinateValidationResult = validatePosition2D(coordinates);
-
-        if (!isValid(coordinateValidationResult)) allErrors.push(...coordinateValidationResult);
-
-        return allErrors;
+        return validatePosition2D(coordinates);
     }
 
     // Should we have a base class? Does this logic vary amongst subtypes?

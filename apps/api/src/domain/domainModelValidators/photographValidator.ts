@@ -5,7 +5,7 @@ import { Photograph } from '../models/photograph/entities/photograph.entity';
 import { ResourceType } from '../types/ResourceType';
 import { isNullOrUndefined } from '../utilities/validation/is-null-or-undefined';
 import InvalidResourceDTOError from './errors/InvalidResourceDTOError';
-import NullOrUndefinedAggregateDTOError from './errors/NullOrUndefinedResourceDTOError';
+import NullOrUndefinedAggregateDTOError from './errors/NullOrUndefinedAggregateDTOError';
 import { DomainModelValidator } from './types/DomainModelValidator';
 import { Valid } from './Valid';
 

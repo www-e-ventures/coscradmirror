@@ -91,7 +91,6 @@ export class Term extends Resource {
         if (!isStringWithNonzeroLength(term) && !isStringWithNonzeroLength(termEnglish))
             allErrors.push(new TermHasNoTextInAnyLanguageError(id));
 
-        // TODO Validate inherited properties on the base class
         if (typeof published !== 'boolean')
             allErrors.push(new InvalidPublicationStatusError(ResourceType.term));
 

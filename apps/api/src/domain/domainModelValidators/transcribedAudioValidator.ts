@@ -1,7 +1,7 @@
 import { InternalError } from '../../lib/errors/InternalError';
 import { ResourceType } from '../types/ResourceType';
 import { isNullOrUndefined } from '../utilities/validation/is-null-or-undefined';
-import NullOrUndefinedAggregateDTOError from './errors/NullOrUndefinedResourceDTOError';
+import NullOrUndefinedAggregateDTOError from './errors/NullOrUndefinedAggregateDTOError';
 import { DomainModelValidator } from './types/DomainModelValidator';
 import { Valid } from './Valid';
 

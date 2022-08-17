@@ -8,7 +8,7 @@ import InvalidLineInFreeMultilineError from '../errors/context/InvalidLineInFree
 import InvalidLineTypeError from '../errors/context/InvalidLineTypeError';
 import MissingLineContextError from '../errors/context/MissingLineContextError';
 import NullOrUndefinedEdgeConnectionContextDTOError from '../errors/context/NullOrUndefinedEdgeConnectionContextDTOError';
-import { isValid, Valid } from '../Valid';
+import { Valid } from '../Valid';
 
 export const freeMultilineContextValidator = (input: unknown): Valid | InternalError => {
     if (isNullOrUndefined(input))
@@ -36,7 +36,7 @@ export const freeMultilineContextValidator = (input: unknown): Valid | InternalE
     const lineErrors = lines.reduce((accumulatedErrors: InternalError[], line, index) => {
         const validationResult = validateAllCoordinatesInLinearStructure(line);
 
-        if (isValid(validationResult)) return accumulatedErrors;
+        if (validationResult.length === 0) return accumulatedErrors;
 
         return accumulatedErrors.concat(new InvalidLineInFreeMultilineError(index));
     }, []);

@@ -1,7 +1,6 @@
 import { RegisterIndexScopedCommands } from '../../../app/controllers/command/command-info/decorators/register-index-scoped-commands.decorator';
 import { InternalError } from '../../../lib/errors/InternalError';
 import { DTO } from '../../../types/DTO';
-import { isValid } from '../../domainModelValidators/Valid';
 import { AggregateCompositeIdentifier } from '../../types/AggregateCompositeIdentifier';
 import { ResourceType } from '../../types/ResourceType';
 import { Resource } from '../resource.entity';
@@ -37,14 +36,7 @@ export class Line extends Resource implements ISpatialFeature {
     protected validateComplexInvariants(): InternalError[] {
         const { coordinates } = this.geometry;
 
-        // Validate that every coordinate is a valid point
-        const allErrors: InternalError[] = [];
-
-        const coordinateValidationResult = validateAllCoordinatesInLinearStructure(coordinates);
-
-        if (!isValid(coordinateValidationResult)) allErrors.push(...coordinateValidationResult);
-
-        return allErrors;
+        return validateAllCoordinatesInLinearStructure(coordinates);
     }
 
     protected getExternalReferences(): AggregateCompositeIdentifier[] {

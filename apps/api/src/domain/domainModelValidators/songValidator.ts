@@ -6,7 +6,7 @@ import { AggregateId } from '../types/AggregateId';
 import { ResourceType } from '../types/ResourceType';
 import { isNullOrUndefined } from '../utilities/validation/is-null-or-undefined';
 import InvalidResourceDTOError from './errors/InvalidResourceDTOError';
-import NullOrUndefinedAggregateDTOError from './errors/NullOrUndefinedResourceDTOError';
+import NullOrUndefinedAggregateDTOError from './errors/NullOrUndefinedAggregateDTOError';
 import MissingSongTitleError from './errors/song/MissingSongTitleError';
 import { DomainModelValidator } from './types/DomainModelValidator';
 import validateSimpleInvariants from './utilities/validateSimpleInvariants';

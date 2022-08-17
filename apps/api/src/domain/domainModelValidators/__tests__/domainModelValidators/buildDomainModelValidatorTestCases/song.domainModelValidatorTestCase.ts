@@ -1,6 +1,5 @@
 import { InternalError } from '../../../../../lib/errors/InternalError';
 import { ContributorAndRole } from '../../../../models/song/ContributorAndRole';
-import { Song } from '../../../../models/song/song.entity';
 import { ResourceType } from '../../../../types/ResourceType';
 import { DomainModelValidatorTestCase } from '../../types/DomainModelValidatorTestCase';
 import getValidAggregateInstanceForTest from '../utilities/getValidAggregateInstanceForTest';
@@ -12,7 +11,7 @@ const validDTO = getValidAggregateInstanceForTest(resourceType).toDTO();
 
 const buildTopLevelError = buildInvariantValidationErrorFactoryFunction(resourceType);
 
-export const buildSongTestCase = (): DomainModelValidatorTestCase<Song> => ({
+export const buildSongTestCase = (): DomainModelValidatorTestCase<ResourceType.song> => ({
     resourceType: ResourceType.song,
     validCases: [
         {

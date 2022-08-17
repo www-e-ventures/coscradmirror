@@ -19,7 +19,7 @@ const validDTO: DTO<Term> = {
 
 const buildTopLevelError = buildInvariantValidationErrorFactoryFunction(resourceType);
 
-export const buildTermTestCase = (): DomainModelValidatorTestCase<Term> => ({
+export const buildTermTestCase = (): DomainModelValidatorTestCase<ResourceType.term> => ({
     resourceType: resourceType,
     validCases: [
         {

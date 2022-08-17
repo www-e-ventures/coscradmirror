@@ -99,12 +99,11 @@ export default (): EdgeConnectionValidatorTestCase[] => [
             },
         ],
         invalidCases: [
-            // We need to test this at a higher level
-            // {
-            //     description: 'the DTO is null',
-            //     invalidDTO: null,
-            //     expectedError: new NullOrUndefinedEdgeConnectionDTOError(),
-            // },
+            /**
+             * TODO [https://www.pivotaltracker.com/story/show/183014320]
+             * We need to test at a higher level that a null or undefined
+             * DTO leads to the appropriate error from the factory.
+             */
             /**
              * TODO
              *

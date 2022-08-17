@@ -21,7 +21,7 @@ export const buildLineInvalidTestCases = (): DomainModelValidatorInvalidTestCase
                 ],
             },
         },
-        // TODO Check inner errors
+        // TODO [https://www.pivotaltracker.com/story/show/183014405] Check inner errors
         expectedError: buildInvalidSpatialFeatureDtoError(validLineDTO.id, []),
     },
 ];

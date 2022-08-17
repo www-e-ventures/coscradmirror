@@ -18,9 +18,6 @@ import { validateIdentityEdgeConnection } from './validateIdentityEdgeConnection
 export const isMemberContextTheIdentityContext = ({ context: { type } }: EdgeConnectionMember) =>
     type === EdgeConnectionContextType.identity;
 
-/**
- * TODO: Should we call this validateEdgeConnection?
- */
 export default (input: unknown): InternalError[] => {
     /**
      * TODO cast to `DTO<EdgeConnection>`. Why does that type have trouble resolving

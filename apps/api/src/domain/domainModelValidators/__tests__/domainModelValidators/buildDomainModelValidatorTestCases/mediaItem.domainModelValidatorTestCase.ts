@@ -1,9 +1,8 @@
 import { MIMEType } from '@coscrad/data-types';
-import { MediaItem } from '../../../../models/media-item/entities/media-item.entity';
 import { ContributorAndRole } from '../../../../models/song/ContributorAndRole';
 import { ResourceType } from '../../../../types/ResourceType';
 import MediaItemHasNoTitleInAnyLanguageError from '../../../errors/mediaItem/MediaItemHasNoTitleInAnyLanguageError';
-import NullOrUndefinedAggregateDTOError from '../../../errors/NullOrUndefinedResourceDTOError';
+import NullOrUndefinedAggregateDTOError from '../../../errors/NullOrUndefinedAggregateDTOError';
 import { DomainModelValidatorTestCase } from '../../types/DomainModelValidatorTestCase';
 import getValidAggregateInstanceForTest from '../utilities/getValidAggregateInstanceForTest';
 import buildInvariantValidationErrorFactoryFunction from './utils/buildInvariantValidationErrorFactoryFunction';
@@ -14,7 +13,7 @@ const validDTO = getValidAggregateInstanceForTest(resourceType).toDTO();
 
 const buildTopLevelError = buildInvariantValidationErrorFactoryFunction(resourceType);
 
-export const buildmediaItemTestCase = (): DomainModelValidatorTestCase<MediaItem> => ({
+export const buildmediaItemTestCase = (): DomainModelValidatorTestCase<ResourceType.mediaItem> => ({
     resourceType: ResourceType.mediaItem,
     validCases: [
         {

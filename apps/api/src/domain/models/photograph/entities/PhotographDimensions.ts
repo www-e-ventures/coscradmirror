@@ -5,7 +5,6 @@ import BaseDomainModel from '../../BaseDomainModel';
 
 // This is a value-object
 export default class PhotographDimensions extends BaseDomainModel {
-    // Do we need the unit in the prop name? Do we need other units?
     @NonNegativeFiniteNumber()
     readonly widthPX: number;
 
