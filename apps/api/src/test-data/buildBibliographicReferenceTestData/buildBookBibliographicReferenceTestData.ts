@@ -36,7 +36,7 @@ const dtos: DTO<BookBibliographicReference>[] = [
             creators: [
                 {
                     name: 'James Alexander Teit',
-                    type: CreatorType.author,
+                    type: BibliographicSubjectCreatorType.author,
                 },
             ],
             abstract: 'x, p. [443]-813. illus. pl. 13-14 35 cm.',
@@ -54,7 +54,7 @@ const dtos: DTO<BookBibliographicReference>[] = [
             creators: [
                 {
                     name: 'William J. Turkel',
-                    type: CreatorType.author,
+                    type: BibliographicSubjectCreatorType.author,
                 },
             ],
             year: 2007,
