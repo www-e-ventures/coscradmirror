@@ -30,7 +30,7 @@ const dtos: DTO<CourtCaseBibliographicReference>[] = [
             abstract: 'William, Eliza\n- Affidavit #2',
             dateDecided: 'Sworn 2003-07-29',
             court: 'Supreme Court of British Columbia',
-            url: 'http://myunsecurelink.com/another-bogus-link.cfm',
+            url: 'https://mysecurelink.com/another-bogus-link.cfm',
             pages: 'Pages 1 - 73',
         },
         published: true,

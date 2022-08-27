@@ -35,38 +35,38 @@ const dtos: DTO<BookBibliographicReference>[] = [
             title: 'The Shuswap. Memoirs of the AMNH ; v. 4, pt. 7; Publications of the Jesup North Pacific Expedition ; v. 2, pt. 7.',
             creators: [
                 {
-                    name: "James Alexander Teit",
+                    name: 'James Alexander Teit',
                     type: CreatorType.author,
-                }
+                },
             ],
-            abstract: "x, p. [443]-813. illus. pl. 13-14 35 cm.",
+            abstract: 'x, p. [443]-813. illus. pl. 13-14 35 cm.',
             year: 1909,
-            url: 'http://digitallibrary.amnh.org/handle/2246/38',
+            url: 'https://digitallibrary.amnh.org/handle/2246/38',
         },
         published: true,
-        id: '2'
+        id: '2',
     },
     {
         type: ResourceType.bibliographicReference,
         data: {
             type: BibliographicReferenceType.book,
-            title: "The archive of place: unearthing the pasts of the Chilcotin Plateau",
+            title: 'The archive of place: unearthing the pasts of the Chilcotin Plateau',
             creators: [
                 {
-                    name: "William J. Turkel",
+                    name: 'William J. Turkel',
                     type: CreatorType.author,
                 },
             ],
             year: 2007,
-            publisher: "UBC Press",
-            place: "Vancouver",
-            url: "https://vpl.bibliocommons.com/v2/record/S38C1549002",
+            publisher: 'UBC Press',
+            place: 'Vancouver',
+            url: 'https://vpl.bibliocommons.com/v2/record/S38C1549002',
             numberOfPages: 322,
-            isbn: "978-0-7748-1376-1",
+            isbn: '978-0-7748-1376-1',
         },
         published: true,
         id: '3',
-    }
+    },
 ];
 
 export default (): IBibliographicReference[] =>
