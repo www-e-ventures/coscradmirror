@@ -3,36 +3,59 @@
 exports[`NonEmptyString should populate the appropriate metadata 1`] = `
 Object {
   "aliases": Object {
+    "coscradDataType": "NON_EMPTY_STRING",
     "isArray": true,
     "isOptional": false,
-    "type": "NON_EMPTY_STRING",
   },
   "averageRating": Object {
+    "coscradDataType": "NON_NEGATIVE_FINITE_NUMBER",
     "isArray": false,
     "isOptional": true,
-    "type": "NON_NEGATIVE_FINITE_NUMBER",
+  },
+  "creatorType": Object {
+    "coscradDataType": "ENUM",
+    "enumLabel": "Creator Type",
+    "enumName": "BIBLIOGRAPHIC_SUBJECT_CREATOR_TYPE",
+    "isArray": false,
+    "isOptional": false,
+    "labelsAndValues": Array [
+      Object {
+        "label": "artist",
+        "value": "artist",
+      },
+      Object {
+        "label": "author",
+        "value": "author",
+      },
+      Object {
+        "label": "director",
+        "value": "director",
+      },
+    ],
+    "type": "ENUM",
   },
   "iconUrl": Object {
+    "coscradDataType": "URL",
     "isArray": false,
     "isOptional": false,
-    "type": "URL",
   },
   "id": Object {
+    "coscradDataType": "UUID",
     "isArray": false,
     "isOptional": false,
-    "type": "UUID",
   },
   "locationId": Object {
+    "coscradDataType": "UUID",
     "isArray": false,
     "isOptional": true,
-    "type": "UUID",
   },
   "locationName": Object {
+    "coscradDataType": "NON_EMPTY_STRING",
     "isArray": false,
     "isOptional": true,
-    "type": "NON_EMPTY_STRING",
   },
   "mimeType": Object {
+    "coscradDataType": "ENUM",
     "enumLabel": "MIME Type",
     "enumName": "MIME_TYPE",
     "isArray": false,
@@ -47,37 +70,58 @@ Object {
         "value": "video/mp4",
       },
     ],
-    "type": "Enum",
+    "type": "ENUM",
   },
-  "optionalRawData": Object {
+  "numberOfDownvotes": Object {
     "isArray": false,
     "isOptional": true,
-    "type": "RAW_DATA",
+    "type": "POSITIVE_INTEGER",
+  },
+  "numberOfLikes": Object {
+    "isArray": false,
+    "isOptional": false,
+    "type": "POSITIVE_INTEGER",
+  },
+  "optionalISBN": Object {
+    "isArray": false,
+    "isOptional": true,
+    "type": "ISBN",
+  },
+  "optionalRawData": Object {
+    "coscradDataType": "RAW_DATA",
+    "isArray": false,
+    "isOptional": true,
   },
   "primaryWhatsit": Object {
-    "isArray": false,
-    "isOptional": false,
-    "type": Object {
+    "coscradDataType": Object {
       "whatsitId": Object {
+        "coscradDataType": "UUID",
         "isArray": false,
         "isOptional": false,
-        "type": "UUID",
       },
       "whatsitName": Object {
+        "coscradDataType": "NON_EMPTY_STRING",
         "isArray": false,
         "isOptional": true,
-        "type": "NON_EMPTY_STRING",
       },
     },
-  },
-  "rawDataObject": Object {
     "isArray": false,
     "isOptional": false,
-    "type": "RAW_DATA",
+  },
+  "rawDataObject": Object {
+    "coscradDataType": "RAW_DATA",
+    "isArray": false,
+    "isOptional": false,
+  },
+  "requiredISBN": Object {
+    "isArray": false,
+    "isOptional": false,
+    "type": "ISBN",
   },
   "role": Object {
+    "coscradDataType": "ENUM",
     "enumLabel": "User Role",
-    "enumName": "CoscradUserRole",
+    "enumName": "COSCRAD_USER_ROLE",
     "isArray": false,
     "isOptional": false,
     "labelsAndValues": Array [
@@ -94,38 +138,48 @@ Object {
         "value": "superAdmin",
       },
     ],
-    "type": "Enum",
+    "type": "ENUM",
   },
   "secondaryWhatsit": Object {
-    "isArray": false,
-    "isOptional": true,
-    "type": Object {
+    "coscradDataType": Object {
       "whatsitId": Object {
+        "coscradDataType": "UUID",
         "isArray": false,
         "isOptional": false,
-        "type": "UUID",
       },
       "whatsitName": Object {
+        "coscradDataType": "NON_EMPTY_STRING",
         "isArray": false,
         "isOptional": true,
-        "type": "NON_EMPTY_STRING",
       },
     },
-  },
-  "specSheetUrl": Object {
     "isArray": false,
     "isOptional": true,
-    "type": "URL",
+  },
+  "specSheetUrl": Object {
+    "coscradDataType": "URL",
+    "isArray": false,
+    "isOptional": true,
   },
   "widgetName": Object {
+    "coscradDataType": "NON_EMPTY_STRING",
     "isArray": false,
     "isOptional": false,
-    "type": "NON_EMPTY_STRING",
   },
   "width": Object {
+    "coscradDataType": "NON_NEGATIVE_FINITE_NUMBER",
     "isArray": false,
     "isOptional": false,
-    "type": "NON_NEGATIVE_FINITE_NUMBER",
+  },
+  "year": Object {
+    "isArray": false,
+    "isOptional": false,
+    "type": "YEAR",
+  },
+  "yearUploaded": Object {
+    "isArray": false,
+    "isOptional": true,
+    "type": "YEAR",
   },
 }
 `;

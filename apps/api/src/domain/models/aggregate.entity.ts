@@ -35,6 +35,7 @@ export abstract class Aggregate extends BaseDomainModel implements HasAggregateI
 
     readonly type: AggregateType;
 
+    // TODO Make this a UUID
     @NonEmptyString()
     readonly id: AggregateId;
 

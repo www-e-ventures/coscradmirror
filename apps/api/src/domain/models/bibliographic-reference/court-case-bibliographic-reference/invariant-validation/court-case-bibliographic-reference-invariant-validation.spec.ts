@@ -14,7 +14,6 @@ const validDto: DTO<CourtCaseBibliographicReference> = {
     data: {
         type: BibliographicReferenceType.courtCase,
         caseName: 'Smokey Bear vs. Camper Joe',
-        creators: [],
         abstract: 'Smokey did not steal those picnic baskets!',
         dateDecided: 'Recorded July 01, 1958',
         court: 'Saturday Morning Specials',

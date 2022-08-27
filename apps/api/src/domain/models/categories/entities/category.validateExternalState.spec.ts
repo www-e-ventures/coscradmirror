@@ -2,7 +2,7 @@ import { InternalError } from '../../../../lib/errors/InternalError';
 import buildTestData from '../../../../test-data/buildTestData';
 import { DeepPartial } from '../../../../types/DeepPartial';
 import { Valid } from '../../../domainModelValidators/Valid';
-import { HasAggregateIdAndLabel } from '../../../interfaces/HasAggregateIdAndLabel';
+import { HasLabel } from '../../../interfaces/HasAggregateIdAndLabel';
 import { AggregateType } from '../../../types/AggregateType';
 import { CategorizableType } from '../../../types/CategorizableType';
 import { DeluxeInMemoryStore } from '../../../types/DeluxeInMemoryStore';
@@ -13,7 +13,7 @@ import { dummyUuid } from '../../__tests__/utilities/dummyUuid';
 import InvalidExternalReferenceByAggregateError from '../errors/InvalidExternalReferenceInCategoryError';
 import { Category } from './category.entity';
 
-const buildTopLevelError = (idAndLabel: HasAggregateIdAndLabel, innerErrors) =>
+const buildTopLevelError = (idAndLabel: HasLabel, innerErrors) =>
     new InvalidExternalStateError(innerErrors);
 
 const missingTerm = buildTestData().resources.term[0].clone<Term>({

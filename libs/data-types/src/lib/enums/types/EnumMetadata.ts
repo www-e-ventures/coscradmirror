@@ -4,7 +4,8 @@ import { CoscradEnum } from '../CoscradEnum';
 import { LabelAndValue } from './LabelAndValue';
 
 export type EnumMetadata = {
-    type: CoscradDataType.Enum;
+    // TODO We need a single source of truth for the following key
+    coscradDataType: CoscradDataType.Enum;
 
     enumName: CoscradEnum;
 
@@ -15,4 +16,5 @@ export type EnumMetadata = {
 
 export const isEnumMetadata = (
     input: CoscradDataType | ClassDataTypeMetadata | EnumMetadata
-): input is EnumMetadata => input && (input as EnumMetadata).type === CoscradDataType.Enum;
+): input is EnumMetadata =>
+    input && (input as EnumMetadata).coscradDataType === CoscradDataType.Enum;

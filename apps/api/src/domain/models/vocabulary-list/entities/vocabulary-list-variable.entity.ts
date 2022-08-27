@@ -1,3 +1,4 @@
+import { NonEmptyString } from '@coscrad/data-types';
 import { ApiProperty } from '@nestjs/swagger';
 import { DropboxOrCheckbox } from '../../vocabulary-list/types/dropbox-or-checkbox';
 import { VocabularyListVariableValue } from '../../vocabulary-list/types/vocabulary-list-variable-value';
@@ -15,6 +16,7 @@ export class VocabularyListVariable<
         example: 'person',
         description: 'name of a property that parametrizes terms in the list',
     })
+    @NonEmptyString()
     name: string;
 
     @ApiProperty({
@@ -22,10 +24,12 @@ export class VocabularyListVariable<
         description:
             'specifies whether the corresponding field be a dropbox (select) or slider (switch)',
     })
+    // TODO Support `DropboxOrCheckbox` enum data-type
     type: DropboxOrCheckbox;
 
     @ApiProperty({
         description: 'specifies the value and label for the corresponding form element',
     })
+    // TODO Add data-type decorator
     validValues: ValueAndDisplay<TVariableType>[];
 }

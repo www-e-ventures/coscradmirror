@@ -1,5 +1,5 @@
 import { writeFileSync } from 'fs';
-import { Valid } from '../domain/domainModelValidators/Valid';
+import { isValid, Valid } from '../domain/domainModelValidators/Valid';
 import getId from '../domain/models/shared/functional/getId';
 import { AggregateId } from '../domain/types/AggregateId';
 import { AggregateType } from '../domain/types/AggregateType';
@@ -63,7 +63,13 @@ describe('buildTestData', () => {
                     it('should satisfy all invariants', () => {
                         const validationResult = aggregate.validateInvariants();
 
-                        expect(validationResult).toBe(Valid);
+                        const validMessage = 'VALID';
+
+                        const validationMessage = isValid(validationResult)
+                            ? validMessage
+                            : validationResult.toString();
+
+                        expect(validationMessage).toBe(validMessage);
                     });
 
                     it('should contain no inconsistent references to the external state (other test data)', () => {

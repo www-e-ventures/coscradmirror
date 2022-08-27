@@ -7,7 +7,6 @@ import formatResourceCompositeIdentifier from '../../view-models/presentation/fo
 import DisallowedContextTypeForResourceError from '../domainModelValidators/errors/context/invalidContextStateErrors/DisallowedContextTypeForResourceError';
 import { Valid } from '../domainModelValidators/Valid';
 import { AggregateId } from '../types/AggregateId';
-import { HasAggregateId } from '../types/HasAggregateId';
 import { ResourceCompositeIdentifier } from '../types/ResourceCompositeIdentifier';
 import { ResourceType } from '../types/ResourceType';
 import { Aggregate } from './aggregate.entity';
@@ -17,7 +16,7 @@ import { EdgeConnectionContextType } from './context/types/EdgeConnectionContext
 import { AccessControlList } from './shared/access-control/access-control-list.entity';
 import UserAlreadyHasReadAccessError from './shared/common-command-errors/invalid-state-transition-errors/UserAlreadyHasReadAccessError';
 
-export abstract class Resource extends Aggregate implements HasAggregateId {
+export abstract class Resource extends Aggregate {
     readonly type: ResourceType;
 
     // TODO: Rename this 'isPublished' - db migration
