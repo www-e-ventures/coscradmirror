@@ -1,6 +1,3 @@
-import { AggregateId } from '../types/AggregateId';
-
-export interface HasAggregateIdAndLabel {
-    id: AggregateId;
+export interface HasLabel {
     label: string;
 }

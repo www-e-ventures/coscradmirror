@@ -1,4 +1,4 @@
-import cloneToPlainObject from './cloneToPlainObject';
+import { clonePlainObjectWithoutProperties } from './clonePlainObjectWithoutProperties';
 
 /**
  * This utility is meant to be used with plain objects (e.g. a DTO). If you use
@@ -15,12 +15,6 @@ const clonePlainObjectWithoutProperty = <
 >(
     object: T,
     property: UProperty
-): Omit<T, UProperty> => {
-    const clone = cloneToPlainObject(object);
-
-    delete clone[property];
-
-    return clone;
-};
+): Omit<T, UProperty> => clonePlainObjectWithoutProperties(object, [property]);
 
 export default clonePlainObjectWithoutProperty;

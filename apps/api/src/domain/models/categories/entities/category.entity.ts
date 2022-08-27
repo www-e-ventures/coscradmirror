@@ -5,7 +5,7 @@ import { RegisterIndexScopedCommands } from '../../../../app/controllers/command
 import { InternalError } from '../../../../lib/errors/InternalError';
 import cloneToPlainObject from '../../../../lib/utilities/cloneToPlainObject';
 import { DTO } from '../../../../types/DTO';
-import { HasAggregateIdAndLabel } from '../../../interfaces/HasAggregateIdAndLabel';
+import { HasLabel } from '../../../interfaces/HasAggregateIdAndLabel';
 import { AggregateCompositeIdentifier } from '../../../types/AggregateCompositeIdentifier';
 import { AggregateId } from '../../../types/AggregateId';
 import { AggregateType } from '../../../types/AggregateType';
@@ -21,7 +21,7 @@ class CategorizableCompositeIdentifier {
 }
 
 @RegisterIndexScopedCommands([])
-export class Category extends Aggregate implements HasAggregateIdAndLabel {
+export class Category extends Aggregate implements HasLabel {
     readonly type = AggregateType.category;
 
     readonly id: AggregateId;

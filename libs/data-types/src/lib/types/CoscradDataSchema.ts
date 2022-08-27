@@ -1,7 +1,7 @@
 import { CoscradDataType } from './CoscradDataType';
 
 export type CoscradDataSchema = {
-    type: CoscradDataType;
+    coscradDataType: CoscradDataType;
     isArray: boolean;
     isOptional: boolean;
 };

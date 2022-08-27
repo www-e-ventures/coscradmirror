@@ -21,7 +21,7 @@ export default (
             ...existingMeta,
             [propertyKey]: isEnumMetadata(propertyType)
                 ? { ...propertyType, isOptional, isArray }
-                : { type: propertyType, isOptional, isArray },
+                : { coscradDataType: propertyType, isOptional, isArray },
         },
         target
     );
