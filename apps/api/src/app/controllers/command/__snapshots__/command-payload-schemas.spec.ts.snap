@@ -3,14 +3,14 @@
 exports[`command payload schemas The schema for command ADD_USER_TO_GROUP should have the expected value 1`] = `
 Object {
   "groupId": Object {
+    "coscradDataType": "UUID",
     "isArray": false,
     "isOptional": false,
-    "type": "UUID",
   },
   "userId": Object {
+    "coscradDataType": "UUID",
     "isArray": false,
     "isOptional": false,
-    "type": "UUID",
   },
 }
 `;
@@ -18,27 +18,28 @@ Object {
 exports[`command payload schemas The schema for command CREATE_MEDIA_ITEM should have the expected value 1`] = `
 Object {
   "contributions": Object {
-    "isArray": true,
-    "isOptional": false,
-    "type": Object {
+    "coscradDataType": Object {
       "contributorId": Object {
+        "coscradDataType": "NON_EMPTY_STRING",
         "isArray": false,
         "isOptional": false,
-        "type": "NON_EMPTY_STRING",
       },
       "role": Object {
+        "coscradDataType": "NON_EMPTY_STRING",
         "isArray": false,
         "isOptional": false,
-        "type": "NON_EMPTY_STRING",
       },
     },
+    "isArray": true,
+    "isOptional": false,
   },
   "id": Object {
+    "coscradDataType": "UUID",
     "isArray": false,
     "isOptional": false,
-    "type": "UUID",
   },
   "mimeType": Object {
+    "coscradDataType": "ENUM",
     "enumLabel": "MIME Type",
     "enumName": "MIME_TYPE",
     "isArray": false,
@@ -53,27 +54,27 @@ Object {
         "value": "video/mp4",
       },
     ],
-    "type": "Enum",
+    "type": "ENUM",
   },
   "rawData": Object {
+    "coscradDataType": "RAW_DATA",
     "isArray": false,
     "isOptional": true,
-    "type": "RAW_DATA",
   },
   "title": Object {
+    "coscradDataType": "NON_EMPTY_STRING",
     "isArray": false,
     "isOptional": true,
-    "type": "NON_EMPTY_STRING",
   },
   "titleEnglish": Object {
+    "coscradDataType": "NON_EMPTY_STRING",
     "isArray": false,
     "isOptional": true,
-    "type": "NON_EMPTY_STRING",
   },
   "url": Object {
+    "coscradDataType": "URL",
     "isArray": false,
     "isOptional": false,
-    "type": "URL",
   },
 }
 `;
@@ -81,50 +82,50 @@ Object {
 exports[`command payload schemas The schema for command CREATE_SONG should have the expected value 1`] = `
 Object {
   "audioURL": Object {
+    "coscradDataType": "URL",
     "isArray": false,
     "isOptional": false,
-    "type": "URL",
   },
   "contributions": Object {
-    "isArray": true,
-    "isOptional": false,
-    "type": Object {
+    "coscradDataType": Object {
       "contributorId": Object {
+        "coscradDataType": "NON_EMPTY_STRING",
         "isArray": false,
         "isOptional": false,
-        "type": "NON_EMPTY_STRING",
       },
       "role": Object {
+        "coscradDataType": "NON_EMPTY_STRING",
         "isArray": false,
         "isOptional": false,
-        "type": "NON_EMPTY_STRING",
       },
     },
+    "isArray": true,
+    "isOptional": false,
   },
   "id": Object {
+    "coscradDataType": "UUID",
     "isArray": false,
     "isOptional": false,
-    "type": "UUID",
   },
   "lyrics": Object {
+    "coscradDataType": "NON_EMPTY_STRING",
     "isArray": false,
     "isOptional": true,
-    "type": "NON_EMPTY_STRING",
   },
   "rawData": Object {
+    "coscradDataType": "RAW_DATA",
     "isArray": false,
     "isOptional": true,
-    "type": "RAW_DATA",
   },
   "title": Object {
+    "coscradDataType": "NON_EMPTY_STRING",
     "isArray": false,
     "isOptional": true,
-    "type": "NON_EMPTY_STRING",
   },
   "titleEnglish": Object {
+    "coscradDataType": "NON_EMPTY_STRING",
     "isArray": false,
     "isOptional": true,
-    "type": "NON_EMPTY_STRING",
   },
 }
 `;
@@ -132,19 +133,19 @@ Object {
 exports[`command payload schemas The schema for command CREATE_USER_GROUP should have the expected value 1`] = `
 Object {
   "description": Object {
+    "coscradDataType": "NON_EMPTY_STRING",
     "isArray": false,
     "isOptional": false,
-    "type": "NON_EMPTY_STRING",
   },
   "id": Object {
+    "coscradDataType": "UUID",
     "isArray": false,
     "isOptional": false,
-    "type": "UUID",
   },
   "label": Object {
+    "coscradDataType": "NON_EMPTY_STRING",
     "isArray": false,
     "isOptional": false,
-    "type": "NON_EMPTY_STRING",
   },
 }
 `;
@@ -152,8 +153,9 @@ Object {
 exports[`command payload schemas The schema for command GRANT_USER_ROLE should have the expected value 1`] = `
 Object {
   "role": Object {
+    "coscradDataType": "ENUM",
     "enumLabel": "User Role",
-    "enumName": "CoscradUserRole",
+    "enumName": "COSCRAD_USER_ROLE",
     "isArray": false,
     "isOptional": false,
     "labelsAndValues": Array [
@@ -170,12 +172,12 @@ Object {
         "value": "superAdmin",
       },
     ],
-    "type": "Enum",
+    "type": "ENUM",
   },
   "userId": Object {
+    "coscradDataType": "UUID",
     "isArray": false,
     "isOptional": false,
-    "type": "UUID",
   },
 }
 `;
@@ -183,9 +185,9 @@ Object {
 exports[`command payload schemas The schema for command PUBLISH_SONG should have the expected value 1`] = `
 Object {
   "id": Object {
+    "coscradDataType": "UUID",
     "isArray": false,
     "isOptional": false,
-    "type": "UUID",
   },
 }
 `;
@@ -193,19 +195,19 @@ Object {
 exports[`command payload schemas The schema for command REGISTER_USER should have the expected value 1`] = `
 Object {
   "id": Object {
+    "coscradDataType": "UUID",
     "isArray": false,
     "isOptional": false,
-    "type": "UUID",
   },
   "userIdFromAuthProvider": Object {
+    "coscradDataType": "NON_EMPTY_STRING",
     "isArray": false,
     "isOptional": false,
-    "type": "NON_EMPTY_STRING",
   },
   "username": Object {
+    "coscradDataType": "NON_EMPTY_STRING",
     "isArray": false,
     "isOptional": false,
-    "type": "NON_EMPTY_STRING",
   },
 }
 `;

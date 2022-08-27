@@ -5,5 +5,5 @@ export type PropertyTypeMetadata = {
 
     isArray: boolean;
 
-    type: CoscradDataType;
+    coscradDataType: CoscradDataType;
 };

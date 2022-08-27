@@ -36,7 +36,7 @@ type DataTypeToFuzz = { [K in CoscradDataType]: FuzzDataType[] };
 const dataTypeToValidFuzz: DataTypeToFuzz = {
     [CoscradDataType.NonEmptyString]: ['url', 'randomString', 'uuid'],
     [CoscradDataType.Enum]: [],
-    [CoscradDataType.NonNegativeFiniteNumber]: ['positiveInteger', 'positiveDecimal'],
+    [CoscradDataType.NonNegativeFiniteNumber]: ['positiveInteger', 'positiveDecimal', 'zero'],
     [CoscradDataType.RawData]: ['shallowObject', 'deeplyNestedObject', 'compositeIdentifier'],
     [CoscradDataType.URL]: ['url'],
     [CoscradDataType.UUID]: ['uuid'],
@@ -44,7 +44,7 @@ const dataTypeToValidFuzz: DataTypeToFuzz = {
 };
 
 export const generateValidValuesOfType = ({
-    type,
+    coscradDataType: type,
     isArray,
     isOptional,
 }: CoscradDataSchema): unknown[] => {
@@ -65,7 +65,11 @@ export const generateValidValuesOfType = ({
     return validValues;
 };
 
-export default ({ type, isArray, isOptional }: CoscradDataSchema): ValueAndDescription[] => {
+export default ({
+    coscradDataType: type,
+    isArray,
+    isOptional,
+}: CoscradDataSchema): ValueAndDescription[] => {
     /**
      * TODO [https://www.pivotaltracker.com/story/show/182715254]
      *

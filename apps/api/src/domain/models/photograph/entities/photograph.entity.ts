@@ -21,6 +21,8 @@ import PhotographDimensions from './PhotographDimensions';
 export class Photograph extends Resource implements Boundable2D {
     readonly type = ResourceType.photograph;
 
+    // TODO Make this a `mediaItemId` @UUID
+    @NonEmptyString()
     readonly filename: string;
 
     // TODO make this a `contributorID`

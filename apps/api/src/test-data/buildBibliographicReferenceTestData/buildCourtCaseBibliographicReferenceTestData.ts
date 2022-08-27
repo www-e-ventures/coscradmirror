@@ -10,7 +10,6 @@ const dtos: DTO<CourtCaseBibliographicReference>[] = [
         data: {
             type: BibliographicReferenceType.courtCase,
             caseName: "2002-07-08_Tsilhqot'inTitleCase",
-            creators: [],
             abstract:
                 "William, June\n- Nemiah Valley\n- Qualifying as an expert in Tsilhqot'in written language",
             dateDecided: 'Recorded 2002-07-08',

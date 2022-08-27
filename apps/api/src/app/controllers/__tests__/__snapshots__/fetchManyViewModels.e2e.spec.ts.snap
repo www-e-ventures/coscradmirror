@@ -11,14 +11,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -58,14 +58,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -100,14 +100,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -120,7 +120,6 @@ Object {
 - Qualifying as an expert in Tsilhqot'in written language",
           "caseName": "2002-07-08_Tsilhqot'inTitleCase",
           "court": "Supreme Court of British Columbia",
-          "creators": Array [],
           "dateDecided": "Recorded 2002-07-08",
           "pages": "Pages 1-6",
           "type": "courtCase",
@@ -150,14 +149,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -197,14 +196,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -239,14 +238,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -259,7 +258,6 @@ Object {
 - Qualifying as an expert in Tsilhqot'in written language",
           "caseName": "2002-07-08_Tsilhqot'inTitleCase",
           "court": "Supreme Court of British Columbia",
-          "creators": Array [],
           "dateDecided": "Recorded 2002-07-08",
           "pages": "Pages 1-6",
           "type": "courtCase",
@@ -289,14 +287,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -323,14 +321,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -356,14 +354,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -392,14 +390,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -426,14 +424,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -459,14 +457,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -495,14 +493,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -545,14 +543,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -595,14 +593,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -627,14 +625,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -659,14 +657,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -694,14 +692,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -726,14 +724,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -758,14 +756,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -793,14 +791,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -832,14 +830,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -874,14 +872,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -913,14 +911,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -955,14 +953,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -992,14 +990,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -1029,14 +1027,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -1066,14 +1064,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -1112,14 +1110,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -1172,14 +1170,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -1209,14 +1207,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -1246,14 +1244,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -1283,14 +1281,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -1329,14 +1327,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -1389,14 +1387,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -1422,14 +1420,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -1455,14 +1453,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -1495,14 +1493,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -1528,14 +1526,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -1561,14 +1559,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -1601,14 +1599,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -1645,14 +1643,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -1689,14 +1687,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -1761,14 +1759,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -1814,14 +1812,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",
@@ -1863,14 +1861,14 @@ Object {
           "label": "Grant Read Access to User",
           "schema": Object {
             "resourceCompositeIdentifier": Object {
+              "coscradDataType": "COMPOSITE_IDENTIFIER",
               "isArray": false,
               "isOptional": false,
-              "type": "COMPOSITE_IDENTIFIER",
             },
             "userId": Object {
+              "coscradDataType": "UUID",
               "isArray": false,
               "isOptional": false,
-              "type": "UUID",
             },
           },
           "type": "GRANT_RESOURCE_READ_ACCESS_TO_USER",

@@ -7,7 +7,6 @@ import { DTO } from '../../../types/DTO';
 import validateEdgeConnection from '../../domainModelValidators/contextValidators/validateEdgeConnection';
 import { isValid, Valid } from '../../domainModelValidators/Valid';
 import { AggregateCompositeIdentifier } from '../../types/AggregateCompositeIdentifier';
-import { AggregateId } from '../../types/AggregateId';
 import { AggregateType } from '../../types/AggregateType';
 import { ResourceCompositeIdentifier } from '../../types/ResourceCompositeIdentifier';
 import { InMemorySnapshot } from '../../types/ResourceType';
@@ -41,13 +40,15 @@ export type EdgeConnectionMember<
     role: EdgeConnectionMemberRole;
 };
 
+/**
+ * TODO [https://www.pivotaltracker.com/story/show/183122742]
+ * Decorate all class properties with `CoscradDataTypes`
+ */
 @RegisterIndexScopedCommands([])
 export class EdgeConnection extends Aggregate {
     type = AggregateType.note;
 
     connectionType: EdgeConnectionType;
-
-    id: AggregateId;
 
     readonly members: EdgeConnectionMember[];
 
@@ -59,10 +60,8 @@ export class EdgeConnection extends Aggregate {
 
         if (!dto) return;
 
-        const { id, members, note, connectionType: type } = dto;
+        const { members, note, connectionType: type } = dto;
         this.connectionType = type;
-
-        this.id = id;
 
         // avoid side effects
         this.members = cloneToPlainObject(members);
