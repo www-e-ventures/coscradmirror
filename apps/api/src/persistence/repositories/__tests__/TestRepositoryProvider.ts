@@ -27,6 +27,12 @@ export default class TestRepositoryProvider extends RepositoryProvider {
         await this.forResource<TResource>(resourceType).createMany(entities);
     }
 
+    /**
+     *
+     * TODO [https://www.pivotaltracker.com/story/show/183227687]
+     * Do this in a way that is extensible to adding new aggregate types.
+     * `DeluxeInMemoryStore` \ `InMemorySnapshotInFlatFormat` may help with this.
+     */
     public async addFullSnapshot({
         resources,
         category: categoryTree,
