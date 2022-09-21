@@ -43,7 +43,7 @@
     "@mui/icons-material": "^5.3.1",
     "@mui/material": "^5.2.8",
     "@mui/x-data-grid": "^5.5.1",
-    "@nestjs/common": "^7.0.0",
+    "@nestjs/common": "^9.1.1",
     "@nestjs/config": "^1.0.1",
     "@nestjs/core": "^7.6.18",
     "@nestjs/mapped-types": "*",
