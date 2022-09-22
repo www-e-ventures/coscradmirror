@@ -1,0 +1,58 @@
+
+> coscrad@0.0.0 build:coscrad:prod
+> nx build api --prod && nx build coscrad-frontend --prod
+
+
+>  NX  Running target build for project api and 3 task(s) that it depends on.
+        
+
+———————————————————————————————————————————————
+
+> nx run api:build:production [existing outputs match the cache, left as is]
+
+[36m>[39m [7m[1m[36m NX [39m[22m[27m [1mUsing webpack 5. Reason: detected version 5 in node_modules/webpack/package.json[22m
+
+[37mIf you want to use webpack 5, try installing compatible versions of the plugins.[39m
+[37mSee: https://nx.dev/guides/webpack-5[39m
+
+[36m>[39m [7m[1m[36m NX [39m[22m[27m [1mFalling back to webpack 4 due to incompatible plugin versions[22m
+
+Hash: [1md09fc961a851565d1b3c[39m[22m
+Built at: 2022-09-22 [1m10:37:45 a.m.[39m[22m
+Entrypoint [1mmain[39m[22m [1m[33m[big][39m[22m = [1m[32mmain.js[39m[22m [1m[32mmain.js.map[39m[22m
+chunk    {[1m[33m0[39m[22m} [1m[32mmain.js, main.js.map[39m[22m (main) 591 KiB[1m[33m [entry][39m[22m[1m[32m [rendered][39m[22m
+
+[1m[33mWARNING in license-webpack-plugin: could not find any license type for @coscrad/data-types in its package.json[39m[22m
+
+[1m[33mWARNING in license-webpack-plugin: could not find any license file for @coscrad/data-types. Use the licenseTextOverrides option to add the license text if desired.[39m[22m
+
+[1m[33mWARNING in license-webpack-plugin: could not find any license type for @coscrad/commands in its package.json[39m[22m
+
+[1m[33mWARNING in license-webpack-plugin: could not find any license file for @coscrad/commands. Use the licenseTextOverrides option to add the license text if desired.[39m[22m
+
+[1m[33mWARNING in license-webpack-plugin: could not find any license type for @coscrad/validation in its package.json[39m[22m
+
+[1m[33mWARNING in license-webpack-plugin: could not find any license file for @coscrad/validation. Use the licenseTextOverrides option to add the license text if desired.[39m[22m
+
+———————————————————————————————————————————————
+
+>  NX   SUCCESS  Running target "build" succeeded
+
+  Nx read the output from cache instead of running the command for 4 out of 4 tasks.
+
+
+> nx run coscrad-frontend:build:production 
+Entrypoint [1mmain[39m[22m [1m[33m[big][39m[22m 247 KiB = [1m[32mruntime.bdc91b7b4b12a0bf.esm.js[39m[22m 1.04 KiB [1m[32mmain.ef46db3751d8e999.css[39m[22m 0 bytes [1m[32mmain.66b654ca53a348ae.esm.js[39m[22m 246 KiB
+Entrypoint [1mpolyfills[39m[22m 84.2 KiB = [1m[32mruntime.bdc91b7b4b12a0bf.esm.js[39m[22m 1.04 KiB [1m[32mpolyfills.016109987bf71c8c.esm.js[39m[22m 83.2 KiB
+Entrypoint [1mstyles[39m[22m 1.04 KiB = [1m[32mruntime.bdc91b7b4b12a0bf.esm.js[39m[22m 1.04 KiB [1m[32mstyles.ef46db3751d8e999.css[39m[22m 0 bytes
+chunk (runtime: runtime) [1m[32mmain.ef46db3751d8e999.css[39m[22m, [1m[32mmain.66b654ca53a348ae.esm.js[39m[22m (main) 323 KiB (javascript) 0 bytes (css/mini-extract) [1m[33m[initial][39m[22m [1m[32m[rendered][39m[22m
+chunk (runtime: runtime) [1m[32mpolyfills.016109987bf71c8c.esm.js[39m[22m (polyfills) 256 KiB [1m[33m[initial][39m[22m [1m[32m[rendered][39m[22m
+chunk (runtime: runtime) [1m[32mstyles.ef46db3751d8e999.css[39m[22m (styles) 50 bytes (javascript) 0 bytes (css/mini-extract) [1m[33m[initial][39m[22m [1m[32m[rendered][39m[22m
+chunk (runtime: runtime) [1m[32mruntime.bdc91b7b4b12a0bf.esm.js[39m[22m (runtime) 3.02 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (564774b33307747b)
+
+———————————————————————————————————————————————
+
+>  NX   SUCCESS  Running target "build" succeeded
+
+
